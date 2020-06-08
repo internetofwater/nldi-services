@@ -1,5 +1,4 @@
 package gov.usgs.owi.nldi.utilty;
-import org.springframework.util.StringUtils;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
