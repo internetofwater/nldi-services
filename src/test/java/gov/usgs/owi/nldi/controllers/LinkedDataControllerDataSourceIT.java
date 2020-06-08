@@ -50,6 +50,20 @@ public class LinkedDataControllerDataSourceIT extends BaseIT {
 				false);
 	}
 
+	@Test
+	@DatabaseSetup("classpath:/testData/featureWqp.xml")
+	public void getWqpUtEmptyParamsTest() throws Exception {
+		assertEntity(restTemplate,
+				"/linked-data/wqp/USGS-05427880/navigate/UT/wqp?distance=&stopComid=&legacy=",
+				HttpStatus.OK.value(),
+				FeatureTransformer.FEATURE_COUNT_HEADER,
+				"13",
+				BaseController.MIME_TYPE_GEOJSON,
+				getCompareFile(RESULT_FOLDER_WQP, "wqp_USGS-05427880_UT_wqp.json"),
+				true,
+				false);
+	}
+
 	//Navigation Different Datasource Testing
 	@Test
 	@DatabaseSetup("classpath:/testData/featureHuc12pp.xml")
@@ -57,6 +71,21 @@ public class LinkedDataControllerDataSourceIT extends BaseIT {
 	public void getWqpDmTest() throws Exception {
 		assertEntity(restTemplate,
 				"/linked-data/wqp/USGS-05427880/navigate/DM/huc12pp",
+				HttpStatus.OK.value(),
+				FeatureTransformer.FEATURE_COUNT_HEADER,
+				"9",
+				BaseController.MIME_TYPE_GEOJSON,
+				getCompareFile(RESULT_FOLDER_WQP, "wqp_USGS-05427880_DM_huc12pp.json"),
+				true,
+				false);
+	}
+
+	@Test
+	@DatabaseSetup("classpath:/testData/featureHuc12pp.xml")
+	@DatabaseSetup("classpath:/testData/featureWqp.xml")
+	public void getWqpDmTestEmptyParams() throws Exception {
+		assertEntity(restTemplate,
+				"/linked-data/wqp/USGS-05427880/navigate/DM/huc12pp?distance=&stopComid=&legacy=",
 				HttpStatus.OK.value(),
 				FeatureTransformer.FEATURE_COUNT_HEADER,
 				"9",

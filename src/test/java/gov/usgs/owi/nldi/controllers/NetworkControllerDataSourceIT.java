@@ -53,6 +53,19 @@ public class NetworkControllerDataSourceIT extends BaseIT {
 	}
 
 	@Test
+	public void getComidUtEmptyParamsTest() throws Exception {
+		assertEntity(restTemplate,
+				"/linked-data/comid/13293474/navigate/UT/wqp?distance=&stopComid=&legacy=",
+				HttpStatus.OK.value(),
+				FeatureTransformer.FEATURE_COUNT_HEADER,
+				"22",
+				BaseController.MIME_TYPE_GEOJSON,
+				getCompareFile(RESULT_FOLDER, "comid_13293474_UT.json"),
+				true,
+				false);
+	}
+
+	@Test
 	public void getComidUtDistanceTest() throws Exception {
 		assertEntity(restTemplate,
 				"/linked-data/comid/13297246/navigate/UT/wqp?distance=10",
@@ -70,6 +83,19 @@ public class NetworkControllerDataSourceIT extends BaseIT {
 	public void getComidUmTest() throws Exception {
 		assertEntity(restTemplate,
 				"/linked-data/comid/13293474/navigate/UM/wqp",
+				HttpStatus.OK.value(),
+				FeatureTransformer.FEATURE_COUNT_HEADER,
+				"17",
+				BaseController.MIME_TYPE_GEOJSON,
+				getCompareFile(RESULT_FOLDER, "comid_13293474_UM.json"),
+				true,
+				false);
+	}
+
+	@Test
+	public void getComidUmEmptyParamsTest() throws Exception {
+		assertEntity(restTemplate,
+				"/linked-data/comid/13293474/navigate/UM/wqp?distance=&stopComid=&legacy=",
 				HttpStatus.OK.value(),
 				FeatureTransformer.FEATURE_COUNT_HEADER,
 				"17",
@@ -107,6 +133,19 @@ public class NetworkControllerDataSourceIT extends BaseIT {
 	}
 
 	@Test
+	public void getComidDmEmptyParamsTest() throws Exception {
+		assertEntity(restTemplate,
+				"/linked-data/comid/13296790/navigate/DM/wqp?distance=&stopComid=&legacy=",
+				HttpStatus.OK.value(),
+				FeatureTransformer.FEATURE_COUNT_HEADER,
+				"6",
+				BaseController.MIME_TYPE_GEOJSON,
+				getCompareFile(RESULT_FOLDER, "comid_13296790_DM.json"),
+				true,
+				false);
+	}
+
+	@Test
 	public void getComidDmDistanceTest() throws Exception {
 		assertEntity(restTemplate,
 				"/linked-data/comid/13293474/navigate/DM/wqp?distance=10",
@@ -124,6 +163,19 @@ public class NetworkControllerDataSourceIT extends BaseIT {
 	public void getComidDdTest() throws Exception {
 		assertEntity(restTemplate,
 				"/linked-data/comid/13294310/navigate/DD/wqp",
+				HttpStatus.OK.value(),
+				FeatureTransformer.FEATURE_COUNT_HEADER,
+				"17",
+				BaseController.MIME_TYPE_GEOJSON,
+				getCompareFile(RESULT_FOLDER, "comid_13294310_DD.json"),
+				true,
+				false);
+	}
+
+	@Test
+	public void getComidDdEmptyParmsTest() throws Exception {
+		assertEntity(restTemplate,
+				"/linked-data/comid/13294310/navigate/DD/wqp?distance=&stopComid=&legacy=",
 				HttpStatus.OK.value(),
 				FeatureTransformer.FEATURE_COUNT_HEADER,
 				"17",
