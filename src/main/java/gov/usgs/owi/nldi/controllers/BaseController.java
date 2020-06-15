@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.ResultHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.util.NumberUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
@@ -27,6 +28,7 @@ import gov.usgs.owi.nldi.transform.BasinTransformer;
 import gov.usgs.owi.nldi.transform.FeatureTransformer;
 import gov.usgs.owi.nldi.transform.FlowLineTransformer;
 import gov.usgs.owi.nldi.transform.ITransformer;
+import org.springframework.web.server.ResponseStatusException;
 
 @Validated
 public abstract class BaseController {
@@ -93,11 +95,15 @@ public abstract class BaseController {
 	}
 
 	protected void streamBasin(HttpServletResponse response, String comid) throws Exception {
-		Map<String, Object> parameterMap = new HashMap<>();
-		parameterMap.put(Parameters.COMID, NumberUtils.parseNumber(comid, Integer.class));
-		BasinTransformer transformer = new BasinTransformer(response);
-		addContentHeader(response);
-		streamResults(transformer, BaseDao.BASIN, parameterMap);
+		if (comid != null) {
+			Map<String, Object> parameterMap = new HashMap<>();
+			parameterMap.put(Parameters.COMID, NumberUtils.parseNumber(comid, Integer.class));
+			BasinTransformer transformer = new BasinTransformer(response);
+			addContentHeader(response);
+			streamResults(transformer, BaseDao.BASIN, parameterMap);
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Basin was not found");
+		}
 	}
 
 	protected void streamResults(ITransformer transformer, String featureType, Map<String, Object> parameterMap) {
