@@ -30,7 +30,6 @@ import gov.usgs.owi.nldi.services.LogService;
 import gov.usgs.owi.nldi.services.Navigation;
 import gov.usgs.owi.nldi.services.Parameters;
 import gov.usgs.owi.nldi.transform.ITransformer;
-import org.springframework.web.server.ResponseStatusException;
 
 public class BaseControllerTest {
 
@@ -119,15 +118,6 @@ public class BaseControllerTest {
 		verify(navigation, never()).navigate(anyMap());
 		verify(navigation, never()).interpretResult(anyMap(), any(HttpServletResponse.class));
 		assertEquals(HttpStatus.OK.value(), response.getStatus());
-	}
-
-	/**
-	 * A null comid would happen if the basin is not found.
-	 * @throws Exception
-	 */
-	@Test(expected = ResponseStatusException.class)
-	public void streamBasinTestWithNullComid() throws Exception {
-		controller.streamBasin(response, null);
 	}
 
 	@Test

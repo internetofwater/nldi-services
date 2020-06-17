@@ -95,15 +95,11 @@ public abstract class BaseController {
 	}
 
 	protected void streamBasin(HttpServletResponse response, String comid) throws Exception {
-		if (comid != null) {
 			Map<String, Object> parameterMap = new HashMap<>();
 			parameterMap.put(Parameters.COMID, NumberUtils.parseNumber(comid, Integer.class));
 			BasinTransformer transformer = new BasinTransformer(response);
 			addContentHeader(response);
 			streamResults(transformer, BaseDao.BASIN, parameterMap);
-		} else {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Basin was not found");
-		}
 	}
 
 	protected void streamResults(ITransformer transformer, String featureType, Map<String, Object> parameterMap) {
