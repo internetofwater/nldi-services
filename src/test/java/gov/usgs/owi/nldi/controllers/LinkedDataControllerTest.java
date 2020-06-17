@@ -6,9 +6,7 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyMap;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -37,7 +35,7 @@ import gov.usgs.owi.nldi.services.Parameters;
 import gov.usgs.owi.nldi.services.TestConfigurationService;
 
 public class LinkedDataControllerTest {
-
+	@Mock
 	private StreamingDao streamingDao;
 	@Mock
 	private LookupDao lookupDao;
@@ -57,6 +55,10 @@ public class LinkedDataControllerTest {
 	@SuppressWarnings("unchecked")
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
+
+		//Need to mock this for only a few tests
+		doCallRealMethod().when(streamingDao).stream(anyString(), anyMap(), any());
+
 		configurationService = new TestConfigurationService();
 		controller = new LinkedDataController(lookupDao, streamingDao, navigation, parameters, configurationService, logService);
 		response = new MockHttpServletResponse();
@@ -78,19 +80,30 @@ public class LinkedDataControllerTest {
 		assertNull(controller.getComid("abc", "def"));
 	}
 
+	@Test(expected = IllegalArgumentException.class)
+	public void getComidWithNullFeatureSourceTest() {
+		controller.getComid(null, "def");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void getComidWithNullFeatureIdTest() {
+		controller.getComid("FakeFeatureSource", null);
+	}
+
 	@Test
 	@SuppressWarnings("unchecked")
 	public void getFlowlinesTest() throws Exception {
 		when(lookupDao.getComid(anyString(), anyMap())).thenReturn(null, goodFeature());
-		controller.getFlowlines(request, response, null, null, null, null, null, null);
+		controller.getFlowlines(request, response, "DoesntMatter", "DoesntMatter", null, null, null, null);
 		verify(logService).logRequest(any(HttpServletRequest.class));
 		verify(logService).logRequestComplete(any(BigInteger.class), any(int.class));
+		//Mock lookupDao 1st response of null means the comid is not found, thus a 404
 		assertEquals(HttpStatus.NOT_FOUND.value(), response.getStatus());
 
 		controller.getFlowlines(request, response, null, null, null, null, null, null);
 		verify(logService, times(2)).logRequest(any(HttpServletRequest.class));
 		verify(logService, times(2)).logRequestComplete(any(BigInteger.class), any(int.class));
-		//this is a INTERNAL_SERVER_ERROR because of NPEs that shouldn't happen in real life.
+		//Mock lookupDao 2nd response doesn't actually exist, thus causes a 500 when we try to get flowlines
 		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR.value(), response.getStatus());
 	}
 
@@ -98,15 +111,16 @@ public class LinkedDataControllerTest {
 	@SuppressWarnings("unchecked")
 	public void getFeaturesTest() throws Exception {
 		when(lookupDao.getComid(anyString(), anyMap())).thenReturn(null, goodFeature());
-		controller.getFeatures(request, response, null, null, null, null, null, null, null);
+		controller.getFeatures(request, response, "DoesntMatter", "DoesntMatter", null, null, null, null, null);
 		verify(logService).logRequest(any(HttpServletRequest.class));
 		verify(logService).logRequestComplete(any(BigInteger.class), any(int.class));
+		//Mock lookupDao 1st response of null means the comid is not found, thus a 404
 		assertEquals(HttpStatus.NOT_FOUND.value(), response.getStatus());
 
 		controller.getFeatures(request, response, null, null, null, null, null, null, null);
 		verify(logService, times(2)).logRequest(any(HttpServletRequest.class));
 		verify(logService, times(2)).logRequestComplete(any(BigInteger.class), any(int.class));
-		//this is a INTERNAL_SERVER_ERROR because of NPEs that shouldn't happen in real life.
+		//Mock lookupDao 2nd response doesn't actually exist, thus causes a 500 when we try to get features
 		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR.value(), response.getStatus());
 	}
 
@@ -132,12 +146,32 @@ public class LinkedDataControllerTest {
 
 	@Test
 	public void getBasinTest() throws Exception {
+		when(lookupDao.getComid(anyString(), anyMap())).thenReturn(goodFeature());
+		doNothing().when(streamingDao).stream(anyString(), anyMap(), any());
+
+		controller.getBasin(request, response, "DoesntMatter", "DoesntMatter");
+		verify(logService).logRequest(any(HttpServletRequest.class));
+		verify(logService).logRequestComplete(any(BigInteger.class), any(int.class));
+		assertEquals(HttpStatus.OK.value(), response.getStatus());
+	}
+
+	@Test
+	public void getBasinWithNullParamsTest() throws Exception {
 		controller.getBasin(request, response, null, null);
 		verify(logService).logRequest(any(HttpServletRequest.class));
 		verify(logService).logRequestComplete(any(BigInteger.class), any(int.class));
 		//this is a INTERNAL_SERVER_ERROR because of NPEs that shouldn't happen in real life.
 		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR.value(), response.getStatus());
 	}
+
+	@Test
+	public void getBasinWithNonexistingComidTest() throws Exception {
+		controller.getBasin(request, response, "NowhereSource", "IDontExist");
+		verify(logService).logRequest(any(HttpServletRequest.class));
+		verify(logService).logRequestComplete(any(BigInteger.class), any(int.class));
+		assertEquals(HttpStatus.NOT_FOUND.value(), response.getStatus());
+	}
+
 	@Test
 	public void getDataSourcesTest() throws UnsupportedEncodingException {
 		List<Map<String, Object>> out = controller.getDataSources(request, response);

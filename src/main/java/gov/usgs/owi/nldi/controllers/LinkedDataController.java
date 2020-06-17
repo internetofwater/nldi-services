@@ -171,9 +171,17 @@ public class LinkedDataController extends BaseController {
 	public void getBasin(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
 			@PathVariable(Parameters.FEATURE_ID) String featureID) throws Exception {
+
 		BigInteger logId = logService.logRequest(request);
+
 		try {
-			streamBasin(response, getComid(featureSource, featureID));
+			String comid = getComid(featureSource, featureID);
+
+			if (null != comid) {
+				streamBasin(response, comid);
+			} else {
+				response.sendError(HttpStatus.NOT_FOUND.value(), "Basin not found");
+			}
 		} catch (Exception e) {
 			GlobalDefaultExceptionHandler.handleError(e, response);
 		} finally {

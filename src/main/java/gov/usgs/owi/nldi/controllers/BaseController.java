@@ -124,7 +124,20 @@ public abstract class BaseController {
 				|| NavigationMode.PP.toString().equalsIgnoreCase(navigationMode);
 	}
 
+	/**
+	 * Fetches a COM ID for non-null featureSource and featureID.
+	 * If either parameter is null, an IllegalArgumentException is thrown.
+	 *
+	 * @param featureSource
+	 * @param featureID
+	 * @return May return null if the COM ID is not found.
+	 */
 	protected String getComid(String featureSource, String featureID) {
+
+		if (null == featureSource || null == featureID) {
+			throw new IllegalArgumentException("A featureSource and featureID are required");
+		}
+
 		Map<String, Object> parameterMap = new HashMap<> ();
 		parameterMap.put(LookupDao.FEATURE_SOURCE, featureSource);
 		parameterMap.put(Parameters.FEATURE_ID, featureID);
