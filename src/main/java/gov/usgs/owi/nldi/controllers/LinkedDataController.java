@@ -153,7 +153,13 @@ public class LinkedDataController extends BaseController {
 			@RequestParam(value=Parameters.CHARACTERISTIC_ID, required=false) String[] characteristicIds) throws IOException {
 		BigInteger logId = logService.logRequest(request);
 		try (CharacteristicDataTransformer transformer = new CharacteristicDataTransformer(response)) {
+
 			String comid = getComid(featureSource, featureID);
+
+			if (null == comid) {
+				response.sendError(HttpStatus.NOT_FOUND.value(), "Feature not found");
+			}
+
 			Map<String, Object> parameterMap = new HashMap<> ();
 			parameterMap.put(Parameters.CHARACTERISTIC_TYPE, characteristicType.toLowerCase());
 			parameterMap.put(Parameters.COMID, NumberUtils.parseNumber(comid, Integer.class));

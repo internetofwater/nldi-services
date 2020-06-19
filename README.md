@@ -39,19 +39,29 @@ Both endpoints accept the same query parameters to further refine/restrict the n
 * (only applicable to NHDPlus comid navigation and the __{stopid}__ must be downstream of the __{featureSourceId}__)
 
 ## Development
-This is a Spring Batch/Boot project. All of the normal caveats relating to a Spring Batch/Boot application apply.
+This is a Spring Batch/Boot project.  All of the normal caveats relating to a Spring Batch/Boot application apply.
+In general, do not run this project via Docker locally, since it places everything under root ownership.
+Rather, start up the demo db and create an application.yml file as described below, then run the project from your IDE.
 
 ### Dependencies
 This application utilizes a PostgreSQL database.
 [nldi-db](https://github.com/ACWI-SSWD/nldi-db) contains everything you need to set up a development database environment. It includes data for the Yahara River in Wisconsin.
 
+### Running the Demo DB for local development
+See the nldi-db project for more details, but in short:
+```shell
+docker network create --subnet=172.26.0.0/16 nldi
+docker run -it --env-file ./.env -p 127.0.0.1:5437:5432/tcp usgswma/nldi-db:demo
+```
+Note the _5437_ port mapping, which is used in the environmental variables below.
+
 ### Environment variables
-To run the project you will need to create the file application.yml in the project's root directory and add the following:
+To run the project (connecting to a separately running db instance) you will need to create the file application.yml in the project's root directory and add the following (normal defaults are filled in):
 ```yaml
-nldiDbHost: hostNameOfDatabase
-nldiDbPort: portNumberForDatabase
-nldiDbUsername: dbUserName
-nldiDbPassword: dbPassword
+nldiDbHost: localhost
+nldiDbPort: 5437 #Or whatever port you map it to
+nldiDbUsername: [dbUserName] #See nldi-db project .env file 'NLDI_READ_ONLY_USERNAME'
+nldiDbPassword: [dbPassword] #See nldi-db project .env file 'NLDI_READ_ONLY_PASSWORD'
 
 nldiProtocol: http
 nldiHost: owi-test.usgs.gov:8080
@@ -76,5 +86,5 @@ mvn package
 To additionally start up a Docker database and run the integration tests of the application use:
 
 ```shell
-mvn verify -DTESTING_DATABASE_PORT=5445 -DTESTING_DATABASE_ADDRESS=localhost -DTESTING_DATABASE_NETWORK=nldiServices
+mvn verify -DTESTING_DATABASE_PORT=5445 -DTESTING_DATABASE_ADDRESS=localhost -DTESTING_DATABASE_NETWORK=nldi
 ```
