@@ -77,6 +77,19 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 				false);
 	}
 
+	@Test
+	public void getBasinMissingTest() throws Exception {
+		assertEntity(restTemplate,
+				"/linked-data/comid/1330259299/basin",
+				HttpStatus.NOT_FOUND.value(),
+				null,
+				null,
+				null,
+				"{\"status\":404,\"error\":\"Not Found\",\"message\":\"Basin not found\",\"path\":\"/nldi/linked-data/comid/1330259299/basin\"}",
+				true,
+				true);
+	}
+
 	//DataSources Testing
 	@Test
 	public void getDataSourcesTest() throws Exception {
