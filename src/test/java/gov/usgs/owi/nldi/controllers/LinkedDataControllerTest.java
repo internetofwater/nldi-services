@@ -153,7 +153,6 @@ public class LinkedDataControllerTest {
 		controller.getCharacteristicData(request, response, "NowhereSource", "IDontExist", null, null);
 		verify(logService).logRequest(any(HttpServletRequest.class));
 		verify(logService).logRequestComplete(any(BigInteger.class), any(int.class));
-		//this is a INTERNAL_SERVER_ERROR because of NPEs that shouldn't happen in real life.
 		assertEquals(HttpStatus.NOT_FOUND.value(), response.getStatus());
 	}
 
