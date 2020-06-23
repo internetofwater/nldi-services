@@ -13,7 +13,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>11</java.version>
-        <springfox.version>2.9.2</springfox.version>
+        <springfox.version>2.10.0</springfox.version>
         <jackson.version>2.9.6</jackson.version>
         <wma.artifactory.url>https://cida.usgs.gov/artifactory</wma.artifactory.url>
     </properties>
