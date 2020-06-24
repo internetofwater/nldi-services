@@ -59,7 +59,7 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 				null,
 				null,
 				null,
-				"{\"status\":404,\"error\":\"Not Found\",\"message\":\"Feature not found\",\"path\":\"/nldi/linked-data/comid/133999999/tot\"}",
+				null,
 				true,
 				true);
 	}
@@ -98,7 +98,7 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 				null,
 				null,
 				null,
-				"{\"status\":404,\"error\":\"Not Found\",\"message\":\"Basin not found\",\"path\":\"/nldi/linked-data/comid/1330259299/basin\"}",
+				null,
 				true,
 				true);
 	}
