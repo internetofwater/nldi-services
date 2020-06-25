@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 *   /basin request now returns a 404 instead of 500 error when basin is not found (WDFN-334)
 *   Updated README for consistency and clearer dev setup
 *   Updated getCharacteristicData (/{featureSource}/{featureID}/{characteristicType}) to return 404s when a comid is not found
+*   Updated Swagger to show distance is in kilometers
   
 ## [1.2.0](https://github.com/ACWI-SSWD/nldi-services/compare/nldi-services-1.1.0...nldi-services-1.2.0)
 ### Changed
