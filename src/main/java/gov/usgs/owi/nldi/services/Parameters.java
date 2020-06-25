@@ -24,6 +24,9 @@ public class Parameters {
 	public static final String LEGACY = "legacy";
 	public static final String CHARACTERISTIC_TYPE = "characteristicType";
 	public static final String CHARACTERISTIC_ID = "characteristicId";
+	public static final String DISTANCE_VALIDATION_MESSAGE = "distance must be between 1 and 9999 kilometers";
+	// Validates that distances is either an empty string or a string representing 1 to 9999 kilometers
+	public static final String DISTANCE_VALIDATION_REGEX = "^[0-9]{1,4}+$|^$|^\\s$";
 
 	public Map<String, Object> processParameters(final String comid, final String navigationMode,
 			final String distance, final String stopComid) {

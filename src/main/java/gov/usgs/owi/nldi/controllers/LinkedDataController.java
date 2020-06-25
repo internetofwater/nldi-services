@@ -2,6 +2,10 @@ package gov.usgs.owi.nldi.controllers;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 import java.math.BigInteger;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -12,8 +16,15 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Constraint;
+import javax.validation.Payload;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Null;
 import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.CompositionType;
+import org.hibernate.validator.constraints.ConstraintComposition;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -201,10 +212,11 @@ public class LinkedDataController extends BaseController {
 			@PathVariable(Parameters.FEATURE_ID) String featureID,
 			@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode,
 			@RequestParam(value=Parameters.STOP_COMID, required=false) @Range(min=1, max=Integer.MAX_VALUE) String stopComid,
-			@RequestParam(value=Parameters.DISTANCE, required=false) @Range(min=1, max=Integer.MAX_VALUE) String distance,
+			@RequestParam(value=Parameters.DISTANCE, required=false) @Pattern(message=Parameters.DISTANCE_VALIDATION_MESSAGE, regexp=Parameters.DISTANCE_VALIDATION_REGEX) String distance,
 			@RequestParam(value=Parameters.LEGACY, required=false) String legacy) throws Exception {
 
 		BigInteger logId = logService.logRequest(request);
+
 		try {
 			String comid = getComid(featureSource, featureID);
 			if (null == comid) {
@@ -226,7 +238,7 @@ public class LinkedDataController extends BaseController {
 			@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode,
 			@PathVariable(value=DATA_SOURCE) String dataSource,
 			@RequestParam(value=Parameters.STOP_COMID, required=false) @Range(min=1, max=Integer.MAX_VALUE) String stopComid,
-			@RequestParam(value=Parameters.DISTANCE, required=false) @Range(min=1, max=Integer.MAX_VALUE) String distance,
+			@RequestParam(value=Parameters.DISTANCE, required=false) @Pattern(message=Parameters.DISTANCE_VALIDATION_MESSAGE, regexp=Parameters.DISTANCE_VALIDATION_REGEX) String distance,
 			@RequestParam(value=Parameters.LEGACY, required=false) String legacy) throws Exception {
 
 		BigInteger logId = logService.logRequest(request);
@@ -243,4 +255,6 @@ public class LinkedDataController extends BaseController {
 			logService.logRequestComplete(logId, response.getStatus());
 		}
 	}
+
+
 }
