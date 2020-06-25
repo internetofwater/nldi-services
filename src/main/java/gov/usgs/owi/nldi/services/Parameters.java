@@ -19,6 +19,7 @@ public class Parameters {
 	public static final String COMID = "comid";
 	public static final String FEATURE_ID = "featureID";
 	public static final String DISTANCE = "distance";
+	public static final String DISTANCE_DESCRIPTION = "distance in kilometers";
 	public static final String NAVIGATION_MODE = "navigationMode";
 	public static final String STOP_COMID = "stopComid";
 	public static final String LEGACY = "legacy";
