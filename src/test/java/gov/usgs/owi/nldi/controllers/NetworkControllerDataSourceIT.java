@@ -93,7 +93,7 @@ public class NetworkControllerDataSourceIT extends BaseIT {
 
 
 	@Test
-	public void getComidUtDistanceTest_BelowMin() throws Exception {
+	public void getComidUtDistanceTestBelowMin() throws Exception {
 		assertEntity(restTemplate,
 				"/linked-data/comid/13297246/navigate/UT/wqp?distance=-1",
 				HttpStatus.BAD_REQUEST.value(),

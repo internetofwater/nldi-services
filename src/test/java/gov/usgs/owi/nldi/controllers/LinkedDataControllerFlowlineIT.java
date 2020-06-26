@@ -99,8 +99,8 @@ public class LinkedDataControllerFlowlineIT extends BaseIT {
 
 	@Test
 	@DatabaseSetup("classpath:/testData/featureHuc12pp.xml")
-	public void getHuc12ppDMTest_EmptyDistance() throws Exception {
-		String body = assertEntity(restTemplate,
+	public void getHuc12ppDMTestEmptyDistance() throws Exception {
+		assertEntity(restTemplate,
 				"/linked-data/huc12pp/070900020601/navigate/DM?distance=",
 				HttpStatus.OK.value(),
 				FlowLineTransformer.FLOW_LINES_COUNT_HEADER,

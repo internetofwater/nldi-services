@@ -83,7 +83,7 @@ public class LinkedDataControllerDataSourceIT extends BaseIT {
 	@Test
 	@DatabaseSetup("classpath:/testData/featureWqp.xml")
 	public void getWqpUtTestDistanceAboveMax() throws Exception {
-		String body = assertEntity(restTemplate,
+		assertEntity(restTemplate,
 				"/linked-data/wqp/USGS-05427880/navigate/UT/wqp?distance=10000",
 				HttpStatus.BAD_REQUEST.value(),
 				null,
@@ -98,7 +98,7 @@ public class LinkedDataControllerDataSourceIT extends BaseIT {
 	@Test
 	@DatabaseSetup("classpath:/testData/featureWqp.xml")
 	public void getWqpUtTestDistanceBelowMin() throws Exception {
-		String body = assertEntity(restTemplate,
+		assertEntity(restTemplate,
 				"/linked-data/wqp/USGS-05427880/navigate/UT/wqp?distance=-1",
 				HttpStatus.BAD_REQUEST.value(),
 				null,
