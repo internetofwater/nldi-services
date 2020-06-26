@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.Pattern;
 
+import gov.usgs.owi.nldi.swagger.model.Feature;
+import gov.usgs.owi.nldi.transform.FeatureCollectionTransformer;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -79,18 +81,39 @@ public class LinkedDataController extends BaseController {
 		return rtn;
 	}
 
-	@ApiOperation(value="getFeatures", hidden=true)
+	@ApiOperation(value="getFeatures", response= Feature.class, responseContainer="List")
 	@GetMapping(value="linked-data/{featureSource}", produces=MediaType.APPLICATION_JSON_VALUE)
-	public Object getFeatures(HttpServletRequest request, HttpServletResponse response, @PathVariable(LookupDao.FEATURE_SOURCE) String featureSource) throws IOException {
+	public void getFeatures(HttpServletRequest request, HttpServletResponse response,
+							@PathVariable(LookupDao.FEATURE_SOURCE) @Pattern(regexp=REGEX_VALID_FEATURE_SOURCES) String featureSource) {
 		BigInteger logId = logService.logRequest(request);
+		List<Map<String, Object>> rtn = new ArrayList<>();
+
 		try {
-			response.sendError(HttpStatus.BAD_REQUEST.value(), "This functionality is not implemented.");
+			Map<String, Object> parameterMap = new HashMap<>();
+
+			parameterMap.put(LookupDao.ROOT_URL, "http://localhost:8080/test-url/linked-data");
+			parameterMap.put(LookupDao.FEATURE_SOURCE, featureSource);
+			rtn = lookupDao.getList(BaseDao.FEATURES, parameterMap);
+			FeatureCollectionTransformer transformer = new FeatureCollectionTransformer(response, configurationService);
+			addContentHeader(response);
+			writeResults(transformer, BaseDao.FEATURES, parameterMap, rtn);
+
 		} catch (Exception e) {
 			GlobalDefaultExceptionHandler.handleError(e, response);
 		} finally {
 			logService.logRequestComplete(logId, response.getStatus());
 		}
-		return null;
+	}
+
+    private void writeResults(FeatureCollectionTransformer transformer, String featureType,
+												 Map<String, Object> parameterMap, List<Map<String, Object>> rtn) throws Exception {
+		transformer.startCollection(new HashMap<String, Object>());
+		for (Map<String, Object> item: rtn) {
+			transformer.writeFeature(item);
+		}
+		transformer.endCollection();
+		transformer.end();
+		transformer.close();
 	}
 
 	@GetMapping(value="linked-data/{featureSource}/{featureID}", produces=MediaType.APPLICATION_JSON_VALUE)

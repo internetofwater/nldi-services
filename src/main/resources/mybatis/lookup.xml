@@ -3,6 +3,7 @@
 
 <mapper namespace="lookup">
 
+
     <sql id="featureProperties">
         crawler_source.source_suffix source,
         crawler_source.source_name,
@@ -37,6 +38,7 @@
         </choose>
     </sql>
 
+
     <sql id="featureFromWhere">
          from nldi_data.feature
               join nldi_data.crawler_source
@@ -69,6 +71,18 @@
                #{rootUrl,jdbcType=VARCHAR} || '/' || lower(source_suffix) features
           from nldi_data.crawler_source
              order by lower(source_suffix)
+    </select>
+
+
+    <select id="features" resultType="java.util.LinkedHashMap">
+        select
+
+        <include refid="lookup.featureProperties"/>
+        from nldi_data.feature
+        join nldi_data.crawler_source
+        on feature.crawler_source_id = crawler_source.crawler_source_id
+        where lower(source_suffix) = lower(#{featureSource})
+
     </select>
 
 </mapper>

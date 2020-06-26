@@ -110,15 +110,29 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 	@Test
 	public void getFeaturesTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/comid",
+				"/linked-data/wqp",
+				HttpStatus.OK.value(),
+				null,
+				null,
+			 	BaseController.MIME_TYPE_GEOJSON,
+				getCompareFile(RESULT_FOLDER, "wqpFeatureCollection.json"),
+				true,
+				false);
+	}
+
+	@Test
+	public void getFeaturesTestInvalid() throws Exception {
+		assertEntity(restTemplate,
+				"/linked-data/wqx",
 				HttpStatus.BAD_REQUEST.value(),
 				null,
 				null,
 				null,
-				"{\"status\":400,\"error\":\"Bad Request\",\"message\":\"This functionality is not implemented.\",\"path\":\"/nldi/linked-data/comid\"}",
-				true,
-				true);
+				"getFeatures.featureSource: must match \"" + BaseController.REGEX_VALID_FEATURE_SOURCES + "\"",
+				false,
+				false);
 	}
+
 
 	//Object Testing Catchment
 	@Test

@@ -186,13 +186,15 @@ public class LinkedDataControllerTest {
 	}
 
 	@Test
-	public void getFeaturestest() throws IOException {
-		controller.getFeatures(request, response, null);
+	public void getFeaturestest() {
+        when(lookupDao.getList(anyString(), anyMap())).thenReturn(getTestList(), null, new ArrayList<Map<String, Object>>());
+		controller.getFeatures(request, response, "wqp");
 		verify(logService).logRequest(any(HttpServletRequest.class));
 		verify(logService).logRequestComplete(any(BigInteger.class), any(int.class));
-		assertEquals(HttpStatus.BAD_REQUEST.value(), response.getStatus());
-		assertEquals("This functionality is not implemented.", response.getErrorMessage());
+		assertEquals(HttpStatus.OK.value(), response.getStatus());
+
 	}
+
 
 	@Test
 	public void getRegisteredFeatureTest() {

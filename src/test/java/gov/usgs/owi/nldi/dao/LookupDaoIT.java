@@ -73,4 +73,23 @@ public class LookupDaoIT extends BaseIT {
 		assertEquals("Water Quality Portal", results.get(3).get(LookupDao.SOURCE_NAME));
 		assertEquals(String.join("/", configurationService.getRootUrl(), "wqp"), results.get(3).get(BaseDao.FEATURES));
 	}
+
+	@Test
+	public void getFeaturesTest() {
+		Map<String, Object> parameterMap = new HashMap<>();
+		parameterMap.put(LookupDao.ROOT_URL, configurationService.getRootUrl());
+		parameterMap.put(LookupDao.FEATURE_SOURCE, "wqp");
+		List<Map<String, Object>> results = lookupDao.getList(BaseDao.FEATURES, parameterMap);
+		assertFalse(results.isEmpty());
+		assertEquals(91, results.size());
+
+
+		assertEquals("WQP", results.get(0).get(LookupDao.SOURCE));
+		assertEquals("TOKEN CREEK UPSTREAM SHONUS BRNCH @ SUN PRAIRIE,WI", results.get(0).get(LookupDao.NAME));
+		assertEquals("http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-054277505/", results.get(0).get(LookupDao.URI));
+		assertEquals("{\"type\":\"Point\",\"coordinates\":[-89.2619444,43.2022222]}", results.get(0).get(LookupDao.SHAPE));
+		assertEquals(13293474, results.get(0).get(LookupDao.COMID));
+		assertEquals("USGS-054277505", results.get(0).get(LookupDao.IDENTIFIER));
+
+	}
 }

@@ -35,6 +35,7 @@ public abstract class BaseController {
 	public static final String HEADER_CONTENT_TYPE = "Content-Type";
 	public static final String MIME_TYPE_GEOJSON = "application/vnd.geo+json";
 	public static final String REGEX_NAVIGATION_MODE = "DD|DM|PP|UT|UM";
+	public static final String REGEX_VALID_FEATURE_SOURCES = "comid|huc12pp|nwissite|wade|wqp";
 
 	static final String DATA_SOURCE = "dataSource";
 
