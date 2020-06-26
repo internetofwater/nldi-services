@@ -201,7 +201,7 @@ public class LinkedDataController extends BaseController {
 			@RequestParam(value=Parameters.STOP_COMID, required=false) @Range(min=1, max=Integer.MAX_VALUE) String stopComid,
 			@ApiParam(value=Parameters.DISTANCE_DESCRIPTION)
 								 @RequestParam(value=Parameters.DISTANCE, required=false)
-								 @Range(min=1, max=10000, message="distance must be between 1 and 10000 kilometers") String distance,
+								 @Range(min=1, max=9999, message="distance must be between 1 and 9999 kilometers") String distance,
 			@RequestParam(value=Parameters.LEGACY, required=false) String legacy) {
 
 		BigInteger logId = logService.logRequest(request);
@@ -228,7 +228,7 @@ public class LinkedDataController extends BaseController {
 			@RequestParam(value=Parameters.STOP_COMID, required=false) @Range(min=1, max=Integer.MAX_VALUE) String stopComid,
 			@ApiParam(value=Parameters.DISTANCE_DESCRIPTION)
 								@RequestParam(value=Parameters.DISTANCE, required=false)
-								@Range(min=1, max=10000, message="distance must be between 1 and 10000 kilometers") String distance,
+								@Range(min=1, max=9999, message="distance must be between 1 and 9999 kilometers") String distance,
 			@RequestParam(value=Parameters.LEGACY, required=false) String legacy) throws Exception {
 
 		BigInteger logId = logService.logRequest(request);
