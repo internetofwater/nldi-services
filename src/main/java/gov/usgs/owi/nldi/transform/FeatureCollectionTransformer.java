@@ -2,7 +2,6 @@ package gov.usgs.owi.nldi.transform;
 
 import java.io.IOException;
 import java.net.URLEncoder;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
@@ -21,13 +20,13 @@ public class FeatureCollectionTransformer extends MapToGeoJsonTransformer {
 	public static final String FEATURE_COUNT_HEADER = BaseDao.FEATURES + COUNT_SUFFIX;
 	public static final String DEFAULT_ENCODING = "UTF-8";
 
-	static final String COMID = "comid";
-	static final String IDENTIFIER = "identifier";
-	static final String MEASURE = "measure";
-	static final String NAME = "name";
-	static final String REACHCODE = "reachcode";
-	static final String SOURCE_NAME_DB = "source_name";
-	static final String URI = "uri";
+	public static final String COMID = "comid";
+	public static final String IDENTIFIER = "identifier";
+	public static final String MEASURE = "measure";
+	public static final String NAME = "name";
+	public static final String REACHCODE = "reachcode";
+	public static final String SOURCE_NAME_DB = "source_name";
+	public static final String URI = "uri";
 
 	private static final String SOURCE_NAME = "sourceName";
 	private static final String NAVIGATION = "navigation";
