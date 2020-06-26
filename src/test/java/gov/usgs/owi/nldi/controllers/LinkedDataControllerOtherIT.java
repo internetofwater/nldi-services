@@ -52,6 +52,19 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 	}
 
 	@Test
+	public void getCharacteristicDataMissingTest() throws Exception {
+		assertEntity(restTemplate,
+				"/linked-data/comid/133999999/tot",
+				HttpStatus.NOT_FOUND.value(),
+				null,
+				null,
+				null,
+				"{\"status\":404,\"error\":\"Not Found\",\"message\":\"Feature not found\",\"path\":\"/nldi/linked-data/comid/133999999/tot\"}",
+				true,
+				true);
+	}
+
+	@Test
 	public void getCharacteristicDataFilteredTest() throws Exception {
 		assertEntity(restTemplate,
 				"/linked-data/comid/13302592/tot?characteristicId=TOT_N97&characteristicId=TOT_ET",

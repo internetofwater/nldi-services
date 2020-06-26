@@ -140,12 +140,20 @@ public class LinkedDataControllerTest {
 	}
 
 	@Test
-	public void getCharacteristicDataTest() throws IOException {
+	public void getCharacteristicDataWithNullParamsTest() throws IOException {
 		controller.getCharacteristicData(request, response, null, null, null, null);
 		verify(logService).logRequest(any(HttpServletRequest.class));
 		verify(logService).logRequestComplete(any(BigInteger.class), any(int.class));
 		//this is a INTERNAL_SERVER_ERROR because of NPEs that shouldn't happen in real life.
 		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR.value(), response.getStatus());
+	}
+
+	@Test
+	public void getCharacteristicDataWithNonexistingComidTest() throws IOException {
+		controller.getCharacteristicData(request, response, "NowhereSource", "IDontExist", null, null);
+		verify(logService).logRequest(any(HttpServletRequest.class));
+		verify(logService).logRequestComplete(any(BigInteger.class), any(int.class));
+		assertEquals(HttpStatus.NOT_FOUND.value(), response.getStatus());
 	}
 
 	@Test
