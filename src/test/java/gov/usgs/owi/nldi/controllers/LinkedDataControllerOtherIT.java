@@ -34,7 +34,7 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 	private static final String RESULT_FOLDER  = "feature/other/";
 
 	@Before
-	public void setup() {
+	public void setUp() {
 		urlRoot = "http://localhost:" + port + context;
 	}
 
