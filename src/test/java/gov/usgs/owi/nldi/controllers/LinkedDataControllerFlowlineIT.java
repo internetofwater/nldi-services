@@ -16,6 +16,7 @@ import com.github.springtestdbunit.annotation.DatabaseSetup;
 import gov.usgs.owi.nldi.BaseIT;
 import gov.usgs.owi.nldi.transform.FlowLineTransformer;
 
+
 @EnableWebMvc
 @SpringBootTest(webEnvironment=WebEnvironment.RANDOM_PORT)
 @DatabaseSetup("classpath:/testData/crawlerSource.xml")
@@ -99,15 +100,16 @@ public class LinkedDataControllerFlowlineIT extends BaseIT {
 	@Test
 	@DatabaseSetup("classpath:/testData/featureHuc12pp.xml")
 	public void getHuc12ppDMTest_EmptyDistance() throws Exception {
-		assertEntity(restTemplate,
+		String body = assertEntity(restTemplate,
 				"/linked-data/huc12pp/070900020601/navigate/DM?distance=",
 				HttpStatus.OK.value(),
 				FlowLineTransformer.FLOW_LINES_COUNT_HEADER,
 				"51",
 				BaseController.MIME_TYPE_GEOJSON,
-				null,
+				getCompareFile(RESULT_FOLDER_HUC, "huc12pp_070900020601_DM_distance_empty.json"),
 				true,
 				false);
+
 
 	}
 

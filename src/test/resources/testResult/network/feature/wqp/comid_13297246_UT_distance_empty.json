@@ -1,0 +1,1734 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.125608,
+          42.807715
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-543289",
+        "name": "YAHARA RIVER - BEL FULTON DAM",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-543289/",
+        "comid": "13296798",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-543289/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.12554,
+          42.808052
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-543056",
+        "name": "Yahara River at Cth M At Fulton",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-543056/",
+        "comid": "13296798",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-543056/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.12778,
+          42.810776
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-10015792",
+        "name": "Yahara River - Highway 184 (Hwy H) At Fulton",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10015792/",
+        "comid": "13296798",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10015792/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.1259471,
+          42.8061172
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "USGS-424822089073301",
+        "name": "RO-04/12E/18-0499",
+        "uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-424822089073301/",
+        "comid": "13296798",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-424822089073301/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.1292805,
+          42.8066727
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "USGS-424824089074501",
+        "name": "RO-04/12E/18-0473",
+        "uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-424824089074501/",
+        "comid": "13297238",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-424824089074501/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.1503921,
+          42.8111168
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "USGS-05430200",
+        "name": "YAHARA RIVER-QW SITE-NEAR FULTON, WI",
+        "uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-05430200/",
+        "comid": "13296790",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05430200/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.172262,
+          42.826501
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-543281",
+        "name": "Yahara River - Near Fulton WI",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-543281/",
+        "comid": "13296764",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-543281/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.172374,
+          42.8263
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-543226",
+        "name": "Yahara River at Sth 59 Near Fulton WI",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-543226/",
+        "comid": "13296764",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-543226/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.1725,
+          42.82651
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-10010955",
+        "name": "Yahara River - Sth 59",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10010955/",
+        "comid": "13296764",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10010955/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.1719444,
+          42.8263889
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "USGS-05430175",
+        "name": "YAHARA RIVER NEAR FULTON, WI",
+        "uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-05430175/",
+        "comid": "13296764",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05430175/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.1730556,
+          42.8436111
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "USGS-05430000",
+        "name": "YAHARA RIVER NEAR EDGERTON, WI",
+        "uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-05430000/",
+        "comid": "13296756",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05430000/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.211091,
+          42.881116
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-133550",
+        "name": "Yahara River - Near Stoughton WI",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-133550/",
+        "comid": "13297204",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-133550/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.20998,
+          42.878662
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-133047",
+        "name": "Yahara River at Cth N",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-133047/",
+        "comid": "13297204",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-133047/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.18581,
+          42.90463
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-10035612",
+        "name": "Unnamed Lake",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10035612/",
+        "comid": "13297204",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10035612/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.210949,
+          42.8811141
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "USGS-05429720",
+        "name": "YAHARA RIVER NEAR STOUGHTON, WI",
+        "uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-05429720/",
+        "comid": "13297204",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05429720/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.212077,
+          42.882788
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-10036008",
+        "name": "Yahara River - Area of Open Water",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10036008/",
+        "comid": "13297198",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10036008/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.34668,
+          43.05535
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-10038729",
+        "name": "Lagoon du Sud 120 ft west of bridge",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10038729/",
+        "comid": "13293852",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10038729/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.432785,
+          43.131663
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-133456",
+        "name": "LAKE MENDOTA - GOVERNOR NELSON STATE PARK BEACH",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-133456/",
+        "comid": "13294304",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-133456/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.41972,
+          43.12229
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-10031720",
+        "name": "Lake Mendota - Yahara Bay",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10031720/",
+        "comid": "13294304",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10031720/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.43334,
+          43.130154
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-10017818",
+        "name": "Lake Mendota -- Governor Nelson State Park",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10017818/",
+        "comid": "13294304",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10017818/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.4081744,
+          43.1305501
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "USGS-430758089242901",
+        "name": "DN-08/09E/34-0077",
+        "uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-430758089242901/",
+        "comid": "13294304",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-430758089242901/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.4376195,
+          43.1255502
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "USGS-430731089261701",
+        "name": "DN-08/09E/33-0089",
+        "uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-430731089261701/",
+        "comid": "13294304",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-430731089261701/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.41822,
+          43.13685
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-10031711",
+        "name": "LAKE MENDOTA NEAR YAHARA R. INLET WATER DEPTH ABOUT 5 FEET",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10031711/",
+        "comid": "13294298",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10031711/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.4001186,
+          43.1347167
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "USGS-430805089240001",
+        "name": "DN-08/09E/26-1185",
+        "uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-430805089240001/",
+        "comid": "13294298",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-430805089240001/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.4001187,
+          43.1333278
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "USGS-430800089240001",
+        "name": "DN-08/09E/35-1186",
+        "uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-430800089240001/",
+        "comid": "13294298",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-430800089240001/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.40221,
+          43.150715
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-133394",
+        "name": "Yahara River at Westport Rd Near Madison WI",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-133394/",
+        "comid": "13294290",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-133394/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.407504,
+          43.14912
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-10017815",
+        "name": "Yahara River -- Access",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10017815/",
+        "comid": "13294290",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10017815/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.4,
+          43.14
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-10001216",
+        "name": "Yahara River - Yahara River 23 Bel Stoughton",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10001216/",
+        "comid": "13294290",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10001216/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.3948407,
+          43.1422165
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "USGS-430832089234101",
+        "name": "DN-08/09E/26-0041",
+        "uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-430832089234101/",
+        "comid": "13294290",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-430832089234101/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.40194,
+          43.150833
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-133040",
+        "name": "Yahara River at Sth 113 At Madison WI",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-133040/",
+        "comid": "13293576",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-133040/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.4022222,
+          43.1508333
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "USGS-05427851",
+        "name": "YAHARA RIVER AT WESTPORT ROAD NEAR MADISON, WI",
+        "uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-05427851/",
+        "comid": "13293576",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427851/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.4019444,
+          43.1508333
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "USGS-05427850",
+        "name": "YAHARA RIVER AT STATE HIGHWAY 113 AT MADISON, WI",
+        "uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-05427850/",
+        "comid": "13293576",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427850/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.38578,
+          43.15504
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-10044183",
+        "name": "Yahara River estuary below middle basin",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10044183/",
+        "comid": "13294284",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10044183/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.37428,
+          43.16454
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-10044182",
+        "name": "Yahara River estuary below upper basin",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10044182/",
+        "comid": "13294280",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10044182/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.3676,
+          43.175346
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-10039185",
+        "name": "Cherokee Marsh - Yahara River",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10039185/",
+        "comid": "13294280",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10039185/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.3653955,
+          43.1672158
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "USGS-431002089215501",
+        "name": "DN-08/09E/13-1067",
+        "uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-431002089215501/",
+        "comid": "13294280",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-431002089215501/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.3876182,
+          43.162216
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "USGS-430944089231501",
+        "name": "DN-08/09E/23-1104",
+        "uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-430944089231501/",
+        "comid": "13294280",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-430944089231501/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.3786111,
+          43.1544444
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "USGS-430916089224300",
+        "name": "CHEROKEE PARK AMBIENT AIR TEMPERATURE @ MADISON,WI",
+        "uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-430916089224300/",
+        "comid": "13294280",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-430916089224300/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.36049,
+          43.17637
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-10039184",
+        "name": "Cherokee Marsh - Yahara River",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10039184/",
+        "comid": "13293506",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10039184/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.472768,
+          43.191892
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-10043697",
+        "name": "Sixmile Creek at STH 19 (WEST) crossing",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10043697/",
+        "comid": "13294132",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10043697/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.51033,
+          43.17692
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-10017024",
+        "name": "Sixmile Creek - Woodland Rd Station #2",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10017024/",
+        "comid": "13294132",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10017024/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.493089,
+          43.186791
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-10016974",
+        "name": "SIXMILE CREEK - 10 M UPSTREAM OF KINGSLEY RD CROS-SING",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10016974/",
+        "comid": "13294132",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10016974/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.51,
+          43.2
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-10001221",
+        "name": "BARBIAN POND - BARBIAN POND",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10001221/",
+        "comid": "13294132",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10001221/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.4728889,
+          43.1922222
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "USGS-05427880",
+        "name": "SIXMILE CREEK AT STATE HIGHWAY 19 NEAR WAUNAKEE,WI",
+        "uri": "http://www.waterqualitydata.us/provider/BIODATA/USGS-WI/USGS-05427880/",
+        "comid": "13294132",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427880/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.4728889,
+          43.1922222
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "USGS-05427880",
+        "name": "SIXMILE CREEK AT STATE HIGHWAY 19 NEAR WAUNAKEE,WI",
+        "uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-05427880/",
+        "comid": "13294132",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427880/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.32463,
+          43.181812
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-133492",
+        "name": "Token Creek - Near Madison WI",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-133492/",
+        "comid": "13294138",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-133492/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.329226,
+          43.180953
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-133053",
+        "name": "Token Creek at Daentl Rd Bridge",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-133053/",
+        "comid": "13294138",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-133053/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.324169,
+          43.1819
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-133051",
+        "name": "Token Creek at Sth 51",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-133051/",
+        "comid": "13294138",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-133051/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.35614,
+          43.175865
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-10013299",
+        "name": "Token Creek 1",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10013299/",
+        "comid": "13294138",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10013299/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.3202,
+          43.18608
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-10011992",
+        "name": "Token Creek - Upstream Of County Park",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10011992/",
+        "comid": "13294138",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10011992/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.3298404,
+          43.1808745
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-10010940",
+        "name": "Token Creek - Token Creek At Daentl Rd",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10010940/",
+        "comid": "13294138",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10010940/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.3245612,
+          43.1811043
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "USGS-05427800",
+        "name": "TOKEN CREEK NEAR MADISON, WI",
+        "uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-05427800/",
+        "comid": "13294138",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427800/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.31003,
+          43.194427
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-133484",
+        "name": "TOHERN CREEK - TRIB",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-133484/",
+        "comid": "13293496",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-133484/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.30992,
+          43.19465
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-10011959",
+        "name": "Harbison Creek Sth 19 Upstream To Inlet Spring",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10011959/",
+        "comid": "13293496",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10011959/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.31251,
+          43.19108
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-10011958",
+        "name": "Harbison Creek Carp Pond Upstream To Sth 19",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10011958/",
+        "comid": "13293496",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10011958/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.3127778,
+          43.1888889
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "USGS-05427796",
+        "name": "TOKEN CR HARBISON TRB @ POND OTL NR TOKEN CREEK,WI",
+        "uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-05427796/",
+        "comid": "13293496",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427796/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.3097222,
+          43.1947222
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "USGS-05427793",
+        "name": "TOKEN CREEK HARBISON TRB @ STH 19 @ TOKEN CREEK,WI",
+        "uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-05427793/",
+        "comid": "13293496",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427793/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.294544,
+          43.196453
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-133329",
+        "name": "TOKEN CREEK - FISH POND (HATCHERY)",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-133329/",
+        "comid": "13293484",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-133329/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.29387,
+          43.196644
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-10032543",
+        "name": "Token Creek at Portage Road",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10032543/",
+        "comid": "13293484",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10032543/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.29945,
+          43.194763
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-10011994",
+        "name": "TOKEN CREEK - STH 19 TO ISLAND",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10011994/",
+        "comid": "13293484",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10011994/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.5299444,
+          43.2033889
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "USGS-431212089314802",
+        "name": "DANE CO MRBI WATERWAY 2-QW-SPRINGFIELD CORNERS, WI",
+        "uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-431212089314802/",
+        "comid": "13293462",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-431212089314802/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.5299444,
+          43.2033889
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "USGS-431212089314801",
+        "name": "DANE CO MRBI WATERWAY 2 NR SPRINGFIELD CORNERS, WI",
+        "uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-431212089314801/",
+        "comid": "13293462",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-431212089314801/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.5302222,
+          43.20225
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "USGS-431208089314901",
+        "name": "DANE CO. MRBI TILE NO. 1 NR SPRINGFIELD CORNERS,WI",
+        "uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-431208089314901/",
+        "comid": "13293462",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-431208089314901/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.55,
+          43.2
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-10001223",
+        "name": "DIEDRICH POND - DIEDRICH POND",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10001223/",
+        "comid": "13293464",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10001223/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.291637,
+          43.198521
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-133427",
+        "name": "Token Creek Millpond at Portage Rd dam",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-133427/",
+        "comid": "13294276",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-133427/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.2930556,
+          43.1980556
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "USGS-05427767",
+        "name": "TOKEN CREEK AT TOKEN CREEK, WI",
+        "uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-05427767/",
+        "comid": "13294276",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427767/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.263572,
+          43.200831
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-133470",
+        "name": "TOKEN CREEK - CTH C",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-133470/",
+        "comid": "13293474",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-133470/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.272404,
+          43.198489
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-133422",
+        "name": "MARSHALL MILLPOND - DEEP HOLE",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-133422/",
+        "comid": "13293474",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-133422/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.25858,
+          43.199245
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-133421",
+        "name": "Token Creek Trib - Near Sun Prairie WI",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-133421/",
+        "comid": "13293474",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-133421/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.2635731,
+          43.2010344
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-10010941",
+        "name": "TOKEN CREEK - TOKEN CREEK AT CTH C",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10010941/",
+        "comid": "13293474",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10010941/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.2642819,
+          43.2088812
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "USGS-431232089155100",
+        "name": "TOKEN CREEK RAIN GAGE NUMBER 1 NEAR TOKEN CREEK,WI",
+        "uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-431232089155100/",
+        "comid": "13293474",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-431232089155100/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.2638889,
+          43.2011111
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "USGS-05427762",
+        "name": "TOKEN CREEK @ CNTY TRNK HGHWAY C NR TOKEN CREEK,WI",
+        "uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-05427762/",
+        "comid": "13293474",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427762/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.2616667,
+          43.2019444
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "USGS-054277615",
+        "name": "TOKEN CREEK SHONUS BRANCH AT SUN PRAIRIE, WI",
+        "uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-054277615/",
+        "comid": "13293474",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-054277615/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.2612264,
+          43.2011037
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "USGS-05427761",
+        "name": "TOKEN CREEK TRIB. @ STONEHAVEN DR @ SUN PRAIRIE,WI",
+        "uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-05427761/",
+        "comid": "13293474",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427761/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.2605556,
+          43.2011111
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "USGS-054277605",
+        "name": "TOKEN CREEK WEST BRANCH SHONUS BR @ SUN PRAIRIE,WI",
+        "uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-054277605/",
+        "comid": "13293474",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-054277605/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.26,
+          43.2008333
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "USGS-054277602",
+        "name": "TOKEN CREEK EAST BRANCH SHONUS BR @ SUN PRAIRIE,WI",
+        "uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-054277602/",
+        "comid": "13293474",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-054277602/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.2583333,
+          43.1994444
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "USGS-05427760",
+        "name": "TOKEN CREEK TRIBUTARY NEAR SUN PRAIRIE, WI",
+        "uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-05427760/",
+        "comid": "13293474",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427760/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.2577778,
+          43.1975
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "USGS-05427759",
+        "name": "SHONUS DENT BASIN LOWER POND OUTL @ SUN PRAIRIE,WI",
+        "uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-05427759/",
+        "comid": "13293474",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427759/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.2566667,
+          43.1961111
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "USGS-05427758",
+        "name": "SHONUS DENT BASIN UPPER POND OUTL @ SUN PRAIRIE,WI",
+        "uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-05427758/",
+        "comid": "13293474",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427758/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.2619444,
+          43.2022222
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "USGS-054277505",
+        "name": "TOKEN CREEK UPSTREAM SHONUS BRNCH @ SUN PRAIRIE,WI",
+        "uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-054277505/",
+        "comid": "13293474",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-054277505/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.592506,
+          43.194998
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-134002",
+        "name": "Brandenburg Lake - Brandenburg Lake",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-134002/",
+        "comid": "13293490",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-134002/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.56,
+          43.18
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-10001227",
+        "name": "LOUIS BUECHNER POND - LOUIS BUECHNER POND",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10001227/",
+        "comid": "13293490",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10001227/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.59,
+          43.19
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-10001222",
+        "name": "BRANDENBURG LAKE - BRANDENBURG LAKE",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10001222/",
+        "comid": "13293490",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10001222/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.25026,
+          43.209507
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-10016566",
+        "name": "Token Creek - 10M DS Egre Rd Crossing",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10016566/",
+        "comid": "13294118",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10016566/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.25047,
+          43.20938
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-10016555",
+        "name": "Token Creek - 30 Yds DS of Egre Rd crossing at Wagner Farms",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10016555/",
+        "comid": "13294118",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10016555/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.250465,
+          43.209385
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-10016554",
+        "name": "Token Creek - Egre Rd crossing DS 30 Yds of bridge (culvert) crossing",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10016554/",
+        "comid": "13294118",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10016554/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.24464,
+          43.209118
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "WIDNR_WQX-10016652",
+        "name": "Token Creek-Wagner Trib. - 50 M US of second crossing on Egre Rd",
+        "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10016652/",
+        "comid": "13293468",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10016652/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.2292811,
+          43.2091592
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "USGS-431233089134500",
+        "name": "TOKEN CREEK RAIN GAGE NUMBER 2 NEAR TOKEN CREEK,WI",
+        "uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-431233089134500/",
+        "comid": "13293468",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-431233089134500/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.2251145,
+          43.1936042
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "USGS-431137089133001",
+        "name": "DN-08/11E/05-0888",
+        "uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-431137089133001/",
+        "comid": "13293468",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-431137089133001/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.2251145,
+          43.1933264
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "USGS-431136089133001",
+        "name": "DN-08/11E/05-0421",
+        "uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-431136089133001/",
+        "comid": "13293468",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-431136089133001/navigate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.2528926,
+          43.2680461
+        ]
+      },
+      "properties": {
+        "source": "WQP",
+        "sourceName": "Water Quality Portal",
+        "identifier": "USGS-431605089151000",
+        "name": "TOKEN CREEK RAIN GAGE NUMBER 4 NEAR TOKEN CREEK,WI",
+        "uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-431605089151000/",
+        "comid": "13294112",
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-431605089151000/navigate"
+      }
+    }
+  ]
+}

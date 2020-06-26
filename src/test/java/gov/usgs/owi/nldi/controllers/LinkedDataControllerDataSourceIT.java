@@ -50,6 +50,65 @@ public class LinkedDataControllerDataSourceIT extends BaseIT {
 				false);
 	}
 
+	@Test
+	@DatabaseSetup("classpath:/testData/featureWqp.xml")
+	public void getWqpUtTest_Distance10() throws Exception {
+		assertEntity(restTemplate,
+				"/linked-data/wqp/USGS-05427880/navigate/UT/wqp?distance=1",
+				HttpStatus.OK.value(),
+				FeatureTransformer.FEATURE_COUNT_HEADER,
+				"6",
+				BaseController.MIME_TYPE_GEOJSON,
+				getCompareFile(RESULT_FOLDER_WQP, "wqp_USGS-05427880_UT_wqp_distance_1.json"),
+				true,
+				false);
+
+	}
+
+
+	@Test
+	@DatabaseSetup("classpath:/testData/featureWqp.xml")
+	public void getWqpUtTest_Distance_Empty() throws Exception {
+		assertEntity(restTemplate,
+				"/linked-data/wqp/USGS-05427880/navigate/UT/wqp?distance=",
+				HttpStatus.OK.value(),
+				FeatureTransformer.FEATURE_COUNT_HEADER,
+				"13",
+				BaseController.MIME_TYPE_GEOJSON,
+				getCompareFile(RESULT_FOLDER_WQP, "wqp_USGS-05427880_UT_wqp_distance_empty.json"),
+				true,
+				false);
+	}
+
+	@Test
+	@DatabaseSetup("classpath:/testData/featureWqp.xml")
+	public void getWqpUtTest_Distance_AboveMax() throws Exception {
+		String body = assertEntity(restTemplate,
+				"/linked-data/wqp/USGS-05427880/navigate/UT/wqp?distance=10000",
+				HttpStatus.BAD_REQUEST.value(),
+				null,
+				null,
+				null,
+				null,
+				true,
+				false);
+	}
+
+
+	@Test
+	@DatabaseSetup("classpath:/testData/featureWqp.xml")
+	public void getWqpUtTest_Distance_BelowMin() throws Exception {
+		String body = assertEntity(restTemplate,
+				"/linked-data/wqp/USGS-05427880/navigate/UT/wqp?distance=-1",
+				HttpStatus.BAD_REQUEST.value(),
+				null,
+				null,
+				null,
+				null,
+				true,
+				false);
+	}
+
 	//Navigation Different Datasource Testing
 	@Test
 	@DatabaseSetup("classpath:/testData/featureHuc12pp.xml")

@@ -65,6 +65,46 @@ public class NetworkControllerDataSourceIT extends BaseIT {
 				false);
 	}
 
+	@Test
+	public void getComidUtDistanceTest_Empty() throws Exception {
+		assertEntity(restTemplate,
+				"/linked-data/comid/13297246/navigate/UT/wqp?distance=",
+				HttpStatus.OK.value(),
+				FeatureTransformer.FEATURE_COUNT_HEADER,
+				"91",
+				BaseController.MIME_TYPE_GEOJSON,
+                getCompareFile(RESULT_FOLDER, "comid_13297246_UT_distance_empty.json"),
+				true,
+				false);
+	}
+
+	@Test
+	public void getComidUtDistanceTest_AboveMax() throws Exception {
+		assertEntity(restTemplate,
+				"/linked-data/comid/13297246/navigate/UT/wqp?distance=10000",
+				HttpStatus.BAD_REQUEST.value(),
+				null,
+				null,
+				null,
+				null,
+				true,
+				false);
+	}
+
+
+	@Test
+	public void getComidUtDistanceTest_BelowMin() throws Exception {
+		assertEntity(restTemplate,
+				"/linked-data/comid/13297246/navigate/UT/wqp?distance=-1",
+				HttpStatus.BAD_REQUEST.value(),
+				null,
+				null,
+				null,
+				null,
+				true,
+				false);
+	}
+
 	//UM Testing
 	@Test
 	public void getComidUmTest() throws Exception {
