@@ -70,29 +70,29 @@ public class LinkedDataControllerFlowlineIT extends BaseIT {
 
 	@Test
 	@DatabaseSetup("classpath:/testData/featureHuc12pp.xml")
-	public void getHuc12ppDM10000Test_ExceedsMaxDistance() throws Exception {
+	public void getHuc12ppDM10000TestDistanceAboveMax() throws Exception {
 		assertEntity(restTemplate,
 				"/linked-data/huc12pp/070900020601/navigate/DM?distance=10000",
 				HttpStatus.BAD_REQUEST.value(),
 				null,
 				null,
 				null,
-				null,
-				true,
+				"getFlowlines.distance: distance must be between 1 and 9999 kilometers",
+				false,
 				false);
 	}
 
 	@Test
 	@DatabaseSetup("classpath:/testData/featureHuc12pp.xml")
-	public void getHuc12ppDM0Test_BelowDistance() throws Exception {
+	public void getHuc12ppDM0TestDistanceBelowMin() throws Exception {
 		assertEntity(restTemplate,
 				"/linked-data/huc12pp/070900020601/navigate/DM?distance=-1",
 				HttpStatus.BAD_REQUEST.value(),
 				null,
 				null,
 				null,
-				null,
-				true,
+				"getFlowlines.distance: distance must be between 1 and 9999 kilometers",
+				false,
 				false);
 	}
 

@@ -68,8 +68,8 @@ public class NetworkControllerFlowlineIT extends BaseIT {
 
 
 	@Test
-	public void getComidUtDistanceTest_Empty() throws Exception {
-		String body = assertEntity(restTemplate,
+	public void getComidUtDistanceTestEmpty() throws Exception {
+		assertEntity(restTemplate,
 				"/linked-data/comid/13297246/navigate/UT?distance=",
 				HttpStatus.OK.value(),
 				FlowLineTransformer.FLOW_LINES_COUNT_HEADER,
@@ -82,28 +82,28 @@ public class NetworkControllerFlowlineIT extends BaseIT {
 	}
 
 	@Test
-	public void getComidUtDistanceTest_AboveMax() throws Exception {
+	public void getComidUtDistanceTestAboveMax() throws Exception {
 		assertEntity(restTemplate,
 				"/linked-data/comid/13297246/navigate/UT?distance=10000",
 				HttpStatus.BAD_REQUEST.value(),
 				null,
 				null,
 				null,
-				null,
-				true,
+				"getFlowlines.distance: distance must be between 1 and 9999 kilometers",
+				false,
 				false);
 	}
 
 	@Test
-	public void getComidUtDistanceTest_BelowMin() throws Exception {
+	public void getComidUtDistanceTestBelowMin() throws Exception {
 		assertEntity(restTemplate,
 				"/linked-data/comid/13297246/navigate/UT?distance=-1",
 				HttpStatus.BAD_REQUEST.value(),
 				null,
 				null,
 				null,
-				null,
-				true,
+				"getFlowlines.distance: distance must be between 1 and 9999 kilometers",
+				false,
 				false);
 	}
 

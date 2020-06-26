@@ -66,7 +66,7 @@ public class NetworkControllerDataSourceIT extends BaseIT {
 	}
 
 	@Test
-	public void getComidUtDistanceTest_Empty() throws Exception {
+	public void getComidUtDistanceTestEmpty() throws Exception {
 		assertEntity(restTemplate,
 				"/linked-data/comid/13297246/navigate/UT/wqp?distance=",
 				HttpStatus.OK.value(),
@@ -79,15 +79,15 @@ public class NetworkControllerDataSourceIT extends BaseIT {
 	}
 
 	@Test
-	public void getComidUtDistanceTest_AboveMax() throws Exception {
+	public void getComidUtDistanceTestAboveMax() throws Exception {
 		assertEntity(restTemplate,
 				"/linked-data/comid/13297246/navigate/UT/wqp?distance=10000",
 				HttpStatus.BAD_REQUEST.value(),
 				null,
 				null,
 				null,
-				null,
-				true,
+				"getFeatures.distance: distance must be between 1 and 9999 kilometers",
+				false,
 				false);
 	}
 
@@ -100,8 +100,8 @@ public class NetworkControllerDataSourceIT extends BaseIT {
 				null,
 				null,
 				null,
-				null,
-				true,
+				"getFeatures.distance: distance must be between 1 and 9999 kilometers",
+				false,
 				false);
 	}
 

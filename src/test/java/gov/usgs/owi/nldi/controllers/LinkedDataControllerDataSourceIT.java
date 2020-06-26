@@ -52,7 +52,7 @@ public class LinkedDataControllerDataSourceIT extends BaseIT {
 
 	@Test
 	@DatabaseSetup("classpath:/testData/featureWqp.xml")
-	public void getWqpUtTest_Distance10() throws Exception {
+	public void getWqpUtTestDistance1() throws Exception {
 		assertEntity(restTemplate,
 				"/linked-data/wqp/USGS-05427880/navigate/UT/wqp?distance=1",
 				HttpStatus.OK.value(),
@@ -68,7 +68,7 @@ public class LinkedDataControllerDataSourceIT extends BaseIT {
 
 	@Test
 	@DatabaseSetup("classpath:/testData/featureWqp.xml")
-	public void getWqpUtTest_Distance_Empty() throws Exception {
+	public void getWqpUtTestDistanceEmpty() throws Exception {
 		assertEntity(restTemplate,
 				"/linked-data/wqp/USGS-05427880/navigate/UT/wqp?distance=",
 				HttpStatus.OK.value(),
@@ -82,30 +82,30 @@ public class LinkedDataControllerDataSourceIT extends BaseIT {
 
 	@Test
 	@DatabaseSetup("classpath:/testData/featureWqp.xml")
-	public void getWqpUtTest_Distance_AboveMax() throws Exception {
+	public void getWqpUtTestDistanceAboveMax() throws Exception {
 		String body = assertEntity(restTemplate,
 				"/linked-data/wqp/USGS-05427880/navigate/UT/wqp?distance=10000",
 				HttpStatus.BAD_REQUEST.value(),
 				null,
 				null,
 				null,
-				null,
-				true,
+				"getFeatures.distance: distance must be between 1 and 9999 kilometers",
+				false,
 				false);
 	}
 
 
 	@Test
 	@DatabaseSetup("classpath:/testData/featureWqp.xml")
-	public void getWqpUtTest_Distance_BelowMin() throws Exception {
+	public void getWqpUtTestDistanceBelowMin() throws Exception {
 		String body = assertEntity(restTemplate,
 				"/linked-data/wqp/USGS-05427880/navigate/UT/wqp?distance=-1",
 				HttpStatus.BAD_REQUEST.value(),
 				null,
 				null,
 				null,
-				null,
-				true,
+				"getFeatures.distance: distance must be between 1 and 9999 kilometers",
+				false,
 				false);
 	}
 
