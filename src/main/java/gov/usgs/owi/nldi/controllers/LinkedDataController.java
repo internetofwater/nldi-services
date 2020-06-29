@@ -79,20 +79,6 @@ public class LinkedDataController extends BaseController {
 		return rtn;
 	}
 
-	@ApiOperation(value="getFeatures", hidden=true)
-	@GetMapping(value="linked-data/{featureSource}", produces=MediaType.APPLICATION_JSON_VALUE)
-	public Object getFeatures(HttpServletRequest request, HttpServletResponse response, @PathVariable(LookupDao.FEATURE_SOURCE) String featureSource) throws IOException {
-		BigInteger logId = logService.logRequest(request);
-		try {
-			response.sendError(HttpStatus.BAD_REQUEST.value(), "This functionality is not implemented.");
-		} catch (Exception e) {
-			GlobalDefaultExceptionHandler.handleError(e, response);
-		} finally {
-			logService.logRequestComplete(logId, response.getStatus());
-		}
-		return null;
-	}
-
 	@GetMapping(value="linked-data/{featureSource}/{featureID}", produces=MediaType.APPLICATION_JSON_VALUE)
 	public void getRegisteredFeature(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,

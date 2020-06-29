@@ -194,15 +194,6 @@ public class LinkedDataControllerTest {
 	}
 
 	@Test
-	public void getFeaturestest() throws IOException {
-		controller.getFeatures(request, response, null);
-		verify(logService).logRequest(any(HttpServletRequest.class));
-		verify(logService).logRequestComplete(any(BigInteger.class), any(int.class));
-		assertEquals(HttpStatus.BAD_REQUEST.value(), response.getStatus());
-		assertEquals("This functionality is not implemented.", response.getErrorMessage());
-	}
-
-	@Test
 	public void getRegisteredFeatureTest() {
 		try {
 			controller.getRegisteredFeature(request, response, null, null);

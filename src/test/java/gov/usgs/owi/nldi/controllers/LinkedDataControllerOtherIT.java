@@ -119,20 +119,6 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 				sameJSONArrayAs(new JSONArray(getCompareFile(RESULT_FOLDER, "dataSources.json"))).allowingAnyArrayOrdering());
 	}
 
-	//Features Testing
-	@Test
-	public void getFeaturesTest() throws Exception {
-		assertEntity(restTemplate,
-				"/linked-data/comid",
-				HttpStatus.BAD_REQUEST.value(),
-				null,
-				null,
-				null,
-				"{\"status\":400,\"error\":\"Bad Request\",\"message\":\"This functionality is not implemented.\",\"path\":\"/nldi/linked-data/comid\"}",
-				true,
-				true);
-	}
-
 	//Object Testing Catchment
 	@Test
 	public void getComidTest() throws Exception {

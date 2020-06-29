@@ -58,38 +58,53 @@ public abstract class BaseController {
 
 	protected void streamFlowLines(HttpServletResponse response,
 			String comid, String navigationMode, String stopComid, String distance, boolean legacy) throws Exception {
+
+		String featureType;
 		Map<String, Object> parameterMap = parameters.processParameters(comid, navigationMode, distance, stopComid);
-		FlowLineTransformer transformer = new FlowLineTransformer(response);
+
 		if (legacy) {
 			String sessionId = getSessionId(parameterMap, response);
 			if (null != sessionId) {
 				parameterMap.put(StreamingDao.SESSION_ID, sessionId);
-				addContentHeader(response);
-				streamResults(transformer, BaseDao.FLOW_LINES_LEGACY, parameterMap);
+				featureType = BaseDao.FLOW_LINES_LEGACY;
+			} else {
+				return;
 			}
 		} else {
-			addContentHeader(response);
-			streamResults(transformer, BaseDao.FLOW_LINES, parameterMap);
+			featureType = BaseDao.FLOW_LINES;
 		}
+
+		//Defer transformer creation to allow error messages to be sent (above) in the response if needed
+		FlowLineTransformer transformer = new FlowLineTransformer(response);
+
+		addContentHeader(response);
+		streamResults(transformer, featureType, parameterMap);
 	}
 
 	protected void streamFeatures(HttpServletResponse response,
 			String comid, String navigationMode, String stopComid, String distance, String dataSource, boolean legacy) throws Exception {
+
+		String featureType;
 		Map<String, Object> parameterMap = parameters.processParameters(comid, navigationMode, distance, stopComid);
-		FeatureTransformer transformer = new FeatureTransformer(response, configurationService);
+
 		if (legacy) {
 			String sessionId = getSessionId(parameterMap, response);
 			if (null != sessionId) {
 				parameterMap.put(StreamingDao.SESSION_ID, sessionId);
-				parameterMap.put(DATA_SOURCE, dataSource.toLowerCase());
-				addContentHeader(response);
-				streamResults(transformer, BaseDao.FEATURES_LEGACY, parameterMap);
+				featureType = BaseDao.FEATURES_LEGACY;
+			} else {
+				return;
 			}
 		} else {
-			parameterMap.put(DATA_SOURCE, dataSource.toLowerCase());
-			addContentHeader(response);
-			streamResults(transformer, BaseDao.FEATURES, parameterMap);
+			featureType = BaseDao.FEATURES;
 		}
+
+		//Defer transformer creation to allow error messages to be sent (above) in the response if needed
+		FeatureTransformer transformer = new FeatureTransformer(response, configurationService);
+
+		parameterMap.put(DATA_SOURCE, dataSource.toLowerCase());
+		addContentHeader(response);
+		streamResults(transformer, featureType, parameterMap);
 	}
 
 	protected void streamBasin(HttpServletResponse response, String comid) throws Exception {
