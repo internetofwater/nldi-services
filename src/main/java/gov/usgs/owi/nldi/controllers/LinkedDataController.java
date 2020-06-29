@@ -96,7 +96,7 @@ public class LinkedDataController extends BaseController {
 			rtn = lookupDao.getList(BaseDao.FEATURES, parameterMap);
 			FeatureCollectionTransformer transformer = new FeatureCollectionTransformer(response, configurationService);
 			addContentHeader(response);
-			writeResults(transformer, BaseDao.FEATURES, parameterMap, rtn);
+			writeResults(transformer, rtn);
 
 		} catch (Exception e) {
 			GlobalDefaultExceptionHandler.handleError(e, response);
@@ -105,8 +105,7 @@ public class LinkedDataController extends BaseController {
 		}
 	}
 
-    private void writeResults(FeatureCollectionTransformer transformer, String featureType,
-												 Map<String, Object> parameterMap, List<Map<String, Object>> rtn) throws Exception {
+    private void writeResults(FeatureCollectionTransformer transformer, List<Map<String, Object>> rtn) throws Exception {
 		transformer.startCollection(new HashMap<String, Object>());
 		for (Map<String, Object> item: rtn) {
 			transformer.writeFeature(item);
