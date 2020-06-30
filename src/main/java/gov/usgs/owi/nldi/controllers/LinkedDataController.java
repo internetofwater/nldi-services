@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.Pattern;
 
-import gov.usgs.owi.nldi.transform.FeatureCollectionTransformer;
+import io.swagger.annotations.ApiParam;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,6 +37,7 @@ import gov.usgs.owi.nldi.services.Parameters;
 import gov.usgs.owi.nldi.swagger.model.DataSource;
 import gov.usgs.owi.nldi.transform.CharacteristicDataTransformer;
 import gov.usgs.owi.nldi.transform.FeatureTransformer;
+import gov.usgs.owi.nldi.transform.FeatureCollectionTransformer;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
@@ -161,13 +162,10 @@ public class LinkedDataController extends BaseController {
 			@RequestParam(value=Parameters.CHARACTERISTIC_ID, required=false) String[] characteristicIds) throws IOException {
 		BigInteger logId = logService.logRequest(request);
 		try (CharacteristicDataTransformer transformer = new CharacteristicDataTransformer(response)) {
-
 			String comid = getComid(featureSource, featureID);
-
 			if (null == comid) {
 				response.sendError(HttpStatus.NOT_FOUND.value(), "Feature not found");
 			}
-
 			Map<String, Object> parameterMap = new HashMap<> ();
 			parameterMap.put(Parameters.CHARACTERISTIC_TYPE, characteristicType.toLowerCase());
 			parameterMap.put(Parameters.COMID, NumberUtils.parseNumber(comid, Integer.class));
@@ -209,8 +207,10 @@ public class LinkedDataController extends BaseController {
 			@PathVariable(Parameters.FEATURE_ID) String featureID,
 			@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode,
 			@RequestParam(value=Parameters.STOP_COMID, required=false) @Range(min=1, max=Integer.MAX_VALUE) String stopComid,
-			@RequestParam(value=Parameters.DISTANCE, required=false) @Range(min=1, max=Integer.MAX_VALUE) String distance,
-			@RequestParam(value=Parameters.LEGACY, required=false) String legacy) throws Exception {
+			@ApiParam(value=Parameters.DISTANCE_DESCRIPTION)
+								 @RequestParam(value=Parameters.DISTANCE, required=false)
+								 @Range(min=1, max=9999, message="distance must be between 1 and 9999 kilometers") String distance,
+			@RequestParam(value=Parameters.LEGACY, required=false) String legacy) {
 
 		BigInteger logId = logService.logRequest(request);
 		try {
@@ -234,7 +234,9 @@ public class LinkedDataController extends BaseController {
 			@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode,
 			@PathVariable(value=DATA_SOURCE) String dataSource,
 			@RequestParam(value=Parameters.STOP_COMID, required=false) @Range(min=1, max=Integer.MAX_VALUE) String stopComid,
-			@RequestParam(value=Parameters.DISTANCE, required=false) @Range(min=1, max=Integer.MAX_VALUE) String distance,
+			@ApiParam(value=Parameters.DISTANCE_DESCRIPTION)
+								@RequestParam(value=Parameters.DISTANCE, required=false)
+								@Range(min=1, max=9999, message="distance must be between 1 and 9999 kilometers") String distance,
 			@RequestParam(value=Parameters.LEGACY, required=false) String legacy) throws Exception {
 
 		BigInteger logId = logService.logRequest(request);
