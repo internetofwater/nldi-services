@@ -195,12 +195,15 @@ public class LinkedDataControllerTest {
 
 	@Test
 	public void getFeaturestest() {
-        when(lookupDao.getList(anyString(), anyMap())).thenReturn(getTestList(), null, new ArrayList<Map<String, Object>>());
-		controller.getFeatures(request, response, "wqp");
+		try {
+			controller.getFeatures(request, response, null);
+		} catch (Exception e) {
+			assertTrue(e instanceof NullPointerException);
+		}
 		verify(logService).logRequest(any(HttpServletRequest.class));
 		verify(logService).logRequestComplete(any(BigInteger.class), any(int.class));
-		assertEquals(HttpStatus.OK.value(), response.getStatus());
-
+		//this is a INTERNAL_SERVER_ERROR because of NPEs that shouldn't happen in real life.
+		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR.value(), response.getStatus());
 	}
 
 

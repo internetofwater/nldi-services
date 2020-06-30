@@ -137,11 +137,11 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 	public void getFeaturesTestInvalid() throws Exception {
 		assertEntity(restTemplate,
 				"/linked-data/wqx",
-				HttpStatus.BAD_REQUEST.value(),
+				HttpStatus.OK.value(),
 				null,
 				null,
 				null,
-				"getFeatures.featureSource: must match \"" + BaseController.REGEX_VALID_FEATURE_SOURCES + "\"",
+				null,
 				false,
 				false);
 	}

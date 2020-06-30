@@ -81,22 +81,20 @@ public class LinkedDataController extends BaseController {
 		return rtn;
 	}
 
-	@ApiOperation(value="getFeatures", response= Feature.class, responseContainer="List")
 	@GetMapping(value="linked-data/{featureSource}", produces=MediaType.APPLICATION_JSON_VALUE)
 	public void getFeatures(HttpServletRequest request, HttpServletResponse response,
-							@PathVariable(LookupDao.FEATURE_SOURCE) @Pattern(regexp=REGEX_VALID_FEATURE_SOURCES) String featureSource) {
+							@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource) {
 		BigInteger logId = logService.logRequest(request);
 		List<Map<String, Object>> rtn = new ArrayList<>();
 
 		try {
 			Map<String, Object> parameterMap = new HashMap<>();
 
-			parameterMap.put(LookupDao.ROOT_URL, "http://localhost:8080/test-url/linked-data");
+			parameterMap.put(LookupDao.ROOT_URL, configurationService.getRootUrl());
 			parameterMap.put(LookupDao.FEATURE_SOURCE, featureSource);
-			rtn = lookupDao.getList(BaseDao.FEATURES, parameterMap);
 			FeatureCollectionTransformer transformer = new FeatureCollectionTransformer(response, configurationService);
 			addContentHeader(response);
-			writeResults(transformer, rtn);
+			streamResults(transformer, BaseDao.FEATURES_COLLECTION, parameterMap);
 
 		} catch (Exception e) {
 			GlobalDefaultExceptionHandler.handleError(e, response);
@@ -105,7 +103,7 @@ public class LinkedDataController extends BaseController {
 		}
 	}
 
-    private void writeResults(FeatureCollectionTransformer transformer, List<Map<String, Object>> rtn) throws Exception {
+/*    private void writeResults(FeatureCollectionTransformer transformer, List<Map<String, Object>> rtn) throws Exception {
 		transformer.startCollection(new HashMap<String, Object>());
 		for (Map<String, Object> item: rtn) {
 			transformer.writeFeature(item);
@@ -113,7 +111,7 @@ public class LinkedDataController extends BaseController {
 		transformer.endCollection();
 		transformer.end();
 		transformer.close();
-	}
+	}*/
 
 	@GetMapping(value="linked-data/{featureSource}/{featureID}", produces=MediaType.APPLICATION_JSON_VALUE)
 	public void getRegisteredFeature(HttpServletRequest request, HttpServletResponse response,

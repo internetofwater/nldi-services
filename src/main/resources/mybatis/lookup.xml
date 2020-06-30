@@ -74,15 +74,6 @@
     </select>
 
 
-    <select id="features" resultType="java.util.LinkedHashMap">
-        select
 
-        <include refid="lookup.featureProperties"/>
-        from nldi_data.feature
-        join nldi_data.crawler_source
-        on feature.crawler_source_id = crawler_source.crawler_source_id
-        where lower(source_suffix) = lower(#{featureSource})
-
-    </select>
 
 </mapper>
