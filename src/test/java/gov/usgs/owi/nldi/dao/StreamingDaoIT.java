@@ -156,24 +156,39 @@ public class StreamingDaoIT extends BaseIT {
 	}
 
 	@Test
-	public void getFeaturesCollectionTest() {
+	public void streamFeaturesCollectionTest() {
+		//TODO - Real verification - this test just validates that the query has no syntax errors, not that it is logically correct.
 		Map<String, Object> parameterMap = new HashMap<>();
-		TestResultHandler my_handler = new TestResultHandler();
+
+		//MyBatis is happy with no parms or ResultHandler - it will read the entire database, load up the list,
+		// and not complain or expose it to you (unless you run out of memory). We have a check to make sure the
+		// resultHandler is not null. (The tests were failing on Jenkins with "java.lang.OutOfMemoryError: Java heap space")
+		try {
+			streamingDao.stream(null, null, null);
+		} catch (RuntimeException e) {
+			if (!"A ResultHandler is required for the StreamingDao.stream".equalsIgnoreCase(e.getMessage())) {
+				fail("Expected a RuntimeException, but got " + e.getLocalizedMessage());
+			}
+		}
+		try {
+			streamingDao.stream(BaseDao.FEATURES_COLLECTION, null, null);
+		} catch (RuntimeException e) {
+			if (!"A ResultHandler is required for the StreamingDao.stream".equalsIgnoreCase(e.getMessage())) {
+				fail("Expected a RuntimeException, but got " + e.getLocalizedMessage());
+			}
+		}
+		try {
+			streamingDao.stream(BaseDao.FEATURES_COLLECTION, parameterMap, null);
+		} catch (RuntimeException e) {
+			if (!"A ResultHandler is required for the StreamingDao.stream".equalsIgnoreCase(e.getMessage())) {
+				fail("Expected a RuntimeException, but got " + e.getLocalizedMessage());
+			}
+		}
+
+		//No limits
 		parameterMap.put(LookupDao.FEATURE_SOURCE, "wqp");
-		streamingDao.stream(BaseDao.FEATURES_COLLECTION, parameterMap, my_handler);
-		assertFalse(my_handler.results.isEmpty());
-		assertEquals(91, my_handler.results.size());
 
-
-		assertEquals("WQP", my_handler.results.get(0).get(LookupDao.SOURCE));
-		assertEquals("TOKEN CREEK UPSTREAM SHONUS BRNCH @ SUN PRAIRIE,WI",
-				my_handler.results.get(0).get(LookupDao.NAME));
-		assertEquals("http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-054277505/",
-				my_handler.results.get(0).get(LookupDao.URI));
-		assertEquals("{\"type\":\"Point\",\"coordinates\":[-89.2619444,43.2022222]}",
-				my_handler.results.get(0).get(LookupDao.SHAPE));
-		assertEquals(13293474, my_handler.results.get(0).get(LookupDao.COMID));
-		assertEquals("USGS-054277505", my_handler.results.get(0).get(LookupDao.IDENTIFIER));
+		streamingDao.stream(BaseDao.FEATURES_COLLECTION, parameterMap, handler);
 
 	}
 
