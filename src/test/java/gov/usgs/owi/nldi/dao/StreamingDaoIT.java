@@ -18,8 +18,6 @@ import gov.usgs.owi.nldi.springinit.DbTestConfig;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.Assert.fail;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 
 @SpringBootTest(webEnvironment=SpringBootTest.WebEnvironment.NONE,
 		classes={DbTestConfig.class, StreamingDao.class})
