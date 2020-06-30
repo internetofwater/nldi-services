@@ -202,19 +202,17 @@ public class LinkedDataController extends BaseController {
 			@RequestParam(value=Parameters.STOP_COMID, required=false) @Range(min=1, max=Integer.MAX_VALUE) String stopComid,
 			@ApiParam(value=Parameters.DISTANCE_DESCRIPTION) @RequestParam(value=Parameters.DISTANCE, required=false)
 			@Pattern(message=Parameters.DISTANCE_VALIDATION_MESSAGE, regexp=Parameters.DISTANCE_VALIDATION_REGEX) String distance,
-                        @RequestParam(value=Parameters.LEGACY, required=false) String legacy) throws Exception {
+			@RequestParam(value=Parameters.LEGACY, required=false) String legacy) throws Exception {
 
 		BigInteger logId = logService.logRequest(request);
 
 		try {
-			if (StringUtils.isEmpty(distance)) {
-				distance = Parameters.MAX_DISTANCE;
-			}
+			String guaranteedDistance = (StringUtils.isEmpty(distance)) ? Parameters.MAX_DISTANCE: distance;
 			String comid = getComid(featureSource, featureID);
 			if (null == comid) {
 				response.setStatus(HttpStatus.NOT_FOUND.value());
 			} else {
-				streamFlowLines(response, comid, navigationMode, stopComid, distance, isLegacy(legacy, navigationMode));
+				streamFlowLines(response, comid, navigationMode, stopComid, guaranteedDistance, isLegacy(legacy, navigationMode));
 			}
 		} catch (Exception e) {
 			GlobalDefaultExceptionHandler.handleError(e, response);
@@ -236,14 +234,13 @@ public class LinkedDataController extends BaseController {
 
 		BigInteger logId = logService.logRequest(request);
 		try {
-			if (StringUtils.isEmpty(distance)) {
-				distance = Parameters.MAX_DISTANCE;
-			}
+			String guaranteedDistance = (StringUtils.isEmpty(distance)) ? Parameters.MAX_DISTANCE: distance;
 			String comid = getComid(featureSource, featureID);
 			if (null == comid) {
 				response.setStatus(HttpStatus.NOT_FOUND.value());
 			} else {
-				streamFeatures(response, comid, navigationMode, stopComid, distance, dataSource, isLegacy(legacy, navigationMode));
+				streamFeatures(response, comid, navigationMode, stopComid, guaranteedDistance, dataSource,
+						isLegacy(legacy, navigationMode));
 			}
 		} catch (Exception e) {
 			GlobalDefaultExceptionHandler.handleError(e, response);

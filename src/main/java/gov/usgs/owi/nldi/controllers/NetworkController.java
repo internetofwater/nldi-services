@@ -44,10 +44,9 @@ public class NetworkController extends BaseController {
 			@RequestParam(value=Parameters.LEGACY, required=false) String legacy) throws Exception {
 		BigInteger logId = logService.logRequest(request);
 		try {
-			if (StringUtils.isEmpty(distance)) {
-				distance = Parameters.MAX_DISTANCE;
-			}
-			streamFlowLines(response, comid, navigationMode, stopComid, distance, isLegacy(legacy, navigationMode));
+			String guaranteedDistance = (StringUtils.isEmpty(distance)) ? Parameters.MAX_DISTANCE: distance;
+
+			streamFlowLines(response, comid, navigationMode, stopComid, guaranteedDistance, isLegacy(legacy, navigationMode));
 		} catch (Exception e) {
 			GlobalDefaultExceptionHandler.handleError(e, response);
 		} finally {
@@ -66,10 +65,9 @@ public class NetworkController extends BaseController {
 			@RequestParam(value=Parameters.LEGACY, required=false) String legacy) throws Exception {
 		BigInteger logId = logService.logRequest(request);
 		try {
-			if (StringUtils.isEmpty(distance)) {
-				distance = Parameters.MAX_DISTANCE;
-			}
-			streamFeatures(response, comid, navigationMode, stopComid, distance, dataSource, isLegacy(legacy, navigationMode));
+			String guaranteedDistance = (StringUtils.isEmpty(distance)) ? Parameters.MAX_DISTANCE: distance;
+
+			streamFeatures(response, comid, navigationMode, stopComid, guaranteedDistance, dataSource, isLegacy(legacy, navigationMode));
 		} catch (Exception e) {
 			GlobalDefaultExceptionHandler.handleError(e, response);
 		} finally {
