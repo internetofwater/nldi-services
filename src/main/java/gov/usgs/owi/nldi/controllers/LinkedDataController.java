@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.util.NumberUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -199,12 +200,16 @@ public class LinkedDataController extends BaseController {
 			@PathVariable(Parameters.FEATURE_ID) String featureID,
 			@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode,
 			@RequestParam(value=Parameters.STOP_COMID, required=false) @Range(min=1, max=Integer.MAX_VALUE) String stopComid,
-			@ApiParam(value=Parameters.DISTANCE_DESCRIPTION) @RequestParam(value=Parameters.DISTANCE, required=false) @Pattern(message=Parameters.DISTANCE_VALIDATION_MESSAGE, regexp=Parameters.DISTANCE_VALIDATION_REGEX) String distance,
+			@ApiParam(value=Parameters.DISTANCE_DESCRIPTION) @RequestParam(value=Parameters.DISTANCE, required=false)
+			@Pattern(message=Parameters.DISTANCE_VALIDATION_MESSAGE, regexp=Parameters.DISTANCE_VALIDATION_REGEX) String distance,
                         @RequestParam(value=Parameters.LEGACY, required=false) String legacy) throws Exception {
 
 		BigInteger logId = logService.logRequest(request);
 
 		try {
+			if (StringUtils.isEmpty(distance)) {
+				distance = Parameters.MAX_DISTANCE;
+			}
 			String comid = getComid(featureSource, featureID);
 			if (null == comid) {
 				response.setStatus(HttpStatus.NOT_FOUND.value());
@@ -225,11 +230,15 @@ public class LinkedDataController extends BaseController {
 			@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode,
 			@PathVariable(value=DATA_SOURCE) String dataSource,
 			@RequestParam(value=Parameters.STOP_COMID, required=false) @Range(min=1, max=Integer.MAX_VALUE) String stopComid,
-			@ApiParam(value=Parameters.DISTANCE_DESCRIPTION) @RequestParam(value=Parameters.DISTANCE, required=false) @Pattern(message=Parameters.DISTANCE_VALIDATION_MESSAGE, regexp=Parameters.DISTANCE_VALIDATION_REGEX) String distance,
-                        @RequestParam(value=Parameters.LEGACY, required=false) String legacy) throws Exception {
+			@ApiParam(value=Parameters.DISTANCE_DESCRIPTION) @RequestParam(value=Parameters.DISTANCE, required=false)
+			@Pattern(message=Parameters.DISTANCE_VALIDATION_MESSAGE, regexp=Parameters.DISTANCE_VALIDATION_REGEX) String distance,
+			@RequestParam(value=Parameters.LEGACY, required=false) String legacy) throws Exception {
 
 		BigInteger logId = logService.logRequest(request);
 		try {
+			if (StringUtils.isEmpty(distance)) {
+				distance = Parameters.MAX_DISTANCE;
+			}
 			String comid = getComid(featureSource, featureID);
 			if (null == comid) {
 				response.setStatus(HttpStatus.NOT_FOUND.value());

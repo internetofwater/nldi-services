@@ -9,6 +9,7 @@ import javax.validation.constraints.Pattern;
 import io.swagger.annotations.ApiParam;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,10 +39,14 @@ public class NetworkController extends BaseController {
 			@PathVariable(Parameters.COMID) @Range(min=1, max=Integer.MAX_VALUE) String comid,
 			@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode,
 			@RequestParam(value=Parameters.STOP_COMID, required=false) @Range(min=1, max=Integer.MAX_VALUE) String stopComid,
-			@ApiParam(value=Parameters.DISTANCE_DESCRIPTION) @RequestParam(value=Parameters.DISTANCE, required=false) @Pattern(message=Parameters.DISTANCE_VALIDATION_MESSAGE, regexp=Parameters.DISTANCE_VALIDATION_REGEX) String distance,
+			@ApiParam(value=Parameters.DISTANCE_DESCRIPTION) @RequestParam(value=Parameters.DISTANCE, required=false)
+			@Pattern(message=Parameters.DISTANCE_VALIDATION_MESSAGE, regexp=Parameters.DISTANCE_VALIDATION_REGEX) String distance,
 			@RequestParam(value=Parameters.LEGACY, required=false) String legacy) throws Exception {
 		BigInteger logId = logService.logRequest(request);
 		try {
+			if (StringUtils.isEmpty(distance)) {
+				distance = Parameters.MAX_DISTANCE;
+			}
 			streamFlowLines(response, comid, navigationMode, stopComid, distance, isLegacy(legacy, navigationMode));
 		} catch (Exception e) {
 			GlobalDefaultExceptionHandler.handleError(e, response);
@@ -56,10 +61,14 @@ public class NetworkController extends BaseController {
 			@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode,
 			@PathVariable(value=DATA_SOURCE) String dataSource,
 			@RequestParam(value=Parameters.STOP_COMID, required=false) @Range(min=1, max=Integer.MAX_VALUE) String stopComid,
-			@ApiParam(value=Parameters.DISTANCE_DESCRIPTION) @RequestParam(value=Parameters.DISTANCE, required=false) @Pattern(message=Parameters.DISTANCE_VALIDATION_MESSAGE, regexp=Parameters.DISTANCE_VALIDATION_REGEX) String distance,
+			@ApiParam(value=Parameters.DISTANCE_DESCRIPTION) @RequestParam(value=Parameters.DISTANCE, required=false)
+			@Pattern(message=Parameters.DISTANCE_VALIDATION_MESSAGE, regexp=Parameters.DISTANCE_VALIDATION_REGEX) String distance,
 			@RequestParam(value=Parameters.LEGACY, required=false) String legacy) throws Exception {
 		BigInteger logId = logService.logRequest(request);
 		try {
+			if (StringUtils.isEmpty(distance)) {
+				distance = Parameters.MAX_DISTANCE;
+			}
 			streamFeatures(response, comid, navigationMode, stopComid, distance, dataSource, isLegacy(legacy, navigationMode));
 		} catch (Exception e) {
 			GlobalDefaultExceptionHandler.handleError(e, response);
