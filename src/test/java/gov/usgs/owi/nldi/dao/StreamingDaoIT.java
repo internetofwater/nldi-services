@@ -2,7 +2,6 @@ package gov.usgs.owi.nldi.dao;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.ResultContext;
@@ -18,8 +17,9 @@ import gov.usgs.owi.nldi.services.Parameters;
 import gov.usgs.owi.nldi.springinit.DbTestConfig;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 @SpringBootTest(webEnvironment=SpringBootTest.WebEnvironment.NONE,
 		classes={DbTestConfig.class, StreamingDao.class})
@@ -158,19 +158,22 @@ public class StreamingDaoIT extends BaseIT {
 	@Test
 	public void getFeaturesCollectionTest() {
 		Map<String, Object> parameterMap = new HashMap<>();
-		//parameterMap.put(LookupDao.ROOT_URL, configurationService.getRootUrl());
+		TestResultHandler my_handler = new TestResultHandler();
 		parameterMap.put(LookupDao.FEATURE_SOURCE, "wqp");
-		streamingDao.stream(BaseDao.FEATURES_COLLECTION, parameterMap, handler);
-		assertFalse(handler.results.isEmpty());
-		assertEquals(91, handler.results.size());
+		streamingDao.stream(BaseDao.FEATURES_COLLECTION, parameterMap, my_handler);
+		assertFalse(my_handler.results.isEmpty());
+		assertEquals(91, my_handler.results.size());
 
 
-		assertEquals("WQP", handler.results.get(0).get(LookupDao.SOURCE));
-		assertEquals("TOKEN CREEK UPSTREAM SHONUS BRNCH @ SUN PRAIRIE,WI", handler.results.get(0).get(LookupDao.NAME));
-		assertEquals("http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-054277505/", handler.results.get(0).get(LookupDao.URI));
-		assertEquals("{\"type\":\"Point\",\"coordinates\":[-89.2619444,43.2022222]}", handler.results.get(0).get(LookupDao.SHAPE));
-		assertEquals(13293474, handler.results.get(0).get(LookupDao.COMID));
-		assertEquals("USGS-054277505", handler.results.get(0).get(LookupDao.IDENTIFIER));
+		assertEquals("WQP", my_handler.results.get(0).get(LookupDao.SOURCE));
+		assertEquals("TOKEN CREEK UPSTREAM SHONUS BRNCH @ SUN PRAIRIE,WI",
+				my_handler.results.get(0).get(LookupDao.NAME));
+		assertEquals("http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-054277505/",
+				my_handler.results.get(0).get(LookupDao.URI));
+		assertEquals("{\"type\":\"Point\",\"coordinates\":[-89.2619444,43.2022222]}",
+				my_handler.results.get(0).get(LookupDao.SHAPE));
+		assertEquals(13293474, my_handler.results.get(0).get(LookupDao.COMID));
+		assertEquals("USGS-054277505", my_handler.results.get(0).get(LookupDao.IDENTIFIER));
 
 	}
 

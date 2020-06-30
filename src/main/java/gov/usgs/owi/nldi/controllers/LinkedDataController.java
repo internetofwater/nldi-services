@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.Pattern;
 
-import gov.usgs.owi.nldi.swagger.model.Feature;
 import gov.usgs.owi.nldi.transform.FeatureCollectionTransformer;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,7 +84,6 @@ public class LinkedDataController extends BaseController {
 	public void getFeatures(HttpServletRequest request, HttpServletResponse response,
 							@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource) {
 		BigInteger logId = logService.logRequest(request);
-		List<Map<String, Object>> rtn = new ArrayList<>();
 
 		try {
 			Map<String, Object> parameterMap = new HashMap<>();
@@ -102,16 +100,6 @@ public class LinkedDataController extends BaseController {
 			logService.logRequestComplete(logId, response.getStatus());
 		}
 	}
-
-/*    private void writeResults(FeatureCollectionTransformer transformer, List<Map<String, Object>> rtn) throws Exception {
-		transformer.startCollection(new HashMap<String, Object>());
-		for (Map<String, Object> item: rtn) {
-			transformer.writeFeature(item);
-		}
-		transformer.endCollection();
-		transformer.end();
-		transformer.close();
-	}*/
 
 	@GetMapping(value="linked-data/{featureSource}/{featureID}", produces=MediaType.APPLICATION_JSON_VALUE)
 	public void getRegisteredFeature(HttpServletRequest request, HttpServletResponse response,
