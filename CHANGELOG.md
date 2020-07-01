@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 *   Updated getCharacteristicData (/{featureSource}/{featureID}/{characteristicType}) to return 404s when a comid is not found
 *   Add features collection API /linked-data/{featureSource}
 *   Updated Swagger to show distance is in kilometers
+*   Migrate from springfox to springdoc
   
 ## [1.2.0](https://github.com/ACWI-SSWD/nldi-services/compare/nldi-services-1.1.0...nldi-services-1.2.0)
 ### Changed
