@@ -14,7 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.Pattern;
 
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,9 +40,9 @@ import gov.usgs.owi.nldi.services.LogService;
 import gov.usgs.owi.nldi.services.Navigation;
 import gov.usgs.owi.nldi.services.Parameters;
 import gov.usgs.owi.nldi.swagger.model.DataSource;
+import gov.usgs.owi.nldi.swagger.model.Feature;
 import gov.usgs.owi.nldi.transform.CharacteristicDataTransformer;
 import gov.usgs.owi.nldi.transform.FeatureTransformer;
-import io.swagger.annotations.ApiOperation;
 
 @RestController
 public class LinkedDataController extends BaseController {
@@ -54,7 +59,13 @@ public class LinkedDataController extends BaseController {
 		super(inLookupDao, inStreamingDao, inNavigation, inParameters, configurationService, inLogService);
 	}
 
-	@ApiOperation(value="getDataSources", response=DataSource.class, responseContainer="List")
+	@Operation(summary = "getDataSources", description = "returns a list of data sources")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "OK",
+					content = { @Content(mediaType = "application/json",
+							schema = @Schema(implementation = DataSource.class)) }),
+			@ApiResponse(responseCode = "500", description = "Server error",
+					content = @Content) })
 	@GetMapping(value="linked-data", produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<Map<String, Object>> getDataSources(HttpServletRequest request, HttpServletResponse response) {
 		BigInteger logId = logService.logRequest(request);
@@ -80,7 +91,14 @@ public class LinkedDataController extends BaseController {
 		return rtn;
 	}
 
-	@ApiOperation(value="getFeatures", hidden=true)
+	@Operation(summary = "getFeatures", description = "returns a list of features for a given data source")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "OK",
+					content = { @Content(mediaType = "application/json",
+							schema = @Schema(implementation = Feature.class)) }),
+			@ApiResponse(responseCode = "500", description = "Server error",
+					content = @Content) })
+
 	@GetMapping(value="linked-data/{featureSource}", produces=MediaType.APPLICATION_JSON_VALUE)
 	public Object getFeatures(HttpServletRequest request, HttpServletResponse response, @PathVariable(LookupDao.FEATURE_SOURCE) String featureSource) throws IOException {
 		BigInteger logId = logService.logRequest(request);
@@ -199,7 +217,7 @@ public class LinkedDataController extends BaseController {
 			@PathVariable(Parameters.FEATURE_ID) String featureID,
 			@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode,
 			@RequestParam(value=Parameters.STOP_COMID, required=false) @Range(min=1, max=Integer.MAX_VALUE) String stopComid,
-			@ApiParam(value=Parameters.DISTANCE_DESCRIPTION)
+			@Parameter(description=Parameters.DISTANCE_DESCRIPTION)
 								 @RequestParam(value=Parameters.DISTANCE, required=false)
 								 @Range(min=1, max=9999, message="distance must be between 1 and 9999 kilometers") String distance,
 			@RequestParam(value=Parameters.LEGACY, required=false) String legacy) {
@@ -226,7 +244,7 @@ public class LinkedDataController extends BaseController {
 			@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode,
 			@PathVariable(value=DATA_SOURCE) String dataSource,
 			@RequestParam(value=Parameters.STOP_COMID, required=false) @Range(min=1, max=Integer.MAX_VALUE) String stopComid,
-			@ApiParam(value=Parameters.DISTANCE_DESCRIPTION)
+			@Parameter(description=Parameters.DISTANCE_DESCRIPTION)
 								@RequestParam(value=Parameters.DISTANCE, required=false)
 								@Range(min=1, max=9999, message="distance must be between 1 and 9999 kilometers") String distance,
 			@RequestParam(value=Parameters.LEGACY, required=false) String legacy) throws Exception {
