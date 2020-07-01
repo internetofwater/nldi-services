@@ -3,6 +3,7 @@
 
 <mapper namespace="lookup">
 
+
     <sql id="featureProperties">
         crawler_source.source_suffix source,
         crawler_source.source_name,
@@ -37,6 +38,7 @@
         </choose>
     </sql>
 
+
     <sql id="featureFromWhere">
          from nldi_data.feature
               join nldi_data.crawler_source
@@ -70,5 +72,6 @@
           from nldi_data.crawler_source
              order by lower(source_suffix)
     </select>
+
 
 </mapper>

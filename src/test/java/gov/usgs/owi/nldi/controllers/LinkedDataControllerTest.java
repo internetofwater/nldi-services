@@ -194,13 +194,18 @@ public class LinkedDataControllerTest {
 	}
 
 	@Test
-	public void getFeaturestest() throws IOException {
-		controller.getFeatures(request, response, null);
+	public void getFeaturestest() {
+		try {
+			controller.getFeatures(request, response, null);
+		} catch (Exception e) {
+			assertTrue(e instanceof NullPointerException);
+		}
 		verify(logService).logRequest(any(HttpServletRequest.class));
 		verify(logService).logRequestComplete(any(BigInteger.class), any(int.class));
-		assertEquals(HttpStatus.BAD_REQUEST.value(), response.getStatus());
-		assertEquals("This functionality is not implemented.", response.getErrorMessage());
+		//this is a INTERNAL_SERVER_ERROR because of NPEs that shouldn't happen in real life.
+		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR.value(), response.getStatus());
 	}
+
 
 	@Test
 	public void getRegisteredFeatureTest() {

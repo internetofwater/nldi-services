@@ -16,6 +16,7 @@ public class TestConfigurationService extends ConfigurationService {
 		return "owi-test.usgs.gov:8080";
 	}
 
+
 	@Override
 	public String getDisplayPath() {
 		return "/test-url";
