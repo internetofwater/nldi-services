@@ -9,5 +9,4 @@ public class Feature {
 	public String uri;
 	@JsonProperty("comid")
 	public String comid;
-
 }
