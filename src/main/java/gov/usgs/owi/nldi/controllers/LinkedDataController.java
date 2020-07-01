@@ -38,6 +38,7 @@ import gov.usgs.owi.nldi.services.Parameters;
 import gov.usgs.owi.nldi.swagger.model.DataSource;
 import gov.usgs.owi.nldi.transform.CharacteristicDataTransformer;
 import gov.usgs.owi.nldi.transform.FeatureTransformer;
+import gov.usgs.owi.nldi.transform.FeatureCollectionTransformer;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
@@ -81,18 +82,25 @@ public class LinkedDataController extends BaseController {
 		return rtn;
 	}
 
-	@ApiOperation(value="getFeatures", hidden=true)
 	@GetMapping(value="linked-data/{featureSource}", produces=MediaType.APPLICATION_JSON_VALUE)
-	public Object getFeatures(HttpServletRequest request, HttpServletResponse response, @PathVariable(LookupDao.FEATURE_SOURCE) String featureSource) throws IOException {
+	public void getFeatures(HttpServletRequest request, HttpServletResponse response,
+							@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource) {
 		BigInteger logId = logService.logRequest(request);
+
 		try {
-			response.sendError(HttpStatus.BAD_REQUEST.value(), "This functionality is not implemented.");
+			Map<String, Object> parameterMap = new HashMap<>();
+
+			parameterMap.put(LookupDao.ROOT_URL, configurationService.getRootUrl());
+			parameterMap.put(LookupDao.FEATURE_SOURCE, featureSource);
+			FeatureCollectionTransformer transformer = new FeatureCollectionTransformer(response, configurationService);
+			addContentHeader(response);
+			streamResults(transformer, BaseDao.FEATURES_COLLECTION, parameterMap);
+
 		} catch (Exception e) {
 			GlobalDefaultExceptionHandler.handleError(e, response);
 		} finally {
 			logService.logRequestComplete(logId, response.getStatus());
 		}
-		return null;
 	}
 
 	@GetMapping(value="linked-data/{featureSource}/{featureID}", produces=MediaType.APPLICATION_JSON_VALUE)
@@ -200,19 +208,19 @@ public class LinkedDataController extends BaseController {
 			@PathVariable(Parameters.FEATURE_ID) String featureID,
 			@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode,
 			@RequestParam(value=Parameters.STOP_COMID, required=false) @Range(min=1, max=Integer.MAX_VALUE) String stopComid,
-			@ApiParam(value=Parameters.DISTANCE_DESCRIPTION) @RequestParam(value=Parameters.DISTANCE, required=false)
+			@ApiParam(value=Parameters.DISTANCE_DESCRIPTION)
+				@RequestParam(value=Parameters.DISTANCE, required=false, defaultValue=Parameters.MAX_DISTANCE)
 			@Pattern(message=Parameters.DISTANCE_VALIDATION_MESSAGE, regexp=Parameters.DISTANCE_VALIDATION_REGEX) String distance,
 			@RequestParam(value=Parameters.LEGACY, required=false) String legacy) throws Exception {
 
 		BigInteger logId = logService.logRequest(request);
 
 		try {
-			String guaranteedDistance = (StringUtils.isEmpty(distance)) ? Parameters.MAX_DISTANCE: distance;
 			String comid = getComid(featureSource, featureID);
 			if (null == comid) {
 				response.setStatus(HttpStatus.NOT_FOUND.value());
 			} else {
-				streamFlowLines(response, comid, navigationMode, stopComid, guaranteedDistance, isLegacy(legacy, navigationMode));
+				streamFlowLines(response, comid, navigationMode, stopComid, distance, isLegacy(legacy, navigationMode));
 			}
 		} catch (Exception e) {
 			GlobalDefaultExceptionHandler.handleError(e, response);
@@ -228,18 +236,18 @@ public class LinkedDataController extends BaseController {
 			@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode,
 			@PathVariable(value=DATA_SOURCE) String dataSource,
 			@RequestParam(value=Parameters.STOP_COMID, required=false) @Range(min=1, max=Integer.MAX_VALUE) String stopComid,
-			@ApiParam(value=Parameters.DISTANCE_DESCRIPTION) @RequestParam(value=Parameters.DISTANCE, required=false)
+			@ApiParam(value=Parameters.DISTANCE_DESCRIPTION)
+				@RequestParam(value=Parameters.DISTANCE, required=false, defaultValue=Parameters.MAX_DISTANCE)
 			@Pattern(message=Parameters.DISTANCE_VALIDATION_MESSAGE, regexp=Parameters.DISTANCE_VALIDATION_REGEX) String distance,
 			@RequestParam(value=Parameters.LEGACY, required=false) String legacy) throws Exception {
 
 		BigInteger logId = logService.logRequest(request);
 		try {
-			String guaranteedDistance = (StringUtils.isEmpty(distance)) ? Parameters.MAX_DISTANCE: distance;
 			String comid = getComid(featureSource, featureID);
 			if (null == comid) {
 				response.setStatus(HttpStatus.NOT_FOUND.value());
 			} else {
-				streamFeatures(response, comid, navigationMode, stopComid, guaranteedDistance, dataSource,
+				streamFeatures(response, comid, navigationMode, stopComid, distance, dataSource,
 						isLegacy(legacy, navigationMode));
 			}
 		} catch (Exception e) {

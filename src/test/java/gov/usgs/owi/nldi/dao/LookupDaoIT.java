@@ -73,4 +73,6 @@ public class LookupDaoIT extends BaseIT {
 		assertEquals("Water Quality Portal", results.get(3).get(LookupDao.SOURCE_NAME));
 		assertEquals(String.join("/", configurationService.getRootUrl(), "wqp"), results.get(3).get(BaseDao.FEATURES));
 	}
+
+
 }

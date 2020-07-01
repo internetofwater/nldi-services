@@ -34,7 +34,7 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 	private static final String RESULT_FOLDER  = "feature/other/";
 
 	@Before
-	public void setup() {
+	public void setUp() {
 		urlRoot = "http://localhost:" + port + context;
 	}
 
@@ -123,15 +123,29 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 	@Test
 	public void getFeaturesTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/comid",
-				HttpStatus.BAD_REQUEST.value(),
+				"/linked-data/wqp",
+				HttpStatus.OK.value(),
 				null,
 				null,
-				null,
-				"{\"status\":400,\"error\":\"Bad Request\",\"message\":\"This functionality is not implemented.\",\"path\":\"/nldi/linked-data/comid\"}",
+			 	BaseController.MIME_TYPE_GEOJSON,
+				getCompareFile(RESULT_FOLDER, "wqpFeatureCollection.json"),
 				true,
-				true);
+				false);
 	}
+
+	@Test
+	public void getFeaturesTestInvalid() throws Exception {
+		assertEntity(restTemplate,
+				"/linked-data/wqx",
+				HttpStatus.OK.value(),
+				null,
+				null,
+				null,
+				null,
+				false,
+				false);
+	}
+
 
 	//Object Testing Catchment
 	@Test
