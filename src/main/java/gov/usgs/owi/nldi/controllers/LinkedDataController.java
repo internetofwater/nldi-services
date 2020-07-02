@@ -25,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.util.NumberUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -230,11 +231,12 @@ public class LinkedDataController extends BaseController {
 			@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode,
 			@RequestParam(value=Parameters.STOP_COMID, required=false) @Range(min=1, max=Integer.MAX_VALUE) String stopComid,
 			@Parameter(description=Parameters.DISTANCE_DESCRIPTION)
-								 @RequestParam(value=Parameters.DISTANCE, required=false)
-								 @Range(min=1, max=9999, message="distance must be between 1 and 9999 kilometers") String distance,
-			@RequestParam(value=Parameters.LEGACY, required=false) String legacy) {
+				@RequestParam(value=Parameters.DISTANCE, required=false, defaultValue=Parameters.MAX_DISTANCE)
+			@Pattern(message=Parameters.DISTANCE_VALIDATION_MESSAGE, regexp=Parameters.DISTANCE_VALIDATION_REGEX) String distance,
+			@RequestParam(value=Parameters.LEGACY, required=false) String legacy) throws Exception {
 
 		BigInteger logId = logService.logRequest(request);
+
 		try {
 			String comid = getComid(featureSource, featureID);
 			if (null == comid) {
@@ -257,8 +259,8 @@ public class LinkedDataController extends BaseController {
 			@PathVariable(value=DATA_SOURCE) String dataSource,
 			@RequestParam(value=Parameters.STOP_COMID, required=false) @Range(min=1, max=Integer.MAX_VALUE) String stopComid,
 			@Parameter(description=Parameters.DISTANCE_DESCRIPTION)
-								@RequestParam(value=Parameters.DISTANCE, required=false)
-								@Range(min=1, max=9999, message="distance must be between 1 and 9999 kilometers") String distance,
+				@RequestParam(value=Parameters.DISTANCE, required=false, defaultValue=Parameters.MAX_DISTANCE)
+			@Pattern(message=Parameters.DISTANCE_VALIDATION_MESSAGE, regexp=Parameters.DISTANCE_VALIDATION_REGEX) String distance,
 			@RequestParam(value=Parameters.LEGACY, required=false) String legacy) throws Exception {
 
 		BigInteger logId = logService.logRequest(request);
@@ -267,7 +269,8 @@ public class LinkedDataController extends BaseController {
 			if (null == comid) {
 				response.setStatus(HttpStatus.NOT_FOUND.value());
 			} else {
-				streamFeatures(response, comid, navigationMode, stopComid, distance, dataSource, isLegacy(legacy, navigationMode));
+				streamFeatures(response, comid, navigationMode, stopComid, distance, dataSource,
+						isLegacy(legacy, navigationMode));
 			}
 		} catch (Exception e) {
 			GlobalDefaultExceptionHandler.handleError(e, response);
@@ -275,4 +278,6 @@ public class LinkedDataController extends BaseController {
 			logService.logRequestComplete(logId, response.getStatus());
 		}
 	}
+
+
 }
