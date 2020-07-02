@@ -43,7 +43,6 @@ import gov.usgs.owi.nldi.swagger.model.DataSource;
 import gov.usgs.owi.nldi.swagger.model.Feature;
 import gov.usgs.owi.nldi.transform.CharacteristicDataTransformer;
 import gov.usgs.owi.nldi.transform.FeatureTransformer;
-
 import gov.usgs.owi.nldi.transform.FeatureCollectionTransformer;
 
 @RestController
@@ -68,6 +67,8 @@ public class LinkedDataController extends BaseController {
 							schema = @Schema(implementation = DataSource.class)) }),
 			@ApiResponse(responseCode = "500", description = "Server error",
 					content = @Content) })
+
+
 	@GetMapping(value="linked-data", produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<Map<String, Object>> getDataSources(HttpServletRequest request, HttpServletResponse response) {
 		BigInteger logId = logService.logRequest(request);
@@ -93,6 +94,7 @@ public class LinkedDataController extends BaseController {
 		return rtn;
 	}
 
+
 	@Operation(summary = "getFeatures", description = "returns a list of features for a given data source")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "OK",
@@ -100,6 +102,8 @@ public class LinkedDataController extends BaseController {
 							schema = @Schema(implementation = Feature.class)) }),
 			@ApiResponse(responseCode = "500", description = "Server error",
 					content = @Content) })
+
+
 	@GetMapping(value="linked-data/{featureSource}", produces=MediaType.APPLICATION_JSON_VALUE)
 	public void getFeatures(HttpServletRequest request, HttpServletResponse response,
 							@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource) {
@@ -107,7 +111,6 @@ public class LinkedDataController extends BaseController {
 
 		try {
 			Map<String, Object> parameterMap = new HashMap<>();
-
 			parameterMap.put(LookupDao.ROOT_URL, configurationService.getRootUrl());
 			parameterMap.put(LookupDao.FEATURE_SOURCE, featureSource);
 			FeatureCollectionTransformer transformer = new FeatureCollectionTransformer(response, configurationService);

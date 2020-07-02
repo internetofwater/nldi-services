@@ -7,6 +7,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class ConfigurationService {
 
+	@Value("${springdoc.version}")
+	private String appVersion;
+
 	@Value("${nldi.displayProtocol}")
 	private String displayProtocol;
 
@@ -30,5 +33,9 @@ public class ConfigurationService {
 
 	public String getRootUrl() {
 		return getDisplayProtocol() + "://" + getDisplayHost() + getDisplayPath() + "/linked-data";
+	}
+
+	public String getAppVersion() {
+		return appVersion;
 	}
 }
