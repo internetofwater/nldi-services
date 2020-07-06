@@ -194,9 +194,21 @@ public class LinkedDataControllerTest {
 	}
 
 	@Test
-	public void getFeaturestest() {
+	public void getFeaturesTestHtml() {
 		try {
-			controller.getFeatures(request, response, null);
+			controller.getFeatures(request, response, null, null);
+		} catch (Exception e) {
+			assertTrue(e instanceof NullPointerException);
+		}
+		verify(logService).logRequest(any(HttpServletRequest.class));
+		verify(logService).logRequestComplete(any(BigInteger.class), any(int.class));
+		assertEquals(HttpStatus.OK.value(), response.getStatus());
+	}
+
+	@Test
+	public void getFeaturesTestJson() {
+		try {
+			controller.getFeatures(request, response, "wqp", "json");
 		} catch (Exception e) {
 			assertTrue(e instanceof NullPointerException);
 		}

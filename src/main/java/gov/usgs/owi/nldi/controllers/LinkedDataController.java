@@ -82,25 +82,34 @@ public class LinkedDataController extends BaseController {
 		return rtn;
 	}
 
-	@GetMapping(value="linked-data/{featureSource}", produces=MediaType.APPLICATION_JSON_VALUE)
-	public void getFeatures(HttpServletRequest request, HttpServletResponse response,
-							@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource) {
-		BigInteger logId = logService.logRequest(request);
-
+	@GetMapping(value="linked-data/{featureSource}")
+	public Object getFeatures(HttpServletRequest request, HttpServletResponse response,
+							@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
+							@RequestParam(name="format", required=false) String format) {
+		//BigInteger logId = logService.logRequest(request);
+        System.err.println("format is " + format);
 		try {
-			Map<String, Object> parameterMap = new HashMap<>();
 
-			parameterMap.put(LookupDao.ROOT_URL, configurationService.getRootUrl());
-			parameterMap.put(LookupDao.FEATURE_SOURCE, featureSource);
-			FeatureCollectionTransformer transformer = new FeatureCollectionTransformer(response, configurationService);
-			addContentHeader(response);
-			streamResults(transformer, BaseDao.FEATURES_COLLECTION, parameterMap);
+			if ("json".equals(format)) {
+				System.err.println("in json block");
+				Map<String, Object> parameterMap = new HashMap<>();
+
+				parameterMap.put(LookupDao.ROOT_URL, configurationService.getRootUrl());
+				parameterMap.put(LookupDao.FEATURE_SOURCE, featureSource);
+				FeatureCollectionTransformer transformer = new FeatureCollectionTransformer(response, configurationService);
+				addContentHeader(response);
+				streamResults(transformer, BaseDao.FEATURES_COLLECTION, parameterMap);
+			} else {
+				System.err.println("in htmlblock");
+				return "<html><body><a href='" + request.getRequestURL() + "?format=json'>Click here to see json data</a></body></html>";
+			}
 
 		} catch (Exception e) {
 			GlobalDefaultExceptionHandler.handleError(e, response);
 		} finally {
-			logService.logRequestComplete(logId, response.getStatus());
+		//	logService.logRequestComplete(logId, response.getStatus());
 		}
+		return null;
 	}
 
 	@GetMapping(value="linked-data/{featureSource}/{featureID}", produces=MediaType.APPLICATION_JSON_VALUE)
