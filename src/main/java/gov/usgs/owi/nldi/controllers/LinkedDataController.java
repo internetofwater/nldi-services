@@ -91,9 +91,14 @@ public class LinkedDataController extends BaseController {
 							@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
 							@RequestParam(name="f", required=false) String format) {
 		BigInteger logId = logService.logRequest(request);
+		System.err.println("ACCEPT:" + request.getHeader("Accept"));
+		String validFormat = format;
+		if (request.getHeader("Accept") != null && request.getHeader("Accept").contains("json")) {
+			validFormat = "json";
+		}
         try {
 
-			if ("json".equals(format)) {
+			if ("json".equals(validFormat)) {
 				Map<String, Object> parameterMap = new HashMap<>();
 
 				parameterMap.put(LookupDao.ROOT_URL, configurationService.getRootUrl());
