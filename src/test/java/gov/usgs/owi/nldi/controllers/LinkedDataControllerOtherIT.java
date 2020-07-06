@@ -123,7 +123,7 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 	@Test
 	public void getFeaturesTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/wqp?format=json",
+				"/linked-data/wqp?f=json",
 				HttpStatus.OK.value(),
 				null,
 				null,
@@ -140,13 +140,17 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 				HttpStatus.OK.value(),
 				null,
 				null,
-				null,//"text/html",
+				"text/plain;charset=ISO-8859-1",
 				null,
 				false,
 				false);
-		assertThat("contains right stuff",
-				actualbody.endsWith("/linked-data/wqp?format=json'>Click here</a></body></html>"));
-		System.err.println(actualbody);
+		assertThat("contains <html> tag", actualbody.startsWith("<html>"));
+		assertThat("contains </html> tag", actualbody.endsWith("</html>"));
+		assertThat("opens link", actualbody.contains("<a"));
+		assertThat("closes link", actualbody.contains("</a>"));
+		assertThat("contains format", actualbody.contains("f=json"));
+		assertThat("contains linked-data", actualbody.contains("/linked-data"));
+
 
 	}
 

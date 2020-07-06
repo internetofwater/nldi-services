@@ -17,8 +17,10 @@ import javax.validation.constraints.Pattern;
 import io.swagger.annotations.ApiParam;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.util.NumberUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,6 +50,8 @@ public class LinkedDataController extends BaseController {
 	private static final String DOWNSTREAM_MAIN = "downstreamMain";
 	private static final String UPSTREAM_MAIN = "upstreamMain";
 	private static final String UPSTREAM_TRIBUTARIES = "upstreamTributaries";
+
+	private static final String FEATURES_URL_MARKER = "FEATURES_URL_MARKER";
 
 	@Autowired
 	public LinkedDataController(LookupDao inLookupDao, StreamingDao inStreamingDao,
@@ -85,13 +89,11 @@ public class LinkedDataController extends BaseController {
 	@GetMapping(value="linked-data/{featureSource}")
 	public Object getFeatures(HttpServletRequest request, HttpServletResponse response,
 							@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
-							@RequestParam(name="format", required=false) String format) {
-		//BigInteger logId = logService.logRequest(request);
-        System.err.println("format is " + format);
-		try {
+							@RequestParam(name="f", required=false) String format) {
+		BigInteger logId = logService.logRequest(request);
+        try {
 
 			if ("json".equals(format)) {
-				System.err.println("in json block");
 				Map<String, Object> parameterMap = new HashMap<>();
 
 				parameterMap.put(LookupDao.ROOT_URL, configurationService.getRootUrl());
@@ -100,14 +102,15 @@ public class LinkedDataController extends BaseController {
 				addContentHeader(response);
 				streamResults(transformer, BaseDao.FEATURES_COLLECTION, parameterMap);
 			} else {
-				System.err.println("in htmlblock");
-				return "<html><body><a href='" + request.getRequestURL() + "?format=json'>Click here to see json data</a></body></html>";
+				String html = getHtmlTemplate("controllers","/features.html");
+				html = html.replace(LinkedDataController.FEATURES_URL_MARKER, request.getRequestURL() + "?f=json");
+				return html;
 			}
 
 		} catch (Exception e) {
 			GlobalDefaultExceptionHandler.handleError(e, response);
 		} finally {
-		//	logService.logRequestComplete(logId, response.getStatus());
+			logService.logRequestComplete(logId, response.getStatus());
 		}
 		return null;
 	}
@@ -266,5 +269,10 @@ public class LinkedDataController extends BaseController {
 		}
 	}
 
+	public String getHtmlTemplate(String folder, String file) throws IOException {
+		ClassPathResource classPathResource = new ClassPathResource("static/" + folder + file);
+		java.nio.file.Files.write(java.nio.file.Paths.get("c:/users/kkehl/filename.txt"),classPathResource.getFilename().getBytes());
 
+		return new String(FileCopyUtils.copyToByteArray(new ClassPathResource("static/" + folder + file).getInputStream()));
+	}
 }
