@@ -11,6 +11,7 @@ public abstract class BaseDao extends SqlSessionDaoSupport {
 	public static final String DATA_SOURCES = "dataSources";
 	public static final String FEATURE = "feature";
 	public static final String FEATURES = "features";
+	public static final String FEATURES_COLLECTION = "featuresCollection";
 	public static final String FLOW_LINES = "flowLines";
 	public static final String BASIN = "basin";
 	public static final String CHARACTERISTICS_METADATA = "characteristicMetadata";

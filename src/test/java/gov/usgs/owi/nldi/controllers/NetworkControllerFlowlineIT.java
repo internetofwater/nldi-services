@@ -17,6 +17,7 @@ import com.github.springtestdbunit.annotation.DatabaseSetup;
 import gov.usgs.owi.nldi.BaseIT;
 import gov.usgs.owi.nldi.transform.FlowLineTransformer;
 
+
 @EnableWebMvc
 @SpringBootTest(webEnvironment=WebEnvironment.RANDOM_PORT)
 @DatabaseSetup("classpath:/testData/crawlerSource.xml")
@@ -62,6 +63,47 @@ public class NetworkControllerFlowlineIT extends BaseIT {
 				BaseController.MIME_TYPE_GEOJSON,
 				getCompareFile(RESULT_FOLDER, "comid_13297246_UT_distance_10.json"),
 				true,
+				false);
+	}
+
+
+	@Test
+	public void getComidUtDistanceTestEmpty() throws Exception {
+		assertEntity(restTemplate,
+				"/linked-data/comid/13297246/navigate/UT?distance=",
+				HttpStatus.OK.value(),
+				FlowLineTransformer.FLOW_LINES_COUNT_HEADER,
+				"359",
+				BaseController.MIME_TYPE_GEOJSON,
+				getCompareFile(RESULT_FOLDER, "comid_13297246_UT_distance_empty.json"),
+				true,
+				false);
+
+	}
+
+	@Test
+	public void getComidUtDistanceTestAboveMax() throws Exception {
+		assertEntity(restTemplate,
+				"/linked-data/comid/13297246/navigate/UT?distance=10000",
+				HttpStatus.BAD_REQUEST.value(),
+				null,
+				null,
+				null,
+				"getFlowlines.distance: distance must be between 1 and 9999 kilometers",
+				false,
+				false);
+	}
+
+	@Test
+	public void getComidUtDistanceTestBelowMin() throws Exception {
+		assertEntity(restTemplate,
+				"/linked-data/comid/13297246/navigate/UT?distance=-1",
+				HttpStatus.BAD_REQUEST.value(),
+				null,
+				null,
+				null,
+				"getFlowlines.distance: distance must be between 1 and 9999 kilometers",
+				false,
 				false);
 	}
 

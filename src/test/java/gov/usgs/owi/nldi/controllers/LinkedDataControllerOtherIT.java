@@ -34,7 +34,7 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 	private static final String RESULT_FOLDER  = "feature/other/";
 
 	@Before
-	public void setup() {
+	public void setUp() {
 		urlRoot = "http://localhost:" + port + context;
 	}
 
@@ -117,6 +117,33 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 				false);
 		assertThat(new JSONArray(actualbody),
 				sameJSONArrayAs(new JSONArray(getCompareFile(RESULT_FOLDER, "dataSources.json"))).allowingAnyArrayOrdering());
+	}
+
+	//Features Testing
+	@Test
+	public void getFeaturesTest() throws Exception {
+		assertEntity(restTemplate,
+				"/linked-data/wqp",
+				HttpStatus.OK.value(),
+				null,
+				null,
+			 	BaseController.MIME_TYPE_GEOJSON,
+				getCompareFile(RESULT_FOLDER, "wqpFeatureCollection.json"),
+				true,
+				false);
+	}
+
+	@Test
+	public void getFeaturesTestInvalid() throws Exception {
+		assertEntity(restTemplate,
+				"/linked-data/wqx",
+				HttpStatus.OK.value(),
+				null,
+				null,
+				null,
+				null,
+				false,
+				false);
 	}
 
 	//Object Testing Catchment

@@ -11,7 +11,10 @@ import org.springframework.stereotype.Component;
 public class LookupDao extends BaseDao {
 
 	public static final String ROOT_URL = "rootUrl";
-
+    public static final String NAME = "name";
+    public static final String URI = "uri";
+    public static final String SHAPE = "shape";
+    public static final String IDENTIFIER = "identifier";
 	public static final String FEATURE_SOURCE = "featureSource";
 	public static final String SOURCE = "source";
 	public static final String SOURCE_NAME = "sourceName";
