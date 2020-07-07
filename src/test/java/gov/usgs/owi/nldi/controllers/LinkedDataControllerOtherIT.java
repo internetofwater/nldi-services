@@ -11,8 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
+import org.springframework.http.*;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
@@ -92,6 +91,9 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 
 	@Test
 	public void getBasinHtmlTest() throws Exception {
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Accept", "text/html");
+		restTemplate.exchange("/linked-data/comid/13302592/basin", HttpMethod.GET, new HttpEntity<>(headers), String.class);
 		String actualbody = assertEntity(restTemplate,
 				"/linked-data/comid/13302592/basin?f=html",
 				HttpStatus.OK.value(),
@@ -122,7 +124,7 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 	public void getBasinBadFormatTest() throws Exception {
 		assertEntity(restTemplate,
 				"/linked-data/comid/1330259299/basin?f=png",
-				HttpStatus.BAD_REQUEST.value(),
+				HttpStatus.NOT_ACCEPTABLE.value(),
 				null,
 				null,
 				null,
@@ -185,7 +187,7 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 	public void getFeaturesTestInvalid() throws Exception {
 		assertEntity(restTemplate,
 				"/linked-data/wqp?f=badformat",
-				HttpStatus.BAD_REQUEST.value(),
+				HttpStatus.NOT_ACCEPTABLE.value(),
 				null,
 				null,
 				null,

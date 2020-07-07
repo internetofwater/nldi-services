@@ -5,6 +5,8 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
+import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -27,6 +29,20 @@ public class SpringConfig implements WebMvcConfigurer {
 		resolver.setPrefix("/WEB-INF/views/");
 		resolver.setSuffix(".jsp");
 		return resolver;
+	}
+
+	@Override
+	public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+		configurer
+				.favorPathExtension(false)
+				.favorParameter(true)
+				.parameterName("f")
+				// Browser
+				.mediaType("html", MediaType.TEXT_HTML)
+				// API
+				.mediaType("json", MediaType.APPLICATION_JSON)
+				.defaultContentType(MediaType.APPLICATION_JSON)
+		;
 	}
 
 	@Override

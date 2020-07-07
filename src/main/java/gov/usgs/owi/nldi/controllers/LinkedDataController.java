@@ -197,7 +197,6 @@ public class LinkedDataController extends BaseController {
 			@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
 			@PathVariable(Parameters.FEATURE_ID) String featureID,
 			@RequestParam(name=Parameters.FORMAT, required=false) @Pattern(regexp=OUTPUT_FORMAT) String format) throws Exception {
-
 		BigInteger logId = logService.logRequest(request);
 		String acceptHeader = request.getHeader("Accept");
 
