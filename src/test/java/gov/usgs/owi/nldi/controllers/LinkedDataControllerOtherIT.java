@@ -98,10 +98,10 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 		String actualbody = assertEntity(restTemplate,
 				"/linked-data/comid/13302592/basin?f=html",
 				HttpStatus.OK.value(),
-				null,//BasinTransformer.BASIN_COUNT_HEADER,
-				null,//"1",
-				null,//BaseController.MIME_TYPE_GEOJSON,
-				null, //getCompareFile(RESULT_FOLDER, "basin/comid_13302592.json"),
+				null,
+				null,
+				null,
+				null,
 				false,
 				false);
 		assertThat("contains <html>", actualbody.contains("<html>"));

@@ -93,7 +93,7 @@ public class LinkedDataController extends BaseController {
 		String acceptHeader = request.getHeader("Accept");
 		String validFormat = format;
  		try {
-            validFormat = resolveFormat(validFormat, acceptHeader);
+            		validFormat = resolveFormat(validFormat, acceptHeader);
 
 			if ("json".equals(validFormat)) {
 				Map<String, Object> parameterMap = new HashMap<>();
@@ -199,7 +199,7 @@ public class LinkedDataController extends BaseController {
 	public Object getBasin(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
 			@PathVariable(Parameters.FEATURE_ID) String featureID,
-						 @RequestParam(name=Parameters.FORMAT, required=false) @Pattern(regexp=OUTPUT_FORMAT) String format) throws Exception {
+			@RequestParam(name=Parameters.FORMAT, required=false) @Pattern(regexp=OUTPUT_FORMAT) String format) throws Exception {
 
 		BigInteger logId = logService.logRequest(request);
 		String acceptHeader = request.getHeader("Accept");
@@ -235,7 +235,7 @@ public class LinkedDataController extends BaseController {
 				@RequestParam(value=Parameters.DISTANCE, required=false, defaultValue=Parameters.MAX_DISTANCE)
 			@Pattern(message=Parameters.DISTANCE_VALIDATION_MESSAGE, regexp=Parameters.DISTANCE_VALIDATION_REGEX) String distance,
 			@RequestParam(value=Parameters.LEGACY, required=false) String legacy,
-							 @RequestParam(name=Parameters.FORMAT, required=false) @Pattern(regexp=OUTPUT_FORMAT) String format) throws Exception {
+			@RequestParam(name=Parameters.FORMAT, required=false) @Pattern(regexp=OUTPUT_FORMAT) String format) throws Exception {
 
 		BigInteger logId = logService.logRequest(request);
 		String acceptHeader = request.getHeader("Accept");
@@ -272,7 +272,7 @@ public class LinkedDataController extends BaseController {
 				@RequestParam(value=Parameters.DISTANCE, required=false, defaultValue=Parameters.MAX_DISTANCE)
 			@Pattern(message=Parameters.DISTANCE_VALIDATION_MESSAGE, regexp=Parameters.DISTANCE_VALIDATION_REGEX) String distance,
 			@RequestParam(value=Parameters.LEGACY, required=false) String legacy,
-							@RequestParam(name=Parameters.FORMAT, required=false) @Pattern(regexp=OUTPUT_FORMAT) String format) throws Exception {
+			@RequestParam(name=Parameters.FORMAT, required=false) @Pattern(regexp=OUTPUT_FORMAT) String format) throws Exception {
 
 		BigInteger logId = logService.logRequest(request);
 		String acceptHeader = request.getHeader("Accept");

@@ -43,7 +43,7 @@ public class NetworkController extends BaseController {
 				@RequestParam(value=Parameters.DISTANCE, required=false, defaultValue=Parameters.MAX_DISTANCE)
 			@Pattern(message=Parameters.DISTANCE_VALIDATION_MESSAGE, regexp=Parameters.DISTANCE_VALIDATION_REGEX) String distance,
 			@RequestParam(value=Parameters.LEGACY, required=false) String legacy,
-							 @RequestParam(name=Parameters.FORMAT, required=false) @Pattern(regexp=OUTPUT_FORMAT) String format) throws Exception {
+			@RequestParam(name=Parameters.FORMAT, required=false) @Pattern(regexp=OUTPUT_FORMAT) String format) throws Exception {
 		BigInteger logId = logService.logRequest(request);
 		String acceptHeader = request.getHeader("Accept");
 		try {
@@ -72,7 +72,7 @@ public class NetworkController extends BaseController {
 				@RequestParam(value=Parameters.DISTANCE, required=false, defaultValue=Parameters.MAX_DISTANCE)
 			@Pattern(message=Parameters.DISTANCE_VALIDATION_MESSAGE, regexp=Parameters.DISTANCE_VALIDATION_REGEX) String distance,
 			@RequestParam(value=Parameters.LEGACY, required=false) String legacy,
-							@RequestParam(name=Parameters.FORMAT, required=false) @Pattern(regexp=OUTPUT_FORMAT) String format) throws Exception {
+			@RequestParam(name=Parameters.FORMAT, required=false) @Pattern(regexp=OUTPUT_FORMAT) String format) throws Exception {
 		BigInteger logId = logService.logRequest(request);
 		String acceptHeader = request.getHeader("Accept");
 
