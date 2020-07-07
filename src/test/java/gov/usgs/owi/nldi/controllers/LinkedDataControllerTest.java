@@ -223,8 +223,6 @@ public class LinkedDataControllerTest {
 		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR.value(), response.getStatus());
 	}
 
-
-
 	@Test
 	public void getRegisteredFeatureTest() {
 		try {
