@@ -1,5 +1,6 @@
 package gov.usgs.owi.nldi.controllers;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,6 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.ResultHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.MediaType;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.util.NumberUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
@@ -35,6 +39,9 @@ public abstract class BaseController {
 	public static final String HEADER_CONTENT_TYPE = "Content-Type";
 	public static final String MIME_TYPE_GEOJSON = "application/vnd.geo+json";
 	public static final String REGEX_NAVIGATION_MODE = "DD|DM|PP|UT|UM";
+
+	protected static final String OUTPUT_FORMAT = "json|html";
+	protected static final String URL_MARKER = "URL_MARKER";
 
 	static final String DATA_SOURCE = "dataSource";
 
@@ -163,5 +170,21 @@ public abstract class BaseController {
 		} else {
 			return feature.get(Parameters.COMID).toString();
 		}
+	}
+
+	protected String getHtml(String url) throws IOException {
+		String html = new String(FileCopyUtils.copyToByteArray(new ClassPathResource("static/controllers/json_link_template.html").getInputStream()));
+		return html.replace(URL_MARKER, url + "?f=json");
+	}
+
+	protected String resolveFormat(String format, String acceptHeader) {
+		if (!StringUtils.isEmpty(format)) {
+			//do nothing because this is what the user has chosen
+		} else if (StringUtils.isEmpty(format) && !StringUtils.isEmpty(acceptHeader) && acceptHeader.startsWith(MediaType.TEXT_HTML_VALUE)) {
+			format = "html";
+		} else {
+			format = "json";
+		}
+		return format;
 	}
 }

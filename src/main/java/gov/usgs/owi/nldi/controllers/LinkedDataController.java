@@ -50,8 +50,6 @@ public class LinkedDataController extends BaseController {
 	private static final String DOWNSTREAM_MAIN = "downstreamMain";
 	private static final String UPSTREAM_MAIN = "upstreamMain";
 	private static final String UPSTREAM_TRIBUTARIES = "upstreamTributaries";
-    private static final String OUTPUT_FORMAT = "json|html";
-	private static final String FEATURES_URL_MARKER = "FEATURES_URL_MARKER";
 
 	@Autowired
 	public LinkedDataController(LookupDao inLookupDao, StreamingDao inStreamingDao,
@@ -228,7 +226,7 @@ public class LinkedDataController extends BaseController {
 	}
 
 	@GetMapping(value="linked-data/{featureSource}/{featureID}/navigate/{navigationMode}", produces=MediaType.APPLICATION_JSON_VALUE)
-	public void getFlowlines(HttpServletRequest request, HttpServletResponse response,
+	public Object getFlowlines(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
 			@PathVariable(Parameters.FEATURE_ID) String featureID,
 			@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode,
@@ -236,22 +234,31 @@ public class LinkedDataController extends BaseController {
 			@ApiParam(value=Parameters.DISTANCE_DESCRIPTION)
 				@RequestParam(value=Parameters.DISTANCE, required=false, defaultValue=Parameters.MAX_DISTANCE)
 			@Pattern(message=Parameters.DISTANCE_VALIDATION_MESSAGE, regexp=Parameters.DISTANCE_VALIDATION_REGEX) String distance,
-			@RequestParam(value=Parameters.LEGACY, required=false) String legacy) throws Exception {
+			@RequestParam(value=Parameters.LEGACY, required=false) String legacy,
+							 @RequestParam(name=Parameters.FORMAT, required=false) @Pattern(regexp=OUTPUT_FORMAT) String format) throws Exception {
 
 		BigInteger logId = logService.logRequest(request);
-
+		String acceptHeader = request.getHeader("Accept");
 		try {
+			String validFormat = resolveFormat(format, acceptHeader);
+
 			String comid = getComid(featureSource, featureID);
 			if (null == comid) {
 				response.setStatus(HttpStatus.NOT_FOUND.value());
 			} else {
-				streamFlowLines(response, comid, navigationMode, stopComid, distance, isLegacy(legacy, navigationMode));
+
+				if ("json".equals(validFormat)) {
+					streamFlowLines(response, comid, navigationMode, stopComid, distance, isLegacy(legacy, navigationMode));
+				} else {
+					return getHtml(request.getRequestURL().toString());
+				}
 			}
 		} catch (Exception e) {
 			GlobalDefaultExceptionHandler.handleError(e, response);
 		} finally {
 			logService.logRequestComplete(logId, response.getStatus());
 		}
+		return null;
 	}
 
 	@GetMapping(value="linked-data/{featureSource}/{featureID}/navigate/{navigationMode}/{dataSource}", produces=MediaType.APPLICATION_JSON_VALUE)
@@ -294,19 +301,5 @@ public class LinkedDataController extends BaseController {
 		return null;
 	}
 
-	public String getHtml(String url) throws IOException {
-		String html = new String(FileCopyUtils.copyToByteArray(new ClassPathResource("static/controllers/json_link_template.html").getInputStream()));
-		return html.replace(LinkedDataController.FEATURES_URL_MARKER, url + "?f=json");
-	}
 
-	public String resolveFormat(String format, String acceptHeader) {
-		if (!StringUtils.isEmpty(format)) {
-			//do nothing because this is what the user has chosen
-		} else if (StringUtils.isEmpty(format) && !StringUtils.isEmpty(acceptHeader) && acceptHeader.startsWith(MediaType.TEXT_HTML_VALUE)) {
-			format = "html";
-		} else {
-			format = "json";
-		}
-		return format;
-	}
 }

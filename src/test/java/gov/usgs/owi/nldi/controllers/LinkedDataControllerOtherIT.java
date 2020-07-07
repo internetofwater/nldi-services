@@ -121,6 +121,19 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 				true);
 	}
 
+	@Test
+	public void getBasinBadFormatTest() throws Exception {
+		assertEntity(restTemplate,
+				"/linked-data/comid/1330259299/basin?f=png",
+				HttpStatus.BAD_REQUEST.value(),
+				null,
+				null,
+				null,
+				null,
+				true,
+				true);
+	}
+
 	//DataSources Testing
 	@Test
 	public void getDataSourcesTest() throws Exception {

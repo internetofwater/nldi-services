@@ -55,7 +55,7 @@ public class NetworkControllerTest {
 
 	@Test
 	public void getFlowlinesTest() throws Exception {
-		controller.getFlowlines(request, response, null, null, null, null, null);
+		controller.getFlowlines(request, response, null, null, null, null, null, null);
 		verify(logService).logRequest(any(HttpServletRequest.class));
 		verify(logService).logRequestComplete(any(BigInteger.class), any(int.class));
 		//this is a INTERNAL_SERVER_ERROR because of NPEs that shouldn't happen in real life.
@@ -64,7 +64,7 @@ public class NetworkControllerTest {
 
 	@Test
 	public void getFeaturesTest() throws Exception {
-		controller.getFeatures(request, response, null, null, null, null, null, null);
+		controller.getFeatures(request, response, null, null, null, null, null, null, null);
 		verify(logService).logRequest(any(HttpServletRequest.class));
 		verify(logService).logRequestComplete(any(BigInteger.class), any(int.class));
 		//this is a INTERNAL_SERVER_ERROR because of NPEs that shouldn't happen in real life.
@@ -73,7 +73,7 @@ public class NetworkControllerTest {
 
 	@Test
 	public void getBasinTest() throws Exception {
-		controller.getFeatures(request, response, null, null, BaseDao.BASIN, null, null, null);
+		controller.getFeatures(request, response, null, null, BaseDao.BASIN, null, null, null, null);
 		verify(logService).logRequest(any(HttpServletRequest.class));
 		verify(logService).logRequestComplete(any(BigInteger.class), any(int.class));
 		//this is a INTERNAL_SERVER_ERROR because of NPEs that shouldn't happen in real life.
