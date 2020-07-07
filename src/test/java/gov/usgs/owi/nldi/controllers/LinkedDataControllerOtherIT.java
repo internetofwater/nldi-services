@@ -94,6 +94,21 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 	}
 
 	@Test
+	public void getBasinHtmlTest() throws Exception {
+		String actualbody = assertEntity(restTemplate,
+				"/linked-data/comid/13302592/basin?f=html",
+				HttpStatus.OK.value(),
+				null,//BasinTransformer.BASIN_COUNT_HEADER,
+				null,//"1",
+				null,//BaseController.MIME_TYPE_GEOJSON,
+				null, //getCompareFile(RESULT_FOLDER, "basin/comid_13302592.json"),
+				false,
+				false);
+		assertThat("contains <html>", actualbody.contains("<html>"));
+		assertThat("contains url", actualbody.contains("/linked-data/comid/13302592/basin?f=json"));
+	}
+
+	@Test
 	public void getBasinMissingTest() throws Exception {
 		assertEntity(restTemplate,
 				"/linked-data/comid/1330259299/basin",
@@ -139,11 +154,11 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 	@Test
 	public void getFeaturesTestGoodHtml() throws Exception {
 		String actualbody = assertEntity(restTemplate,
-				"/linked-data/wqp",
+				"/linked-data/wqp?f=html",
 				HttpStatus.OK.value(),
 				null,
 				null,
-				"text/plain;charset=ISO-8859-1",
+				null,
 				null,
 				false,
 				false);
@@ -159,8 +174,8 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 	@Test
 	public void getFeaturesTestInvalid() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/wqx",
-				HttpStatus.OK.value(),
+				"/linked-data/wqp?f=badformat",
+				HttpStatus.BAD_REQUEST.value(),
 				null,
 				null,
 				null,

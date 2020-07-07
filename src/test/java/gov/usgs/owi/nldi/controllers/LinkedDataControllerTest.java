@@ -115,13 +115,13 @@ public class LinkedDataControllerTest {
 	@SuppressWarnings("unchecked")
 	public void getFeaturesTest() throws Exception {
 		when(lookupDao.getComid(anyString(), anyMap())).thenReturn(null, goodFeature());
-		controller.getFeatures(request, response, "DoesntMatter", "DoesntMatter", null, null, null, null, null);
+		controller.getFeatures(request, response, "DoesntMatter", "DoesntMatter", null, null, null, null, null, null);
 		verify(logService).logRequest(any(HttpServletRequest.class));
 		verify(logService).logRequestComplete(any(BigInteger.class), any(int.class));
 		//Mock lookupDao 1st response of null means the comid is not found, thus a 404
 		assertEquals(HttpStatus.NOT_FOUND.value(), response.getStatus());
 
-		controller.getFeatures(request, response, null, null, null, null, null, null, null);
+		controller.getFeatures(request, response, null, null, null, null, null, null, null, null);
 		verify(logService, times(2)).logRequest(any(HttpServletRequest.class));
 		verify(logService, times(2)).logRequestComplete(any(BigInteger.class), any(int.class));
 		//Mock lookupDao 2nd response doesn't actually exist, thus causes a 500 when we try to get features
@@ -161,7 +161,7 @@ public class LinkedDataControllerTest {
 		when(lookupDao.getComid(anyString(), anyMap())).thenReturn(goodFeature());
 		doNothing().when(streamingDao).stream(anyString(), anyMap(), any());
 
-		controller.getBasin(request, response, "DoesntMatter", "DoesntMatter");
+		controller.getBasin(request, response, "DoesntMatter", "DoesntMatter", null);
 		verify(logService).logRequest(any(HttpServletRequest.class));
 		verify(logService).logRequestComplete(any(BigInteger.class), any(int.class));
 		assertEquals(HttpStatus.OK.value(), response.getStatus());
@@ -169,7 +169,7 @@ public class LinkedDataControllerTest {
 
 	@Test
 	public void getBasinWithNullParamsTest() throws Exception {
-		controller.getBasin(request, response, null, null);
+		controller.getBasin(request, response, null, null, null);
 		verify(logService).logRequest(any(HttpServletRequest.class));
 		verify(logService).logRequestComplete(any(BigInteger.class), any(int.class));
 		//this is a INTERNAL_SERVER_ERROR because of NPEs that shouldn't happen in real life.
@@ -178,7 +178,7 @@ public class LinkedDataControllerTest {
 
 	@Test
 	public void getBasinWithNonexistingComidTest() throws Exception {
-		controller.getBasin(request, response, "NowhereSource", "IDontExist");
+		controller.getBasin(request, response, "NowhereSource", "IDontExist", null);
 		verify(logService).logRequest(any(HttpServletRequest.class));
 		verify(logService).logRequestComplete(any(BigInteger.class), any(int.class));
 		assertEquals(HttpStatus.NOT_FOUND.value(), response.getStatus());
@@ -196,7 +196,7 @@ public class LinkedDataControllerTest {
 	@Test
 	public void getFeaturesTestHtml() {
 		try {
-			controller.getFeatures(request, response, null, null);
+			controller.getFeatures(request, response, "wqp", "html");
 		} catch (Exception e) {
 			assertTrue(e instanceof NullPointerException);
 		}
@@ -207,16 +207,22 @@ public class LinkedDataControllerTest {
 
 	@Test
 	public void getFeaturesTestJson() {
-		try {
-			controller.getFeatures(request, response, "wqp", "json");
-		} catch (Exception e) {
-			assertTrue(e instanceof NullPointerException);
-		}
+		controller.getFeatures(request, response, "wqp", "json");
 		verify(logService).logRequest(any(HttpServletRequest.class));
 		verify(logService).logRequestComplete(any(BigInteger.class), any(int.class));
 		//this is a INTERNAL_SERVER_ERROR because of NPEs that shouldn't happen in real life.
 		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR.value(), response.getStatus());
 	}
+
+	@Test
+	public void getFeaturesTestDefaultToJson() {
+		controller.getFeatures(request, response, "wqp", null);
+		verify(logService).logRequest(any(HttpServletRequest.class));
+		verify(logService).logRequestComplete(any(BigInteger.class), any(int.class));
+		//this is a INTERNAL_SERVER_ERROR because of NPEs that shouldn't happen in real life.
+		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR.value(), response.getStatus());
+	}
+
 
 
 	@Test

@@ -24,6 +24,7 @@ public class Parameters {
 	public static final String NAVIGATION_MODE = "navigationMode";
 	public static final String STOP_COMID = "stopComid";
 	public static final String LEGACY = "legacy";
+	public static final String FORMAT = "f";
 	public static final String CHARACTERISTIC_TYPE = "characteristicType";
 	public static final String CHARACTERISTIC_ID = "characteristicId";
 	public static final String DISTANCE_VALIDATION_MESSAGE = "distance must be between 1 and 9999 kilometers";

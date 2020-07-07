@@ -50,7 +50,7 @@ public class LinkedDataController extends BaseController {
 	private static final String DOWNSTREAM_MAIN = "downstreamMain";
 	private static final String UPSTREAM_MAIN = "upstreamMain";
 	private static final String UPSTREAM_TRIBUTARIES = "upstreamTributaries";
-
+    private static final String OUTPUT_FORMAT = "json|html";
 	private static final String FEATURES_URL_MARKER = "FEATURES_URL_MARKER";
 
 	@Autowired
@@ -89,31 +89,27 @@ public class LinkedDataController extends BaseController {
 	@GetMapping(value="linked-data/{featureSource}")
 	public Object getFeatures(HttpServletRequest request, HttpServletResponse response,
 							@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
-							@RequestParam(name="f", required=false) String format) {
+							@RequestParam(name=Parameters.FORMAT, required=false) @Pattern(regexp=OUTPUT_FORMAT) String format) {
+
 		BigInteger logId = logService.logRequest(request);
-		System.err.println("ACCEPT:" + request.getHeader("Accept"));
+		String acceptHeader = request.getHeader("Accept");
 		String validFormat = format;
-		if (request.getHeader("Accept") != null && request.getHeader("Accept").contains("json")) {
-			validFormat = "json";
-		}
-        try {
+ 		try {
+            validFormat = resolveFormat(validFormat, acceptHeader);
 
 			if ("json".equals(validFormat)) {
 				Map<String, Object> parameterMap = new HashMap<>();
-
 				parameterMap.put(LookupDao.ROOT_URL, configurationService.getRootUrl());
 				parameterMap.put(LookupDao.FEATURE_SOURCE, featureSource);
 				FeatureCollectionTransformer transformer = new FeatureCollectionTransformer(response, configurationService);
 				addContentHeader(response);
 				streamResults(transformer, BaseDao.FEATURES_COLLECTION, parameterMap);
 			} else {
-				String html = getHtmlTemplate("controllers","/features.html");
-				html = html.replace(LinkedDataController.FEATURES_URL_MARKER, request.getRequestURL() + "?f=json");
-				return html;
+				return getHtml(request.getRequestURL().toString());
 			}
 
 		} catch (Exception e) {
-			GlobalDefaultExceptionHandler.handleError(e, response);
+ 			GlobalDefaultExceptionHandler.handleError(e, response);
 		} finally {
 			logService.logRequestComplete(logId, response.getStatus());
 		}
@@ -198,17 +194,24 @@ public class LinkedDataController extends BaseController {
 	}
 
 	@GetMapping(value="linked-data/{featureSource}/{featureID}/basin")
-	public void getBasin(HttpServletRequest request, HttpServletResponse response,
+	public Object getBasin(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
-			@PathVariable(Parameters.FEATURE_ID) String featureID) throws Exception {
+			@PathVariable(Parameters.FEATURE_ID) String featureID,
+						 @RequestParam(name=Parameters.FORMAT, required=false) @Pattern(regexp=OUTPUT_FORMAT) String format) throws Exception {
 
 		BigInteger logId = logService.logRequest(request);
+		String acceptHeader = request.getHeader("Accept");
 
 		try {
 			String comid = getComid(featureSource, featureID);
+			String validFormat = resolveFormat(format, acceptHeader);
 
 			if (null != comid) {
-				streamBasin(response, comid);
+				if ("json".equals(validFormat)) {
+					streamBasin(response, comid);
+				} else {
+					return getHtml(request.getRequestURL().toString());
+				}
 			} else {
 				response.sendError(HttpStatus.NOT_FOUND.value(), "Basin not found");
 			}
@@ -217,6 +220,7 @@ public class LinkedDataController extends BaseController {
 		} finally {
 			logService.logRequestComplete(logId, response.getStatus());
 		}
+		return null;
 	}
 
 	@GetMapping(value="linked-data/{featureSource}/{featureID}/navigate/{navigationMode}", produces=MediaType.APPLICATION_JSON_VALUE)
@@ -247,7 +251,7 @@ public class LinkedDataController extends BaseController {
 	}
 
 	@GetMapping(value="linked-data/{featureSource}/{featureID}/navigate/{navigationMode}/{dataSource}", produces=MediaType.APPLICATION_JSON_VALUE)
-	public void getFeatures(HttpServletRequest request, HttpServletResponse response,
+	public Object getFeatures(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
 			@PathVariable(Parameters.FEATURE_ID) String featureID,
 			@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode,
@@ -256,28 +260,49 @@ public class LinkedDataController extends BaseController {
 			@ApiParam(value=Parameters.DISTANCE_DESCRIPTION)
 				@RequestParam(value=Parameters.DISTANCE, required=false, defaultValue=Parameters.MAX_DISTANCE)
 			@Pattern(message=Parameters.DISTANCE_VALIDATION_MESSAGE, regexp=Parameters.DISTANCE_VALIDATION_REGEX) String distance,
-			@RequestParam(value=Parameters.LEGACY, required=false) String legacy) throws Exception {
+			@RequestParam(value=Parameters.LEGACY, required=false) String legacy,
+							@RequestParam(name=Parameters.FORMAT, required=false) @Pattern(regexp=OUTPUT_FORMAT) String format) throws Exception {
 
 		BigInteger logId = logService.logRequest(request);
+		String acceptHeader = request.getHeader("Accept");
+		String validFormat = format;
+
 		try {
+			validFormat = resolveFormat(validFormat, acceptHeader);
+
 			String comid = getComid(featureSource, featureID);
 			if (null == comid) {
 				response.setStatus(HttpStatus.NOT_FOUND.value());
 			} else {
-				streamFeatures(response, comid, navigationMode, stopComid, distance, dataSource,
-						isLegacy(legacy, navigationMode));
+				if ("json".equals(validFormat)) {
+					streamFeatures(response, comid, navigationMode, stopComid, distance, dataSource,
+							isLegacy(legacy, navigationMode));
+				} else {
+					return getHtml(request.getRequestURL().toString());
+				}
+
 			}
 		} catch (Exception e) {
 			GlobalDefaultExceptionHandler.handleError(e, response);
 		} finally {
 			logService.logRequestComplete(logId, response.getStatus());
 		}
+		return null;
 	}
 
-	public String getHtmlTemplate(String folder, String file) throws IOException {
-		ClassPathResource classPathResource = new ClassPathResource("static/" + folder + file);
-		java.nio.file.Files.write(java.nio.file.Paths.get("c:/users/kkehl/filename.txt"),classPathResource.getFilename().getBytes());
+	public String getHtml(String url) throws IOException {
+		String html = new String(FileCopyUtils.copyToByteArray(new ClassPathResource("static/controllers/json_link_template.html").getInputStream()));
+		return html.replace(LinkedDataController.FEATURES_URL_MARKER, url + "?f=json");
+	}
 
-		return new String(FileCopyUtils.copyToByteArray(new ClassPathResource("static/" + folder + file).getInputStream()));
+	public String resolveFormat(String format, String acceptHeader) {
+		if (!StringUtils.isEmpty(format)) {
+			//do nothing because this is what the user has chosen
+		} else if (StringUtils.isEmpty(format) && !StringUtils.isEmpty(acceptHeader) && acceptHeader.startsWith(MediaType.TEXT_HTML_VALUE)) {
+			format = "html";
+		} else {
+			format = "json";
+		}
+		return format;
 	}
 }
