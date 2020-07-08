@@ -22,8 +22,8 @@ public class ConfigOpenApi {
                 .addServersItem(new Server().url(configurationService.getRootUrl()))
                 .components(new Components())
                 .info(new Info()
-                        .title("National Linked Data Index API")
-                        .description("Documentation for the National Linked Data Index API")
+                        .title("Network Linked Data Index API")
+                        .description("Documentation for the Network Linked Data Index API")
                         .version(configurationService.getAppVersion())
                 );
     }
