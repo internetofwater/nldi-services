@@ -35,6 +35,10 @@ public class ConfigurationService {
 		return getDisplayProtocol() + "://" + getDisplayHost() + getDisplayPath() + "/linked-data";
 	}
 
+	public String getSwaggerUrl() {
+		return getDisplayProtocol() + "://" + getDisplayHost() + getDisplayPath();
+	}
+
 	public String getAppVersion() {
 		return appVersion;
 	}
