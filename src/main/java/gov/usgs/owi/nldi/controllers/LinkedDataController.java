@@ -81,27 +81,19 @@ public class LinkedDataController extends BaseController {
 		return rtn;
 	}
 
-	@GetMapping(value="linked-data/{featureSource}")
+	@GetMapping(value="linked-data/{featureSource}", produces=MediaType.APPLICATION_JSON_VALUE)
 	public Object getFeatures(HttpServletRequest request, HttpServletResponse response,
-							@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
-							@RequestParam(name=Parameters.FORMAT, required=false) @Pattern(regexp=OUTPUT_FORMAT) String format) {
+		@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
+		@RequestParam(name=Parameters.FORMAT, required=false) @Pattern(regexp=OUTPUT_FORMAT) String format) {
 
 		BigInteger logId = logService.logRequest(request);
-		String acceptHeader = request.getHeader("Accept");
-		String validFormat = format;
- 		try {
-            		validFormat = resolveFormat(validFormat, acceptHeader);
-
-			if ("json".equals(validFormat)) {
-				Map<String, Object> parameterMap = new HashMap<>();
-				parameterMap.put(LookupDao.ROOT_URL, configurationService.getRootUrl());
-				parameterMap.put(LookupDao.FEATURE_SOURCE, featureSource);
-				FeatureCollectionTransformer transformer = new FeatureCollectionTransformer(response, configurationService);
-				addContentHeader(response);
-				streamResults(transformer, BaseDao.FEATURES_COLLECTION, parameterMap);
-			} else {
-				return getHtml(request.getRequestURL().toString());
-			}
+		try {
+			Map<String, Object> parameterMap = new HashMap<>();
+			parameterMap.put(LookupDao.ROOT_URL, configurationService.getRootUrl());
+			parameterMap.put(LookupDao.FEATURE_SOURCE, featureSource);
+			FeatureCollectionTransformer transformer = new FeatureCollectionTransformer(response, configurationService);
+			addContentHeader(response);
+			streamResults(transformer, BaseDao.FEATURES_COLLECTION, parameterMap);
 
 		} catch (Exception e) {
  			GlobalDefaultExceptionHandler.handleError(e, response);
@@ -111,10 +103,27 @@ public class LinkedDataController extends BaseController {
 		return null;
 	}
 
+	@GetMapping(value="linked-data/{featureSource}", produces=MediaType.TEXT_HTML_VALUE)
+	public Object getFeaturesHtml(HttpServletRequest request, HttpServletResponse response,
+		@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
+		@RequestParam(name=Parameters.FORMAT, required=false) @Pattern(regexp=OUTPUT_FORMAT) String format) {
+
+		BigInteger logId = logService.logRequest(request);
+		try {
+			return getHtml(request.getRequestURL().toString());
+		} catch (Exception e) {
+			GlobalDefaultExceptionHandler.handleError(e, response);
+		} finally {
+			logService.logRequestComplete(logId, response.getStatus());
+		}
+		return null;
+	}
+
 	@GetMapping(value="linked-data/{featureSource}/{featureID}", produces=MediaType.APPLICATION_JSON_VALUE)
 	public void getRegisteredFeature(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
-			@PathVariable(Parameters.FEATURE_ID) String featureID) throws Exception {
+		@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
+		@PathVariable(Parameters.FEATURE_ID) String featureID) throws Exception {
+		
 		BigInteger logId = logService.logRequest(request);
 		try (FeatureTransformer transformer = new FeatureTransformer(response, configurationService)) {
 			Map<String, Object> parameterMap = new HashMap<> ();
@@ -131,8 +140,9 @@ public class LinkedDataController extends BaseController {
 
 	@GetMapping(value="linked-data/{featureSource}/{featureID}/navigate", produces=MediaType.APPLICATION_JSON_VALUE)
 	public Map<String, Object> getNavigationTypes(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
-			@PathVariable(Parameters.FEATURE_ID) String featureID) throws UnsupportedEncodingException {
+		@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
+		@PathVariable(Parameters.FEATURE_ID) String featureID) throws UnsupportedEncodingException {
+		
 		BigInteger logId = logService.logRequest(request);
 		Map<String, Object> rtn = new LinkedHashMap<>();
 		try {
@@ -165,10 +175,11 @@ public class LinkedDataController extends BaseController {
 
 	@GetMapping(value="linked-data/{featureSource}/{featureID}/{characteristicType}")
 	public void getCharacteristicData(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
-			@PathVariable(Parameters.FEATURE_ID) String featureID,
-			@PathVariable(Parameters.CHARACTERISTIC_TYPE) String characteristicType,
-			@RequestParam(value=Parameters.CHARACTERISTIC_ID, required=false) String[] characteristicIds) throws IOException {
+		@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
+		@PathVariable(Parameters.FEATURE_ID) String featureID,
+		@PathVariable(Parameters.CHARACTERISTIC_TYPE) String characteristicType,
+		@RequestParam(value=Parameters.CHARACTERISTIC_ID, required=false) String[] characteristicIds) throws IOException {
+		
 		BigInteger logId = logService.logRequest(request);
 		try (CharacteristicDataTransformer transformer = new CharacteristicDataTransformer(response)) {
       
@@ -193,25 +204,43 @@ public class LinkedDataController extends BaseController {
 	}
 
 	@GetMapping(value="linked-data/{featureSource}/{featureID}/basin")
-	public Object getBasin(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
-			@PathVariable(Parameters.FEATURE_ID) String featureID,
-			@RequestParam(name=Parameters.FORMAT, required=false) @Pattern(regexp=OUTPUT_FORMAT) String format) throws Exception {
+	public void getBasin(HttpServletRequest request, HttpServletResponse response,
+		@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
+		@PathVariable(Parameters.FEATURE_ID) String featureID,
+		@RequestParam(name=Parameters.FORMAT, required=false) @Pattern(regexp=OUTPUT_FORMAT) String format) throws Exception {
+		
 		BigInteger logId = logService.logRequest(request);
-		String acceptHeader = request.getHeader("Accept");
 
 		try {
 			String comid = getComid(featureSource, featureID);
-			String validFormat = resolveFormat(format, acceptHeader);
 
 		    if (null == comid) {
 				response.setStatus(HttpStatus.NOT_FOUND.value());
 			} else {
-				if ("json".equals(validFormat)) {
-					streamBasin(response, comid);
-				} else {
-					return getHtml(request.getRequestURL().toString());
-				}
+		    	streamBasin(response, comid);
+			}
+		} catch (Exception e) {
+			GlobalDefaultExceptionHandler.handleError(e, response);
+		} finally {
+			logService.logRequestComplete(logId, response.getStatus());
+		}
+	}
+
+	@GetMapping(value="linked-data/{featureSource}/{featureID}/basin", produces=MediaType.TEXT_HTML_VALUE)
+	public String getBasinHtml(HttpServletRequest request, HttpServletResponse response,
+		@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
+		@PathVariable(Parameters.FEATURE_ID) String featureID,
+		@RequestParam(name=Parameters.FORMAT, required=false) @Pattern(regexp=OUTPUT_FORMAT) String format) throws Exception {
+		
+		BigInteger logId = logService.logRequest(request);
+
+		try {
+			String comid = getComid(featureSource, featureID);
+
+			if (null == comid) {
+				response.setStatus(HttpStatus.NOT_FOUND.value());
+			} else {
+				return getHtml(request.getRequestURL().toString());
 			}
 		} catch (Exception e) {
 			GlobalDefaultExceptionHandler.handleError(e, response);
@@ -221,33 +250,55 @@ public class LinkedDataController extends BaseController {
 		return null;
 	}
 
+
 	@GetMapping(value="linked-data/{featureSource}/{featureID}/navigate/{navigationMode}", produces=MediaType.APPLICATION_JSON_VALUE)
-	public Object getFlowlines(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
-			@PathVariable(Parameters.FEATURE_ID) String featureID,
-			@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode,
-			@RequestParam(value=Parameters.STOP_COMID, required=false) @Range(min=1, max=Integer.MAX_VALUE) String stopComid,
-			@ApiParam(value=Parameters.DISTANCE_DESCRIPTION)
-				@RequestParam(value=Parameters.DISTANCE, required=false, defaultValue=Parameters.MAX_DISTANCE)
-			@Pattern(message=Parameters.DISTANCE_VALIDATION_MESSAGE, regexp=Parameters.DISTANCE_VALIDATION_REGEX) String distance,
-			@RequestParam(value=Parameters.LEGACY, required=false) String legacy,
-			@RequestParam(name=Parameters.FORMAT, required=false) @Pattern(regexp=OUTPUT_FORMAT) String format) throws Exception {
+	public void getFlowlines(HttpServletRequest request, HttpServletResponse response,
+		@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
+		@PathVariable(Parameters.FEATURE_ID) String featureID,
+		@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode,
+		@RequestParam(value=Parameters.STOP_COMID, required=false) @Range(min=1, max=Integer.MAX_VALUE) String stopComid,
+		@ApiParam(value=Parameters.DISTANCE_DESCRIPTION)
+			@RequestParam(value=Parameters.DISTANCE, required=false, defaultValue=Parameters.MAX_DISTANCE)
+		@Pattern(message=Parameters.DISTANCE_VALIDATION_MESSAGE, regexp=Parameters.DISTANCE_VALIDATION_REGEX) String distance,
+		@RequestParam(value=Parameters.LEGACY, required=false) String legacy,
+		@RequestParam(name=Parameters.FORMAT, required=false) @Pattern(regexp=OUTPUT_FORMAT) String format) throws Exception {
 
 		BigInteger logId = logService.logRequest(request);
-		String acceptHeader = request.getHeader("Accept");
 		try {
-			String validFormat = resolveFormat(format, acceptHeader);
 
 			String comid = getComid(featureSource, featureID);
 			if (null == comid) {
 				response.setStatus(HttpStatus.NOT_FOUND.value());
 			} else {
+				streamFlowLines(response, comid, navigationMode, stopComid, distance, isLegacy(legacy, navigationMode));
+			}
+		} catch (Exception e) {
+			GlobalDefaultExceptionHandler.handleError(e, response);
+		} finally {
+			logService.logRequestComplete(logId, response.getStatus());
+		}
+	}
 
-				if ("json".equals(validFormat)) {
-					streamFlowLines(response, comid, navigationMode, stopComid, distance, isLegacy(legacy, navigationMode));
-				} else {
-					return getHtml(request.getRequestURL().toString());
-				}
+
+	@GetMapping(value="linked-data/{featureSource}/{featureID}/navigate/{navigationMode}", produces=MediaType.TEXT_HTML_VALUE)
+	public String getFlowlinesHtml(HttpServletRequest request, HttpServletResponse response,
+		@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
+		@PathVariable(Parameters.FEATURE_ID) String featureID,
+		@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode,
+		@RequestParam(value=Parameters.STOP_COMID, required=false) @Range(min=1, max=Integer.MAX_VALUE) String stopComid,
+		@ApiParam(value=Parameters.DISTANCE_DESCRIPTION)
+		@RequestParam(value=Parameters.DISTANCE, required=false, defaultValue=Parameters.MAX_DISTANCE)
+		@Pattern(message=Parameters.DISTANCE_VALIDATION_MESSAGE, regexp=Parameters.DISTANCE_VALIDATION_REGEX) String distance,
+		@RequestParam(value=Parameters.LEGACY, required=false) String legacy,
+		@RequestParam(name=Parameters.FORMAT, required=false) @Pattern(regexp=OUTPUT_FORMAT) String format) throws Exception {
+
+		BigInteger logId = logService.logRequest(request);
+		try {
+			String comid = getComid(featureSource, featureID);
+			if (null == comid) {
+				response.setStatus(HttpStatus.NOT_FOUND.value());
+			} else {
+				return getHtml(request.getRequestURL().toString());
 			}
 		} catch (Exception e) {
 			GlobalDefaultExceptionHandler.handleError(e, response);
@@ -258,35 +309,61 @@ public class LinkedDataController extends BaseController {
 	}
 
 	@GetMapping(value="linked-data/{featureSource}/{featureID}/navigate/{navigationMode}/{dataSource}", produces=MediaType.APPLICATION_JSON_VALUE)
-	public Object getFeatures(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
-			@PathVariable(Parameters.FEATURE_ID) String featureID,
-			@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode,
-			@PathVariable(value=DATA_SOURCE) String dataSource,
-			@RequestParam(value=Parameters.STOP_COMID, required=false) @Range(min=1, max=Integer.MAX_VALUE) String stopComid,
-			@ApiParam(value=Parameters.DISTANCE_DESCRIPTION)
-				@RequestParam(value=Parameters.DISTANCE, required=false, defaultValue=Parameters.MAX_DISTANCE)
-			@Pattern(message=Parameters.DISTANCE_VALIDATION_MESSAGE, regexp=Parameters.DISTANCE_VALIDATION_REGEX) String distance,
-			@RequestParam(value=Parameters.LEGACY, required=false) String legacy,
-			@RequestParam(name=Parameters.FORMAT, required=false) @Pattern(regexp=OUTPUT_FORMAT) String format) throws Exception {
+	public void getFeatures(HttpServletRequest request, HttpServletResponse response,
+		@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
+		@PathVariable(Parameters.FEATURE_ID) String featureID,
+		@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode,
+		@PathVariable(value=DATA_SOURCE) String dataSource,
+		@RequestParam(value=Parameters.STOP_COMID, required=false) @Range(min=1, max=Integer.MAX_VALUE) String stopComid,
+		@ApiParam(value=Parameters.DISTANCE_DESCRIPTION)
+			@RequestParam(value=Parameters.DISTANCE, required=false, defaultValue=Parameters.MAX_DISTANCE)
+		@Pattern(message=Parameters.DISTANCE_VALIDATION_MESSAGE, regexp=Parameters.DISTANCE_VALIDATION_REGEX) String distance,
+		@RequestParam(value=Parameters.LEGACY, required=false) String legacy,
+		@RequestParam(name=Parameters.FORMAT, required=false) @Pattern(regexp=OUTPUT_FORMAT) String format) throws Exception {
 
 		BigInteger logId = logService.logRequest(request);
-		String acceptHeader = request.getHeader("Accept");
-		String validFormat = format;
 
 		try {
-			validFormat = resolveFormat(validFormat, acceptHeader);
 
 			String comid = getComid(featureSource, featureID);
 			if (null == comid) {
 				response.setStatus(HttpStatus.NOT_FOUND.value());
 			} else {
-				if ("json".equals(validFormat)) {
-					streamFeatures(response, comid, navigationMode, stopComid, distance, dataSource,
-							isLegacy(legacy, navigationMode));
-				} else {
-					return getHtml(request.getRequestURL().toString());
-				}
+				streamFeatures(response, comid, navigationMode, stopComid, distance, dataSource, 
+					isLegacy(legacy, navigationMode));
+
+			}
+		} catch (Exception e) {
+			GlobalDefaultExceptionHandler.handleError(e, response);
+		} finally {
+			logService.logRequestComplete(logId, response.getStatus());
+		}
+	}
+
+
+	@GetMapping(value="linked-data/{featureSource}/{featureID}/navigate/{navigationMode}/{dataSource}", produces=MediaType.TEXT_HTML_VALUE)
+	public String getFeaturesHtml(HttpServletRequest request, HttpServletResponse response,
+		@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
+		@PathVariable(Parameters.FEATURE_ID) String featureID,
+		@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode,
+		@PathVariable(value=DATA_SOURCE) String dataSource,
+		@RequestParam(value=Parameters.STOP_COMID, required=false) @Range(min=1, max=Integer.MAX_VALUE) String stopComid,
+		@ApiParam(value=Parameters.DISTANCE_DESCRIPTION)
+		@RequestParam(value=Parameters.DISTANCE, required=false, defaultValue=Parameters.MAX_DISTANCE)
+		@Pattern(message=Parameters.DISTANCE_VALIDATION_MESSAGE, regexp=Parameters.DISTANCE_VALIDATION_REGEX) String distance,
+		@RequestParam(value=Parameters.LEGACY, required=false) String legacy,
+		@RequestParam(name=Parameters.FORMAT, required=false) @Pattern(regexp=OUTPUT_FORMAT) String format) throws Exception {
+
+		BigInteger logId = logService.logRequest(request);
+
+		try {
+
+			String comid = getComid(featureSource, featureID);
+			if (null == comid) {
+				response.setStatus(HttpStatus.NOT_FOUND.value());
+			} else {
+				return getHtml(request.getRequestURL().toString());
+
 
 			}
 		} catch (Exception e) {
@@ -296,6 +373,7 @@ public class LinkedDataController extends BaseController {
 		}
 		return null;
 	}
+
 
 
 }

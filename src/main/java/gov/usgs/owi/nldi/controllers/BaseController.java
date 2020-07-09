@@ -176,20 +176,5 @@ public abstract class BaseController {
 		String html = new String(FileCopyUtils.copyToByteArray(new ClassPathResource("static/controllers/json_link_template.html").getInputStream()));
 		return html.replace(URL_MARKER, url + "?f=json");
 	}
-
-	protected String resolveFormat(String format, String acceptHeader) {
-		if (!StringUtils.isEmpty(format)) {
-			//do nothing because this is what the user has chosen
-		} else if (StringUtils.isEmpty(format) && !StringUtils.isEmpty(acceptHeader)
-				&& acceptHeader.contains(MediaType.TEXT_HTML_VALUE)
-				&& !acceptHeader.contains(MediaType.APPLICATION_JSON_VALUE)
-				&& !acceptHeader.contains(MIME_TYPE_GEOJSON)) {
-			// If the accept header has 'text/html' and doesn't have application json or geojson,
-			// use html.
-			format = "html";
-		} else {
-			format = "json";
-		}
-		return format;
-	}
+	
 }

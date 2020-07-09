@@ -207,7 +207,7 @@ public class LinkedDataControllerTest {
 	@Test
 	public void getFeaturesTestHtml() {
 		try {
-			controller.getFeatures(request, response, "wqp", "html");
+			controller.getFeaturesHtml(request, response, "wqp", "html");
 		} catch (Exception e) {
 			assertTrue(e instanceof NullPointerException);
 		}
