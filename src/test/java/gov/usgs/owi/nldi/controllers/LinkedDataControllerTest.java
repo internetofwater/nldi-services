@@ -141,7 +141,7 @@ public class LinkedDataControllerTest {
 
 	@Test
 	public void getCharacteristicDataWithNullParamsTest() throws IOException {
-		controller.getCharacteristicData(request, response, null, null, null, null);
+		controller.getCharacteristicData(request, response, null, null, null, null, "json");
 		verify(logService).logRequest(any(HttpServletRequest.class));
 		verify(logService).logRequestComplete(any(BigInteger.class), any(int.class));
 		//this is a INTERNAL_SERVER_ERROR because of NPEs that shouldn't happen in real life.
@@ -150,7 +150,7 @@ public class LinkedDataControllerTest {
 
 	@Test
 	public void getCharacteristicDataWithNonexistingComidTest() throws IOException {
-		controller.getCharacteristicData(request, response, "NowhereSource", "IDontExist", null, null);
+		controller.getCharacteristicData(request, response, "NowhereSource", "IDontExist", null, null, "json");
 		verify(logService).logRequest(any(HttpServletRequest.class));
 		verify(logService).logRequestComplete(any(BigInteger.class), any(int.class));
 		assertEquals(HttpStatus.NOT_FOUND.value(), response.getStatus());
@@ -197,7 +197,7 @@ public class LinkedDataControllerTest {
 
 	@Test
 	public void getDataSourcesTest() throws UnsupportedEncodingException {
-		List<Map<String, Object>> out = controller.getDataSources(request, response);
+		List<Map<String, Object>> out = controller.getDataSources(request, response, "json");
 		verify(logService).logRequest(any(HttpServletRequest.class));
 		verify(logService).logRequestComplete(any(BigInteger.class), any(int.class));
 		assertEquals(HttpStatus.OK.value(), response.getStatus());
@@ -237,7 +237,7 @@ public class LinkedDataControllerTest {
 	@Test
 	public void getRegisteredFeatureTest() {
 		try {
-			controller.getRegisteredFeature(request, response, null, null);
+			controller.getRegisteredFeature(request, response, null, null, "json");
 		} catch (Exception e) {
 			assertTrue(e instanceof NullPointerException);
 		}
@@ -245,23 +245,24 @@ public class LinkedDataControllerTest {
 		verify(logService).logRequestComplete(any(BigInteger.class), any(int.class));
 		//this is a INTERNAL_SERVER_ERROR because of NPEs that shouldn't happen in real life.
 		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR.value(), response.getStatus());
+
 	}
 
 	@Test
 	public void getNavigationTypesTest() throws UnsupportedEncodingException {
-		controller.getNavigationTypes(request, response, null, null);
+		controller.getNavigationTypes(request, response, null, null, null);
 		verify(logService).logRequest(any(HttpServletRequest.class));
 		verify(logService).logRequestComplete(any(BigInteger.class), any(int.class));
 		assertEquals(HttpStatus.NOT_FOUND.value(), response.getStatus());
 
 		response = new MockHttpServletResponse();
-		controller.getNavigationTypes(request, response, null, null);
+		controller.getNavigationTypes(request, response, null, null, null);
 		verify(logService, times(2)).logRequest(any(HttpServletRequest.class));
 		verify(logService, times(2)).logRequestComplete(any(BigInteger.class), any(int.class));
 		assertEquals(HttpStatus.NOT_FOUND.value(), response.getStatus());
 
 		response = new MockHttpServletResponse();
-		Map<String, Object> out = controller.getNavigationTypes(request, response, "test", "test123");
+		Map<String, Object> out = controller.getNavigationTypes(request, response, "test", "test123", "json");
 		verify(logService, times(3)).logRequest(any(HttpServletRequest.class));
 		verify(logService, times(3)).logRequestComplete(any(BigInteger.class), any(int.class));
 		assertEquals(HttpStatus.OK.value(), response.getStatus());

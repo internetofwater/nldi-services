@@ -51,6 +51,36 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 	}
 
 	@Test
+	public void getCharacteristicDataInvalidTest() throws Exception {
+		assertEntity(restTemplate,
+				"/linked-data/comid/13302592/tot?f=bad",
+				HttpStatus.NOT_ACCEPTABLE.value(),
+				null,
+				null,
+				null,
+				null,
+				false,
+				false);
+	}
+
+
+	@Test
+	public void getCharacteristicDataHtmlTest() throws Exception {
+		String actualbody = assertEntity(restTemplate,
+				"/linked-data/comid/13302592/tot?f=html",
+				HttpStatus.OK.value(),
+				null,
+				null,
+				null,
+				null,
+				false,
+				false);
+		testGenericHtml(actualbody, "/linked-data/comid/13302592/tot");
+
+	}
+
+
+	@Test
 	public void getCharacteristicDataMissingTest() throws Exception {
 		assertEntity(restTemplate,
 				"/linked-data/comid/133999999/tot",
@@ -103,8 +133,7 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 				null,
 				false,
 				false);
-		assertThat("contains <html>", actualbody.contains("<html>"));
-		assertThat("contains url", actualbody.contains("/linked-data/comid/13302592/basin?f=json"));
+		testGenericHtml(actualbody, "/linked-data/comid/13302592/basin");
 	}
 
 	@Test
@@ -149,6 +178,35 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 				sameJSONArrayAs(new JSONArray(getCompareFile(RESULT_FOLDER, "dataSources.json"))).allowingAnyArrayOrdering());
 	}
 
+	@Test
+	public void getDataSourcesTestInvalid() throws Exception {
+		String actualbody = assertEntity(restTemplate,
+				"/linked-data?f=badformat",
+				HttpStatus.NOT_ACCEPTABLE.value(),
+				null,
+				null,
+				null,
+				null,
+				false,
+				false);
+	}
+
+	@Test
+	public void getDataSourcesTestHtml() throws Exception {
+		String actualbody = assertEntity(restTemplate,
+				"/linked-data?f=html",
+				HttpStatus.OK.value(),
+				null,
+				null,
+				null,
+				null,
+				false,
+				false);
+		testGenericHtml(actualbody, "/linked-data");
+	}
+
+
+
 	//Features Testing
 	@Test
 	public void getFeaturesTest() throws Exception {
@@ -165,8 +223,9 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 
 	@Test
 	public void getFeaturesTestGoodHtml() throws Exception {
+		String url = "/linked-data/wqp";
 		String actualbody = assertEntity(restTemplate,
-				"/linked-data/wqp?f=html",
+				url + "?f=html",
 				HttpStatus.OK.value(),
 				null,
 				null,
@@ -174,13 +233,8 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 				null,
 				false,
 				false);
-		assertThat("contains <html> tag", actualbody.startsWith("<html>"));
-		assertThat("contains </html> tag", actualbody.endsWith("</html>"));
-		assertThat("opens link", actualbody.contains("<a"));
-		assertThat("closes link", actualbody.contains("</a>"));
-		assertThat("contains format", actualbody.contains("f=json"));
-		assertThat("contains linked-data", actualbody.contains("/linked-data"));
 
+		testGenericHtml(actualbody, url);
 	}
 
 	@Test
@@ -208,6 +262,47 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 				getCompareFile(RESULT_FOLDER, "comid_13297246.json"),
 				true,
 				false);
+
+	}
+
+	@Test
+	public void getComidTestGoodHtml() throws Exception {
+		String url="/linked-data/comid/13297246";
+		String actualbody = assertEntity(restTemplate,
+				url + "?f=html",
+				HttpStatus.OK.value(),
+				null,
+				null,
+				null,
+				null,
+				false,
+				false);
+
+		testGenericHtml(actualbody, url);
+	}
+
+	private void testGenericHtml(String actualbody, String url) {
+		assertThat("contains <html> tag", actualbody.startsWith("<html>"));
+		assertThat("contains </html> tag", actualbody.endsWith("</html>"));
+		assertThat("opens link", actualbody.contains("<a"));
+		assertThat("actual url",actualbody.contains(url + "?f=json"));
+		assertThat("closes link", actualbody.contains("</a>"));
+		assertThat("contains format", actualbody.contains("f=json"));
+		assertThat("contains linked-data", actualbody.contains("/linked-data"));
+	}
+
+
+	@Test
+	public void getComidTestInvalid() throws Exception {
+		assertEntity(restTemplate,
+				"/linked-data/comid/13297246?f=badformat",
+				HttpStatus.NOT_ACCEPTABLE.value(),
+				null,
+				null,
+				null,
+				null,
+				false,
+				false);
 	}
 
 	//Linked Object Testing WQP
@@ -225,6 +320,33 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 				false);
 	}
 
+	public void getWqpTestInvalid() throws Exception {
+		assertEntity(restTemplate,
+				"/linked-data/wqp/USGS-05427880?f=badformat",
+				HttpStatus.NOT_ACCEPTABLE.value(),
+				null,
+				null,
+				null,
+				null,
+				false,
+				false);
+	}
+
+	public void getWqpTestHtml() throws Exception {
+		String actualbody = assertEntity(restTemplate,
+				"/linked-data/wqp/USGS-05427880?f=html",
+				HttpStatus.NOT_ACCEPTABLE.value(),
+				null,
+				null,
+				null,
+				null,
+				false,
+				false);
+		testGenericHtml(actualbody, "/linked-data/wqp/USGS-05427880");
+	}
+
+
+
 	//Linked Object Testing huc12pp
 	@Test
 	@DatabaseSetup("classpath:/testData/featureHuc12pp.xml")
@@ -240,6 +362,37 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 				false);
 	}
 
+	@Test
+	@DatabaseSetup("classpath:/testData/featureHuc12pp.xml")
+	public void gethuc12ppTestInvalid() throws Exception {
+		assertEntity(restTemplate,
+				"/linked-data/huc12pp/070900020604?f=badformat",
+				HttpStatus.NOT_ACCEPTABLE.value(),
+				null,
+				null,
+				null,
+				null,
+				false,
+				false);
+	}
+
+
+	@Test
+	@DatabaseSetup("classpath:/testData/featureHuc12pp.xml")
+	public void gethuc12ppTestHtml() throws Exception {
+		String actualbody = assertEntity(restTemplate,
+				"/linked-data/huc12pp/070900020604?f=html",
+				HttpStatus.OK.value(),
+				null,
+				null,
+				null,
+				null,
+				false,
+				false);
+		testGenericHtml(actualbody, "/linked-data/huc12pp/070900020604");
+	}
+
+
 	//Navigation Types Testing
 	@Test
 	@DatabaseSetup("classpath:/testData/featureWqp.xml")
@@ -253,6 +406,35 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 				getCompareFile(RESULT_FOLDER, "wqp_USGS-05427880.json"),
 				true,
 				false);
+	}
+
+	@Test
+	@DatabaseSetup("classpath:/testData/featureWqp.xml")
+	public void getNavigationTypesTestInvalid() throws Exception {
+		assertEntity(restTemplate,
+				"/linked-data/wqp/USGS-05427880/navigate?f=badformat",
+				HttpStatus.NOT_ACCEPTABLE.value(),
+				null,
+				null,
+				null,
+				null,
+				false,
+				false);
+	}
+
+	@Test
+	@DatabaseSetup("classpath:/testData/featureWqp.xml")
+	public void getNavigationTypesTestHtml() throws Exception {
+		String actualbody = assertEntity(restTemplate,
+				"/linked-data/wqp/USGS-05427880/navigate?f=html",
+				HttpStatus.OK.value(),
+				null,
+				null,
+				null,
+				null,
+				false,
+				false);
+		testGenericHtml(actualbody, "/linked-data/wqp/USGS-05427880/navigate");
 	}
 
 	@Test

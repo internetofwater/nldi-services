@@ -57,7 +57,8 @@ public class LinkedDataController extends BaseController {
 
 	@ApiOperation(value="getDataSources", response=DataSource.class, responseContainer="List")
 	@GetMapping(value="linked-data", produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<Map<String, Object>> getDataSources(HttpServletRequest request, HttpServletResponse response) {
+	public List<Map<String, Object>> getDataSources(HttpServletRequest request, HttpServletResponse response,
+													@RequestParam(name=Parameters.FORMAT, required=false) @Pattern(regexp=OUTPUT_FORMAT) String format) {
 		BigInteger logId = logService.logRequest(request);
 		List<Map<String, Object>> rtn = new ArrayList<>();
 		try {
@@ -79,6 +80,22 @@ public class LinkedDataController extends BaseController {
 			logService.logRequestComplete(logId, response.getStatus());
 		}
 		return rtn;
+	}
+
+
+	@GetMapping(value="linked-data", produces=MediaType.TEXT_HTML_VALUE)
+	public String getDataSourcesHtml(HttpServletRequest request, HttpServletResponse response,
+									 @RequestParam(name=Parameters.FORMAT, required=false) @Pattern(regexp=OUTPUT_FORMAT) String format) {
+		BigInteger logId = logService.logRequest(request);
+		String html = null;
+		try {
+			return getHtml(request.getRequestURL().toString());
+		} catch (Exception e) {
+			GlobalDefaultExceptionHandler.handleError(e, response);
+		} finally {
+			logService.logRequestComplete(logId, response.getStatus());
+		}
+		return html;
 	}
 
 	@GetMapping(value="linked-data/{featureSource}", produces=MediaType.APPLICATION_JSON_VALUE)
@@ -122,7 +139,8 @@ public class LinkedDataController extends BaseController {
 	@GetMapping(value="linked-data/{featureSource}/{featureID}", produces=MediaType.APPLICATION_JSON_VALUE)
 	public void getRegisteredFeature(HttpServletRequest request, HttpServletResponse response,
 		@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
-		@PathVariable(Parameters.FEATURE_ID) String featureID) throws Exception {
+		@PathVariable(Parameters.FEATURE_ID) String featureID,
+									 @RequestParam(name=Parameters.FORMAT, required=false) @Pattern(regexp=OUTPUT_FORMAT) String format) throws Exception {
 		
 		BigInteger logId = logService.logRequest(request);
 		try (FeatureTransformer transformer = new FeatureTransformer(response, configurationService)) {
@@ -138,10 +156,29 @@ public class LinkedDataController extends BaseController {
 		}
 	}
 
+	@GetMapping(value="linked-data/{featureSource}/{featureID}", produces=MediaType.TEXT_HTML_VALUE)
+	public String getRegisteredFeatureHtml(HttpServletRequest request, HttpServletResponse response,
+									 @PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
+									 @PathVariable(Parameters.FEATURE_ID) String featureID,
+										   @RequestParam(name=Parameters.FORMAT, required=false) @Pattern(regexp=OUTPUT_FORMAT) String format) throws Exception {
+
+		BigInteger logId = logService.logRequest(request);
+		try {
+			return getHtml(request.getRequestURL().toString());
+		} catch (Exception e) {
+			GlobalDefaultExceptionHandler.handleError(e, response);
+		} finally {
+			logService.logRequestComplete(logId, response.getStatus());
+		}
+		return null;
+	}
+
+
 	@GetMapping(value="linked-data/{featureSource}/{featureID}/navigate", produces=MediaType.APPLICATION_JSON_VALUE)
 	public Map<String, Object> getNavigationTypes(HttpServletRequest request, HttpServletResponse response,
 		@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
-		@PathVariable(Parameters.FEATURE_ID) String featureID) throws UnsupportedEncodingException {
+		@PathVariable(Parameters.FEATURE_ID) String featureID,
+												  @RequestParam(name=Parameters.FORMAT, required=false) @Pattern(regexp=OUTPUT_FORMAT) String format) throws UnsupportedEncodingException {
 		
 		BigInteger logId = logService.logRequest(request);
 		Map<String, Object> rtn = new LinkedHashMap<>();
@@ -173,12 +210,32 @@ public class LinkedDataController extends BaseController {
 		return rtn;
 	}
 
-	@GetMapping(value="linked-data/{featureSource}/{featureID}/{characteristicType}")
+	@GetMapping(value="linked-data/{featureSource}/{featureID}/navigate", produces=MediaType.TEXT_HTML_VALUE)
+	public String getNavigationTypesHtml(HttpServletRequest request, HttpServletResponse response,
+												  @PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
+												  @PathVariable(Parameters.FEATURE_ID) String featureID,
+										 @RequestParam(name=Parameters.FORMAT, required=false) @Pattern(regexp=OUTPUT_FORMAT) String format) throws UnsupportedEncodingException {
+
+		BigInteger logId = logService.logRequest(request);
+		Map<String, Object> rtn = new LinkedHashMap<>();
+		try {
+			return getHtml(request.getRequestURL().toString());
+		} catch (Exception e) {
+			GlobalDefaultExceptionHandler.handleError(e, response);
+		} finally {
+			logService.logRequestComplete(logId, response.getStatus());
+		}
+		return null;
+	}
+
+
+	@GetMapping(value="linked-data/{featureSource}/{featureID}/{characteristicType}", produces=MediaType.APPLICATION_JSON_VALUE)
 	public void getCharacteristicData(HttpServletRequest request, HttpServletResponse response,
 		@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
 		@PathVariable(Parameters.FEATURE_ID) String featureID,
 		@PathVariable(Parameters.CHARACTERISTIC_TYPE) String characteristicType,
-		@RequestParam(value=Parameters.CHARACTERISTIC_ID, required=false) String[] characteristicIds) throws IOException {
+		@RequestParam(value=Parameters.CHARACTERISTIC_ID, required=false) String[] characteristicIds,
+									  @RequestParam(name=Parameters.FORMAT, required=false) @Pattern(regexp=OUTPUT_FORMAT) String format) throws IOException {
 		
 		BigInteger logId = logService.logRequest(request);
 		try (CharacteristicDataTransformer transformer = new CharacteristicDataTransformer(response)) {
@@ -201,6 +258,34 @@ public class LinkedDataController extends BaseController {
 		} finally {
 			logService.logRequestComplete(logId, response.getStatus());
 		}
+	}
+
+
+	@GetMapping(value="linked-data/{featureSource}/{featureID}/{characteristicType}", produces=MediaType.TEXT_HTML_VALUE)
+	public String getCharacteristicDataHtml(HttpServletRequest request, HttpServletResponse response,
+									  @PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
+									  @PathVariable(Parameters.FEATURE_ID) String featureID,
+									  @PathVariable(Parameters.CHARACTERISTIC_TYPE) String characteristicType,
+									  @RequestParam(value=Parameters.CHARACTERISTIC_ID, required=false) String[] characteristicIds,
+											  @RequestParam(name=Parameters.FORMAT, required=false) @Pattern(regexp=OUTPUT_FORMAT) String format) throws IOException {
+
+		BigInteger logId = logService.logRequest(request);
+		try (CharacteristicDataTransformer transformer = new CharacteristicDataTransformer(response)) {
+
+			String comid = getComid(featureSource, featureID);
+
+			if (null == comid) {
+				response.setStatus(HttpStatus.NOT_FOUND.value());
+			} else {
+				return getHtml(request.getRequestURL().toString());
+			}
+
+		} catch (Exception e) {
+			GlobalDefaultExceptionHandler.handleError(e, response);
+		} finally {
+			logService.logRequestComplete(logId, response.getStatus());
+		}
+		return null;
 	}
 
 	@GetMapping(value="linked-data/{featureSource}/{featureID}/basin")

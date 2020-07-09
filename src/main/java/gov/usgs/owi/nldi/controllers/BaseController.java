@@ -176,5 +176,5 @@ public abstract class BaseController {
 		String html = new String(FileCopyUtils.copyToByteArray(new ClassPathResource("static/controllers/json_link_template.html").getInputStream()));
 		return html.replace(URL_MARKER, url + "?f=json");
 	}
-	
+
 }
