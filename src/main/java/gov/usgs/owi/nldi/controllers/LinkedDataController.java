@@ -80,11 +80,11 @@ public class LinkedDataController extends BaseController {
 			//Manually add comid as a feature source.
 			featureSource.put(LookupDao.SOURCE, Parameters.COMID);
 			featureSource.put(LookupDao.SOURCE_NAME, "NHDPlus comid");
-			featureSource.put(BaseDao.FEATURES, String.join("/", configurationService.getRootUrl(), Parameters.COMID));
+			featureSource.put(BaseDao.FEATURES, String.join("/", configurationService.getLinkedDataUrl(), Parameters.COMID));
 			rtn.add(featureSource);
 
 			Map<String, Object> parameterMap = new HashMap<>();
-			parameterMap.put(LookupDao.ROOT_URL, configurationService.getRootUrl());
+			parameterMap.put(LookupDao.ROOT_URL, configurationService.getLinkedDataUrl());
 			rtn.addAll(lookupDao.getList(BaseDao.DATA_SOURCES, parameterMap));
 
 		} catch (Exception e) {
@@ -112,7 +112,7 @@ public class LinkedDataController extends BaseController {
 
 		try {
 			Map<String, Object> parameterMap = new HashMap<>();
-			parameterMap.put(LookupDao.ROOT_URL, configurationService.getRootUrl());
+			parameterMap.put(LookupDao.ROOT_URL, configurationService.getLinkedDataUrl());
 			parameterMap.put(LookupDao.FEATURE_SOURCE, featureSource);
 			FeatureCollectionTransformer transformer = new FeatureCollectionTransformer(response, configurationService);
 			addContentHeader(response);
@@ -160,13 +160,13 @@ public class LinkedDataController extends BaseController {
 				response.setStatus(HttpStatus.NOT_FOUND.value());
 			} else {
 				rtn.put(UPSTREAM_MAIN, 
-						String.join("/", configurationService.getRootUrl(), featureSource.toLowerCase(), URLEncoder.encode(featureID, FeatureTransformer.DEFAULT_ENCODING), NavigationDao.NAVIGATE, NavigationMode.UM.toString()));
+						String.join("/", configurationService.getLinkedDataUrl(), featureSource.toLowerCase(), URLEncoder.encode(featureID, FeatureTransformer.DEFAULT_ENCODING), NavigationDao.NAVIGATE, NavigationMode.UM.toString()));
 				rtn.put(UPSTREAM_TRIBUTARIES, 
-						String.join("/", configurationService.getRootUrl(), featureSource.toLowerCase(), URLEncoder.encode(featureID, FeatureTransformer.DEFAULT_ENCODING), NavigationDao.NAVIGATE, NavigationMode.UT.toString()));
+						String.join("/", configurationService.getLinkedDataUrl(), featureSource.toLowerCase(), URLEncoder.encode(featureID, FeatureTransformer.DEFAULT_ENCODING), NavigationDao.NAVIGATE, NavigationMode.UT.toString()));
 				rtn.put(DOWNSTREAM_MAIN, 
-						String.join("/", configurationService.getRootUrl(), featureSource.toLowerCase(), URLEncoder.encode(featureID, FeatureTransformer.DEFAULT_ENCODING), NavigationDao.NAVIGATE, NavigationMode.DM.toString()));
+						String.join("/", configurationService.getLinkedDataUrl(), featureSource.toLowerCase(), URLEncoder.encode(featureID, FeatureTransformer.DEFAULT_ENCODING), NavigationDao.NAVIGATE, NavigationMode.DM.toString()));
 				rtn.put(DOWNSTREAM_DIVERSIONS, 
-						String.join("/", configurationService.getRootUrl(), featureSource.toLowerCase(), URLEncoder.encode(featureID, FeatureTransformer.DEFAULT_ENCODING), NavigationDao.NAVIGATE, NavigationMode.DD.toString()));
+						String.join("/", configurationService.getLinkedDataUrl(), featureSource.toLowerCase(), URLEncoder.encode(featureID, FeatureTransformer.DEFAULT_ENCODING), NavigationDao.NAVIGATE, NavigationMode.DD.toString()));
 			}
 
 		} catch (Exception e) {

@@ -19,7 +19,7 @@ public class ConfigOpenApi {
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
-                .addServersItem(new Server().url(configurationService.getSwaggerUrl()))
+                .addServersItem(new Server().url(configurationService.getRootUrl()))
                 .components(new Components())
                 .info(new Info()
                         .title("Network Linked Data Index API")
