@@ -43,13 +43,6 @@ management:
       enabled: true
       show-details: never
 
-site:
-  url:
-    base: ${serverContextPath}
-  swagger:
-    apiDocsUrl: ${serverContextPath}/v3/api-docs
-    deployName: ${deployName}
 
 springdoc:
   version: "@project.version@"
-  
