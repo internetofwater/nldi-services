@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: "jdbc:postgresql://${nldiDbHost}:${nldiDbPort}/nldi"
+    url: "jdbc:postgresql://${nldiDbHost}:${nldiDbPort}/${nldiDbName}"
     username: ${nldiDbUsername}
     password: ${nldiDbPassword}
     driver-class-name: org.postgresql.Driver
@@ -42,3 +42,7 @@ management:
     health:
       enabled: true
       show-details: never
+
+
+springdoc:
+  version: "@project.version@"

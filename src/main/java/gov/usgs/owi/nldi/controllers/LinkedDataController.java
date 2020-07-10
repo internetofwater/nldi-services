@@ -14,7 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.Pattern;
 
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,10 +41,10 @@ import gov.usgs.owi.nldi.services.LogService;
 import gov.usgs.owi.nldi.services.Navigation;
 import gov.usgs.owi.nldi.services.Parameters;
 import gov.usgs.owi.nldi.swagger.model.DataSource;
+import gov.usgs.owi.nldi.swagger.model.Feature;
 import gov.usgs.owi.nldi.transform.CharacteristicDataTransformer;
 import gov.usgs.owi.nldi.transform.FeatureTransformer;
 import gov.usgs.owi.nldi.transform.FeatureCollectionTransformer;
-import io.swagger.annotations.ApiOperation;
 
 @RestController
 public class LinkedDataController extends BaseController {
@@ -56,7 +61,15 @@ public class LinkedDataController extends BaseController {
 		super(inLookupDao, inStreamingDao, inNavigation, inParameters, configurationService, inLogService);
 	}
 
-	@ApiOperation(value="getDataSources", response=DataSource.class, responseContainer="List")
+	@Operation(summary = "getDataSources", description = "returns a list of data sources")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "OK",
+					content = { @Content(mediaType = "application/json",
+							schema = @Schema(implementation = DataSource.class)) }),
+			@ApiResponse(responseCode = "500", description = "Server error",
+					content = @Content) })
+
+
 	@GetMapping(value="linked-data", produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<Map<String, Object>> getDataSources(HttpServletRequest request, HttpServletResponse response) {
 		BigInteger logId = logService.logRequest(request);
@@ -67,11 +80,11 @@ public class LinkedDataController extends BaseController {
 			//Manually add comid as a feature source.
 			featureSource.put(LookupDao.SOURCE, Parameters.COMID);
 			featureSource.put(LookupDao.SOURCE_NAME, "NHDPlus comid");
-			featureSource.put(BaseDao.FEATURES, String.join("/", configurationService.getRootUrl(), Parameters.COMID));
+			featureSource.put(BaseDao.FEATURES, String.join("/", configurationService.getLinkedDataUrl(), Parameters.COMID));
 			rtn.add(featureSource);
 
 			Map<String, Object> parameterMap = new HashMap<>();
-			parameterMap.put(LookupDao.ROOT_URL, configurationService.getRootUrl());
+			parameterMap.put(LookupDao.ROOT_URL, configurationService.getLinkedDataUrl());
 			rtn.addAll(lookupDao.getList(BaseDao.DATA_SOURCES, parameterMap));
 
 		} catch (Exception e) {
@@ -82,6 +95,16 @@ public class LinkedDataController extends BaseController {
 		return rtn;
 	}
 
+
+	@Operation(summary = "getFeatures", description = "returns a list of features for a given data source")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "OK",
+					content = { @Content(mediaType = "application/json",
+							schema = @Schema(implementation = Feature.class)) }),
+			@ApiResponse(responseCode = "500", description = "Server error",
+					content = @Content) })
+
+
 	@GetMapping(value="linked-data/{featureSource}", produces=MediaType.APPLICATION_JSON_VALUE)
 	public void getFeatures(HttpServletRequest request, HttpServletResponse response,
 							@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource) {
@@ -89,8 +112,7 @@ public class LinkedDataController extends BaseController {
 
 		try {
 			Map<String, Object> parameterMap = new HashMap<>();
-
-			parameterMap.put(LookupDao.ROOT_URL, configurationService.getRootUrl());
+			parameterMap.put(LookupDao.ROOT_URL, configurationService.getLinkedDataUrl());
 			parameterMap.put(LookupDao.FEATURE_SOURCE, featureSource);
 			FeatureCollectionTransformer transformer = new FeatureCollectionTransformer(response, configurationService);
 			addContentHeader(response);
@@ -138,13 +160,13 @@ public class LinkedDataController extends BaseController {
 				response.setStatus(HttpStatus.NOT_FOUND.value());
 			} else {
 				rtn.put(UPSTREAM_MAIN, 
-						String.join("/", configurationService.getRootUrl(), featureSource.toLowerCase(), URLEncoder.encode(featureID, FeatureTransformer.DEFAULT_ENCODING), NavigationDao.NAVIGATE, NavigationMode.UM.toString()));
+						String.join("/", configurationService.getLinkedDataUrl(), featureSource.toLowerCase(), URLEncoder.encode(featureID, FeatureTransformer.DEFAULT_ENCODING), NavigationDao.NAVIGATE, NavigationMode.UM.toString()));
 				rtn.put(UPSTREAM_TRIBUTARIES, 
-						String.join("/", configurationService.getRootUrl(), featureSource.toLowerCase(), URLEncoder.encode(featureID, FeatureTransformer.DEFAULT_ENCODING), NavigationDao.NAVIGATE, NavigationMode.UT.toString()));
+						String.join("/", configurationService.getLinkedDataUrl(), featureSource.toLowerCase(), URLEncoder.encode(featureID, FeatureTransformer.DEFAULT_ENCODING), NavigationDao.NAVIGATE, NavigationMode.UT.toString()));
 				rtn.put(DOWNSTREAM_MAIN, 
-						String.join("/", configurationService.getRootUrl(), featureSource.toLowerCase(), URLEncoder.encode(featureID, FeatureTransformer.DEFAULT_ENCODING), NavigationDao.NAVIGATE, NavigationMode.DM.toString()));
+						String.join("/", configurationService.getLinkedDataUrl(), featureSource.toLowerCase(), URLEncoder.encode(featureID, FeatureTransformer.DEFAULT_ENCODING), NavigationDao.NAVIGATE, NavigationMode.DM.toString()));
 				rtn.put(DOWNSTREAM_DIVERSIONS, 
-						String.join("/", configurationService.getRootUrl(), featureSource.toLowerCase(), URLEncoder.encode(featureID, FeatureTransformer.DEFAULT_ENCODING), NavigationDao.NAVIGATE, NavigationMode.DD.toString()));
+						String.join("/", configurationService.getLinkedDataUrl(), featureSource.toLowerCase(), URLEncoder.encode(featureID, FeatureTransformer.DEFAULT_ENCODING), NavigationDao.NAVIGATE, NavigationMode.DD.toString()));
 			}
 
 		} catch (Exception e) {
@@ -212,7 +234,7 @@ public class LinkedDataController extends BaseController {
 			@PathVariable(Parameters.FEATURE_ID) String featureID,
 			@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode,
 			@RequestParam(value=Parameters.STOP_COMID, required=false) @Range(min=1, max=Integer.MAX_VALUE) String stopComid,
-			@ApiParam(value=Parameters.DISTANCE_DESCRIPTION)
+			@Parameter(description=Parameters.DISTANCE_DESCRIPTION)
 				@RequestParam(value=Parameters.DISTANCE, required=false, defaultValue=Parameters.MAX_DISTANCE)
 			@Pattern(message=Parameters.DISTANCE_VALIDATION_MESSAGE, regexp=Parameters.DISTANCE_VALIDATION_REGEX) String distance,
 			@RequestParam(value=Parameters.LEGACY, required=false) String legacy) throws Exception {
@@ -240,7 +262,7 @@ public class LinkedDataController extends BaseController {
 			@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode,
 			@PathVariable(value=DATA_SOURCE) String dataSource,
 			@RequestParam(value=Parameters.STOP_COMID, required=false) @Range(min=1, max=Integer.MAX_VALUE) String stopComid,
-			@ApiParam(value=Parameters.DISTANCE_DESCRIPTION)
+			@Parameter(description=Parameters.DISTANCE_DESCRIPTION)
 				@RequestParam(value=Parameters.DISTANCE, required=false, defaultValue=Parameters.MAX_DISTANCE)
 			@Pattern(message=Parameters.DISTANCE_VALIDATION_MESSAGE, regexp=Parameters.DISTANCE_VALIDATION_REGEX) String distance,
 			@RequestParam(value=Parameters.LEGACY, required=false) String legacy) throws Exception {

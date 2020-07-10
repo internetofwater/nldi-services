@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 *   Add features collection API /linked-data/{featureSource}
 *   Updated Swagger to show distance is in kilometers
 *   Add code coverage
+*   Migrate from springfox to springdoc
   
 ## [1.2.0](https://github.com/ACWI-SSWD/nldi-services/compare/nldi-services-1.1.0...nldi-services-1.2.0)
 ### Changed
