@@ -62,7 +62,7 @@ nldiDbHost: localhost
 nldiDbPort: 5437 #Or whatever port you map it to
 nldiDbUsername: [dbUserName] #See nldi-db project .env file 'NLDI_READ_ONLY_USERNAME'
 nldiDbPassword: [dbPassword] #See nldi-db project .env file 'NLDI_READ_ONLY_PASSWORD'
-
+nldiDbName: [dbName] #See nldi-db project .env file 'NLDI_DATABASE_NAME'
 nldiProtocol: http
 nldiHost: owi-test.usgs.gov:8080
 nldiPath: /test-url

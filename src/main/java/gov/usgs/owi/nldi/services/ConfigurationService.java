@@ -31,11 +31,11 @@ public class ConfigurationService {
 		return displayPath;
 	}
 
-	public String getRootUrl() {
+	public String getLinkedDataUrl() {
 		return getDisplayProtocol() + "://" + getDisplayHost() + getDisplayPath() + "/linked-data";
 	}
 
-	public String getSwaggerUrl() {
+	public String getRootUrl() {
 		return getDisplayProtocol() + "://" + getDisplayHost() + getDisplayPath();
 	}
 

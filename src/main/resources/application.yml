@@ -52,3 +52,4 @@ site:
 
 springdoc:
   version: "@project.version@"
+  
