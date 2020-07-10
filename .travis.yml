@@ -12,3 +12,8 @@ script:
   - docker network create nldiServices
   - docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v "$TRAVIS_BUILD_DIR":/usr/src/mymaven -w /usr/src/mymaven --network=nldiServices -e TESTING_DATABASE_PORT=5432 -e TESTING_DATABASE_ADDRESS=nldiDatabase -e TESTING_DATABASE_NETWORK=nldiServices maven:3.6.0-jdk-11 mvn clean verify
   - docker network rm nldiServices
+
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
