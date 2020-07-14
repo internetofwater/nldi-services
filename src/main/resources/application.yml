@@ -46,3 +46,10 @@ management:
 
 springdoc:
   version: "@project.version@"
+
+site:
+  url:
+    base: ${SITE_URL_BASE}
+  swagger:
+    apiDocsUrl: ${serverContextPath}/v3/api-docs/swagger-config
+    deployName: NLDI

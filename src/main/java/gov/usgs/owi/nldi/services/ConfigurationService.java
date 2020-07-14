@@ -19,6 +19,13 @@ public class ConfigurationService {
 	@Value("${nldi.displayPath}")
 	private String displayPath;
 
+	@Value("${site.swagger.apiDocsUrl}")
+	private String swaggerApiDocsUrl;
+	@Value("${site.swagger.deployName}")
+	private String deployName;
+	@Value("${server.servlet.context-path}")
+	private String serverContextPath;
+
 	public String getDisplayProtocol() {
 		return displayProtocol;
 	}
@@ -42,4 +49,16 @@ public class ConfigurationService {
 	public String getAppVersion() {
 		return appVersion;
 	}
+
+	public String getSwaggerApiDocsUrl() {
+		return getDisplayPath() + "/v3/api-docs/swagger-config";
+	}
+	public String getDeployName() {
+		return deployName;
+	}
 }
+
+
+
+
+
