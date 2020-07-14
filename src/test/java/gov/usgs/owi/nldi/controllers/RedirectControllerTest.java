@@ -7,13 +7,11 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import gov.usgs.owi.nldi.services.LogService;
 import gov.usgs.owi.nldi.services.TestConfigurationService;
 import org.springframework.web.servlet.view.RedirectView;
 
 public class RedirectControllerTest {
-	@Mock
-	private LogService logService;
+
 
 	private TestConfigurationService configurationService;
 	private RedirectController controller;
