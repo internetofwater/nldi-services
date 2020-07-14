@@ -34,22 +34,16 @@ public class RedirectControllerTest {
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
 
-		//Need to mock this for only a few tests
-
 		configurationService = new TestConfigurationService();
-		response = new MockHttpServletResponse();
-		request = new MockHttpServletRequest();
         controller = new RedirectController(configurationService);
-		when(logService.logRequest(any(HttpServletRequest.class))).thenReturn(BigInteger.ONE);
 	}
 
 	@Test
 	public void getSwaggerTest() throws Exception {
 		RedirectView redirectView= controller.getSwagger();
 		String url = redirectView.getUrl();
-		assertEquals(configurationService.getSwaggerApiDocsUrl(), "/test-url/v3/api-docs/swagger-config");
+		assertEquals("/test-url/v3/api-docs/swagger-config", configurationService.getSwaggerApiDocsUrl());
 		assertTrue(url.contains("/test-url/swagger-ui/index.html?configUrl="));
-		assertEquals(configurationService.getSwaggerApiDocsUrl(), "/test-url/v3/api-docs/swagger-config");
 	}
 
 }

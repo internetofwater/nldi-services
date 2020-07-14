@@ -49,7 +49,7 @@ springdoc:
 
 site:
   url:
-    base: ${SITE_URL_BASE}
+    base: ${siteUrlBase}
   swagger:
-    apiDocsUrl: ${serverContextPath}/v3/api-docs/swagger-config
-    deployName: NLDI
+    apiDocsUrl: "/v3/api-docs/swagger-config"
+    deployName: "NLDI"
