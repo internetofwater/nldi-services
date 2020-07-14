@@ -2,19 +2,10 @@ package gov.usgs.owi.nldi.controllers;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
-
-import java.math.BigInteger;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.mock.web.MockHttpServletResponse;
 
 import gov.usgs.owi.nldi.services.LogService;
 import gov.usgs.owi.nldi.services.TestConfigurationService;
@@ -26,8 +17,6 @@ public class RedirectControllerTest {
 
 	private TestConfigurationService configurationService;
 	private RedirectController controller;
-	private MockHttpServletResponse response;
-	private MockHttpServletRequest request;
 
 	@Before
 	@SuppressWarnings("unchecked")

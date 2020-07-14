@@ -1,4 +1,3 @@
-
 package gov.usgs.owi.nldi.services;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -18,9 +17,6 @@ public class ConfigurationService {
 
 	@Value("${nldi.displayPath}")
 	private String displayPath;
-
-	@Value("${server.servlet.context-path}")
-	private String serverContextPath;
 
 	public String getDisplayProtocol() {
 		return displayProtocol;
