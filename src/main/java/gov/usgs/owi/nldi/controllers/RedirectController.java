@@ -1,7 +1,13 @@
 package gov.usgs.owi.nldi.controllers;
 
+import gov.usgs.owi.nldi.dao.LookupDao;
+import gov.usgs.owi.nldi.dao.StreamingDao;
 import gov.usgs.owi.nldi.services.ConfigurationService;
+import gov.usgs.owi.nldi.services.LogService;
+import gov.usgs.owi.nldi.services.Navigation;
+import gov.usgs.owi.nldi.services.Parameters;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.view.RedirectView;
@@ -11,20 +17,28 @@ import io.swagger.v3.oas.annotations.Hidden;
 @RestController
 public class RedirectController {
 
-	protected final ConfigurationService configurationService;
-
 	@Autowired
-	public RedirectController(ConfigurationService configurationService) {
-		this.configurationService = configurationService;
+	ConfigurationService configurationService;
+
+	private String urlRoot = null;
+
+	RedirectController() {
+
 	}
 
+	//Used for integration test ... see RedirectControllerIT.java
+	void setRootUrl(String url) {
+    	this.urlRoot = url;
+	}
 
 	@GetMapping(value="/swagger")
 	@Hidden
 	public RedirectView getSwagger() {
-		return new RedirectView(configurationService.getRootUrl() + "/swagger-ui/index.html?configUrl="
+		if (urlRoot == null) {
+			urlRoot = configurationService.getRootUrl();
+		}
+		return new RedirectView(this.urlRoot + "/swagger-ui/index.html?configUrl="
 									+ configurationService.getSwaggerApiDocsUrl(), true, true);
 	}
-
 
 }
