@@ -15,20 +15,18 @@ import org.springframework.web.servlet.view.RedirectView;
 import io.swagger.v3.oas.annotations.Hidden;
 
 @RestController
-public class RedirectController {
-
-	@Autowired
-	ConfigurationService configurationService;
+public class RedirectController extends BaseController {
 
 	private String urlRoot = null;
 
-	RedirectController() {
-
+	public RedirectController(LookupDao inLookupDao, StreamingDao inStreamingDao, Navigation inNavigation, Parameters inParameters, ConfigurationService inConfigurationService, LogService inLogService) {
+		super(inLookupDao, inStreamingDao, inNavigation, inParameters, inConfigurationService, inLogService);
 	}
+
 
 	//Used for integration test ... see RedirectControllerIT.java
 	void setRootUrl(String url) {
-    	this.urlRoot = url;
+		this.urlRoot = url;
 	}
 
 	@GetMapping(value="/swagger")

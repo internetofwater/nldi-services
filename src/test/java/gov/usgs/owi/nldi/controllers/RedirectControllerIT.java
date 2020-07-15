@@ -40,7 +40,7 @@ public class RedirectControllerIT extends BaseIT {
 	public void setUp() {
 		urlRoot = "http://localhost:" + port + context;
 	}
-	
+
 	@Test
 	public void getCharacteristicDataFilteredTest() throws Exception {
 		// configurationService.getRootUrl() will always be set to owi-test.usgs.gov:8080
