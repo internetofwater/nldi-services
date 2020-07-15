@@ -162,7 +162,7 @@
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <configuration>
                     <environmentVariables>
-                        <nldiDbUrl>jdbc:postgresql://${TESTING_DATABASE_ADDRESS}:${TESTING_DATABASE_PORT}/${nldiDbName}</nldiDbUrl>
+                        <nldiDbUrl>jdbc:postgresql://${TESTING_DATABASE_ADDRESS}:${TESTING_DATABASE_PORT}/nldi_db_name</nldiDbUrl>
                         <nldiUsername>read_only_user</nldiUsername>
                         <nldiPassword>changeMe</nldiPassword>
                         <dbUnitUsername>nldi</dbUnitUsername>
