@@ -13,7 +13,10 @@ import org.springframework.mock.web.MockHttpServletResponse;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
 
 public class MapToGeoJsonTransformerTest {
 

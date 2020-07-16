@@ -22,13 +22,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class RedirectControllerIT  {
 
 	@Value("${nldi.displayHost}")
-	String displayHost;
+	private String displayHost;
 
 	@Value("${nldi.displayProtocol}")
-	String displayProtocol;
+	private String displayProtocol;
 
 	@Value("${nldi.displayPath}")
-	String displayPath;
+	private String displayPath;
 
 	@Test
 	void testProperties(){
