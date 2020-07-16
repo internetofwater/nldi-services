@@ -20,13 +20,13 @@ public class FeatureTransformer extends MapToGeoJsonTransformer {
 	public static final String FEATURE_COUNT_HEADER = BaseDao.FEATURES + COUNT_SUFFIX;
 	public static final String DEFAULT_ENCODING = "UTF-8";
 
-	static final String COMID = "comid";
-	static final String IDENTIFIER = "identifier";
-	static final String MEASURE = "measure";
-	static final String NAME = "name";
-	static final String REACHCODE = "reachcode";
-	static final String SOURCE_NAME_DB = "source_name";
-	static final String URI = "uri";
+	protected static final String COMID = "comid";
+	protected static final String IDENTIFIER = "identifier";
+	protected static final String MEASURE = "measure";
+	protected static final String NAME = "name";
+	protected static final String REACHCODE = "reachcode";
+	protected static final String SOURCE_NAME_DB = "source_name";
+	protected static final String URI = "uri";
 
 	private static final String SOURCE_NAME = "sourceName";
 	private static final String NAVIGATION = "navigation";

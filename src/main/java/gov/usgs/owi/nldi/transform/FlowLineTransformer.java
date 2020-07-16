@@ -13,7 +13,7 @@ public class FlowLineTransformer extends MapToGeoJsonTransformer {
 
 	public static final String FLOW_LINES_COUNT_HEADER = BaseDao.FLOW_LINES + COUNT_SUFFIX;
 
-	static final String NHDPLUS_COMID = "nhdplus_comid";
+	protected static final String NHDPLUS_COMID = "nhdplus_comid";
 
 	public FlowLineTransformer(HttpServletResponse response) {
 		super(response, FLOW_LINES_COUNT_HEADER);

@@ -1,6 +1,5 @@
 package gov.usgs.owi.nldi.controllers;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,7 +27,6 @@ import gov.usgs.owi.nldi.transform.BasinTransformer;
 import gov.usgs.owi.nldi.transform.FeatureTransformer;
 import gov.usgs.owi.nldi.transform.FlowLineTransformer;
 import gov.usgs.owi.nldi.transform.ITransformer;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Validated
 public abstract class BaseController {

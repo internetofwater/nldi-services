@@ -11,9 +11,9 @@ import gov.usgs.owi.nldi.dao.BaseDao;
 
 public abstract class MapToGeoJsonTransformer extends MapToJsonTransformer {
 
-	static final String COUNT_SUFFIX = "_count";
-	static final String SHAPE = "shape";
-	static final String TOTAL_ROWS = "total_rows";
+	public static final String COUNT_SUFFIX = "_count";
+	public static final String SHAPE = "shape";
+	public static final String TOTAL_ROWS = "total_rows";
 
 	private static final String FEATURE_COLLECTION = "FeatureCollection";
 	private static final String FEATURE_INIT_CAP = "Feature";
