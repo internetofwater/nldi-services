@@ -1,7 +1,5 @@
 package gov.usgs.owi.nldi.dao;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -9,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.json.JSONException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
@@ -19,6 +17,9 @@ import gov.usgs.owi.nldi.services.ConfigurationService;
 import gov.usgs.owi.nldi.services.Parameters;
 import gov.usgs.owi.nldi.springinit.DbTestConfig;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @SpringBootTest(webEnvironment=SpringBootTest.WebEnvironment.NONE,
 		classes={DbTestConfig.class, LookupDao.class, ConfigurationService.class})

@@ -1,29 +1,29 @@
 package gov.usgs.owi.nldi.transform;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockHttpServletResponse;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class FlowLineTransformerTest {
 
 	protected FlowLineTransformer transformer;
 	protected MockHttpServletResponse response;
 
-	@Before
+	@BeforeEach
 	public void beforeTest() throws IOException {
 		response = new MockHttpServletResponse();
 		transformer = new FlowLineTransformer(response);
 	}
 
-	@After
+	@AfterEach
 	public void afterTest() throws Exception {
 		transformer.close();
 	}

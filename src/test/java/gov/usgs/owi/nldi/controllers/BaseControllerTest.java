@@ -1,8 +1,6 @@
 package gov.usgs.owi.nldi.controllers;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyMap;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -15,8 +13,8 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.ResultHandler;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
@@ -57,7 +55,7 @@ public class BaseControllerTest {
 
 	private TestBaseController controller;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
 		controller = new TestBaseController(lookupDao, streamingDao, navigation, parameters, configurationService, logService);

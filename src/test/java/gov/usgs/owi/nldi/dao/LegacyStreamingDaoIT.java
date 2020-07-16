@@ -2,19 +2,20 @@ package gov.usgs.owi.nldi.dao;
 
 import gov.usgs.owi.nldi.BaseIT;
 import gov.usgs.owi.nldi.springinit.DbTestConfig;
-import static org.junit.Assert.fail;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.ibatis.session.ResultContext;
 import org.apache.ibatis.session.ResultHandler;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+
+import static org.junit.jupiter.api.Assertions.fail;
 
 @SpringBootTest(webEnvironment=WebEnvironment.NONE,
 		classes={DbTestConfig.class, StreamingDao.class})
@@ -34,13 +35,13 @@ public class LegacyStreamingDaoIT extends BaseIT{
 
 	TestResultHandler handler;
 
-	@Before
-	public void init() {
+	@BeforeEach
+	public void setUp() {
 		handler = new TestResultHandler();
 	}
 
-	@After
-	public void cleanup() {
+	@AfterEach
+	public void tearDown() {
 		handler = null;
 	}
 

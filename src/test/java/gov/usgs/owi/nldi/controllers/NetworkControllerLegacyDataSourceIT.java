@@ -1,7 +1,7 @@
 package gov.usgs.owi.nldi.controllers;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -33,8 +33,8 @@ public class NetworkControllerLegacyDataSourceIT extends BaseIT {
 	private TestRestTemplate restTemplate;
 	private static final String RESULT_FOLDER  = "network/feature/wqp/";
 
-	@Before
-	public void setup() {
+	@BeforeEach
+	public void setUp() {
 		urlRoot = "http://localhost:" + port + context;
 	}
 
@@ -154,7 +154,7 @@ public class NetworkControllerLegacyDataSourceIT extends BaseIT {
 				HttpStatus.BAD_REQUEST.value(),
 				null,
 				null,
-				MediaType.APPLICATION_JSON_UTF8_VALUE,
+				MediaType.APPLICATION_JSON_VALUE,
 				getCompareFile(RESULT_FOLDER, "comid_13297246_PP_stop_13297198.json"),
 				true,
 				true);

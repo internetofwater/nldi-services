@@ -1,12 +1,11 @@
 package gov.usgs.owi.nldi.dao;
 
-import static org.junit.Assert.assertNotNull;
 
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
@@ -17,6 +16,8 @@ import gov.usgs.owi.nldi.BaseIT;
 import gov.usgs.owi.nldi.springinit.DbTestConfig;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest(webEnvironment=WebEnvironment.NONE,
 		classes={DbTestConfig.class, LogDao.class})

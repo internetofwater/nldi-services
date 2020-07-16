@@ -1,14 +1,11 @@
 package gov.usgs.owi.nldi.dao;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.NumberUtils;
 
@@ -19,6 +16,8 @@ import gov.usgs.owi.nldi.NavigationMode;
 import gov.usgs.owi.nldi.services.Parameters;
 import gov.usgs.owi.nldi.springinit.DbTestConfig;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment=SpringBootTest.WebEnvironment.NONE,
 		classes={DbTestConfig.class, NavigationDao.class})

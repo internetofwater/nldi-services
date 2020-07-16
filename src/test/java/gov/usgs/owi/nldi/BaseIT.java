@@ -1,8 +1,8 @@
 package gov.usgs.owi.nldi;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static uk.co.datumedge.hamcrest.json.SameJSONAs.sameJSONObjectAs;
 
 import java.io.IOException;
@@ -14,7 +14,6 @@ import java.time.format.DateTimeFormatter;
 import org.dbunit.dataset.ReplacementDataSet;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
@@ -24,7 +23,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,7 +32,6 @@ import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DbUnitConfiguration;
 import com.github.springtestdbunit.dataset.ReplacementDataSetModifier;
 
-@RunWith(SpringRunner.class)
 @ActiveProfiles("it")
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, 
 	TransactionDbUnitTestExecutionListener.class

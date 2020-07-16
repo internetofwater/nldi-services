@@ -6,8 +6,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import org.apache.ibatis.session.ResultContext;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -21,7 +21,7 @@ public class StreamingResultHandlerTest {
 	@Mock
 	private ResultContext<Object> context;
 
-	@Before
+	@BeforeEach
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
 		h = new StreamingResultHandler(t);

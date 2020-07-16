@@ -1,6 +1,6 @@
 package gov.usgs.owi.nldi.controllers;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -9,8 +9,8 @@ import java.math.BigInteger;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
@@ -41,8 +41,8 @@ public class LookupControllerTest {
 	private MockHttpServletResponse response;
 	private MockHttpServletRequest request;
 
-	@Before
-	public void setup() {
+	@BeforeEach
+	public void setUp() {
 		MockitoAnnotations.initMocks(this);
 		configurationService = new TestConfigurationService();
 

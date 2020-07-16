@@ -1,13 +1,12 @@
 package gov.usgs.owi.nldi.controllers;
 
-import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpInputMessage;
@@ -18,6 +17,8 @@ import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.context.request.WebRequest;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class GlobalDefaultExceptionHandlerTest {
 
 	@Mock
@@ -26,7 +27,7 @@ public class GlobalDefaultExceptionHandlerTest {
 	private GlobalDefaultExceptionHandler controller = new GlobalDefaultExceptionHandler();
 	private HttpInputMessage httpInputMessage;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
 	}

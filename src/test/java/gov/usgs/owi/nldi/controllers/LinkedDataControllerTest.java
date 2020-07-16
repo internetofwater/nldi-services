@@ -1,8 +1,6 @@
 package gov.usgs.owi.nldi.controllers;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyMap;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -23,8 +21,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
@@ -55,9 +53,9 @@ public class LinkedDataControllerTest {
 	private MockHttpServletResponse response;
 	private MockHttpServletRequest request;
 
-	@Before
+	@BeforeEach
 	@SuppressWarnings("unchecked")
-	public void setup() {
+	public void setUp() {
 		MockitoAnnotations.initMocks(this);
 
 		//Need to mock this for only a few tests
@@ -84,14 +82,19 @@ public class LinkedDataControllerTest {
 		assertNull(controller.getComid("abc", "def"));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void getComidWithNullFeatureSourceTest() {
-		controller.getComid(null, "def");
+		assertThrows(IllegalArgumentException.class, () -> {
+			controller.getComid(null, "def");
+		});
+
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void getComidWithNullFeatureIdTest() {
-		controller.getComid("FakeFeatureSource", null);
+		assertThrows(IllegalArgumentException.class, () -> {
+			controller.getComid("FakeFeatureSource", null);
+		});
 	}
 
 	@Test

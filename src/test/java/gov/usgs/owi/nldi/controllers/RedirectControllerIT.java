@@ -1,55 +1,47 @@
 package gov.usgs.owi.nldi.controllers;
 
-import org.junit.Before;
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import com.github.springtestdbunit.annotation.DatabaseSetup;
-import gov.usgs.owi.nldi.BaseIT;
+import org.springframework.http.ResponseEntity;
 
-@EnableWebMvc
-@SpringBootTest(webEnvironment=WebEnvironment.RANDOM_PORT)
-@DatabaseSetup("classpath:/testData/crawlerSource.xml")
-public class RedirectControllerIT extends BaseIT {
+import static org.hamcrest.CoreMatchers.equalTo;
 
-	@LocalServerPort
-	private int port;
+import org.junit.jupiter.api.Test;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-	@Autowired
-	private TestRestTemplate restTemplate;
+@SpringBootTest(webEnvironment=WebEnvironment.DEFINED_PORT,
+		properties={
+				"nldi.displayHost=localhost:8080",
+				"nldi.displayProtocol=http",
+				"nldi.displayPath=/nldi"})
+public class RedirectControllerIT  {
 
-	@Autowired
-	private RedirectController controller;
+	@Value("${nldi.displayHost}")
+	String displayHost;
 
-	private static final String RESULT_FOLDER  = "feature/other/";
+	@Value("${nldi.displayProtocol}")
+	String displayProtocol;
 
-	@Before
-	public void setUp() {
-		urlRoot = "http://localhost:" + port + context;
+	@Value("${nldi.displayPath}")
+	String displayPath;
+
+	@Test
+	void testProperties(){
+		assertThat("protocol is correct", "http".equals(displayProtocol));
+		assertThat("display host is correct", "localhost:8080".equals(displayHost));
+		assertThat("display path is correct", "/nldi".equals(displayPath));
 	}
 
 	@Test
-	public void getCharacteristicDataFilteredTest() throws Exception {
-		// configurationService.getRootUrl() will always be set to owi-test.usgs.gov:8080
-		// when the tests run.  This is hardcoded in the TestConfigurationService class
-		// and many tests seem to rely on it.
-		// But this test requires the root url to be set to what the test is running on,
-		// http://localhost:<random port>
-		controller.setRootUrl(restTemplate.getRootUri());
-		assertEntity(restTemplate,
-				"/swagger",
-				HttpStatus.OK.value(),
-				null,
-				null,
-				null,
-				null,
-				false,
-				false);
+	public void getSwaggerTest(@Autowired TestRestTemplate restTemplate) throws Exception {
+		ResponseEntity<String> rtn = restTemplate.getForEntity("/swagger", String.class);
+		assertThat(rtn.getStatusCode(), equalTo(HttpStatus.OK));
+		assertTrue(rtn.getBody().contains("Swagger UI"));
 	}
 
 }

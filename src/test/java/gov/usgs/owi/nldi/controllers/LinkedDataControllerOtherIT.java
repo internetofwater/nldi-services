@@ -4,8 +4,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static uk.co.datumedge.hamcrest.json.SameJSONAs.sameJSONArrayAs;
 
 import org.json.JSONArray;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
@@ -33,7 +33,7 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 
 	private static final String RESULT_FOLDER  = "feature/other/";
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		urlRoot = "http://localhost:" + port + context;
 	}
@@ -111,7 +111,7 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 				HttpStatus.OK.value(),
 				null,
 				null,
-				MediaType.APPLICATION_JSON_UTF8_VALUE,
+				MediaType.APPLICATION_JSON_VALUE,
 				null,
 				false,
 				false);
@@ -199,7 +199,7 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 				HttpStatus.OK.value(),
 				null,
 				null,
-				MediaType.APPLICATION_JSON_UTF8_VALUE,
+				MediaType.APPLICATION_JSON_VALUE,
 				getCompareFile(RESULT_FOLDER, "wqp_USGS-05427880.json"),
 				true,
 				false);
@@ -212,7 +212,7 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 				HttpStatus.NOT_FOUND.value(),
 				null,
 				null,
-				MediaType.APPLICATION_JSON_UTF8_VALUE,
+				MediaType.APPLICATION_JSON_VALUE,
 				null,
 				true,
 				false);
@@ -222,7 +222,7 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 				HttpStatus.NOT_FOUND.value(),
 				null,
 				null,
-				MediaType.APPLICATION_JSON_UTF8_VALUE,
+				MediaType.APPLICATION_JSON_VALUE,
 				null,
 				true,
 				false);

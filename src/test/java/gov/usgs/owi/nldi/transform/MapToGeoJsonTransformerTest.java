@@ -1,21 +1,19 @@
 package gov.usgs.owi.nldi.transform;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockHttpServletResponse;
 
 import com.fasterxml.jackson.core.JsonGenerator;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MapToGeoJsonTransformerTest {
 
@@ -47,13 +45,13 @@ public class MapToGeoJsonTransformerTest {
 		}
 	}
 
-	@Before
+	@BeforeEach
 	public void beforeTest() throws IOException {
 		response = new MockHttpServletResponse();
 		transformer = new TestTransformer(response);
 	}
 
-	@After
+	@AfterEach
 	public void afterTest() throws Exception {
 		transformer.close();
 	}

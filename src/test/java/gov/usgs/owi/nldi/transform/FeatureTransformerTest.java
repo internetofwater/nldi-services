@@ -1,19 +1,19 @@
 package gov.usgs.owi.nldi.transform;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockHttpServletResponse;
 
 import gov.usgs.owi.nldi.dao.LookupDao;
 import gov.usgs.owi.nldi.services.TestConfigurationService;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class FeatureTransformerTest {
 
@@ -21,14 +21,14 @@ public class FeatureTransformerTest {
 	protected FeatureTransformer transformer;
 	protected MockHttpServletResponse response;
 
-	@Before
+	@BeforeEach
 	public void beforeTest() throws IOException {
 		configurationService = new TestConfigurationService();
 		response = new MockHttpServletResponse();
 		transformer = new FeatureTransformer(response, configurationService);
 	}
 
-	@After
+	@AfterEach
 	public void afterTest() throws Exception {
 		transformer.close();
 	}

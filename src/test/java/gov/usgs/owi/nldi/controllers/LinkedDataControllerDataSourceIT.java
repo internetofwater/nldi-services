@@ -1,7 +1,7 @@
 package gov.usgs.owi.nldi.controllers;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -30,8 +30,8 @@ public class LinkedDataControllerDataSourceIT extends BaseIT {
 	@Autowired
 	private TestRestTemplate restTemplate;
 
-	@Before
-	public void setup() {
+	@BeforeEach
+	public void setUp() {
 		urlRoot = "http://localhost:" + port + context;
 	}
 
