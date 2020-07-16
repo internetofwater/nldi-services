@@ -25,7 +25,9 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class StreamingDaoIT extends BaseIT {
 
 	@Autowired
-	StreamingDao streamingDao;
+	private StreamingDao streamingDao;
+
+	private TestResultHandler handler;
 
 	private class TestResultHandler implements ResultHandler<Object> {
 		//TODO put the results somewhere to check them and allow them to be cleared between queries
@@ -35,8 +37,6 @@ public class StreamingDaoIT extends BaseIT {
 			results.add((Map<String, Object>) context.getResultObject());
 		}
 	}
-
-	TestResultHandler handler;
 
 	@BeforeEach
 	public void setUp() {

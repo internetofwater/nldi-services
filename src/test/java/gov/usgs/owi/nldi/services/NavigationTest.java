@@ -43,7 +43,7 @@ public class NavigationTest {
 	}
 
 	@Test
-	public void interpretResultTest_Good() {
+	public void interpretResultTestGood() {
 		try {
 			assertEquals("{4d06cca2-001e-11e6-b9d0-0242ac110003}", navigation.interpretResult(goodResult(), response));
 		} catch (Exception e) {
@@ -52,7 +52,7 @@ public class NavigationTest {
 	}
 
 	@Test
-	public void interpretResultTest_Bad1() throws UnsupportedEncodingException {
+	public void interpretResultTestBad1() throws UnsupportedEncodingException {
 		try {
 			assertNull(navigation.interpretResult(badResult1(), response));
 		} catch (Exception e) {
@@ -63,7 +63,7 @@ public class NavigationTest {
 	}
 
 	@Test
-	public void interpretResultTest_Bad2() throws UnsupportedEncodingException {
+	public void interpretResultTestBad2() throws UnsupportedEncodingException {
 		try {
 			assertNull(navigation.interpretResult(badResult2(), response));
 		} catch (Exception e) {

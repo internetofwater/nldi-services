@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class GlobalDefaultExceptionHandlerTest {
 
 	@Mock
-	WebRequest request;
+	private WebRequest request;
 
 	private GlobalDefaultExceptionHandler controller = new GlobalDefaultExceptionHandler();
 	private HttpInputMessage httpInputMessage;

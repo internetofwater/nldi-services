@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class LegacyStreamingDaoIT extends BaseIT{
 
 	@Autowired
-	StreamingDao streamingDao;
+	private StreamingDao streamingDao;
 
 	private class TestResultHandler implements ResultHandler<Object> {
 		//TODO put the results somewhere to check them and allow them to be cleared between queries
