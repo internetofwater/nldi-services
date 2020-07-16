@@ -1,0 +1,48 @@
+spring:
+  datasource:
+    url: "jdbc:postgresql://${nldiDbHost}:${nldiDbPort}/nldi_db_name"
+    username: ${nldiDbUsername}
+    password: ${nldiDbPassword}
+    driver-class-name: org.postgresql.Driver
+
+  profiles:
+    active: default,swagger
+
+logging:
+  level:
+    root: ${springFrameworkLogLevel}
+    javax.management: OFF
+    sun.rmi: OFF
+
+server:
+  port: ${serverPort}
+  servlet:
+    context-path: ${serverContextPath}
+
+nldi:
+  displayProtocol: ${nldiProtocol}
+  displayHost: ${nldiHost}
+  displayPath: ${nldiPath:}
+
+management:
+  endpoints:
+    enabled-by-default: false
+    jmx:
+      exposure:
+        exclude: "*"
+    web:
+      base-path: /about
+      exposure:
+        include:
+        - info
+        - health
+  endpoint:
+    info:
+      enabled: true
+    health:
+      enabled: true
+      show-details: never
+
+
+springdoc:
+  version: "@project.version@"
