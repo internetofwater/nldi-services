@@ -7,10 +7,10 @@
 ## Public API
 The services are accessed via an http GET request. All navigation output is generated as GeoJSON ("application/vnd.geo+json")
 
-### The root is {host}/nldi.
+### The root is {host}/nldi
 Both a test and a production are exposed to the public:
-__https://labs-beta.waterdata.usgs.gov/nldi/linked_data__ is the test root.
-__https://labs.waterdata.usgs.gov/nldi/linked_data__ is the production root.
+  <https://labs-beta.waterdata.usgs.gov/nldi/linked_data> is the test root.
+  <https://labs.waterdata.usgs.gov/nldi/linked_data> is the production root.
 This endpoint will give you the valid dataSource names for the other endpoints. There is also a health check at /about/health and version information at /about/info.
 
 ### Display Up/Down Stream Flow Lines
