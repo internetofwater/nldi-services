@@ -43,29 +43,31 @@ public class SpringConfig implements WebMvcConfigurer {
 	@Override
 	public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
 		configurer.strategies(Arrays.asList(new ContentNegotiationStrategy() {
-					@Override
-					public List<MediaType> resolveMediaTypes(NativeWebRequest webRequest)
-							throws HttpMediaTypeNotAcceptableException {
-						//If the user specifies output with the format parameter, give them what they asked for.
-						Map<String, String[]> map = webRequest.getParameterMap();
-                        if (map != null) {
-                        	String[] values = map.get(Parameters.FORMAT);
-                        	if (values != null) {
-                        		if (values[0].toLowerCase().equals("json")) {
-                        			return Arrays.asList(MediaType.APPLICATION_JSON);
+			@Override
+			public List<MediaType> resolveMediaTypes(NativeWebRequest webRequest)
+				throws HttpMediaTypeNotAcceptableException {
+						
+				//If the user specifies output with the format parameter, give them what they asked for.
+				Map<String, String[]> map = webRequest.getParameterMap();
+                        	if (map != null) {
+                        		String[] values = map.get(Parameters.FORMAT);
+                        		if (values != null) {
+                        			if (values[0].toLowerCase().equals("json")) {
+                        				return Arrays.asList(MediaType.APPLICATION_JSON);
 								} else if (values[0].toLowerCase().equals("html")) {
-                        			return Arrays.asList(MediaType.TEXT_HTML);
+                        				return Arrays.asList(MediaType.TEXT_HTML);
 								}
 							}
 						}
-                        //Browsers have 'text/html' as the first element in their accept headers,
-						// so if it is the first element, the user has stumbled to this url in the
-						// browser and may not expect a json dump.
-						String accept = webRequest.getHeader(HttpHeaders.ACCEPT);
-						if (accept != null && accept.startsWith(MediaType.TEXT_HTML_VALUE)) {
-							return Arrays.asList(MediaType.TEXT_HTML);
-						} else {
-							return Arrays.asList(MediaType.APPLICATION_JSON);
+
+                        		//Browsers have 'text/html' as the first element in their accept headers,
+					// so if it is the first element, the user has stumbled to this url in the
+					// browser and may not expect a json dump.
+					String accept = webRequest.getHeader(HttpHeaders.ACCEPT);
+					if (accept != null && accept.startsWith(MediaType.TEXT_HTML_VALUE)) {
+						return Arrays.asList(MediaType.TEXT_HTML);
+					} else {
+						return Arrays.asList(MediaType.APPLICATION_JSON);
 						}
 					}
 				}));
@@ -74,10 +76,10 @@ public class SpringConfig implements WebMvcConfigurer {
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
 		registry
-				.addMapping("/**")
-				.allowedOrigins("*")
-				.allowedMethods("GET", "OPTIONS")
-				.allowedHeaders("Origin", "Accept", "X-Requested-With", "Content-Type", "Access-Control-Request-Method", "Access-Control-Request-Headers")
-				.exposedHeaders("feature_count", "flowLine_count");
+			.addMapping("/**")
+			.allowedOrigins("*")
+			.allowedMethods("GET", "OPTIONS")
+			.allowedHeaders("Origin", "Accept", "X-Requested-With", "Content-Type", "Access-Control-Request-Method", "Access-Control-Request-Headers")
+			.exposedHeaders("feature_count", "flowLine_count");
 	}
 }
