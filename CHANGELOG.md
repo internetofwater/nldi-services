@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 *   Add code coverage
 *   Migrate from springfox to springdoc
 *   Added swagger annotations
+*   Implement HTML media type for NLDI resources
   
 ## [1.2.0](https://github.com/ACWI-SSWD/nldi-services/compare/nldi-services-1.1.0...nldi-services-1.2.0)
 ### Changed
