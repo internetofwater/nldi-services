@@ -3,4 +3,4 @@ ignore:
   - "**/Application.java"
 
   # OpenAPI model classes - no testable logic
-  - "gov/usgs/owi/nldi/swagger/model"
+  - "**/swagger/model/*.java"
