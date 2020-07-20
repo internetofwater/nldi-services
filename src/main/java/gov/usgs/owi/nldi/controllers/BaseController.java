@@ -1,13 +1,20 @@
 package gov.usgs.owi.nldi.controllers;
 
+import java.io.IOException;
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.constraints.Pattern;
 
 import org.apache.ibatis.session.ResultHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.MediaType;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.util.NumberUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
@@ -27,6 +34,8 @@ import gov.usgs.owi.nldi.transform.BasinTransformer;
 import gov.usgs.owi.nldi.transform.FeatureTransformer;
 import gov.usgs.owi.nldi.transform.FlowLineTransformer;
 import gov.usgs.owi.nldi.transform.ITransformer;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Validated
 public abstract class BaseController {
@@ -35,8 +44,8 @@ public abstract class BaseController {
 	public static final String HEADER_CONTENT_TYPE = "Content-Type";
 	public static final String MIME_TYPE_GEOJSON = "application/vnd.geo+json";
 	public static final String REGEX_NAVIGATION_MODE = "DD|DM|PP|UT|UM";
-
-	static final String DATA_SOURCE = "dataSource";
+    	public static final String OUTPUT_FORMAT = "json|html";
+	public static final String DATA_SOURCE = "dataSource";
 
 	protected final LookupDao lookupDao;
 	protected final StreamingDao streamingDao;
@@ -55,6 +64,7 @@ public abstract class BaseController {
 		configurationService = inConfigurationService;
 		logService = inLogService;
 	}
+
 
 	protected void streamFlowLines(HttpServletResponse response,
 			String comid, String navigationMode, String stopComid, String distance, boolean legacy) throws Exception {

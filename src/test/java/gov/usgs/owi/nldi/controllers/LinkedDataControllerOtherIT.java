@@ -1,6 +1,7 @@
 package gov.usgs.owi.nldi.controllers;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static uk.co.datumedge.hamcrest.json.SameJSONAs.sameJSONArrayAs;
 
 import org.json.JSONArray;

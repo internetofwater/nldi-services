@@ -62,15 +62,12 @@ public class LinkedDataController extends BaseController {
 
 	//swagger documentation for /linked-data endpoint
 	@Operation(summary = "getDataSources", description = "returns a list of data sources")
-	
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "OK",
 					content = { @Content(mediaType = "application/json",
 							schema = @Schema(implementation = DataSource.class)) }),
 			@ApiResponse(responseCode = "500", description = "Server error",
 					content = @Content) })
-
-
 	@GetMapping(value="linked-data", produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<Map<String, Object>> getDataSources(HttpServletRequest request, HttpServletResponse response) {
 		BigInteger logId = logService.logRequest(request);
@@ -98,14 +95,12 @@ public class LinkedDataController extends BaseController {
 
 	//swagger documentation for /linked-data/{featureSource} endpoint
 	@Operation(summary = "getFeatures", description = "returns a list of features for a given data source")
-	
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "OK",
 					content = { @Content(mediaType = "application/json",
 							schema = @Schema(implementation = Feature.class)) }),
 			@ApiResponse(responseCode = "500", description = "Server error",
 					content = @Content) })
-
 	@GetMapping(value="linked-data/{featureSource}", produces=MediaType.APPLICATION_JSON_VALUE)
 	public void getFeatures(HttpServletRequest request, HttpServletResponse response,
 							@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource) {
@@ -128,7 +123,6 @@ public class LinkedDataController extends BaseController {
 
 	//swagger documentation for /linked-data/{featureSource}/{featureID} endpoint
 	@Operation(summary = "getRegisteredFeature", description = "returns registered feature as WGS84 lat/lon GeoJSON if it exists")
-	
 	@GetMapping(value="linked-data/{featureSource}/{featureID}", produces=MediaType.APPLICATION_JSON_VALUE)
 	public void getRegisteredFeature(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
@@ -149,7 +143,6 @@ public class LinkedDataController extends BaseController {
 
 	//swagger documentation for /linked-data/{featureSource}/{featureID}/navigate endpoint
 	@Operation(summary = "getNavigationTypes", description = "returns valid navigation end points")
-	
 	@GetMapping(value="linked-data/{featureSource}/{featureID}/navigate", produces=MediaType.APPLICATION_JSON_VALUE)
 	public Map<String, Object> getNavigationTypes(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
@@ -186,8 +179,7 @@ public class LinkedDataController extends BaseController {
 
 	//swagger documentation for /linked-data/{featureSource}/{featureID}/{characteristicType} endpoint
 	@Operation(summary = "getCharacteristicData", description = "returns all characteristics of the given type for the specified feature")
-	
-	@GetMapping(value="linked-data/{featureSource}/{featureID}/{characteristicType}")
+	@GetMapping(value="linked-data/{featureSource}/{featureID}/{characteristicType}", produces=MediaType.APPLICATION_JSON_VALUE)
 	public void getCharacteristicData(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
 			@PathVariable(Parameters.FEATURE_ID) String featureID,
@@ -218,8 +210,7 @@ public class LinkedDataController extends BaseController {
 
 	//swagger documentation for /linked-data/{featureSource}/{featureID}/basin endpoint
 	@Operation(summary = "getBasin", description = "returns the aggregated basin for the specified feature in WGS84 lat/lon GeoJSON")
-	
-	@GetMapping(value="linked-data/{featureSource}/{featureID}/basin")
+	@GetMapping(value="linked-data/{featureSource}/{featureID}/basin", produces=MediaType.APPLICATION_JSON_VALUE)
 	public void getBasin(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
 			@PathVariable(Parameters.FEATURE_ID) String featureID) throws Exception {
@@ -243,7 +234,6 @@ public class LinkedDataController extends BaseController {
 
 	//swagger documentation for /linked-data/{featureSource}/{featureID}/navigate/{navigationMode} endpoint
 	@Operation(summary = "getFlowlines", description = "returns the flowlines for the specified navigation in WGS84 lat/lon GeoJSON")
-	
 	@GetMapping(value="linked-data/{featureSource}/{featureID}/navigate/{navigationMode}", produces=MediaType.APPLICATION_JSON_VALUE)
 	public void getFlowlines(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
@@ -301,6 +291,4 @@ public class LinkedDataController extends BaseController {
 			logService.logRequestComplete(logId, response.getStatus());
 		}
 	}
-
-
 }
