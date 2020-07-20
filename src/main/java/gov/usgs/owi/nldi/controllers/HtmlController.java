@@ -20,7 +20,7 @@ import java.math.BigInteger;
 public class HtmlController {
 
 	@Autowired
-	LogService logService;
+	private LogService logService;
 
 	@GetMapping(value="/linked-data/{featureSource}/**", produces= MediaType.TEXT_HTML_VALUE)
 	public String getLinkedDataHtml(HttpServletRequest request, HttpServletResponse response,
