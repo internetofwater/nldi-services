@@ -121,13 +121,13 @@ public class NetworkController extends BaseController {
 		//Only currently supported format is POINT(x y)
 		String tempCoords = coords;
 		tempCoords = tempCoords.replace("POINT(", "");
-        tempCoords = tempCoords.replace(")", "");
-        String[] coordsArray = tempCoords.split(" ");
-        Double longitude = Double.parseDouble(coordsArray[0]);
-        Double latitude = Double.parseDouble(coordsArray[1]);
-        Map<String, Object> map = new HashMap<>();
-        map.put(Parameters.LATITUDE, latitude);
-        map.put(Parameters.LONGITUDE, longitude);
-        return map;
+		tempCoords = tempCoords.replace(")", "");
+		String[] coordsArray = tempCoords.split(" ");
+		Double longitude = Double.parseDouble(coordsArray[0]);
+		Double latitude = Double.parseDouble(coordsArray[1]);
+		Map<String, Object> map = new HashMap<>();
+		map.put(Parameters.LATITUDE, latitude);
+		map.put(Parameters.LONGITUDE, longitude);
+		return map;
 	}
 }
