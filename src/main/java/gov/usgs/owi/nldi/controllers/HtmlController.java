@@ -44,22 +44,32 @@ public class HtmlController {
 		return processHtml(request, response);
 	}
 
-	private String getHtmlString(HttpServletRequest request) throws IOException {
-		StringBuffer url = request.getRequestURL();
-		String queryString = request.getQueryString();
+	private String rebuildQueryString(String oldQueryString) {
 		//remove it if user put it somewhere in the middle
+		String queryString = oldQueryString;
 		queryString = queryString.replace("&f=html", "");
 		//remove it if user put it at the beginning
 		queryString = queryString.replace("f=html", "");
+        if (queryString.startsWith("&")) {
+        	queryString = queryString.substring(1);
+		}
+        return queryString;
+	}
+
+	private String getHtmlString(HttpServletRequest request) throws IOException {
+		StringBuffer url = request.getRequestURL();
+		String queryString = rebuildQueryString(request.getQueryString());
 		url.append("?f=json");
 		if (!StringUtils.isEmpty(queryString)) {
-			if (!queryString.startsWith("&")) {
-				url.append("&");
-			}
+			url.append("&");
 			url.append(queryString);
 		}
+		String officialUrl = url.toString();
+		if (officialUrl.toLowerCase().contains("usgs.gov")) {
+			officialUrl = officialUrl.replace("http://", "https://");
+		}
 		String html = new String(FileCopyUtils.copyToByteArray(new ClassPathResource("/html/htmlresponse.html").getInputStream()));
-		return html.replace("URL_MARKER", url);
+		return html.replace("URL_MARKER", officialUrl);
 	}
 
 	private String processHtml(HttpServletRequest request, HttpServletResponse response) throws Exception {
