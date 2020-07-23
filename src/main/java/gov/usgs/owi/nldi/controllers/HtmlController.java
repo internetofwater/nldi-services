@@ -43,7 +43,7 @@ public class HtmlController {
 		
 		return processHtml(request, response);
 	}
-	
+
 	private String removeHtmlFormatFromQueryString(String oldQueryString) {
 		//remove it if user put it somewhere in the middle
 		String queryString = oldQueryString;
@@ -67,8 +67,8 @@ public class HtmlController {
 		String urlString = url.toString();
 		// labs-dev request.getRequestURL() reports incorrectly as http,
 		// so replace http with request.getScheme() to make sure we get https on official sites.
-		urlString.replace("https", "scheme");
-		urlString.replace("http", "scheme");
+		urlString = urlString.replace("https", "scheme");
+		urlString = urlString.replace("http", "scheme");
 		String returnValue = urlString.replace("scheme", request.getScheme());
 		return returnValue;
 	}
