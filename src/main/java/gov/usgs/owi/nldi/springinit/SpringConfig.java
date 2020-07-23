@@ -25,7 +25,7 @@ import java.util.Map;
 public class SpringConfig implements WebMvcConfigurer {
 
 	@Autowired
-	DataSource dataSource;
+	private DataSource dataSource;
 
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
