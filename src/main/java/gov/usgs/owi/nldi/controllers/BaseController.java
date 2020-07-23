@@ -35,8 +35,8 @@ public abstract class BaseController {
 	public static final String HEADER_CONTENT_TYPE = "Content-Type";
 	public static final String MIME_TYPE_GEOJSON = "application/vnd.geo+json";
 	public static final String REGEX_NAVIGATION_MODE = "DD|DM|PP|UT|UM";
-
-	static final String DATA_SOURCE = "dataSource";
+    	public static final String OUTPUT_FORMAT = "json|html";
+	public static final String DATA_SOURCE = "dataSource";
 
 	protected final LookupDao lookupDao;
 	protected final StreamingDao streamingDao;
@@ -55,6 +55,7 @@ public abstract class BaseController {
 		configurationService = inConfigurationService;
 		logService = inLogService;
 	}
+
 
 	protected void streamFlowLines(HttpServletResponse response,
 			String comid, String navigationMode, String stopComid, String distance, boolean legacy) throws Exception {

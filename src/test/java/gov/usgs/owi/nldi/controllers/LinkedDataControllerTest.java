@@ -163,6 +163,7 @@ public class LinkedDataControllerTest {
 		assertEquals(HttpStatus.NOT_FOUND.value(), response.getStatus());
 	}
 
+
 	@Test
 	public void getBasinTest() throws Exception {
 		when(lookupDao.getComid(anyString(), anyMap())).thenReturn(goodFeature());

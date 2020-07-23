@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,8 +35,7 @@ public class LookupController extends BaseController {
 
 	//swagger documentation for /lookups/{characteristicType}/characteristics endpoint
 	@Operation(summary = "getCharacteristics", description = "Returns available characteristics metadata")
-
-	@GetMapping(value="lookups/{characteristicType}/characteristics")
+	@GetMapping(value="lookups/{characteristicType}/characteristics",produces=MediaType.APPLICATION_JSON_VALUE)
 	public void getCharacteristics(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable(Parameters.CHARACTERISTIC_TYPE) String characteristicType) throws Exception {
 		BigInteger logId = logService.logRequest(request);

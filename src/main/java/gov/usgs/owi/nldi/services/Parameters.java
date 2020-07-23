@@ -32,6 +32,7 @@ public class Parameters {
 	// Validates that the "coords" parameter is in the form POINT(-89.35 43.0864))
 	public static final String POINT_VALIDATION_MESSAGE = "coords must be specified as a point with longitude and latitude, i.e. POINT(-89.35 43.0864)";
 	public static final String POINT_VALIDATION_REGEX = "POINT\\([0-9.-]+,[0-9.-]+\\)";
+	public static final String FORMAT = "f";
 	public static final String CHARACTERISTIC_TYPE = "characteristicType";
 	public static final String CHARACTERISTIC_ID = "characteristicId";
 	public static final String DISTANCE_VALIDATION_MESSAGE = "distance must be between 1 and 9999 kilometers";

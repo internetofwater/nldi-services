@@ -14,6 +14,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.Pattern;
 
+import gov.usgs.owi.nldi.NavigationMode;
+import gov.usgs.owi.nldi.dao.NavigationDao;
+import gov.usgs.owi.nldi.transform.CharacteristicDataTransformer;
+import gov.usgs.owi.nldi.transform.FeatureCollectionTransformer;
+import gov.usgs.owi.nldi.transform.FeatureTransformer;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -30,10 +35,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import gov.usgs.owi.nldi.NavigationMode;
 import gov.usgs.owi.nldi.dao.BaseDao;
 import gov.usgs.owi.nldi.dao.LookupDao;
-import gov.usgs.owi.nldi.dao.NavigationDao;
 import gov.usgs.owi.nldi.dao.StreamingDao;
 import gov.usgs.owi.nldi.services.ConfigurationService;
 import gov.usgs.owi.nldi.services.LogService;
@@ -41,9 +44,6 @@ import gov.usgs.owi.nldi.services.Navigation;
 import gov.usgs.owi.nldi.services.Parameters;
 import gov.usgs.owi.nldi.swagger.model.DataSource;
 import gov.usgs.owi.nldi.swagger.model.Feature;
-import gov.usgs.owi.nldi.transform.CharacteristicDataTransformer;
-import gov.usgs.owi.nldi.transform.FeatureTransformer;
-import gov.usgs.owi.nldi.transform.FeatureCollectionTransformer;
 
 @RestController
 public class LinkedDataController extends BaseController {
@@ -179,7 +179,7 @@ public class LinkedDataController extends BaseController {
 
 	//swagger documentation for /linked-data/{featureSource}/{featureID}/{characteristicType} endpoint
 	@Operation(summary = "getCharacteristicData", description = "returns all characteristics of the given type for the specified feature")
-	@GetMapping(value="linked-data/{featureSource}/{featureID}/{characteristicType}")
+	@GetMapping(value="linked-data/{featureSource}/{featureID}/{characteristicType}", produces=MediaType.APPLICATION_JSON_VALUE)
 	public void getCharacteristicData(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
 			@PathVariable(Parameters.FEATURE_ID) String featureID,
@@ -210,7 +210,7 @@ public class LinkedDataController extends BaseController {
 
 	//swagger documentation for /linked-data/{featureSource}/{featureID}/basin endpoint
 	@Operation(summary = "getBasin", description = "returns the aggregated basin for the specified feature in WGS84 lat/lon GeoJSON")
-	@GetMapping(value="linked-data/{featureSource}/{featureID}/basin")
+	@GetMapping(value="linked-data/{featureSource}/{featureID}/basin", produces=MediaType.APPLICATION_JSON_VALUE)
 	public void getBasin(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
 			@PathVariable(Parameters.FEATURE_ID) String featureID) throws Exception {
@@ -290,5 +290,4 @@ public class LinkedDataController extends BaseController {
 			logService.logRequestComplete(logId, response.getStatus());
 		}
 	}
-
 }
