@@ -21,7 +21,7 @@ public class Parameters {
 	public static final String DISTANCE = "distance";
 	public static final String DISTANCE_DESCRIPTION = "distance in kilometers";
 	public static final String COORDS = "coords";
-	public static final String COORDS_DESCRIPTION = "coordinates in the form 'POINT(x,y)'";
+	public static final String COORDS_DESCRIPTION = "coordinates in the form 'POINT(longitude latitude)'";
 	public static final String MAX_DISTANCE = "9999";
 	public static final String NAVIGATION_MODE = "navigationMode";
 	public static final String STOP_COMID = "stopComid";
@@ -30,7 +30,7 @@ public class Parameters {
 	public static final String LONGITUDE = "lon";
 
 	// Validates that the "coords" parameter is in the form POINT(-89.35 43.0864))
-	public static final String POINT_VALIDATION_MESSAGE = "coords must be specified as a point with longitude and latitude, i.e. POINT(-89.35%2043.0864)";
+	public static final String POINT_VALIDATION_MESSAGE = "coords must be specified as a point with longitude and latitude, i.e. POINT(-89.35 43.0864)";
 	public static final String POINT_VALIDATION_REGEX = "POINT\\([0-9.-]+\\s[0-9.-]+\\)";
 	public static final String FORMAT = "f";
 	public static final String CHARACTERISTIC_TYPE = "characteristicType";
