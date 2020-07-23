@@ -1,5 +1,6 @@
 package gov.usgs.owi.nldi.controllers;
 
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
@@ -86,7 +87,7 @@ public class NetworkController extends BaseController {
 	}
 
 
-	//swagger documentation for /linked-data/{featureSource} endpoint
+	//swagger documentation for /linked-data/comid/position endpoint
 	@Operation(summary = "getFeatureByCoordinates", description = "returns the feature closest to a provided set of coordinates")
 	@ApiResponses(value = {
 		@ApiResponse(responseCode = "200", description = "OK", content = { @Content(mediaType = "application/json",
@@ -109,7 +110,6 @@ public class NetworkController extends BaseController {
 			parameterMap.put(Parameters.FEATURE_ID, comid);
 			addContentHeader(response);
 			streamResults(transformer, BaseDao.FEATURE, parameterMap);
-
 		} catch (Exception e) {
 			GlobalDefaultExceptionHandler.handleError(e, response);
 		} finally {
@@ -117,11 +117,12 @@ public class NetworkController extends BaseController {
 		}
 	}
 
-	private Map<String, Object> extractLatitudeAndLongitude(String coords) {
-		//Only currently supported format is POINT(x,y)
-		coords = coords.replace("POINT(", "");
-        coords = coords.replace(")", "");
-        String[] coordsArray = coords.split(",");
+	private Map<String, Object> extractLatitudeAndLongitude(String coords) throws UnsupportedEncodingException {
+		//Only currently supported format is POINT(x y)
+		String tempCoords = coords;
+		tempCoords = tempCoords.replace("POINT(", "");
+        tempCoords = tempCoords.replace(")", "");
+        String[] coordsArray = tempCoords.split(" ");
         Double longitude = Double.parseDouble(coordsArray[0]);
         Double latitude = Double.parseDouble(coordsArray[1]);
         Map<String, Object> map = new HashMap<>();

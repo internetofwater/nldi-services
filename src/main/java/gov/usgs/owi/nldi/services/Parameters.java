@@ -30,8 +30,8 @@ public class Parameters {
 	public static final String LONGITUDE = "lon";
 
 	// Validates that the "coords" parameter is in the form POINT(-89.35 43.0864))
-	public static final String POINT_VALIDATION_MESSAGE = "coords must be specified as a point with longitude and latitude, i.e. POINT(-89.35 43.0864)";
-	public static final String POINT_VALIDATION_REGEX = "POINT\\([0-9.-]+,[0-9.-]+\\)";
+	public static final String POINT_VALIDATION_MESSAGE = "coords must be specified as a point with longitude and latitude, i.e. POINT(-89.35%2043.0864)";
+	public static final String POINT_VALIDATION_REGEX = "POINT\\([0-9.-]+\\s[0-9.-]+\\)";
 	public static final String FORMAT = "f";
 	public static final String CHARACTERISTIC_TYPE = "characteristicType";
 	public static final String CHARACTERISTIC_ID = "characteristicId";

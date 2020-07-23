@@ -13,6 +13,9 @@ import gov.usgs.owi.nldi.dao.LookupDao;
 import gov.usgs.owi.nldi.services.TestConfigurationService;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class FeatureTransformerTest {
@@ -31,6 +34,18 @@ public class FeatureTransformerTest {
 	@AfterEach
 	public void afterTest() throws Exception {
 		transformer.close();
+	}
+
+
+	@Test
+	public void constructorTest() {
+		try {
+			FeatureTransformer ft = new FeatureTransformer(null, configurationService);
+		} catch (RuntimeException re) {
+			assertTrue(true, "threw RuntimeException as expected");
+		} catch (Throwable t) {
+			assertFalse(true, "threw unexpected exception or error");
+		}
 	}
 
 	@Test

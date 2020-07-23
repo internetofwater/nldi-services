@@ -9,13 +9,11 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 
 import gov.usgs.owi.nldi.BaseIT;
-import gov.usgs.owi.nldi.transform.FeatureTransformer;
 
 @EnableWebMvc
 @SpringBootTest(webEnvironment=WebEnvironment.RANDOM_PORT)
@@ -42,8 +40,8 @@ public class NetworkControllerPositionIT extends BaseIT {
 	//Latitude/Longitude Testing
 	@Test
 	public void getCoordinatesTest() throws Exception {
-		String actualbody = assertEntity(restTemplate,
-			"/linked-data/comid/position?coords=POINT(-89.35,43.0864)",
+		assertEntity(restTemplate,
+			"/linked-data/comid/position?coords=POINT(-89.35 43.0864)",
 			HttpStatus.OK.value(),
 			null,
 			null,
@@ -51,14 +49,12 @@ public class NetworkControllerPositionIT extends BaseIT {
 			getCompareFile(RESULT_FOLDER, "comidLatLon.json"),
 			true,
 			true);
-
-
 	}
 
 	@Test
 	public void getCoordinatesTestMalformedNumber() throws Exception {
-		String actualbody = assertEntity(restTemplate,
-			"/linked-data/comid/position?coords=POINT(-89.35,NotANumber)",
+		assertEntity(restTemplate,
+			"/linked-data/comid/position?coords=POINT(-89.35 NotANumber)",
 			HttpStatus.BAD_REQUEST.value(),
 			null,
 			null,
@@ -69,9 +65,9 @@ public class NetworkControllerPositionIT extends BaseIT {
 	}
 
 	@Test
-	public void getCoordinatesTestMalformedText() throws Exception {
-		String actualbody = assertEntity(restTemplate,
-			"/linked-data/comid/position?coords=POINTBAD(-89.35,43.0864)",
+	public void getCoordinatesTestMalformedParam() throws Exception {
+		assertEntity(restTemplate,
+			"/linked-data/comid/position?coords=POINTBAD(-89.35 43.0864)",
 			HttpStatus.BAD_REQUEST.value(),
 			null,
 			null,
@@ -80,11 +76,10 @@ public class NetworkControllerPositionIT extends BaseIT {
 			false,
 			false);
 	}
-
 
 	@Test
 	public void getCoordinatesTestNoCoordinates() throws Exception {
-		String actualbody = assertEntity(restTemplate,
+		assertEntity(restTemplate,
 			"/linked-data/comid/position",
 			HttpStatus.BAD_REQUEST.value(),
 			null,

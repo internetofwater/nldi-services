@@ -1,5 +1,6 @@
 package gov.usgs.owi.nldi.controllers;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -47,6 +48,45 @@ public class HtmlControllerIT extends BaseIT {
 
 		assertTrue(actualbody.contains("?f=json"));
 		assertTrue(actualbody.contains("/linked-data/nwissite"));
+		assertTrue(actualbody.contains("<html>"));
+		assertTrue(actualbody.contains("</html"));
+		assertTrue(actualbody.contains("<a "));
+		assertTrue(actualbody.contains("href="));
+		assertTrue(actualbody.contains("a>"));
+	}
+
+	@Test
+	public void getLinkedDataWithQueryStringTest() throws Exception {
+		String actualbody = assertEntity(restTemplate,
+			"/linked-data/comid/position?coords=POINT(-89.35 48.064)&f=html",
+			HttpStatus.OK.value(),
+			null,
+			null,
+			null,
+			null,
+			false,
+			false);
+		assertTrue(actualbody.contains("/linked-data/comid/position?f=json&coords=POINT(-89.35%2048.064)"));
+		assertTrue(actualbody.contains("<html>"));
+		assertTrue(actualbody.contains("</html"));
+		assertTrue(actualbody.contains("<a "));
+		assertTrue(actualbody.contains("href="));
+		assertTrue(actualbody.contains("a>"));
+	}
+
+	@Test
+	public void getLinkedDataWithAlternateQueryStringTest() throws Exception {
+		String actualbody = assertEntity(restTemplate,
+			"/linked-data/comid/position?f=html&coords=POINT(-89.35 48.064)",
+			HttpStatus.OK.value(),
+			null,
+			null,
+			null,
+			null,
+			false,
+			false);
+		assertTrue(actualbody.contains("/linked-data/comid/position?f=json&coords=POINT(-89.35%2048.064)"));
+		assertFalse(actualbody.contains("f=html"));
 		assertTrue(actualbody.contains("<html>"));
 		assertTrue(actualbody.contains("</html"));
 		assertTrue(actualbody.contains("<a "));

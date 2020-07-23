@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,7 +46,18 @@ public class HtmlController {
 
 	private String getHtmlString(HttpServletRequest request) throws IOException {
 		StringBuffer url = request.getRequestURL();
+		String queryString = request.getQueryString();
+		//remove it if user put it somewhere in the middle
+		queryString = queryString.replace("&f=html", "");
+		//remove it if user put it at the beginning
+		queryString = queryString.replace("f=html", "");
 		url.append("?f=json");
+		if (!StringUtils.isEmpty(queryString)) {
+			if (!queryString.startsWith("&")) {
+				url.append("&");
+			}
+			url.append(queryString);
+		}
 		String html = new String(FileCopyUtils.copyToByteArray(new ClassPathResource("/html/htmlresponse.html").getInputStream()));
 		return html.replace("URL_MARKER", url);
 	}
