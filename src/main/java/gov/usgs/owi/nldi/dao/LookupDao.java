@@ -18,6 +18,7 @@ public class LookupDao extends BaseDao {
 	public static final String FEATURE_SOURCE = "featureSource";
 	public static final String SOURCE = "source";
 	public static final String SOURCE_NAME = "sourceName";
+	public static final String COMID_LAT_LON = "comidLatLon";
 	
 	private static final String NS = "lookup.";
 
@@ -28,6 +29,10 @@ public class LookupDao extends BaseDao {
 
 	public Map<String, Object> getComid(String objectType, Map<String, Object> parameterMap) {
 		return getSqlSession().selectOne(NS + objectType, parameterMap);
+	}
+
+	public Integer getComidByLatitudeAndLongitude(Map<String, Object> parameterMap) {
+		return getSqlSession().selectOne(NS + COMID_LAT_LON, parameterMap);
 	}
 
 	public List<Map<String, Object>> getList(String objectType, Map<String, Object> parameterMap) {
