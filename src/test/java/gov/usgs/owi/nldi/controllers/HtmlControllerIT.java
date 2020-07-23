@@ -95,6 +95,26 @@ public class HtmlControllerIT extends BaseIT {
 	}
 
 	@Test
+	public void getLinkedDataDataSourcesTest() throws Exception {
+		String actualbody = assertEntity(restTemplate,
+			"/linked-data?f=html",
+			HttpStatus.OK.value(),
+			null,
+			null,
+			null,
+			null,
+			false,
+			false);
+		assertTrue(actualbody.contains("/linked-data?f=json"));
+		assertFalse(actualbody.contains("f=html"));
+		assertTrue(actualbody.contains("<html>"));
+		assertTrue(actualbody.contains("</html"));
+		assertTrue(actualbody.contains("<a "));
+		assertTrue(actualbody.contains("href="));
+		assertTrue(actualbody.contains("a>"));
+	}
+
+	@Test
 	public void getNetworkHtmlTest() throws Exception {
 		String actualbody = assertEntity(restTemplate,
 				"/linked-data/comid/13302592/tot?f=html",
