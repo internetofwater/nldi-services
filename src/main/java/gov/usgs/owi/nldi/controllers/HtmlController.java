@@ -43,8 +43,8 @@ public class HtmlController {
 		
 		return processHtml(request, response);
 	}
-
-	private String rebuildQueryString(String oldQueryString) {
+	
+	private String removeHtmlFormatFromQueryString(String oldQueryString) {
 		//remove it if user put it somewhere in the middle
 		String queryString = oldQueryString;
 		queryString = queryString.replace("&f=html", "");
@@ -56,26 +56,28 @@ public class HtmlController {
         return queryString;
 	}
 
-	private String getHtmlString(HttpServletRequest request) throws IOException {
+	private String getJsonRedirectLink(HttpServletRequest request) {
 		StringBuffer url = request.getRequestURL();
-		String queryString = rebuildQueryString(request.getQueryString());
+		String queryString = removeHtmlFormatFromQueryString(request.getQueryString());
 		url.append("?f=json");
 		if (!StringUtils.isEmpty(queryString)) {
 			url.append("&");
 			url.append(queryString);
 		}
-		String officialUrl = url.toString();
-		if (officialUrl.toLowerCase().contains("usgs.gov")) {
-			officialUrl = officialUrl.replace("http://", "https://");
-		}
-		String html = new String(FileCopyUtils.copyToByteArray(new ClassPathResource("/html/htmlresponse.html").getInputStream()));
-		return html.replace("URL_MARKER", officialUrl);
+		String urlString = url.toString();
+		// labs-dev request.getRequestURL() reports incorrectly as http,
+		// so replace http with request.getScheme() to make sure we get https on official sites.
+		urlString.replace("https", "scheme");
+		urlString.replace("http", "scheme");
+		String returnValue = urlString.replace("scheme", request.getScheme());
+		return returnValue;
 	}
 
 	private String processHtml(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		BigInteger logId = logService.logRequest(request);
 		try {
-			return getHtmlString(request);
+			String html = new String(FileCopyUtils.copyToByteArray(new ClassPathResource("/html/htmlresponse.html").getInputStream()));
+			return html.replace("URL_MARKER", getJsonRedirectLink(request));
 		} finally {
 			logService.logRequestComplete(logId, response.getStatus());
 		}

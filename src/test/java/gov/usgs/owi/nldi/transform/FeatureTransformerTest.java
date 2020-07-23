@@ -40,11 +40,12 @@ public class FeatureTransformerTest {
 	@Test
 	public void constructorTest() {
 		try {
-			FeatureTransformer ft = new FeatureTransformer(null, configurationService);
+			new FeatureTransformer(null, configurationService);
+			fail("should have thrown runtime exception");
 		} catch (RuntimeException re) {
-			assertTrue(true, "threw RuntimeException as expected");
+			//ok
 		} catch (Throwable t) {
-			assertFalse(true, "threw unexpected exception or error");
+			fail("threw unexpected exception or error");
 		}
 	}
 

@@ -50,13 +50,13 @@ public class BaseControllerTest {
 	private LogService logService;
 	private HttpServletResponse response;
 
+	private TestBaseController controller;
+
 	private class TestBaseController extends BaseController {
 		public TestBaseController(LookupDao inLookupDao, StreamingDao inStreamingDao, Navigation inNavigation, Parameters inParameters, ConfigurationService inConfigurationService, LogService inLogService) {
 			super(inLookupDao, inStreamingDao, inNavigation, inParameters, inConfigurationService, inLogService);
 		}
 	}
-
-	private TestBaseController controller;
 
 	@BeforeEach
 	public void setUp() {
