@@ -1,5 +1,6 @@
 package gov.usgs.owi.nldi.controllers;
 
+import gov.usgs.owi.nldi.services.ConfigurationService;
 import gov.usgs.owi.nldi.services.LogService;
 import gov.usgs.owi.nldi.services.Parameters;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class HtmlController {
 
 	@Autowired
 	private LogService logService;
+
+	@Autowired
+	private ConfigurationService configurationService;
 
 	@GetMapping(value="/linked-data/{featureSource}/**", produces= MediaType.TEXT_HTML_VALUE)
 	public String getLinkedDataHtml(HttpServletRequest request, HttpServletResponse response,
@@ -64,20 +68,39 @@ public class HtmlController {
 	}
 
 	private String getJsonRedirectLink(HttpServletRequest request) {
-		StringBuffer url = request.getRequestURL();
-		String queryString = removeHtmlFormatFromQueryString(request.getQueryString());
-		url.append("?f=json");
-		if (!StringUtils.isEmpty(queryString)) {
-			url.append("&");
-			url.append(queryString);
+		// Get the base URL
+		StringBuffer redirectUrl = new StringBuffer(configurationService.getRootUrl());
+
+		String requestUrl = request.getRequestURL().toString();
+
+		//append all the path variables
+		if (requestUrl.contains("linked-data")) {
+			String[] tempArr = requestUrl.split("linked-data");
+			// ../linked-data is also a legit URL so check that something comes after
+			redirectUrl.append("/");
+			redirectUrl.append("linked-data");
+			if (tempArr.length > 1) {
+				redirectUrl.append(tempArr[1]);
+			}
+		} else if (requestUrl.contains("lookups")) {
+			String[] tempArr = requestUrl.split("lookups");
+			// ../linked-data is also a legit URL so check that something comes after
+			redirectUrl.append("/");
+			redirectUrl.append("lookups");
+			if (tempArr.length > 1) {
+				redirectUrl.append(tempArr[1]);
+			}
 		}
-		String urlString = url.toString();
-		// labs-dev request.getRequestURL() reports incorrectly as http,
-		// so replace http with request.getScheme() to make sure we get https on official sites.
-		urlString = urlString.replace("https", "scheme");
-		urlString = urlString.replace("http", "scheme");
-		String returnValue = urlString.replace("scheme", request.getScheme());
-		return returnValue;
+
+		String queryString = removeHtmlFormatFromQueryString(request.getQueryString());
+		redirectUrl.append("?f=json");
+
+		if (!StringUtils.isEmpty(queryString)) {
+			redirectUrl.append("&");
+			redirectUrl.append(queryString);
+		}
+
+		return redirectUrl.toString();
 	}
 
 	private String processHtml(HttpServletRequest request, HttpServletResponse response) throws Exception {
