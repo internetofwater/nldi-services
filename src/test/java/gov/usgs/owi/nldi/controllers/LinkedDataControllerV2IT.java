@@ -61,7 +61,7 @@ public class LinkedDataControllerV2IT extends BaseIT {
 	@Test
 	@DatabaseSetup("classpath:/testData/featureWqp.xml")
 	public void getNavigationOptionsTestBadRequest() throws Exception {
-		String actualbody = assertEntity(restTemplate,
+		assertEntity(restTemplate,
 			"/linked-data/v2/wqp/USGS-05427880/navigate/XX",
 			HttpStatus.BAD_REQUEST.value(),
 			null,
