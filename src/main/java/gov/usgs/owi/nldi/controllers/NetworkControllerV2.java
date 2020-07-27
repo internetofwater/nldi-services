@@ -1,11 +1,15 @@
 package gov.usgs.owi.nldi.controllers;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.Pattern;
 
+import gov.usgs.owi.nldi.dao.BaseDao;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import org.hibernate.validator.constraints.Range;
@@ -25,11 +29,11 @@ import gov.usgs.owi.nldi.services.Navigation;
 import gov.usgs.owi.nldi.services.Parameters;
 
 @RestController
-@RequestMapping(value="linked-data/comid/{comid}/navigate/{navigationMode}")
-public class NetworkController extends BaseController {
+@RequestMapping(value="linked-data/v2/comid/{comid}/navigate/{navigationMode}")
+public class NetworkControllerV2 extends BaseController {
 
 	@Autowired
-	public NetworkController(LookupDao inLookupDao, StreamingDao inStreamingDao,
+	public NetworkControllerV2(LookupDao inLookupDao, StreamingDao inStreamingDao,
 			Navigation inNavigation, Parameters inParameters, ConfigurationService configurationService,
 			LogService inLogService) {
 		super(inLookupDao, inStreamingDao, inNavigation, inParameters, configurationService, inLogService);
@@ -37,8 +41,7 @@ public class NetworkController extends BaseController {
 
 	//swagger documentation for /linked-data/{featureSource}/{featureID}/navigate/{navigationMode} endpoint
 	@Operation(summary = "getFlowlines", description = "returns the flowlines for the specified navigation in WGS84 lat/lon GeoJSON")
-	@GetMapping(produces=MediaType.APPLICATION_JSON_VALUE)
-	@Deprecated
+	@GetMapping(value="/flowlines", produces=MediaType.APPLICATION_JSON_VALUE)
 	public void getFlowlines(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable(Parameters.COMID) @Range(min=1, max=Integer.MAX_VALUE) String comid,
 			@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode,

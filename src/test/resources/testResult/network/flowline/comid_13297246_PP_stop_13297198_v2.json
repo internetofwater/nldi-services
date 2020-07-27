@@ -1,0 +1,6 @@
+{
+	"status": 400,
+	"error": "Bad Request",
+	"message": "{\"errorCode\":310, \"errorMessage\":\"Start ComID must have a hydroseq greater than the hydroseq for stop ComID.\"}",
+	"path": "/nldi/linked-data/v2/comid/13297246/navigate/PP/flowlines"
+}
