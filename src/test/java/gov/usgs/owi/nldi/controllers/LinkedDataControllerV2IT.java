@@ -1,7 +1,6 @@
 package gov.usgs.owi.nldi.controllers;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static uk.co.datumedge.hamcrest.json.SameJSONAs.sameJSONArrayAs;
 
 import org.json.JSONArray;
@@ -19,7 +18,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 
 import gov.usgs.owi.nldi.BaseIT;
-import gov.usgs.owi.nldi.transform.BasinTransformer;
 
 @EnableWebMvc
 @SpringBootTest(webEnvironment=WebEnvironment.RANDOM_PORT)
