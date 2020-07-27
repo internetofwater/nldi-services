@@ -3,6 +3,7 @@ package gov.usgs.owi.nldi.controllers;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static uk.co.datumedge.hamcrest.json.SameJSONAs.sameJSONArrayAs;
 
+import gov.usgs.owi.nldi.transform.FlowLineTransformer;
 import org.json.JSONArray;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,6 +32,7 @@ public class LinkedDataControllerV2IT extends BaseIT {
 	private TestRestTemplate restTemplate;
 
 	private static final String RESULT_FOLDER  = "feature/flowline/";
+	private static final String RESULT_FOLDER_WQP  = "feature/flowline/wqp/";
 
 	@BeforeEach
 	public void setUp() {
@@ -54,5 +56,37 @@ public class LinkedDataControllerV2IT extends BaseIT {
 		assertThat(new JSONArray(actualbody),
 			sameJSONArrayAs(new JSONArray(getCompareFile(RESULT_FOLDER, "navigate_V2.json"))).allowingAnyArrayOrdering());
 
+	}
+
+	@Test
+	@DatabaseSetup("classpath:/testData/featureWqp.xml")
+	public void getNavigationOptionsTestBadRequest() throws Exception {
+		String actualbody = assertEntity(restTemplate,
+			"/linked-data/v2/wqp/USGS-05427880/navigate/XX",
+			HttpStatus.BAD_REQUEST.value(),
+			null,
+			null,
+			null,
+			null,
+			false,
+			false);
+
+	}
+
+
+	//Flowlines
+
+	@Test
+	@DatabaseSetup("classpath:/testData/featureWqp.xml")
+	public void getWqpUMTest() throws Exception {
+		assertEntity(restTemplate,
+			"/linked-data/v2/wqp/USGS-05427880/navigate/UM/flowlines",
+			HttpStatus.OK.value(),
+			FlowLineTransformer.FLOW_LINES_COUNT_HEADER,
+			"10",
+			BaseController.MIME_TYPE_GEOJSON,
+			getCompareFile(RESULT_FOLDER_WQP, "wqp_USGS-05427880_UM.json"),
+			true,
+			false);
 	}
 }

@@ -9,10 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.Pattern;
 
+import gov.usgs.owi.nldi.dao.BaseDao;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,6 +33,9 @@ public class LinkedDataControllerV2 extends BaseController {
 
 	@Autowired
 	private LinkedDataController controllerV1;
+
+	private static final String LINKED_DATA_V1 = "linked-data/";
+	private static final String LINKED_DATA_V2 = "linked-data/v2/";
 
 	@Autowired
 	public LinkedDataControllerV2(LookupDao inLookupDao, StreamingDao inStreamingDao,
@@ -60,15 +65,15 @@ public class LinkedDataControllerV2 extends BaseController {
 			List<Map<String, Object>> newDataSources = new ArrayList<>();
 			String newNavigationUrl = createNewNavigationUrl(request);
 			for (Map<String, Object> dataSource: dataSources) {
-				if ("comid".equals(dataSource.get("source"))) {
-					dataSource.put("source", "Flowlines");
-					dataSource.put("sourceName", "NHDPlus flowlines");
-					String flowlinesV2Url = newNavigationUrl.replace("linked-data/", "linked-data/v2/");
-					dataSource.put("features", flowlinesV2Url  + "flowlines");
+				if (Parameters.COMID.equals(dataSource.get(LookupDao.SOURCE))) {
+					dataSource.put(LookupDao.SOURCE, "Flowlines");
+					dataSource.put(LookupDao.SOURCE_NAME, "NHDPlus flowlines");
+					String flowlinesV2Url = newNavigationUrl.replace(LINKED_DATA_V1, LINKED_DATA_V2);
+					dataSource.put(BaseDao.FEATURES, flowlinesV2Url  + "flowlines");
 					newDataSources.add(dataSource);
 				} else {
-					dataSource.put("features", newNavigationUrl
-						+ dataSource.get("source").toString().toLowerCase());
+					dataSource.put(BaseDao.FEATURES, newNavigationUrl
+						+ dataSource.get(LookupDao.SOURCE).toString().toLowerCase());
 					newDataSources.add(dataSource);
 				}
 			}
@@ -99,7 +104,12 @@ public class LinkedDataControllerV2 extends BaseController {
 		BigInteger logId = logService.logRequest(request);
 
 		try {
-			controllerV1.getFlowlines(request, response, featureSource, featureID, navigationMode, stopComid, distance, legacy);
+			String comid = getComid(featureSource, featureID);
+			if (null == comid) {
+				response.setStatus(HttpStatus.NOT_FOUND.value());
+			} else {
+				streamFlowLines(response, comid, navigationMode, stopComid, distance, isLegacy(legacy, navigationMode));
+			}
 		} catch (Exception e) {
 			GlobalDefaultExceptionHandler.handleError(e, response);
 		} finally {
