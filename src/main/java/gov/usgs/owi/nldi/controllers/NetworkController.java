@@ -53,10 +53,8 @@ public class NetworkController extends BaseController {
 
 		BigInteger logId = logService.logRequest(request);
 		try {
-			if (stopComid != null) {
-				if (Integer.parseInt(stopComid) < Integer.parseInt(comid)) {
-					return new ResponseEntity<>(BaseController.COMID_MISMATCH_ERROR, HttpStatus.BAD_REQUEST);
-				}
+			if (stopComid != null && (Integer.parseInt(stopComid) < Integer.parseInt(comid))) {
+				return new ResponseEntity<>(BaseController.COMID_MISMATCH_ERROR, HttpStatus.BAD_REQUEST);
 			}
 			streamFlowLines(response, comid, navigationMode, stopComid, distance, isLegacy(legacy, navigationMode));
 
@@ -84,11 +82,10 @@ public class NetworkController extends BaseController {
 
 		BigInteger logId = logService.logRequest(request);
 		try {
-			if (stopComid != null) {
-				if (Integer.parseInt(stopComid) < Integer.parseInt(comid)) {
-					return new ResponseEntity<>(BaseController.COMID_MISMATCH_ERROR, HttpStatus.BAD_REQUEST);
-				}
+			if (stopComid != null && (Integer.parseInt(stopComid) < Integer.parseInt(comid))) {
+				return new ResponseEntity<>(BaseController.COMID_MISMATCH_ERROR, HttpStatus.BAD_REQUEST);
 			}
+
 			streamFeatures(response, comid, navigationMode, stopComid, distance, dataSource, isLegacy(legacy, navigationMode));
 		} catch (Exception e) {
 			GlobalDefaultExceptionHandler.handleError(e, response);
