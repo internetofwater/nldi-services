@@ -137,7 +137,7 @@ public class NetworkControllerV2FlowlineIT extends BaseIT {
 	@Test
 	public void getComidUmDistanceTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/v2/comid/13297246/navigate/UM/flowlines?distance=10",
+				"/linked-data/v2/comid/13297246/navigate/UM/flowlines?f=json&distance=10",
 				HttpStatus.OK.value(),
 				FlowLineTransformer.FLOW_LINES_COUNT_HEADER,
 				"6",

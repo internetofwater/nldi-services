@@ -1,8 +1,12 @@
 package gov.usgs.owi.nldi.controllers;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static uk.co.datumedge.hamcrest.json.SameJSONAs.sameJSONArrayAs;
 
+import gov.usgs.owi.nldi.transform.FlowLineTransformer;
+import org.json.JSONArray;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
@@ -107,6 +112,69 @@ public class HtmlControllerIT extends BaseIT {
 			false);
 		assertTrue(actualbody.contains("/linked-data?f=json"));
 		assertFalse(actualbody.contains("f=html"));
+		assertTrue(actualbody.contains("<html>"));
+		assertTrue(actualbody.contains("</html"));
+		assertTrue(actualbody.contains("<a "));
+		assertTrue(actualbody.contains("href="));
+		assertTrue(actualbody.contains("a>"));
+	}
+
+	@Test
+	@DatabaseSetup("classpath:/testData/featureWqp.xml")
+	public void getWqpUMTest() throws Exception {
+		String actualbody = assertEntity(restTemplate,
+			"/linked-data/v2/wqp/USGS-05427880/navigate/UM/flowlines?f=html",
+			HttpStatus.OK.value(),
+			null,
+			null,
+			null,
+			null,
+			true,
+			false);
+		assertFalse(actualbody.contains("f=html"));
+		assertTrue(actualbody.contains("/linked-data/v2/wqp/USGS-05427880/navigate/UM/flowlines?f=json"));
+		assertTrue(actualbody.contains("<html>"));
+		assertTrue(actualbody.contains("</html"));
+		assertTrue(actualbody.contains("<a "));
+		assertTrue(actualbody.contains("href="));
+		assertTrue(actualbody.contains("a>"));
+	}
+
+	@Test
+	public void getComidUmDistanceTest() throws Exception {
+		String actualbody = assertEntity(restTemplate,
+			"/linked-data/v2/comid/13297246/navigate/UM/flowlines?f=html&distance=10",
+			HttpStatus.OK.value(),
+			null,
+			null,
+			null,
+			null,
+			false,
+			false);
+
+		assertFalse(actualbody.contains("f=html"));
+		assertTrue(actualbody.contains("/linked-data/v2/comid/13297246/navigate/UM/flowlines?f=json&distance=10"));
+		assertTrue(actualbody.contains("<html>"));
+		assertTrue(actualbody.contains("</html"));
+		assertTrue(actualbody.contains("<a "));
+		assertTrue(actualbody.contains("href="));
+		assertTrue(actualbody.contains("a>"));
+	}
+
+	@Test
+	@DatabaseSetup("classpath:/testData/featureWqp.xml")
+	public void getNavigationOptionsTest() throws Exception {
+		String actualbody = assertEntity(restTemplate,
+			"/linked-data/v2/wqp/USGS-05427880/navigate/UT?f=html",
+			HttpStatus.OK.value(),
+			null,
+			null,
+			null,
+			null,
+			false,
+			false);
+		assertFalse(actualbody.contains("f=html"));
+		assertTrue(actualbody.contains("/linked-data/v2/wqp/USGS-05427880/navigate/UT?f=json"));
 		assertTrue(actualbody.contains("<html>"));
 		assertTrue(actualbody.contains("</html"));
 		assertTrue(actualbody.contains("<a "));

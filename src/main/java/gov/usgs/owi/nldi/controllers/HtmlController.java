@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.Pattern;
-import java.io.IOException;
 import java.math.BigInteger;
 
 @RestController
@@ -28,6 +27,16 @@ public class HtmlController {
 	@Autowired
 	private ConfigurationService configurationService;
 
+
+	@GetMapping(value="/linked-data/v2/**", produces= MediaType.TEXT_HTML_VALUE)
+	@Hidden
+	public String getLinkedDataV2Html(
+		HttpServletRequest request, HttpServletResponse response,
+		@RequestParam(name= Parameters.FORMAT, required=false) @Pattern(regexp=BaseController.OUTPUT_FORMAT) String format) throws Exception {
+		return processHtml(request, response);
+	}
+
+
 	@GetMapping(value="/linked-data/{featureSource}/**", produces= MediaType.TEXT_HTML_VALUE)
 	@Hidden
 	public String getLinkedDataHtml(HttpServletRequest request, HttpServletResponse response,
@@ -36,16 +45,10 @@ public class HtmlController {
 	}
 
 	@GetMapping(value="/linked-data", produces= MediaType.TEXT_HTML_VALUE)
+	@Hidden
 	public String getLinkedDataDataSourcesHtml(
 		HttpServletRequest request, HttpServletResponse response,
 		@RequestParam(name= Parameters.FORMAT, required=false) @Pattern(regexp=BaseController.OUTPUT_FORMAT) String format) throws Exception {
-		return processHtml(request, response);
-	}
-
-	@GetMapping(value="/linked-data/v2/{featureSource}/**", produces= MediaType.TEXT_HTML_VALUE)
-	@Hidden
-	public String getLinkedDataV2Html(HttpServletRequest request, HttpServletResponse response,
-									@RequestParam(name= Parameters.FORMAT, required=false) @Pattern(regexp=BaseController.OUTPUT_FORMAT) String format) throws Exception {
 		return processHtml(request, response);
 	}
 
