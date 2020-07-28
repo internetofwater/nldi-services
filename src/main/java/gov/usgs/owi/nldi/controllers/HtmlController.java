@@ -3,6 +3,7 @@ package gov.usgs.owi.nldi.controllers;
 import gov.usgs.owi.nldi.services.ConfigurationService;
 import gov.usgs.owi.nldi.services.LogService;
 import gov.usgs.owi.nldi.services.Parameters;
+import io.swagger.v3.oas.annotations.Hidden;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
@@ -28,6 +29,7 @@ public class HtmlController {
 	private ConfigurationService configurationService;
 
 	@GetMapping(value="/linked-data/{featureSource}/**", produces= MediaType.TEXT_HTML_VALUE)
+	@Hidden
 	public String getLinkedDataHtml(HttpServletRequest request, HttpServletResponse response,
 		@RequestParam(name= Parameters.FORMAT, required=false) @Pattern(regexp=BaseController.OUTPUT_FORMAT) String format) throws Exception {
 		return processHtml(request, response);
@@ -40,13 +42,22 @@ public class HtmlController {
 		return processHtml(request, response);
 	}
 
+	@GetMapping(value="/linked-data/v2/{featureSource}/**", produces= MediaType.TEXT_HTML_VALUE)
+	@Hidden
+	public String getLinkedDataV2Html(HttpServletRequest request, HttpServletResponse response,
+									@RequestParam(name= Parameters.FORMAT, required=false) @Pattern(regexp=BaseController.OUTPUT_FORMAT) String format) throws Exception {
+		return processHtml(request, response);
+	}
+
 	@GetMapping(value="/linked-data/comid/**", produces= MediaType.TEXT_HTML_VALUE)
+	@Hidden
 	public String getNetworkHtml(HttpServletRequest request, HttpServletResponse response,
 		@RequestParam(name=Parameters.FORMAT, required=false) @Pattern(regexp=BaseController.OUTPUT_FORMAT) String format) throws Exception {
 		return processHtml(request, response);
 	}
 
 	@GetMapping(value="/lookups/**", produces= MediaType.TEXT_HTML_VALUE)
+	@Hidden
 	public String getLookupsHtml(HttpServletRequest request, HttpServletResponse response,
 		@RequestParam(name=Parameters.FORMAT, required=false) @Pattern(regexp=BaseController.OUTPUT_FORMAT) String format) throws Exception {
 		return processHtml(request, response);

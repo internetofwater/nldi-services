@@ -228,4 +228,5 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 				true,
 				false);
 	}
+
 }

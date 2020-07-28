@@ -235,6 +235,7 @@ public class LinkedDataController extends BaseController {
 	//swagger documentation for /linked-data/{featureSource}/{featureID}/navigate/{navigationMode} endpoint
 	@Operation(summary = "getFlowlines", description = "returns the flowlines for the specified navigation in WGS84 lat/lon GeoJSON")
 	@GetMapping(value="linked-data/{featureSource}/{featureID}/navigate/{navigationMode}", produces=MediaType.APPLICATION_JSON_VALUE)
+	@Deprecated
 	public void getFlowlines(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
 			@PathVariable(Parameters.FEATURE_ID) String featureID,

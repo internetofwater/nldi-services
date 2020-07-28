@@ -46,6 +46,8 @@ public class NetworkController extends BaseController {
 	//swagger documentation for /linked-data/{featureSource}/{featureID}/navigate/{navigationMode} endpoint
 	@Operation(summary = "getFlowlines", description = "returns the flowlines for the specified navigation in WGS84 lat/lon GeoJSON")
 	@GetMapping(value="linked-data/comid/{comid}/navigate/{navigationMode}", produces= MediaType.APPLICATION_JSON_VALUE)
+
+	@Deprecated
 	public void getFlowlines(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable(Parameters.COMID) @Range(min=1, max=Integer.MAX_VALUE) String comid,
 			@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode,
