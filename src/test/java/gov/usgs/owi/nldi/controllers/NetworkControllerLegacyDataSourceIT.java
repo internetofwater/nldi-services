@@ -17,6 +17,8 @@ import com.github.springtestdbunit.annotation.DatabaseSetup;
 import gov.usgs.owi.nldi.BaseIT;
 import gov.usgs.owi.nldi.transform.FeatureTransformer;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 @EnableWebMvc
 @SpringBootTest(webEnvironment=WebEnvironment.RANDOM_PORT)
 @DatabaseSetup("classpath:/testData/crawlerSource.xml")
@@ -149,15 +151,16 @@ public class NetworkControllerLegacyDataSourceIT extends BaseIT {
 	//PP Testing
 	@Test
 	public void getComidPpStopComidInvalidTest() throws Exception {
-		assertEntity(restTemplate,
+		String actualbody = assertEntity(restTemplate,
 				"/linked-data/comid/13297246/navigate/PP/wqp?stopComid=13297198&legacy=true",
 				HttpStatus.BAD_REQUEST.value(),
 				null,
 				null,
-				MediaType.APPLICATION_JSON_VALUE,
-				getCompareFile(RESULT_FOLDER, "comid_13297246_PP_stop_13297198.json"),
+				null,
+				null,
 				true,
 				true);
+		assertEquals(BaseController.COMID_MISMATCH_ERROR, actualbody);
 	}
 
 	@Test

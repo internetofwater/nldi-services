@@ -10,7 +10,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,44 +41,62 @@ public class NetworkController extends BaseController {
 	@Operation(summary = "getFlowlines", description = "returns the flowlines for the specified navigation in WGS84 lat/lon GeoJSON")
 	@GetMapping(produces=MediaType.APPLICATION_JSON_VALUE)
 	@Deprecated
-	public void getFlowlines(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable(Parameters.COMID) @Range(min=1, max=Integer.MAX_VALUE) String comid,
-			@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode,
-			@RequestParam(value=Parameters.STOP_COMID, required=false) @Range(min=1, max=Integer.MAX_VALUE) String stopComid,
-			@Parameter(description=Parameters.DISTANCE_DESCRIPTION)
-				@RequestParam(value=Parameters.DISTANCE, required=false, defaultValue=Parameters.MAX_DISTANCE)
-			@Pattern(message=Parameters.DISTANCE_VALIDATION_MESSAGE, regexp=Parameters.DISTANCE_VALIDATION_REGEX) String distance,
-			@RequestParam(value=Parameters.LEGACY, required=false) String legacy) throws Exception {
+	public ResponseEntity<String> getFlowlines(
+		HttpServletRequest request, HttpServletResponse response,
+		@PathVariable(Parameters.COMID) @Range(min=1, max=Integer.MAX_VALUE) String comid,
+		@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode,
+		@RequestParam(value=Parameters.STOP_COMID, required=false) @Range(min=1, max=Integer.MAX_VALUE) String stopComid,
+		@Parameter(description=Parameters.DISTANCE_DESCRIPTION)
+		@RequestParam(value=Parameters.DISTANCE, required=false, defaultValue=Parameters.MAX_DISTANCE)
+		@Pattern(message=Parameters.DISTANCE_VALIDATION_MESSAGE, regexp=Parameters.DISTANCE_VALIDATION_REGEX) String distance,
+		@RequestParam(value=Parameters.LEGACY, required=false) String legacy) throws Exception {
+
 		BigInteger logId = logService.logRequest(request);
 		try {
+			if (stopComid != null) {
+				if (Integer.parseInt(stopComid) < Integer.parseInt(comid)) {
+					return new ResponseEntity<>(BaseController.COMID_MISMATCH_ERROR, HttpStatus.BAD_REQUEST);
+				}
+			}
 			streamFlowLines(response, comid, navigationMode, stopComid, distance, isLegacy(legacy, navigationMode));
+
 		} catch (Exception e) {
 			GlobalDefaultExceptionHandler.handleError(e, response);
 		} finally {
 			logService.logRequestComplete(logId, response.getStatus());
 		}
+		return null;
 	}
 
 	//swagger documentation for /linked-data/{featureSource}/{featureID}/navigate/{navigationMode}/{dataSource} endpoint
 	@Operation(summary = "getFeatures", description = "Returns all features found along the specified navigation as points in WGS84 lat/lon GeoJSON")
 	@GetMapping(value="{dataSource}", produces=MediaType.APPLICATION_JSON_VALUE)
-	public void getFeatures(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable(Parameters.COMID) @Range(min=1, max=Integer.MAX_VALUE) String comid,
-			@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode,
-			@PathVariable(value=DATA_SOURCE) String dataSource,
-			@RequestParam(value=Parameters.STOP_COMID, required=false) @Range(min=1, max=Integer.MAX_VALUE) String stopComid,
-			@Parameter(description=Parameters.DISTANCE_DESCRIPTION)
-				@RequestParam(value=Parameters.DISTANCE, required=false, defaultValue=Parameters.MAX_DISTANCE)
-			@Pattern(message=Parameters.DISTANCE_VALIDATION_MESSAGE, regexp=Parameters.DISTANCE_VALIDATION_REGEX) String distance,
-			@RequestParam(value=Parameters.LEGACY, required=false) String legacy) throws Exception {
+	public ResponseEntity<String> getFeatures(
+		HttpServletRequest request, HttpServletResponse response,
+		@PathVariable(Parameters.COMID) @Range(min=1, max=Integer.MAX_VALUE) String comid,
+		@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode,
+		@PathVariable(value=DATA_SOURCE) String dataSource,
+		@RequestParam(value=Parameters.STOP_COMID, required=false) @Range(min=1, max=Integer.MAX_VALUE) String stopComid,
+		@Parameter(description=Parameters.DISTANCE_DESCRIPTION)
+		@RequestParam(value=Parameters.DISTANCE, required=false, defaultValue=Parameters.MAX_DISTANCE)
+		@Pattern(message=Parameters.DISTANCE_VALIDATION_MESSAGE, regexp=Parameters.DISTANCE_VALIDATION_REGEX) String distance,
+		@RequestParam(value=Parameters.LEGACY, required=false) String legacy) throws Exception {
+
 		BigInteger logId = logService.logRequest(request);
 		try {
+			if (stopComid != null) {
+				if (Integer.parseInt(stopComid) < Integer.parseInt(comid)) {
+					return new ResponseEntity<>(BaseController.COMID_MISMATCH_ERROR, HttpStatus.BAD_REQUEST);
+				}
+			}
 			streamFeatures(response, comid, navigationMode, stopComid, distance, dataSource, isLegacy(legacy, navigationMode));
 		} catch (Exception e) {
 			GlobalDefaultExceptionHandler.handleError(e, response);
 		} finally {
 			logService.logRequestComplete(logId, response.getStatus());
 		}
+		return null;
 	}
+
 
 }
