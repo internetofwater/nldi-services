@@ -12,22 +12,17 @@ import gov.usgs.owi.nldi.services.TestConfigurationService;
 
 public class HtmlControllerTest {
 
-	private TestConfigurationService configurationService;
-	private HtmlController controller;
-	private MockHttpServletResponse response;
-	private MockHttpServletRequest request;
+
 
 	@BeforeEach
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
-		configurationService = new TestConfigurationService();
-		controller = new HtmlController();
-		response = new MockHttpServletResponse();
-		request = new MockHttpServletRequest();
+
 	}
 
 	@Test
 	public void ensureIsHttpsTest() throws Exception {
+		HtmlController controller = new HtmlController();
 		StringBuffer url = new StringBuffer("http://labs-dev.wma.chs.usgs.gov/api/nldi/linked-data/nwissite?f=json");
 		String link = controller.ensureIsHttps(url);
 		assertEquals("https://labs-dev.wma.chs.usgs.gov/api/nldi/linked-data/nwissite?f=json", link);
