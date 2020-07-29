@@ -52,11 +52,10 @@ public class NetworkControllerV2 extends BaseController {
 
 		BigInteger logId = logService.logRequest(request);
 		if (stopComid != null && (Integer.parseInt(stopComid) < Integer.parseInt(comid))) {
-			logService.logRequestComplete(logId, response.getStatus());
+			logService.logRequestComplete(logId, HttpStatus.BAD_REQUEST.value());
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, BaseController.COMID_MISMATCH_ERROR);
 		}
 		try {
-
 			streamFlowLines(response, comid, navigationMode, stopComid, distance, isLegacy(legacy, navigationMode));
 		} catch (Exception e) {
 			GlobalDefaultExceptionHandler.handleError(e, response);

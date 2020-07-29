@@ -25,11 +25,8 @@ public class LogService {
 		parameterMap.put(LogDao.ID, null);
 		if (null != request) {
 			parameterMap.put(LogDao.REFERER, request.getHeader(LogDao.REFERER));
-
 			parameterMap.put(LogDao.USER_AGENT, request.getHeader(LogDao.USER_AGENT));
-
 			parameterMap.put(LogDao.REQUEST_URI, request.getRequestURI());
-
 			parameterMap.put(LogDao.QUERY_STRING, request.getQueryString());
 		}
 

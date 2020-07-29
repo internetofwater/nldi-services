@@ -1,6 +1,0 @@
-{
-	"status": 400,
-	"error": "Bad Request",
-	"message": "{\"errorCode\":310, \"errorMessage\":\"The stopComid must be downstream of the start comid.\"}",
-	"path": "/nldi/linked-data/comid/13297246/navigate/PP/wqp"
-}

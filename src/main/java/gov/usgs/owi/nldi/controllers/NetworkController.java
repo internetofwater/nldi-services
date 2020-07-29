@@ -49,7 +49,6 @@ public class NetworkController extends BaseController {
 	//swagger documentation for /linked-data/{featureSource}/{featureID}/navigate/{navigationMode} endpoint
 	@Operation(summary = "getFlowlines", description = "returns the flowlines for the specified navigation in WGS84 lat/lon GeoJSON")
 	@GetMapping(value="linked-data/comid/{comid}/navigate/{navigationMode}", produces= MediaType.APPLICATION_JSON_VALUE)
-
 	@Deprecated
 	public void getFlowlines(
 		HttpServletRequest request, HttpServletResponse response,
@@ -63,7 +62,7 @@ public class NetworkController extends BaseController {
 
 		BigInteger logId = logService.logRequest(request);
 		if (stopComid != null && (Integer.parseInt(stopComid) < Integer.parseInt(comid))) {
-			logService.logRequestComplete(logId, response.getStatus());
+			logService.logRequestComplete(logId, HttpStatus.BAD_REQUEST.value());
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, BaseController.COMID_MISMATCH_ERROR);
 		}
 
@@ -90,15 +89,11 @@ public class NetworkController extends BaseController {
 			@RequestParam(value=Parameters.LEGACY, required=false) String legacy) throws Exception {
 		BigInteger logId = logService.logRequest(request);
 		if (stopComid != null && (Integer.parseInt(stopComid) < Integer.parseInt(comid))) {
-			logService.logRequestComplete(logId, response.getStatus());
+			logService.logRequestComplete(logId, HttpStatus.BAD_REQUEST.value());
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, BaseController.COMID_MISMATCH_ERROR);
 		}
 
 		try {
-			if (stopComid != null && (Integer.parseInt(stopComid) < Integer.parseInt(comid))) {
-				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, BaseController.COMID_MISMATCH_ERROR);
-			}
-
 			streamFeatures(response, comid, navigationMode, stopComid, distance, dataSource, isLegacy(legacy, navigationMode));
 		} catch (Exception e) {
 			GlobalDefaultExceptionHandler.handleError(e, response);
