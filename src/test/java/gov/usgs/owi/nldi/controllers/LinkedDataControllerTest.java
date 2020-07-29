@@ -249,6 +249,32 @@ public class LinkedDataControllerTest {
 				out.toString());
 	}
 
+	@Test
+	@SuppressWarnings("unchecked")
+	public void getNavigationFlowlinesTest() throws Exception {
+		when(lookupDao.getComid(anyString(), anyMap())).thenReturn(null, goodFeature());
+		controller.getNavigationFlowlines(request, response, "DoesntMatter", "DoesntMatter", null, null, null, null);
+		verify(logService).logRequest(any(HttpServletRequest.class));
+		verify(logService).logRequestComplete(any(BigInteger.class), any(int.class));
+		//Mock lookupDao 1st response of null means the comid is not found, thus a 404
+		assertEquals(HttpStatus.NOT_FOUND.value(), response.getStatus());
+
+		controller.getNavigationFlowlines(request, response, null, null, null, null, null, null);
+		verify(logService, times(2)).logRequest(any(HttpServletRequest.class));
+		verify(logService, times(2)).logRequestComplete(any(BigInteger.class), any(int.class));
+		//Mock lookupDao 2nd response doesn't actually exist, thus causes a 500 when we try to get flowlines
+		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR.value(), response.getStatus());
+	}
+
+	@Test
+	public void getNavigationOptionsTestBad() throws UnsupportedEncodingException {
+		controller.getNavigationOptions(request, response, null, "DoesntMatter", "UT");
+		verify(logService, times(2)).logRequest(any(HttpServletRequest.class));
+		verify(logService, times(2)).logRequestComplete(any(BigInteger.class), any(int.class));
+		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR.value(), response.getStatus());
+	}
+
+
 	public static List<Map<String, Object>> getTestList() {
 		List<Map<String, Object>> rtn = new ArrayList<>();
 		Map<String, Object> entry = new HashMap<>();

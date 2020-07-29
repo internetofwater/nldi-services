@@ -291,4 +291,87 @@ public class LinkedDataController extends BaseController {
 			logService.logRequestComplete(logId, response.getStatus());
 		}
 	}
+
+
+	//swagger documentation for /linked-data/{featureSource}/{featureID}/navigation/{navigationMode} endpoint
+	@Operation(summary = "getNavigateOptions", description = "returns the navigation options")
+	@GetMapping(value="linked-data/{featureSource}/{featureID}/navigation/{navigationMode}", produces=MediaType.APPLICATION_JSON_VALUE)
+	public List<Map<String, Object>> getNavigationOptions(
+		HttpServletRequest request, HttpServletResponse response,
+		@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
+		@PathVariable(Parameters.FEATURE_ID) String featureID,
+		@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode)  {
+
+		BigInteger logId = logService.logRequest(request);
+
+		try {
+			List<Map<String, Object>> dataSources = getDataSources(request, response);
+			List<Map<String, Object>> newDataSources = new ArrayList<>();
+			String newNavigationUrl = createNewNavigationUrl(request);
+			for (Map<String, Object> dataSource: dataSources) {
+				if (Parameters.COMID.equals(dataSource.get(LookupDao.SOURCE))) {
+					dataSource.put(LookupDao.SOURCE, "Flowlines");
+					dataSource.put(LookupDao.SOURCE_NAME, "NHDPlus flowlines");
+					dataSource.put(BaseDao.FEATURES, newNavigationUrl  + "flowlines");
+					newDataSources.add(dataSource);
+				} else {
+					dataSource.put(BaseDao.FEATURES, newNavigationUrl
+						+ dataSource.get(LookupDao.SOURCE).toString().toLowerCase());
+					newDataSources.add(dataSource);
+				}
+			}
+			return newDataSources;
+
+		} catch (Exception e) {
+			GlobalDefaultExceptionHandler.handleError(e, response);
+		} finally {
+			logService.logRequestComplete(logId, response.getStatus());
+		}
+		return null;
+	}
+
+	//swagger documentation for /linked-data/{featureSource}/{featureID}/navigate/{navigationMode} endpoint
+	@Operation(summary = "getFlowlines", description = "returns the flowlines for the specified navigation in WGS84 lat/lon GeoJSON")
+	@GetMapping(value="linked-data/{featureSource}/{featureID}/navigation/{navigationMode}/flowlines", produces=MediaType.APPLICATION_JSON_VALUE)
+	public void getNavigationFlowlines(
+		HttpServletRequest request, HttpServletResponse response,
+		@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
+		@PathVariable(Parameters.FEATURE_ID) String featureID,
+		@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode,
+		@RequestParam(value=Parameters.STOP_COMID, required=false) @Range(min=1, max=Integer.MAX_VALUE) String stopComid,
+		@Parameter(description=Parameters.DISTANCE_DESCRIPTION)
+		@RequestParam(value=Parameters.DISTANCE, required=false, defaultValue=Parameters.MAX_DISTANCE)
+		@Pattern(message=Parameters.DISTANCE_VALIDATION_MESSAGE, regexp=Parameters.DISTANCE_VALIDATION_REGEX) String distance,
+		@RequestParam(value=Parameters.LEGACY, required=false) String legacy) throws Exception {
+
+		BigInteger logId = logService.logRequest(request);
+
+		try {
+			String comid = getComid(featureSource, featureID);
+			if (null == comid) {
+				response.setStatus(HttpStatus.NOT_FOUND.value());
+			} else {
+				streamFlowLines(response, comid, navigationMode, stopComid, distance, isLegacy(legacy, navigationMode));
+			}
+		} catch (Exception e) {
+			GlobalDefaultExceptionHandler.handleError(e, response);
+		} finally {
+			logService.logRequestComplete(logId, response.getStatus());
+		}
+	}
+
+
+	// We need to create navigation urls for the various options (see test file navigate_V2.json)
+	// We do this by starting with the linked-data url from the configuration service
+	// then adding all the request-specific elements from the request we received
+	private String createNewNavigationUrl(HttpServletRequest request) {
+		String newUrl = configurationService.getLinkedDataUrl();
+		String requestUrl = request.getRequestURL().toString();
+		String[] arr = requestUrl.split("linked-data");
+		newUrl += arr[1];
+		newUrl += "/";
+		return newUrl;
+	}
+
+
 }

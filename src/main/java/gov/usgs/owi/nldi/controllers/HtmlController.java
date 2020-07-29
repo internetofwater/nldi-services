@@ -81,7 +81,7 @@ public class HtmlController {
         return queryString;
 	}
 
-	private String getJsonRedirectLink(HttpServletRequest request) {
+	public String getJsonRedirectLink(HttpServletRequest request) {
 		// Get the base URL
 		StringBuffer redirectUrl = new StringBuffer(configurationService.getRootUrl());
 
@@ -89,21 +89,9 @@ public class HtmlController {
 
 		//append all the path variables
 		if (requestUrl.contains("linked-data")) {
-			String[] tempArr = requestUrl.split("linked-data");
-			// ../linked-data is also a legit URL so check that something comes after
-			redirectUrl.append("/");
-			redirectUrl.append("linked-data");
-			if (tempArr.length > 1) {
-				redirectUrl.append(tempArr[1]);
-			}
+			redirectUrl = addQueryString(requestUrl, redirectUrl, "linked-data");
 		} else if (requestUrl.contains("lookups")) {
-			String[] tempArr = requestUrl.split("lookups");
-			// ../linked-data is also a legit URL so check that something comes after
-			redirectUrl.append("/");
-			redirectUrl.append("lookups");
-			if (tempArr.length > 1) {
-				redirectUrl.append(tempArr[1]);
-			}
+			redirectUrl = addQueryString(requestUrl, redirectUrl, "lookups");
 		}
 
 		String queryString = removeHtmlFormatFromQueryString(request.getQueryString());
@@ -114,7 +102,30 @@ public class HtmlController {
 			redirectUrl.append(queryString);
 		}
 
-		return redirectUrl.toString();
+		String redirectLink = ensureIsHttps(redirectUrl);
+		return redirectLink;
+	}
+
+	public StringBuffer addQueryString(String requestUrl, StringBuffer redirectUrl, String root) {
+		String[] tempArr = requestUrl.split(root);
+		redirectUrl.append("/");
+		redirectUrl.append(root);
+		if (tempArr.length > 1) {
+			redirectUrl.append(tempArr[1]);
+		}
+		return redirectUrl;
+
+	}
+
+	// on labs-dev, both request.getRequestUrl() and configurationService.getRootUrl()
+	// are reporting as "http", which causes the redirect link to fail.  Force it to
+	// https if we know it is https.
+	public String ensureIsHttps(StringBuffer redirectUrl) {
+		String redirectLink = redirectUrl.toString();
+		if (redirectLink.toLowerCase().contains("usgs.gov") && !redirectLink.toLowerCase().contains("owi-test")) {
+			redirectLink = redirectLink.replace("http://", "https://");
+		}
+		return redirectLink;
 	}
 
 	private String processHtml(HttpServletRequest request, HttpServletResponse response) throws Exception {

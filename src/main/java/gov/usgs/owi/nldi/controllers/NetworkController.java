@@ -20,6 +20,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,10 +44,36 @@ public class NetworkController extends BaseController {
 		super(inLookupDao, inStreamingDao, inNavigation, inParameters, configurationService, inLogService);
 	}
 
+
+	//swagger documentation for /linked-data/comid/navigation/{navigationMode} endpoint
+	@Operation(summary = "getNavigationOptions", description = "returns the navigation options")
+	@GetMapping(value="linked-data/comid/navigation/{navigationMode}", produces=MediaType.APPLICATION_JSON_VALUE)
+	public void getNavigationOptions(
+		HttpServletRequest request, HttpServletResponse response,
+		@PathVariable(Parameters.COMID) @Range(min=1, max=Integer.MAX_VALUE) String comid,
+		@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode,
+		@RequestParam(value=Parameters.STOP_COMID, required=false) @Range(min=1, max=Integer.MAX_VALUE) String stopComid,
+		@Parameter(description=Parameters.DISTANCE_DESCRIPTION)
+		@RequestParam(value=Parameters.DISTANCE, required=false, defaultValue=Parameters.MAX_DISTANCE)
+		@Pattern(message=Parameters.DISTANCE_VALIDATION_MESSAGE, regexp=Parameters.DISTANCE_VALIDATION_REGEX) String distance,
+		@RequestParam(value=Parameters.LEGACY, required=false) String legacy) throws Exception {
+
+		BigInteger logId = logService.logRequest(request);
+
+		try {
+			streamFlowLines(response, comid, navigationMode, stopComid, distance, isLegacy(legacy, navigationMode));
+
+		} catch (Exception e) {
+			GlobalDefaultExceptionHandler.handleError(e, response);
+		} finally {
+			logService.logRequestComplete(logId, response.getStatus());
+		}
+	}
+
+
 	//swagger documentation for /linked-data/{featureSource}/{featureID}/navigate/{navigationMode} endpoint
 	@Operation(summary = "getFlowlines", description = "returns the flowlines for the specified navigation in WGS84 lat/lon GeoJSON")
 	@GetMapping(value="linked-data/comid/{comid}/navigate/{navigationMode}", produces= MediaType.APPLICATION_JSON_VALUE)
-
 	@Deprecated
 	public void getFlowlines(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable(Parameters.COMID) @Range(min=1, max=Integer.MAX_VALUE) String comid,
@@ -65,6 +92,31 @@ public class NetworkController extends BaseController {
 			logService.logRequestComplete(logId, response.getStatus());
 		}
 	}
+
+
+	//swagger documentation for /linked-data/{featureSource}/{featureID}/navigation/{navigationMode} endpoint
+	@Operation(summary = "getFlowlines", description = "returns the flowlines for the specified navigation in WGS84 lat/lon GeoJSON")
+	@GetMapping(value="linked-data/comid/{comid}/navigation/{navigationMode}/flowlines", produces=MediaType.APPLICATION_JSON_VALUE)
+	public void getNavigationFlowlines(
+		HttpServletRequest request, HttpServletResponse response,
+		@PathVariable(Parameters.COMID) @Range(min=1, max=Integer.MAX_VALUE) String comid,
+		@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode,
+		@RequestParam(value=Parameters.STOP_COMID, required=false) @Range(min=1, max=Integer.MAX_VALUE) String stopComid,
+		@Parameter(description=Parameters.DISTANCE_DESCRIPTION)
+		@RequestParam(value=Parameters.DISTANCE, required=false, defaultValue=Parameters.MAX_DISTANCE)
+		@Pattern(message=Parameters.DISTANCE_VALIDATION_MESSAGE, regexp=Parameters.DISTANCE_VALIDATION_REGEX) String distance,
+		@RequestParam(value=Parameters.LEGACY, required=false) String legacy) throws Exception {
+
+		BigInteger logId = logService.logRequest(request);
+		try {
+			streamFlowLines(response, comid, navigationMode, stopComid, distance, isLegacy(legacy, navigationMode));
+		} catch (Exception e) {
+			GlobalDefaultExceptionHandler.handleError(e, response);
+		} finally {
+			logService.logRequestComplete(logId, response.getStatus());
+		}
+	}
+
 
 	//swagger documentation for /linked-data/{featureSource}/{featureID}/navigate/{navigationMode}/{dataSource} endpoint
 	@Operation(summary = "getFeatures", description = "Returns all features found along the specified navigation as points in WGS84 lat/lon GeoJSON")
