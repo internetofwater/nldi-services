@@ -119,7 +119,7 @@ public class NetworkController extends BaseController {
 		}
 	}
 
-	private Map<String, Object> extractLatitudeAndLongitude(String coords) throws UnsupportedEncodingException {
+	private Map<String, Object> extractLatitudeAndLongitude(String coords)  {
 		//Only currently supported format is POINT(x y)
 		String tempCoords = coords;
 		tempCoords = tempCoords.replace("POINT(", "");

@@ -45,13 +45,7 @@ public class HtmlControllerIT extends BaseIT {
 				false,
 				false);
 
-		assertTrue(actualbody.contains("?f=json"));
-		assertTrue(actualbody.contains("/linked-data/nwissite"));
-		assertTrue(actualbody.contains("<html>"));
-		assertTrue(actualbody.contains("</html"));
-		assertTrue(actualbody.contains("<a "));
-		assertTrue(actualbody.contains("href="));
-		assertTrue(actualbody.contains("a>"));
+		checkRedirectHtml(actualbody,"/linked-data/nwissite");
 	}
 
 	@Test
@@ -65,12 +59,7 @@ public class HtmlControllerIT extends BaseIT {
 			null,
 			false,
 			false);
-		assertTrue(actualbody.contains("/linked-data/comid/position?f=json&coords=POINT(-89.35%2048.064)"));
-		assertTrue(actualbody.contains("<html>"));
-		assertTrue(actualbody.contains("</html"));
-		assertTrue(actualbody.contains("<a "));
-		assertTrue(actualbody.contains("href="));
-		assertTrue(actualbody.contains("a>"));
+		checkRedirectHtml(actualbody,"/linked-data/comid/position?f=json&coords=POINT(-89.35%2048.064)");
 	}
 
 	@Test
@@ -84,13 +73,8 @@ public class HtmlControllerIT extends BaseIT {
 			null,
 			false,
 			false);
-		assertTrue(actualbody.contains("/linked-data/comid/position?f=json&coords=POINT(-89.35%2048.064)"));
-		assertFalse(actualbody.contains("f=html"));
-		assertTrue(actualbody.contains("<html>"));
-		assertTrue(actualbody.contains("</html"));
-		assertTrue(actualbody.contains("<a "));
-		assertTrue(actualbody.contains("href="));
-		assertTrue(actualbody.contains("a>"));
+		checkRedirectHtml(actualbody, "/linked-data/comid/position?f=json&coords=POINT(-89.35%2048.064)");
+
 	}
 
 	@Test
@@ -104,13 +88,7 @@ public class HtmlControllerIT extends BaseIT {
 			null,
 			false,
 			false);
-		assertTrue(actualbody.contains("/linked-data?f=json"));
-		assertFalse(actualbody.contains("f=html"));
-		assertTrue(actualbody.contains("<html>"));
-		assertTrue(actualbody.contains("</html"));
-		assertTrue(actualbody.contains("<a "));
-		assertTrue(actualbody.contains("href="));
-		assertTrue(actualbody.contains("a>"));
+	    checkRedirectHtml(actualbody, "/linked-data?f=json");
 	}
 
 	@Test
@@ -125,13 +103,7 @@ public class HtmlControllerIT extends BaseIT {
 			null,
 			true,
 			false);
-		assertFalse(actualbody.contains("f=html"));
-		assertTrue(actualbody.contains("/linked-data/v2/wqp/USGS-05427880/navigate/UM/flowlines?f=json"));
-		assertTrue(actualbody.contains("<html>"));
-		assertTrue(actualbody.contains("</html"));
-		assertTrue(actualbody.contains("<a "));
-		assertTrue(actualbody.contains("href="));
-		assertTrue(actualbody.contains("a>"));
+		checkRedirectHtml(actualbody, "/linked-data/v2/wqp/USGS-05427880/navigate/UM/flowlines?f=json");
 	}
 
 	@Test
@@ -145,14 +117,7 @@ public class HtmlControllerIT extends BaseIT {
 			null,
 			false,
 			false);
-
-		assertFalse(actualbody.contains("f=html"));
-		assertTrue(actualbody.contains("/linked-data/v2/comid/13297246/navigate/UM/flowlines?f=json&distance=10"));
-		assertTrue(actualbody.contains("<html>"));
-		assertTrue(actualbody.contains("</html"));
-		assertTrue(actualbody.contains("<a "));
-		assertTrue(actualbody.contains("href="));
-		assertTrue(actualbody.contains("a>"));
+		checkRedirectHtml(actualbody, "/linked-data/v2/comid/13297246/navigate/UM/flowlines?f=json&distance=10");
 	}
 
 	@Test
@@ -167,13 +132,7 @@ public class HtmlControllerIT extends BaseIT {
 			null,
 			false,
 			false);
-		assertFalse(actualbody.contains("f=html"));
-		assertTrue(actualbody.contains("/linked-data/v2/wqp/USGS-05427880/navigate/UT?f=json"));
-		assertTrue(actualbody.contains("<html>"));
-		assertTrue(actualbody.contains("</html"));
-		assertTrue(actualbody.contains("<a "));
-		assertTrue(actualbody.contains("href="));
-		assertTrue(actualbody.contains("a>"));
+		checkRedirectHtml(actualbody, "/linked-data/v2/wqp/USGS-05427880/navigate/UT?f=json");
 	}
 
 	@Test
@@ -188,13 +147,7 @@ public class HtmlControllerIT extends BaseIT {
 				false,
 				false);
 
-		assertTrue(actualbody.contains("?f=json"));
-		assertTrue(actualbody.contains("/linked-data/comid/13302592/tot"));
-		assertTrue(actualbody.contains("<html>"));
-		assertTrue(actualbody.contains("</html"));
-		assertTrue(actualbody.contains("<a "));
-		assertTrue(actualbody.contains("href="));
-		assertTrue(actualbody.contains("a>"));
+		checkRedirectHtml(actualbody, "/linked-data/comid/13302592/tot");
 	}
 
 
@@ -209,11 +162,18 @@ public class HtmlControllerIT extends BaseIT {
 				null,
 				false,
 				false);
-		assertTrue(actualbody.contains("/lookups/x?f=json"));
-		assertTrue(actualbody.contains("<html>"));
-		assertTrue(actualbody.contains("</html"));
+		checkRedirectHtml(actualbody, "/lookups/x?f=json");
+	}
+
+
+	private void checkRedirectHtml(String actualbody, String link) {
+		assertTrue(actualbody.contains(link));
+		assertFalse(actualbody.contains("f=html"));
+		assertTrue(actualbody.trim().startsWith("<html>"));
+		assertTrue(actualbody.trim().endsWith("</html>"));
 		assertTrue(actualbody.contains("<a "));
 		assertTrue(actualbody.contains("href="));
 		assertTrue(actualbody.contains("a>"));
 	}
+
 }
