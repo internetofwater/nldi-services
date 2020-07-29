@@ -103,6 +103,7 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 				true);
 	}
 
+
 	//DataSources Testing
 	@Test
 	public void getDataSourcesTest() throws Exception {

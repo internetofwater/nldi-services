@@ -45,7 +45,7 @@ public class LinkedDataControllerV2IT extends BaseIT {
 	@DatabaseSetup("classpath:/testData/featureWqp.xml")
 	public void getNavigationOptionsTest() throws Exception {
 		String actualbody = assertEntity(restTemplate,
-			"/linked-data/v2/wqp/USGS-05427880/navigate/UT",
+			"/linked-data/v2/wqp/USGS-05427880/navigate/UT?f=json",
 			HttpStatus.OK.value(),
 			null,
 			null,
@@ -80,7 +80,7 @@ public class LinkedDataControllerV2IT extends BaseIT {
 	@DatabaseSetup("classpath:/testData/featureWqp.xml")
 	public void getWqpUMTest() throws Exception {
 		assertEntity(restTemplate,
-			"/linked-data/v2/wqp/USGS-05427880/navigate/UM/flowlines",
+			"/linked-data/v2/wqp/USGS-05427880/navigate/UM/flowlines?f=json",
 			HttpStatus.OK.value(),
 			FlowLineTransformer.FLOW_LINES_COUNT_HEADER,
 			"10",

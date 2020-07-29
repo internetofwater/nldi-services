@@ -14,6 +14,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.Pattern;
 
+import gov.usgs.owi.nldi.NavigationMode;
+import gov.usgs.owi.nldi.dao.NavigationDao;
+import gov.usgs.owi.nldi.transform.CharacteristicDataTransformer;
+import gov.usgs.owi.nldi.transform.FeatureCollectionTransformer;
+import gov.usgs.owi.nldi.transform.FeatureTransformer;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -30,10 +35,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import gov.usgs.owi.nldi.NavigationMode;
 import gov.usgs.owi.nldi.dao.BaseDao;
 import gov.usgs.owi.nldi.dao.LookupDao;
-import gov.usgs.owi.nldi.dao.NavigationDao;
 import gov.usgs.owi.nldi.dao.StreamingDao;
 import gov.usgs.owi.nldi.services.ConfigurationService;
 import gov.usgs.owi.nldi.services.LogService;
@@ -41,9 +44,6 @@ import gov.usgs.owi.nldi.services.Navigation;
 import gov.usgs.owi.nldi.services.Parameters;
 import gov.usgs.owi.nldi.swagger.model.DataSource;
 import gov.usgs.owi.nldi.swagger.model.Feature;
-import gov.usgs.owi.nldi.transform.CharacteristicDataTransformer;
-import gov.usgs.owi.nldi.transform.FeatureTransformer;
-import gov.usgs.owi.nldi.transform.FeatureCollectionTransformer;
 
 @RestController
 public class LinkedDataController extends BaseController {
@@ -93,20 +93,20 @@ public class LinkedDataController extends BaseController {
 		return rtn;
 	}
 
+
 	//swagger documentation for /linked-data/{featureSource} endpoint
 	@Operation(summary = "getFeatures", description = "returns a list of features for a given data source")
 	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "OK",
-					content = { @Content(mediaType = "application/json",
-							schema = @Schema(implementation = Feature.class)) }),
-			@ApiResponse(responseCode = "500", description = "Server error",
-					content = @Content) })
+		@ApiResponse(responseCode = "200", description = "OK", content = { @Content(mediaType = "application/json",
+			schema = @Schema(implementation = Feature.class)) }),
+		@ApiResponse(responseCode = "500", description = "Server error", content = @Content) })
 	@GetMapping(value="linked-data/{featureSource}", produces=MediaType.APPLICATION_JSON_VALUE)
-	public void getFeatures(HttpServletRequest request, HttpServletResponse response,
-							@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource) {
+	public void getFeatures(
+		HttpServletRequest request, HttpServletResponse response,
+		@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource) throws Exception {
 		BigInteger logId = logService.logRequest(request);
-
 		try {
+
 			Map<String, Object> parameterMap = new HashMap<>();
 			parameterMap.put(LookupDao.ROOT_URL, configurationService.getLinkedDataUrl());
 			parameterMap.put(LookupDao.FEATURE_SOURCE, featureSource);

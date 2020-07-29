@@ -20,6 +20,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 @SpringBootTest(webEnvironment=SpringBootTest.WebEnvironment.NONE,
 		classes={DbTestConfig.class, LookupDao.class, ConfigurationService.class})
@@ -52,6 +53,24 @@ public class LookupDaoIT extends BaseIT {
 		Map<String, Object> results = lookupDao.getComid(BaseDao.FEATURE, parameterMap);
 		assertEquals(1,results.size());
 		assertEquals(13297246, results.get(BaseDao.COMID));
+	}
+
+	@Test
+	public void getComidLatLonTest() throws IOException, JSONException {
+		Map<String, Object> parameterMap = new HashMap<>();
+		parameterMap.put(Parameters.LONGITUDE, -89.35);
+		parameterMap.put(Parameters.LATITUDE, 43.0864);
+		Integer results = lookupDao.getComidByLatitudeAndLongitude(parameterMap);
+		assertEquals(13294318, results);
+	}
+
+	@Test
+	public void getComidLatLonTestNotFound() throws IOException, JSONException {
+		Map<String, Object> parameterMap = new HashMap<>();
+		parameterMap.put(Parameters.LONGITUDE, -89.4751);
+		parameterMap.put(Parameters.LATITUDE, -89.4751);
+		Integer results = lookupDao.getComidByLatitudeAndLongitude(parameterMap);
+		assertNull(results);
 	}
 
 	@Test

@@ -1,9 +1,7 @@
 package gov.usgs.owi.nldi.springinit;
 
-import javax.sql.DataSource;
 
 import gov.usgs.owi.nldi.services.Parameters;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
@@ -24,9 +22,6 @@ import java.util.Map;
 @Configuration
 public class SpringConfig implements WebMvcConfigurer {
 
-	@Autowired
-	DataSource dataSource;
-
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
@@ -46,7 +41,7 @@ public class SpringConfig implements WebMvcConfigurer {
 			@Override
 			public List<MediaType> resolveMediaTypes(NativeWebRequest webRequest)
 				throws HttpMediaTypeNotAcceptableException {
-						
+
 				//If the user specifies output with the format parameter, give them what they asked for.
 				Map<String, String[]> map = webRequest.getParameterMap();
 				if (map != null) {
