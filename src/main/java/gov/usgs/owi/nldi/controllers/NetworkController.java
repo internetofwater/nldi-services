@@ -25,6 +25,7 @@ import gov.usgs.owi.nldi.services.ConfigurationService;
 import gov.usgs.owi.nldi.services.LogService;
 import gov.usgs.owi.nldi.services.Navigation;
 import gov.usgs.owi.nldi.services.Parameters;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping(value="linked-data/comid/{comid}/navigate/{navigationMode}")
@@ -41,7 +42,7 @@ public class NetworkController extends BaseController {
 	@Operation(summary = "getFlowlines", description = "returns the flowlines for the specified navigation in WGS84 lat/lon GeoJSON")
 	@GetMapping(produces=MediaType.APPLICATION_JSON_VALUE)
 	@Deprecated
-	public ResponseEntity<String> getFlowlines(
+	public void getFlowlines(
 		HttpServletRequest request, HttpServletResponse response,
 		@PathVariable(Parameters.COMID) @Range(min=1, max=Integer.MAX_VALUE) String comid,
 		@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode,
@@ -52,24 +53,24 @@ public class NetworkController extends BaseController {
 		@RequestParam(value=Parameters.LEGACY, required=false) String legacy) throws Exception {
 
 		BigInteger logId = logService.logRequest(request);
-		try {
-			if (stopComid != null && (Integer.parseInt(stopComid) < Integer.parseInt(comid))) {
-				return new ResponseEntity<>(BaseController.COMID_MISMATCH_ERROR, HttpStatus.BAD_REQUEST);
-			}
-			streamFlowLines(response, comid, navigationMode, stopComid, distance, isLegacy(legacy, navigationMode));
+		if (stopComid != null && (Integer.parseInt(stopComid) < Integer.parseInt(comid))) {
+			logService.logRequestComplete(logId, response.getStatus());
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, BaseController.COMID_MISMATCH_ERROR);
+		}
 
+		try {
+			streamFlowLines(response, comid, navigationMode, stopComid, distance, isLegacy(legacy, navigationMode));
 		} catch (Exception e) {
 			GlobalDefaultExceptionHandler.handleError(e, response);
 		} finally {
 			logService.logRequestComplete(logId, response.getStatus());
 		}
-		return null;
 	}
 
 	//swagger documentation for /linked-data/{featureSource}/{featureID}/navigate/{navigationMode}/{dataSource} endpoint
 	@Operation(summary = "getFeatures", description = "Returns all features found along the specified navigation as points in WGS84 lat/lon GeoJSON")
 	@GetMapping(value="{dataSource}", produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> getFeatures(
+	public void getFeatures(
 		HttpServletRequest request, HttpServletResponse response,
 		@PathVariable(Parameters.COMID) @Range(min=1, max=Integer.MAX_VALUE) String comid,
 		@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode,
@@ -81,9 +82,14 @@ public class NetworkController extends BaseController {
 		@RequestParam(value=Parameters.LEGACY, required=false) String legacy) throws Exception {
 
 		BigInteger logId = logService.logRequest(request);
+		if (stopComid != null && (Integer.parseInt(stopComid) < Integer.parseInt(comid))) {
+			logService.logRequestComplete(logId, response.getStatus());
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, BaseController.COMID_MISMATCH_ERROR);
+		}
+
 		try {
 			if (stopComid != null && (Integer.parseInt(stopComid) < Integer.parseInt(comid))) {
-				return new ResponseEntity<>(BaseController.COMID_MISMATCH_ERROR, HttpStatus.BAD_REQUEST);
+				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, BaseController.COMID_MISMATCH_ERROR);
 			}
 
 			streamFeatures(response, comid, navigationMode, stopComid, distance, dataSource, isLegacy(legacy, navigationMode));
@@ -92,7 +98,6 @@ public class NetworkController extends BaseController {
 		} finally {
 			logService.logRequestComplete(logId, response.getStatus());
 		}
-		return null;
 	}
 
 

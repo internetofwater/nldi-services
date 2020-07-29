@@ -24,6 +24,7 @@ import gov.usgs.owi.nldi.services.ConfigurationService;
 import gov.usgs.owi.nldi.services.LogService;
 import gov.usgs.owi.nldi.services.Navigation;
 import gov.usgs.owi.nldi.services.Parameters;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping(value="linked-data/v2/comid/{comid}/navigate/{navigationMode}")
@@ -39,7 +40,7 @@ public class NetworkControllerV2 extends BaseController {
 	//swagger documentation for /linked-data/{featureSource}/{featureID}/navigate/{navigationMode} endpoint
 	@Operation(summary = "getFlowlines", description = "returns the flowlines for the specified navigation in WGS84 lat/lon GeoJSON")
 	@GetMapping(value="/flowlines", produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> getFlowlines(
+	public void getFlowlines(
 		HttpServletRequest request, HttpServletResponse response,
 		@PathVariable(Parameters.COMID) @Range(min=1, max=Integer.MAX_VALUE) String comid,
 		@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode,
@@ -50,17 +51,17 @@ public class NetworkControllerV2 extends BaseController {
 		@RequestParam(value=Parameters.LEGACY, required=false) String legacy) throws Exception {
 
 		BigInteger logId = logService.logRequest(request);
+		if (stopComid != null && (Integer.parseInt(stopComid) < Integer.parseInt(comid))) {
+			logService.logRequestComplete(logId, response.getStatus());
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, BaseController.COMID_MISMATCH_ERROR);
+		}
 		try {
-			if (stopComid != null && (Integer.parseInt(stopComid) < Integer.parseInt(comid))) {
-				return new ResponseEntity<>(BaseController.COMID_MISMATCH_ERROR, HttpStatus.BAD_REQUEST);
-			}
+
 			streamFlowLines(response, comid, navigationMode, stopComid, distance, isLegacy(legacy, navigationMode));
 		} catch (Exception e) {
 			GlobalDefaultExceptionHandler.handleError(e, response);
 		} finally {
 			logService.logRequestComplete(logId, response.getStatus());
 		}
-		return null;
 	}
-
 }

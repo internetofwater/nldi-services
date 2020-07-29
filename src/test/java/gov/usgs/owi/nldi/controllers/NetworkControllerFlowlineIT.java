@@ -224,11 +224,12 @@ public class NetworkControllerFlowlineIT extends BaseIT {
 				HttpStatus.BAD_REQUEST.value(),
 				null,
 				null,
-				null, //MediaType.APPLICATION_JSON_VALUE,
-				null, //getCompareFile(RESULT_FOLDER, "comid_13297246_PP_stop_13297198.json"),
+				null,
+				null,
 				true,
 				true);
-		assertEquals(BaseController.COMID_MISMATCH_ERROR, actualbody);
+		assertEquals("400 BAD_REQUEST \"The stopComid must be downstream of the start comid.\"", actualbody);
+
 	}
 
 	@Test

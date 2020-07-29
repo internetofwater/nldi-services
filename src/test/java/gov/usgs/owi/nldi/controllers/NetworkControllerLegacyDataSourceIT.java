@@ -159,7 +159,7 @@ public class NetworkControllerLegacyDataSourceIT extends BaseIT {
 				null,
 				true,
 				true);
-		assertEquals(BaseController.COMID_MISMATCH_ERROR, actualbody);
+		assertEquals("400 BAD_REQUEST \"The stopComid must be downstream of the start comid.\"", actualbody);
 	}
 
 	@Test
