@@ -85,8 +85,6 @@ public class LinkedDataController extends BaseController {
 			parameterMap.put(LookupDao.ROOT_URL, configurationService.getLinkedDataUrl());
 			rtn.addAll(lookupDao.getList(BaseDao.DATA_SOURCES, parameterMap));
 
-		} catch (Exception e) {
-			GlobalDefaultExceptionHandler.handleError(e, response);
 		} finally {
 			logService.logRequestComplete(logId, response.getStatus());
 		}
@@ -169,8 +167,6 @@ public class LinkedDataController extends BaseController {
 						String.join("/", configurationService.getLinkedDataUrl(), featureSource.toLowerCase(), URLEncoder.encode(featureID, FeatureTransformer.DEFAULT_ENCODING), NavigationDao.NAVIGATE, NavigationMode.DD.toString()));
 			}
 
-		} catch (Exception e) {
-			GlobalDefaultExceptionHandler.handleError(e, response);
 		} finally {
 			logService.logRequestComplete(logId, response.getStatus());
 		}

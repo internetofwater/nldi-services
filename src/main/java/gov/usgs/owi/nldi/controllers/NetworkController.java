@@ -162,8 +162,6 @@ public class NetworkController extends BaseController {
 			parameterMap.put(Parameters.FEATURE_ID, comid);
 			addContentHeader(response);
 			streamResults(transformer, BaseDao.FEATURE, parameterMap);
-		} catch (Exception e) {
-			GlobalDefaultExceptionHandler.handleError(e, response);
 		} finally {
 			logService.logRequestComplete(logId, response.getStatus());
 		}
