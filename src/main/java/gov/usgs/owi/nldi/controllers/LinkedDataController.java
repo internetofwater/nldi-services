@@ -357,7 +357,7 @@ public class LinkedDataController extends BaseController {
 	}
 
 
-	// We need to create navigation urls for the various options (see test file navigate_V2.json)
+	// We need to create navigation urls for the various options (see test file navigation.json)
 	// We do this by starting with the linked-data url from the configuration service
 	// then adding all the request-specific elements from the request we received
 	private String createNewNavigationUrl(HttpServletRequest request) {

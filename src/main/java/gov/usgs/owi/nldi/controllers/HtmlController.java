@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.Pattern;
 import java.math.BigInteger;
+import java.util.Objects;
 
 @RestController
 public class HtmlController {
@@ -67,11 +68,8 @@ public class HtmlController {
 	}
 
 	private String removeHtmlFormatFromQueryString(String oldQueryString) {
-		if (StringUtils.isEmpty(oldQueryString)) {
-			return oldQueryString;
-		}
 		//remove it if user put it somewhere in the middle
-		String queryString = oldQueryString;
+		String queryString = Objects.requireNonNullElse(oldQueryString, "");
 		queryString = queryString.replace("&f=html", "");
 		//remove it if user put it at the beginning
 		queryString = queryString.replace("f=html", "");

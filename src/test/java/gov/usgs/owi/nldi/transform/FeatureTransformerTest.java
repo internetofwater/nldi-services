@@ -75,6 +75,32 @@ public class FeatureTransformerTest {
 	}
 
 	@Test
+	public void writePropertiesTestBad() {
+		Map<String, Object> map = new HashMap<>();
+		map.put(FlowLineTransformer.NHDPLUS_COMID, "13293474");
+		map.put(FeatureTransformer.COMID, "47439231");
+		map.put(FeatureTransformer.IDENTIFIER, "identifierValue");
+		map.put(FeatureTransformer.NAME, "nameValue");
+		map.put(FeatureTransformer.URI, "uriValue");
+		map.put(LookupDao.SOURCE, "sourceValue");
+		map.put(FeatureTransformer.SOURCE_NAME_DB, "sourceNameValue");
+		map.put(FeatureTransformer.REACHCODE, "05020002004263");
+		map.put(FeatureTransformer.MEASURE, 1.3823300000);
+		try {
+			transformer.g.writeStartObject();
+			transformer.writeProperties(transformer.g, null);
+			transformer.g.writeEndObject();
+			//need to flush the JsonGenerator to get at output.
+			transformer.g.flush();
+			fail("should have thrown runtime exception");
+		} catch (RuntimeException e) {
+			//good
+		} catch (Throwable t) {
+			fail(t.getMessage());
+		}
+	}
+
+	@Test
 	public void testWritePropertiesNoReachNoMeasure() {
 		Map<String, Object> map = new HashMap<>();
 		map.put(FlowLineTransformer.NHDPLUS_COMID, "13294118");

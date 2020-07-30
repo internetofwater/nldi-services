@@ -45,6 +45,20 @@ public class CharacteristicDataTransformerTest {
 	}
 
 	@Test
+	public void initJsonTestBad() {
+		try {
+			transformer.initJson(transformer.g, null);
+			transformer.g.flush();
+			assertEquals(INIT_JSON, response.getContentAsString());
+			fail("should have thrown runtime exception");
+		} catch (RuntimeException e) {
+			//ok
+		} catch (Throwable t) {
+			fail(t);
+		}
+	}
+
+	@Test
 	public void writeMapTest() {
 		transformer.writeMap(transformer.g, buildMap());
 		try {
