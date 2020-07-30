@@ -67,7 +67,7 @@ public class FeatureTransformerTest {
 			transformer.g.flush();
 			assertEquals("{\"source\":\"sourceValue\",\"sourceName\":\"sourceNameValue\",\"identifier\":\"identifierValue\",\"name\":\"nameValue\","
 					+ "\"uri\":\"uriValue\",\"comid\":\"47439231\",\"reachcode\":\"05020002004263\",\"measure\":\"1.38233\","
-					+ "\"navigation\":\"" + configurationService.getLinkedDataUrl() + "/sourcevalue/identifierValue/navigate\"}",
+					+ "\"navigation\":\"" + configurationService.getLinkedDataUrl() + "/sourcevalue/identifierValue/navigation\"}",
 					response.getContentAsString());
 		} catch (IOException e) {
 			fail(e.getLocalizedMessage());
@@ -119,7 +119,7 @@ public class FeatureTransformerTest {
 			transformer.g.flush();
 			assertEquals("{\"source\":\"source2Value\",\"sourceName\":\"sourceName2Value\",\"identifier\":\"identifier2Value\",\"name\":\"name2Value\","
 						+ "\"uri\":\"uri2Value\",\"comid\":\"81149213\","
-						+ "\"navigation\":\"" + configurationService.getLinkedDataUrl() + "/source2value/identifier2Value/navigate\"}",
+						+ "\"navigation\":\"" + configurationService.getLinkedDataUrl() + "/source2value/identifier2Value/navigation\"}",
 						response.getContentAsString());
 		} catch (IOException e) {
 			fail(e.getLocalizedMessage());

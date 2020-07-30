@@ -10,7 +10,6 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
@@ -21,7 +20,7 @@ import gov.usgs.owi.nldi.transform.FlowLineTransformer;
 @EnableWebMvc
 @SpringBootTest(webEnvironment=WebEnvironment.RANDOM_PORT)
 @DatabaseSetup("classpath:/testData/crawlerSource.xml")
-public class NetworkControllerLegacyFlowlineIT extends BaseIT {
+public class DeprecatedNetworkControllerLegacyFlowlineIT extends BaseIT {
 
 	@Value("${serverContextPath}")
 	private String context;
@@ -43,7 +42,7 @@ public class NetworkControllerLegacyFlowlineIT extends BaseIT {
 	@Test
 	public void getComidUtTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/comid/13293474/navigation/UT/flowlines?legacy=true",
+				"/linked-data/comid/13293474/navigate/UT?legacy=true",
 				HttpStatus.OK.value(),
 				FlowLineTransformer.FLOW_LINES_COUNT_HEADER,
 				"7",
@@ -56,7 +55,7 @@ public class NetworkControllerLegacyFlowlineIT extends BaseIT {
 	@Test
 	public void getComidUtDistanceTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/comid/13297246/navigation/UT/flowlines?distance=10&legacy=true",
+				"/linked-data/comid/13297246/navigate/UT?distance=10&legacy=true",
 				HttpStatus.OK.value(),
 				FlowLineTransformer.FLOW_LINES_COUNT_HEADER,
 				"9",
@@ -69,7 +68,7 @@ public class NetworkControllerLegacyFlowlineIT extends BaseIT {
 	@Test
 	public void getComidUtDiversionTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/comid/13294158/navigation/UT/flowlines?legacy=true",
+				"/linked-data/comid/13294158/navigate/UT?legacy=true",
 				HttpStatus.OK.value(),
 				FlowLineTransformer.FLOW_LINES_COUNT_HEADER,
 				"15",
@@ -83,7 +82,7 @@ public class NetworkControllerLegacyFlowlineIT extends BaseIT {
 	@Test
 	public void getComidUmTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/comid/13293474/navigation/UM/flowlines?legacy=true",
+				"/linked-data/comid/13293474/navigate/UM?legacy=true",
 				HttpStatus.OK.value(),
 				FlowLineTransformer.FLOW_LINES_COUNT_HEADER,
 				"4",
@@ -96,7 +95,7 @@ public class NetworkControllerLegacyFlowlineIT extends BaseIT {
 	@Test
 	public void getComidUmDistanceTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/comid/13297246/navigation/UM/flowlines?distance=10&legacy=true",
+				"/linked-data/comid/13297246/navigate/UM?distance=10&legacy=true",
 				HttpStatus.OK.value(),
 				FlowLineTransformer.FLOW_LINES_COUNT_HEADER,
 				"6",
@@ -110,7 +109,7 @@ public class NetworkControllerLegacyFlowlineIT extends BaseIT {
 	@Test
 	public void getComidDmTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/comid/13296790/navigation/DM/flowlines?legacy=true",
+				"/linked-data/comid/13296790/navigate/DM?legacy=true",
 				HttpStatus.OK.value(),
 				FlowLineTransformer.FLOW_LINES_COUNT_HEADER,
 				"5",
@@ -123,7 +122,7 @@ public class NetworkControllerLegacyFlowlineIT extends BaseIT {
 	@Test
 	public void getComidDmDiversionsNotIncludedTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/comid/13294310/navigation/DM/flowlines?legacy=true",
+				"/linked-data/comid/13294310/navigate/DM?legacy=true",
 				HttpStatus.OK.value(),
 				FlowLineTransformer.FLOW_LINES_COUNT_HEADER,
 				"42",
@@ -136,7 +135,7 @@ public class NetworkControllerLegacyFlowlineIT extends BaseIT {
 	@Test
 	public void getComidDmDistanceTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/comid/13293474/navigation/DM/flowlines?distance=10&legacy=true",
+				"/linked-data/comid/13293474/navigate/DM?distance=10&legacy=true",
 				HttpStatus.OK.value(),
 				FlowLineTransformer.FLOW_LINES_COUNT_HEADER,
 				"8",
@@ -150,7 +149,7 @@ public class NetworkControllerLegacyFlowlineIT extends BaseIT {
 	@Test
 	public void getComidDdTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/comid/13294310/navigation/DD/flowlines?legacy=true",
+				"/linked-data/comid/13294310/navigate/DD?legacy=true",
 				HttpStatus.OK.value(),
 				FlowLineTransformer.FLOW_LINES_COUNT_HEADER,
 				"49",
@@ -164,7 +163,7 @@ public class NetworkControllerLegacyFlowlineIT extends BaseIT {
 	public void getComidDdDistanceTest() throws Exception {
 		//We are going to sacrifice a little accuracy for performance, so this does not match the old way...
 		assertEntity(restTemplate,
-				"/linked-data/comid/13294310/navigation/DD/flowlines?distance=11&legacy=true",
+				"/linked-data/comid/13294310/navigate/DD?distance=11&legacy=true",
 				HttpStatus.OK.value(),
 				FlowLineTransformer.FLOW_LINES_COUNT_HEADER,
 				"11",
@@ -177,13 +176,18 @@ public class NetworkControllerLegacyFlowlineIT extends BaseIT {
 	//PP Testing
 	@Test
 	public void getComidPpStopComidInvalidTest() throws Exception {
+		// This deprecated endpoint and test are sharing the result file with
+		// the current endpoint and test, so tweak the comparison string accordingly.
+		String compareFile = getCompareFile(RESULT_FOLDER, "comid_13297246_PP_stop_13297198.json");
+		compareFile = compareFile.replace("/flowlines", "");
+		compareFile = compareFile.replace("navigation", "navigate");
 		assertEntity(restTemplate,
-				"/linked-data/comid/13297246/navigation/PP/flowlines?stopComid=13297198&legacy=true",
+				"/linked-data/comid/13297246/navigate/PP?stopComid=13297198&legacy=true",
 				HttpStatus.BAD_REQUEST.value(),
 				null,
 				null,
 				MediaType.APPLICATION_JSON_VALUE,
-				getCompareFile(RESULT_FOLDER, "comid_13297246_PP_stop_13297198.json"),
+				compareFile,
 				true,
 				true);
 	}
@@ -191,7 +195,7 @@ public class NetworkControllerLegacyFlowlineIT extends BaseIT {
 	@Test
 	public void getComidPpStopComidTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/comid/13297198/navigation/PP/flowlines?stopComid=13297246&legacy=true",
+				"/linked-data/comid/13297198/navigate/PP?stopComid=13297246&legacy=true",
 				HttpStatus.OK.value(),
 				FlowLineTransformer.FLOW_LINES_COUNT_HEADER,
 				"12",
@@ -206,7 +210,7 @@ public class NetworkControllerLegacyFlowlineIT extends BaseIT {
 	@Test
 	public void interestingTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/comid/13293844/navigation/DM/flowlines?distance=5&legacy=true",
+				"/linked-data/comid/13293844/navigate/DM?distance=5&legacy=true",
 				HttpStatus.OK.value(),
 				FlowLineTransformer.FLOW_LINES_COUNT_HEADER,
 				"7",
@@ -216,7 +220,7 @@ public class NetworkControllerLegacyFlowlineIT extends BaseIT {
 				false);
 
 		assertEntity(restTemplate,
-				"/linked-data/comid/13293844/navigation/DD/flowlines?distance=5&legacy=true",
+				"/linked-data/comid/13293844/navigate/DD?distance=5&legacy=true",
 				HttpStatus.OK.value(),
 				FlowLineTransformer.FLOW_LINES_COUNT_HEADER,
 				"14",
@@ -226,7 +230,7 @@ public class NetworkControllerLegacyFlowlineIT extends BaseIT {
 				false);
 
 		assertEntity(restTemplate,
-				"/linked-data/comid/13294328/navigation/DM/flowlines?distance=5&legacy=true",
+				"/linked-data/comid/13294328/navigate/DM?distance=5&legacy=true",
 				HttpStatus.OK.value(),
 				FlowLineTransformer.FLOW_LINES_COUNT_HEADER,
 				"6",
@@ -236,7 +240,7 @@ public class NetworkControllerLegacyFlowlineIT extends BaseIT {
 				false);
 
 		assertEntity(restTemplate,
-				"/linked-data/comid/13294328/navigation/DD/flowlines?distance=5&legacy=true",
+				"/linked-data/comid/13294328/navigate/DD?distance=5&legacy=true",
 				HttpStatus.OK.value(),
 				FlowLineTransformer.FLOW_LINES_COUNT_HEADER,
 				"10",
@@ -246,7 +250,7 @@ public class NetworkControllerLegacyFlowlineIT extends BaseIT {
 				false);
 
 		assertEntity(restTemplate,
-				"/linked-data/comid/13294390/navigation/UM/flowlines?distance=5&legacy=true",
+				"/linked-data/comid/13294390/navigate/UM?distance=5&legacy=true",
 				HttpStatus.OK.value(),
 				FlowLineTransformer.FLOW_LINES_COUNT_HEADER,
 				"6",
@@ -256,7 +260,7 @@ public class NetworkControllerLegacyFlowlineIT extends BaseIT {
 				false);
 
 		assertEntity(restTemplate,
-				"/linked-data/comid/13294390/navigation/UT/flowlines?distance=5&legacy=true",
+				"/linked-data/comid/13294390/navigate/UT?distance=5&legacy=true",
 				HttpStatus.OK.value(),
 				FlowLineTransformer.FLOW_LINES_COUNT_HEADER,
 				"22",

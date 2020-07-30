@@ -13,7 +13,7 @@
 			"name": "TOKEN CREEK RAIN GAGE NUMBER 1 NEAR TOKEN CREEK,WI",
 			"uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-431232089155100/",
 			"comid": "13293474",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-431232089155100/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-431232089155100/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -28,7 +28,7 @@
 			"name": "DN-08/11E/05-0888",
 			"uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-431137089133001/",
 			"comid": "13293468",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-431137089133001/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-431137089133001/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -43,7 +43,7 @@
 			"name": "TOKEN CREEK @ CNTY TRNK HGHWAY C NR TOKEN CREEK,WI",
 			"uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-05427762/",
 			"comid": "13293474",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427762/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427762/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -58,7 +58,7 @@
 			"name": "TOKEN CREEK - CTH C",
 			"uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-133470/",
 			"comid": "13293474",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-133470/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-133470/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -73,7 +73,7 @@
 			"name": "Token Creek-Wagner Trib. - 50 M US of second crossing on Egre Rd",
 			"uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10016652/",
 			"comid": "13293468",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10016652/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10016652/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -88,7 +88,7 @@
 			"name": "MARSHALL MILLPOND - DEEP HOLE",
 			"uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-133422/",
 			"comid": "13293474",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-133422/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-133422/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -103,7 +103,7 @@
 			"name": "TOKEN CREEK RAIN GAGE NUMBER 2 NEAR TOKEN CREEK,WI",
 			"uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-431233089134500/",
 			"comid": "13293468",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-431233089134500/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-431233089134500/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -118,7 +118,7 @@
 			"name": "Token Creek - 10M DS Egre Rd Crossing",
 			"uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10016566/",
 			"comid": "13294118",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10016566/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10016566/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -133,7 +133,7 @@
 			"name": "TOKEN CREEK SHONUS BRANCH AT SUN PRAIRIE, WI",
 			"uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-054277615/",
 			"comid": "13293474",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-054277615/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-054277615/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -148,7 +148,7 @@
 			"name": "DN-08/11E/05-0421",
 			"uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-431136089133001/",
 			"comid": "13293468",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-431136089133001/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-431136089133001/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -163,7 +163,7 @@
 			"name": "TOKEN CREEK WEST BRANCH SHONUS BR @ SUN PRAIRIE,WI",
 			"uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-054277605/",
 			"comid": "13293474",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-054277605/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-054277605/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -178,7 +178,7 @@
 			"name": "SHONUS DENT BASIN LOWER POND OUTL @ SUN PRAIRIE,WI",
 			"uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-05427759/",
 			"comid": "13293474",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427759/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427759/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -193,7 +193,7 @@
 			"name": "TOKEN CREEK TRIB. @ STONEHAVEN DR @ SUN PRAIRIE,WI",
 			"uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-05427761/",
 			"comid": "13293474",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427761/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427761/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -208,7 +208,7 @@
 			"name": "Token Creek - Egre Rd crossing DS 30 Yds of bridge (culvert) crossing",
 			"uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10016554/",
 			"comid": "13294118",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10016554/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10016554/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -223,7 +223,7 @@
 			"name": "Token Creek - 30 Yds DS of Egre Rd crossing at Wagner Farms",
 			"uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10016555/",
 			"comid": "13294118",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10016555/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10016555/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -238,7 +238,7 @@
 			"name": "TOKEN CREEK RAIN GAGE NUMBER 4 NEAR TOKEN CREEK,WI",
 			"uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-431605089151000/",
 			"comid": "13294112",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-431605089151000/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-431605089151000/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -253,7 +253,7 @@
 			"name": "TOKEN CREEK EAST BRANCH SHONUS BR @ SUN PRAIRIE,WI",
 			"uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-054277602/",
 			"comid": "13293474",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-054277602/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-054277602/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -268,7 +268,7 @@
 			"name": "TOKEN CREEK UPSTREAM SHONUS BRNCH @ SUN PRAIRIE,WI",
 			"uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-054277505/",
 			"comid": "13293474",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-054277505/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-054277505/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -283,7 +283,7 @@
 			"name": "Token Creek Trib - Near Sun Prairie WI",
 			"uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-133421/",
 			"comid": "13293474",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-133421/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-133421/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -298,7 +298,7 @@
 			"name": "TOKEN CREEK - TOKEN CREEK AT CTH C",
 			"uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10010941/",
 			"comid": "13293474",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10010941/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10010941/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -313,7 +313,7 @@
 			"name": "SHONUS DENT BASIN UPPER POND OUTL @ SUN PRAIRIE,WI",
 			"uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-05427758/",
 			"comid": "13293474",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427758/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427758/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -328,7 +328,7 @@
 			"name": "TOKEN CREEK TRIBUTARY NEAR SUN PRAIRIE, WI",
 			"uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-05427760/",
 			"comid": "13293474",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427760/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427760/navigation"
 		}
 	}]
 }

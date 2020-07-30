@@ -1,21 +1,21 @@
 [{
 	"source": "Flowlines",
 	"sourceName": "NHDPlus flowlines",
-	"features": "http://owi-test.usgs.gov:8080/test-url/linked-data/v2/wqp/USGS-05427880/navigate/UT/flowlines"
+	"features": "http://owi-test.usgs.gov:8080/test-url/linked-data/v2/wqp/USGS-05427880/navigation/UT/flowlines"
 }, {
 	"source": "huc12pp",
 	"sourceName": "huc12pp",
-	"features": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427880/navigate/UT/huc12pp"
+	"features": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427880/navigation/UT/huc12pp"
 }, {
 	"source": "np21_nwis",
 	"sourceName": "HNDPlusV2_NWIS_Gages",
-	"features": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427880/navigate/UT/np21_nwis"
+	"features": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427880/navigation/UT/np21_nwis"
 }, {
 	"source": "TEST",
 	"sourceName": "TEST Source",
-	"features": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427880/navigate/UT/test"
+	"features": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427880/navigation/UT/test"
 }, {
 	"source": "WQP",
 	"sourceName": "Water Quality Portal",
-	"features": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427880/navigate/UT/wqp"
+	"features": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427880/navigation/UT/wqp"
 }]

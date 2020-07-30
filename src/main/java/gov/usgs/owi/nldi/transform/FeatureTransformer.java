@@ -55,7 +55,7 @@ public class FeatureTransformer extends MapToGeoJsonTransformer {
 			if (StringUtils.hasText(getValue(resultMap, MEASURE))) {
 				jsonGenerator.writeStringField(MEASURE, getValue(resultMap, MEASURE));
 			}
-			jsonGenerator.writeStringField(NAVIGATION, String.join("/", configurationService.getLinkedDataUrl(), source.toLowerCase(), URLEncoder.encode(identifier, DEFAULT_ENCODING), NavigationDao.NAVIGATE));
+			jsonGenerator.writeStringField(NAVIGATION, String.join("/", configurationService.getLinkedDataUrl(), source.toLowerCase(), URLEncoder.encode(identifier, DEFAULT_ENCODING), NavigationDao.NAVIGATION));
 		} catch (IOException e) {
 			throw new RuntimeException("Error writing properties", e);
 		}

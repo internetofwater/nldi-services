@@ -13,7 +13,7 @@
 			"name": "Lagoon du Sud 120 ft west of bridge",
 			"uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10038729/",
 			"comid": "13293852",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10038729/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10038729/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -28,7 +28,7 @@
 			"name": "Yahara River - Area of Open Water",
 			"uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10036008/",
 			"comid": "13297198",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10036008/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10036008/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -43,7 +43,7 @@
 			"name": "Yahara River - Near Stoughton WI",
 			"uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-133550/",
 			"comid": "13297204",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-133550/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-133550/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -58,7 +58,7 @@
 			"name": "Yahara River at Cth N",
 			"uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-133047/",
 			"comid": "13297204",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-133047/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-133047/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -73,7 +73,7 @@
 			"name": "Unnamed Lake",
 			"uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10035612/",
 			"comid": "13297204",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10035612/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10035612/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -88,7 +88,7 @@
 			"name": "YAHARA RIVER NEAR STOUGHTON, WI",
 			"uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-05429720/",
 			"comid": "13297204",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05429720/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05429720/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -103,7 +103,7 @@
 			"name": "YAHARA RIVER NEAR EDGERTON, WI",
 			"uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-05430000/",
 			"comid": "13296756",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05430000/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05430000/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -118,7 +118,7 @@
 			"name": "Yahara River - Near Fulton WI",
 			"uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-543281/",
 			"comid": "13296764",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-543281/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-543281/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -133,7 +133,7 @@
 			"name": "Yahara River at Sth 59 Near Fulton WI",
 			"uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-543226/",
 			"comid": "13296764",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-543226/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-543226/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -148,7 +148,7 @@
 			"name": "Yahara River - Sth 59",
 			"uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10010955/",
 			"comid": "13296764",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10010955/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10010955/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -163,7 +163,7 @@
 			"name": "YAHARA RIVER NEAR FULTON, WI",
 			"uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-05430175/",
 			"comid": "13296764",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05430175/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05430175/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -178,7 +178,7 @@
 			"name": "YAHARA RIVER-QW SITE-NEAR FULTON, WI",
 			"uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-05430200/",
 			"comid": "13296790",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05430200/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05430200/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -193,7 +193,7 @@
 			"name": "RO-04/12E/18-0473",
 			"uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-424824089074501/",
 			"comid": "13297238",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-424824089074501/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-424824089074501/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -208,7 +208,7 @@
 			"name": "YAHARA RIVER - BEL FULTON DAM",
 			"uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-543289/",
 			"comid": "13296798",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-543289/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-543289/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -223,7 +223,7 @@
 			"name": "Yahara River at Cth M At Fulton",
 			"uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-543056/",
 			"comid": "13296798",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-543056/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-543056/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -238,7 +238,7 @@
 			"name": "Yahara River - Highway 184 (Hwy H) At Fulton",
 			"uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10015792/",
 			"comid": "13296798",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10015792/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10015792/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -253,7 +253,7 @@
 			"name": "RO-04/12E/18-0499",
 			"uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-424822089073301/",
 			"comid": "13296798",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-424822089073301/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-424822089073301/navigation"
 		}
 	}]
 }

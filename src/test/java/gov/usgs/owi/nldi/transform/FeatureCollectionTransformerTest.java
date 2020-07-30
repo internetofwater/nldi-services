@@ -46,7 +46,7 @@ public class FeatureCollectionTransformerTest {
 			transformer.endCollection();
 			//need to flush the JsonGenerator to get at output. 
 			transformer.g.flush();
-			assertEquals("{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"geometry\":{},\"properties\":{\"source\":\"\",\"sourceName\":\"\",\"identifier\":\"\",\"name\":\"\",\"uri\":\"\",\"comid\":\"12345\",\"navigation\":\"http://owi-test.usgs.gov:8080/test-url/linked-data///navigate\"}}]}",
+			assertEquals("{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"geometry\":{},\"properties\":{\"source\":\"\",\"sourceName\":\"\",\"identifier\":\"\",\"name\":\"\",\"uri\":\"\",\"comid\":\"12345\",\"navigation\":\"http://owi-test.usgs.gov:8080/test-url/linked-data///navigation\"}}]}",
 				response.getContentAsString());
 		} catch (IOException e) {
 			fail(e.getLocalizedMessage());

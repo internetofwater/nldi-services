@@ -63,11 +63,10 @@ public class LinkedDataController extends BaseController {
 	//swagger documentation for /linked-data endpoint
 	@Operation(summary = "getDataSources", description = "returns a list of data sources")
 	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "OK",
-					content = { @Content(mediaType = "application/json",
-							schema = @Schema(implementation = DataSource.class)) }),
-			@ApiResponse(responseCode = "500", description = "Server error",
-					content = @Content) })
+		@ApiResponse(responseCode = "200", description = "OK", content = { @Content(mediaType = "application/json",
+			schema = @Schema(implementation = DataSource.class)) }),
+		@ApiResponse(responseCode = "500", description = "Server error", content = @Content)
+	})
 	@GetMapping(value="linked-data", produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<Map<String, Object>> getDataSources(HttpServletRequest request, HttpServletResponse response) {
 		BigInteger logId = logService.logRequest(request);
@@ -140,9 +139,10 @@ public class LinkedDataController extends BaseController {
 	}
 
 	//swagger documentation for /linked-data/{featureSource}/{featureID}/navigate endpoint
-	@Operation(summary = "getNavigationTypes", description = "returns valid navigation end points")
+	@Operation(summary = "getNavigateTypes (deprecated)", description = "returns valid navigation end points")
 	@GetMapping(value="linked-data/{featureSource}/{featureID}/navigate", produces=MediaType.APPLICATION_JSON_VALUE)
-	public Map<String, Object> getNavigationTypes(HttpServletRequest request, HttpServletResponse response,
+	@Deprecated
+	public Map<String, Object> getNavigateTypes(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
 			@PathVariable(Parameters.FEATURE_ID) String featureID) throws UnsupportedEncodingException {
 		BigInteger logId = logService.logRequest(request);
@@ -172,6 +172,41 @@ public class LinkedDataController extends BaseController {
 		}
 		return rtn;
 	}
+
+	@Operation(summary = "getNavigationTypes", description = "returns valid navigation end points")
+	@GetMapping(value="linked-data/{featureSource}/{featureID}/navigation", produces=MediaType.APPLICATION_JSON_VALUE)
+	public Map<String, Object> getNavigationTypes(
+		HttpServletRequest request, HttpServletResponse response,
+		@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
+		@PathVariable(Parameters.FEATURE_ID) String featureID) throws UnsupportedEncodingException {
+		BigInteger logId = logService.logRequest(request);
+		Map<String, Object> rtn = new LinkedHashMap<>();
+		try {
+			//Verify that the feature source and identifier are valid
+			Map<String, Object> parameterMap = new HashMap<>();
+			parameterMap.put(LookupDao.FEATURE_SOURCE, featureSource);
+			parameterMap.put(Parameters.FEATURE_ID, featureID);
+			List<Map<String, Object>> results = lookupDao.getList(BaseDao.FEATURE, parameterMap);
+
+			if (null == results || results.isEmpty()) {
+				response.setStatus(HttpStatus.NOT_FOUND.value());
+			} else {
+				rtn.put(UPSTREAM_MAIN,
+					String.join("/", configurationService.getLinkedDataUrl(), featureSource.toLowerCase(), URLEncoder.encode(featureID, FeatureTransformer.DEFAULT_ENCODING), NavigationDao.NAVIGATION, NavigationMode.UM.toString()));
+				rtn.put(UPSTREAM_TRIBUTARIES,
+					String.join("/", configurationService.getLinkedDataUrl(), featureSource.toLowerCase(), URLEncoder.encode(featureID, FeatureTransformer.DEFAULT_ENCODING), NavigationDao.NAVIGATION, NavigationMode.UT.toString()));
+				rtn.put(DOWNSTREAM_MAIN,
+					String.join("/", configurationService.getLinkedDataUrl(), featureSource.toLowerCase(), URLEncoder.encode(featureID, FeatureTransformer.DEFAULT_ENCODING), NavigationDao.NAVIGATION, NavigationMode.DM.toString()));
+				rtn.put(DOWNSTREAM_DIVERSIONS,
+					String.join("/", configurationService.getLinkedDataUrl(), featureSource.toLowerCase(), URLEncoder.encode(featureID, FeatureTransformer.DEFAULT_ENCODING), NavigationDao.NAVIGATION, NavigationMode.DD.toString()));
+			}
+
+		} finally {
+			logService.logRequestComplete(logId, response.getStatus());
+		}
+		return rtn;
+	}
+
 
 	//swagger documentation for /linked-data/{featureSource}/{featureID}/{characteristicType} endpoint
 	@Operation(summary = "getCharacteristicData", description = "returns all characteristics of the given type for the specified feature")
@@ -229,7 +264,7 @@ public class LinkedDataController extends BaseController {
 	}
 
 	//swagger documentation for /linked-data/{featureSource}/{featureID}/navigate/{navigationMode} endpoint
-	@Operation(summary = "getFlowlines", description = "returns the flowlines for the specified navigation in WGS84 lat/lon GeoJSON")
+	@Operation(summary = "getFlowlines (deprecated)", description = "returns the flowlines for the specified navigation in WGS84 lat/lon GeoJSON")
 	@GetMapping(value="linked-data/{featureSource}/{featureID}/navigate/{navigationMode}", produces=MediaType.APPLICATION_JSON_VALUE)
 	@Deprecated
 	public void getFlowlines(HttpServletRequest request, HttpServletResponse response,
@@ -259,9 +294,10 @@ public class LinkedDataController extends BaseController {
 	}
 
 	//swagger documentation for /linked-data/{featureSource}/{featureID}/navigate/{navigationMode}/{dataSource} endpoint
-	@Operation(summary = "getFeatures", description = "Returns all features found along the specified navigation as points in WGS84 lat/lon GeoJSON")
+	@Operation(summary = "getFeatures (deprecated)", description = "Returns all features found along the specified navigation as points in WGS84 lat/lon GeoJSON")
 	@GetMapping(value="linked-data/{featureSource}/{featureID}/navigate/{navigationMode}/{dataSource}", produces=MediaType.APPLICATION_JSON_VALUE)
-	public void getFeatures(HttpServletRequest request, HttpServletResponse response,
+	@Deprecated
+	public void getFeaturesDeprecated(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
 			@PathVariable(Parameters.FEATURE_ID) String featureID,
 			@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode,
@@ -288,11 +324,43 @@ public class LinkedDataController extends BaseController {
 		}
 	}
 
+	//swagger documentation for /linked-data/{featureSource}/{featureID}/navigate/{navigationMode}/{dataSource} endpoint
+	@Operation(summary = "getFeatures", description = "Returns all features found along the specified navigation as points in WGS84 lat/lon GeoJSON")
+	@GetMapping(value="linked-data/{featureSource}/{featureID}/navigation/{navigationMode}/{dataSource}", produces=MediaType.APPLICATION_JSON_VALUE)
+	public void getFeatures(
+		HttpServletRequest request, HttpServletResponse response,
+		@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
+		@PathVariable(Parameters.FEATURE_ID) String featureID,
+		@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode,
+		@PathVariable(value=DATA_SOURCE) String dataSource,
+		@RequestParam(value=Parameters.STOP_COMID, required=false) @Range(min=1, max=Integer.MAX_VALUE) String stopComid,
+		@Parameter(description=Parameters.DISTANCE_DESCRIPTION)
+		@RequestParam(value=Parameters.DISTANCE, required=false, defaultValue=Parameters.MAX_DISTANCE)
+		@Pattern(message=Parameters.DISTANCE_VALIDATION_MESSAGE, regexp=Parameters.DISTANCE_VALIDATION_REGEX) String distance,
+		@RequestParam(value=Parameters.LEGACY, required=false) String legacy) throws Exception {
+
+		BigInteger logId = logService.logRequest(request);
+		try {
+			String comid = getComid(featureSource, featureID);
+			if (null == comid) {
+				response.setStatus(HttpStatus.NOT_FOUND.value());
+			} else {
+				streamFeatures(response, comid, navigationMode, stopComid, distance, dataSource,
+					isLegacy(legacy, navigationMode));
+			}
+		} catch (Exception e) {
+			GlobalDefaultExceptionHandler.handleError(e, response);
+		} finally {
+			logService.logRequestComplete(logId, response.getStatus());
+		}
+	}
+
+
 
 	//swagger documentation for /linked-data/{featureSource}/{featureID}/navigation/{navigationMode} endpoint
-	@Operation(summary = "getNavigateOptions", description = "returns the navigation options")
+	@Operation(summary = "getNavigation", description = "returns the navigation options")
 	@GetMapping(value="linked-data/{featureSource}/{featureID}/navigation/{navigationMode}", produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<Map<String, Object>> getNavigationOptions(
+	public List<Map<String, Object>> getNavigation(
 		HttpServletRequest request, HttpServletResponse response,
 		@PathVariable(LookupDao.FEATURE_SOURCE) String featureSource,
 		@PathVariable(Parameters.FEATURE_ID) String featureID,

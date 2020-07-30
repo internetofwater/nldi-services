@@ -13,7 +13,7 @@
 			"name": "SIXMILE CREEK AT STATE HIGHWAY 19 NEAR WAUNAKEE,WI",
 			"uri": "http://www.waterqualitydata.us/provider/BIODATA/USGS-WI/USGS-05427880/",
 			"comid": "13294132",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427880/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427880/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -28,7 +28,7 @@
 			"name": "SIXMILE CREEK AT STATE HIGHWAY 19 NEAR WAUNAKEE,WI",
 			"uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-05427880/",
 			"comid": "13294132",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427880/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427880/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -43,7 +43,7 @@
 			"name": "BRANDENBURG LAKE - BRANDENBURG LAKE",
 			"uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10001222/",
 			"comid": "13293490",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10001222/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10001222/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -58,7 +58,7 @@
 			"name": "Brandenburg Lake - Brandenburg Lake",
 			"uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-134002/",
 			"comid": "13293490",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-134002/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-134002/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -73,7 +73,7 @@
 			"name": "SIXMILE CREEK - 10 M UPSTREAM OF KINGSLEY RD CROS-SING",
 			"uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10016974/",
 			"comid": "13294132",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10016974/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10016974/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -88,7 +88,7 @@
 			"name": "BARBIAN POND - BARBIAN POND",
 			"uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10001221/",
 			"comid": "13294132",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10001221/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10001221/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -103,7 +103,7 @@
 			"name": "DIEDRICH POND - DIEDRICH POND",
 			"uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10001223/",
 			"comid": "13293464",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10001223/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10001223/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -118,7 +118,7 @@
 			"name": "LOUIS BUECHNER POND - LOUIS BUECHNER POND",
 			"uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10001227/",
 			"comid": "13293490",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10001227/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10001227/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -133,7 +133,7 @@
 			"name": "Sixmile Creek - Woodland Rd Station #2",
 			"uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10017024/",
 			"comid": "13294132",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10017024/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10017024/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -148,7 +148,7 @@
 			"name": "DANE CO MRBI WATERWAY 2 NR SPRINGFIELD CORNERS, WI",
 			"uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-431212089314801/",
 			"comid": "13293462",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-431212089314801/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-431212089314801/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -163,7 +163,7 @@
 			"name": "DANE CO. MRBI TILE NO. 1 NR SPRINGFIELD CORNERS,WI",
 			"uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-431208089314901/",
 			"comid": "13293462",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-431208089314901/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-431208089314901/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -178,7 +178,7 @@
 			"name": "Sixmile Creek at STH 19 (WEST) crossing",
 			"uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10043697/",
 			"comid": "13294132",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10043697/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10043697/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -193,7 +193,7 @@
 			"name": "DANE CO MRBI WATERWAY 2-QW-SPRINGFIELD CORNERS, WI",
 			"uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-431212089314802/",
 			"comid": "13293462",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-431212089314802/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-431212089314802/navigation"
 		}
 	}]
 }

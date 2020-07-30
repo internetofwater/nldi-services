@@ -23,7 +23,7 @@ public class ConfigOpenApi {
                 .components(new Components())
                 .info(new Info()
                         .title("Network Linked Data Index API")
-                        .description("The NLDI is a search service that takes a watershed outlet identifier as a starting point, a navigation mode to perform, and the type of data desired in response to the request. In can provide geospatial representations of the navigation or linked data sources found along the navigation. It also has the ability to return landscape characteristics for the catchment the watershed outlet is contained in or the total upstream basin.")
+                        .description("The NLDI is a search service that takes a watershed outlet identifier as a starting point, a navigation mode to perform, and the type of data desired in response to the request. It can provide geospatial representations of the navigation or linked data sources found along the navigation. It also has the ability to return landscape characteristics for the catchment the watershed outlet is contained in or the total upstream basin.")
                         .version(configurationService.getAppVersion())
                 );
     }

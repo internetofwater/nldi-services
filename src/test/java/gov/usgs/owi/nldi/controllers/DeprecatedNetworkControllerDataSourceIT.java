@@ -21,7 +21,7 @@ import gov.usgs.owi.nldi.transform.FeatureTransformer;
 @SpringBootTest(webEnvironment=WebEnvironment.RANDOM_PORT)
 @DatabaseSetup("classpath:/testData/crawlerSource.xml")
 @DatabaseSetup("classpath:/testData/featureWqp.xml")
-public class NetworkControllerLegacyDataSourceIT extends BaseIT {
+public class DeprecatedNetworkControllerDataSourceIT extends BaseIT {
 
 	@Value("${serverContextPath}")
 	private String context;
@@ -42,7 +42,7 @@ public class NetworkControllerLegacyDataSourceIT extends BaseIT {
 	@Test
 	public void getComidUtTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/comid/13293474/navigation/UT/wqp?legacy=true",
+				"/linked-data/comid/13293474/navigate/UT/wqp",
 				HttpStatus.OK.value(),
 				FeatureTransformer.FEATURE_COUNT_HEADER,
 				"22",
@@ -55,7 +55,7 @@ public class NetworkControllerLegacyDataSourceIT extends BaseIT {
 	@Test
 	public void getComidUtDistanceTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/comid/13297246/navigation/UT/wqp?distance=10&legacy=true",
+				"/linked-data/comid/13297246/navigate/UT/wqp?distance=10",
 				HttpStatus.OK.value(),
 				FeatureTransformer.FEATURE_COUNT_HEADER,
 				"6",
@@ -65,11 +65,51 @@ public class NetworkControllerLegacyDataSourceIT extends BaseIT {
 				false);
 	}
 
+	@Test
+	public void getComidUtDistanceTestEmpty() throws Exception {
+		assertEntity(restTemplate,
+				"/linked-data/comid/13297246/navigate/UT/wqp?distance=",
+				HttpStatus.OK.value(),
+				FeatureTransformer.FEATURE_COUNT_HEADER,
+				"91",
+				BaseController.MIME_TYPE_GEOJSON,
+                getCompareFile(RESULT_FOLDER, "comid_13297246_UT_distance_empty.json"),
+				true,
+				false);
+	}
+
+	@Test
+	public void getComidUtDistanceTestAboveMax() throws Exception {
+		assertEntity(restTemplate,
+				"/linked-data/comid/13297246/navigate/UT/wqp?distance=10000",
+				HttpStatus.BAD_REQUEST.value(),
+				null,
+				null,
+				null,
+				"getFeaturesDeprecated.distance: distance must be between 1 and 9999 kilometers",
+				false,
+				false);
+	}
+
+
+	@Test
+	public void getComidUtDistanceTestBelowMin() throws Exception {
+		assertEntity(restTemplate,
+				"/linked-data/comid/13297246/navigate/UT/wqp?distance=-1",
+				HttpStatus.BAD_REQUEST.value(),
+				null,
+				null,
+				null,
+				"getFeaturesDeprecated.distance: distance must be between 1 and 9999 kilometers",
+				false,
+				false);
+	}
+
 	//UM Testing
 	@Test
 	public void getComidUmTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/comid/13293474/navigation/UM/wqp?legacy=true",
+				"/linked-data/comid/13293474/navigate/UM/wqp",
 				HttpStatus.OK.value(),
 				FeatureTransformer.FEATURE_COUNT_HEADER,
 				"17",
@@ -82,7 +122,7 @@ public class NetworkControllerLegacyDataSourceIT extends BaseIT {
 	@Test
 	public void getComidUmDistanceTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/comid/13297246/navigation/UM/wqp?distance=10&legacy=true",
+				"/linked-data/comid/13297246/navigate/UM/wqp?distance=10",
 				HttpStatus.OK.value(),
 				FeatureTransformer.FEATURE_COUNT_HEADER,
 				"6",
@@ -96,7 +136,7 @@ public class NetworkControllerLegacyDataSourceIT extends BaseIT {
 	@Test
 	public void getComidDmTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/comid/13296790/navigation/DM/wqp?legacy=true",
+				"/linked-data/comid/13296790/navigate/DM/wqp",
 				HttpStatus.OK.value(),
 				FeatureTransformer.FEATURE_COUNT_HEADER,
 				"6",
@@ -108,24 +148,22 @@ public class NetworkControllerLegacyDataSourceIT extends BaseIT {
 
 	@Test
 	public void getComidDmDistanceTest() throws Exception {
-		System.err.println("XYZ enter test");
-		String actualbody = assertEntity(restTemplate,
-				"/linked-data/comid/13293474/navigation/DM/wqp?distance=10&legacy=true",
+		assertEntity(restTemplate,
+				"/linked-data/comid/13293474/navigate/DM/wqp?distance=10",
 				HttpStatus.OK.value(),
 				FeatureTransformer.FEATURE_COUNT_HEADER,
 				"31",
-				BaseController.MIME_TYPE_GEOJSON,
-				getCompareFile(RESULT_FOLDER, "comid_13293474_DM_distance_10.json"),
+				null,
+				null,
 				true,
 				false);
-		System.err.println("XYZ actualbody" + actualbody);
 	}
 
 	//DD Testing
 	@Test
 	public void getComidDdTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/comid/13294310/navigation/DD/wqp?legacy=true",
+				"/linked-data/comid/13294310/navigate/DD/wqp",
 				HttpStatus.OK.value(),
 				FeatureTransformer.FEATURE_COUNT_HEADER,
 				"17",
@@ -138,7 +176,7 @@ public class NetworkControllerLegacyDataSourceIT extends BaseIT {
 	@Test
 	public void getComidDdDistanceTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/comid/13294310/navigation/DD/wqp?distance=11&legacy=true",
+				"/linked-data/comid/13294310/navigate/DD/wqp?distance=11",
 				HttpStatus.OK.value(),
 				FeatureTransformer.FEATURE_COUNT_HEADER,
 				"1",
@@ -152,12 +190,12 @@ public class NetworkControllerLegacyDataSourceIT extends BaseIT {
 	@Test
 	public void getComidPpStopComidInvalidTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/comid/13297246/navigation/PP/wqp?stopComid=13297198&legacy=true",
+				"/linked-data/comid/13297246/navigate/PP/wqp?stopComid=13297198",
 				HttpStatus.BAD_REQUEST.value(),
 				null,
 				null,
-				MediaType.APPLICATION_JSON_VALUE,
-				getCompareFile(RESULT_FOLDER, "comid_13297246_PP_stop_13297198.json"),
+				null,
+				null,
 				true,
 				true);
 	}
@@ -165,7 +203,7 @@ public class NetworkControllerLegacyDataSourceIT extends BaseIT {
 	@Test
 	public void getComidPpStopComidTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/comid/13297198/navigation/PP/wqp?stopComid=13297246&legacy=true",
+				"/linked-data/comid/13297198/navigate/PP/wqp?stopComid=13297246",
 				HttpStatus.OK.value(),
 				FeatureTransformer.FEATURE_COUNT_HEADER,
 				"16",
@@ -175,4 +213,30 @@ public class NetworkControllerLegacyDataSourceIT extends BaseIT {
 				false);
 	}
 
+	//Parameter Error Testing
+	@Test
+	public void badNavigationModeTest() throws Exception {
+		assertEntity(restTemplate,
+				"/linked-data/comid/13297198/navigate/XX/wqp",
+				HttpStatus.BAD_REQUEST.value(),
+				null,
+				null,
+				null,
+				"getFeaturesDeprecated.navigationMode: must match \"DD|DM|PP|UT|UM\"",
+				false,
+				false);
+	}
+
+	@Test
+	public void getBasinTest() throws Exception {
+		assertEntity(restTemplate,
+				"/linked-data/comid/13297246/navigate/UT/basin",
+				HttpStatus.OK.value(),
+				null,
+				null,
+				BaseController.MIME_TYPE_GEOJSON,
+				null,
+				false,
+				false);
+	}
 }

@@ -196,7 +196,7 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 	@DatabaseSetup("classpath:/testData/featureWqp.xml")
 	public void getNavigationTypesTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/wqp/USGS-05427880/navigate",
+				"/linked-data/wqp/USGS-05427880/navigation",
 				HttpStatus.OK.value(),
 				null,
 				null,
@@ -209,7 +209,7 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 	@Test
 	public void getNavigationTypesNotFoundTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/wqx/USGS-05427880/navigate",
+				"/linked-data/wqx/USGS-05427880/navigation",
 				HttpStatus.NOT_FOUND.value(),
 				null,
 				null,
@@ -219,7 +219,7 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 				false);
 
 		assertEntity(restTemplate,
-				"/linked-data/wqp/USGX-05427880/navigate",
+				"/linked-data/wqp/USGX-05427880/navigation",
 				HttpStatus.NOT_FOUND.value(),
 				null,
 				null,

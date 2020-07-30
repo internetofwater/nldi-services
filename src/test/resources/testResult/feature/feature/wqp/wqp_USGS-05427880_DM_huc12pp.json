@@ -13,7 +13,7 @@
 			"name": "070900020601",
 			"uri": "070900020601",
 			"comid": "13293480",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/huc12pp/070900020601/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/huc12pp/070900020601/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -28,7 +28,7 @@
 			"name": "070900020602",
 			"uri": "070900020602",
 			"comid": "13294300",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/huc12pp/070900020602/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/huc12pp/070900020602/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -43,7 +43,7 @@
 			"name": "070900020604",
 			"uri": "070900020604",
 			"comid": "13294312",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/huc12pp/070900020604/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/huc12pp/070900020604/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -58,7 +58,7 @@
 			"name": "070900020702",
 			"uri": "070900020702",
 			"comid": "13302592",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/huc12pp/070900020702/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/huc12pp/070900020702/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -73,7 +73,7 @@
 			"name": "070900020703",
 			"uri": "070900020703",
 			"comid": "13294360",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/huc12pp/070900020703/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/huc12pp/070900020703/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -88,7 +88,7 @@
 			"name": "070900020902",
 			"uri": "070900020902",
 			"comid": "13296606",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/huc12pp/070900020902/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/huc12pp/070900020902/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -103,7 +103,7 @@
 			"name": "070900020903",
 			"uri": "070900020903",
 			"comid": "13297196",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/huc12pp/070900020903/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/huc12pp/070900020903/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -118,7 +118,7 @@
 			"name": "070900020904",
 			"uri": "070900020904",
 			"comid": "13296756",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/huc12pp/070900020904/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/huc12pp/070900020904/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -133,7 +133,7 @@
 			"name": "070900020905",
 			"uri": "070900020905",
 			"comid": "13296798",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/huc12pp/070900020905/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/huc12pp/070900020905/navigation"
 		}
 	}]
 }

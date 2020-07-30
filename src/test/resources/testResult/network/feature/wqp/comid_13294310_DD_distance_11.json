@@ -13,7 +13,7 @@
 			"name": "Lagoon du Sud 120 ft west of bridge",
 			"uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10038729/",
 			"comid": "13293852",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10038729/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10038729/navigation"
 		}
 	}
 ]

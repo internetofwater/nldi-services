@@ -245,7 +245,7 @@ public class LinkedDataControllerTest {
 		verify(logService, times(3)).logRequest(any(HttpServletRequest.class));
 		verify(logService, times(3)).logRequestComplete(any(BigInteger.class), any(int.class));
 		assertEquals(HttpStatus.OK.value(), response.getStatus());
-		assertEquals("{upstreamMain=http://owi-test.usgs.gov:8080/test-url/linked-data/test/test123/navigate/UM, upstreamTributaries=http://owi-test.usgs.gov:8080/test-url/linked-data/test/test123/navigate/UT, downstreamMain=http://owi-test.usgs.gov:8080/test-url/linked-data/test/test123/navigate/DM, downstreamDiversions=http://owi-test.usgs.gov:8080/test-url/linked-data/test/test123/navigate/DD}",
+		assertEquals("{upstreamMain=http://owi-test.usgs.gov:8080/test-url/linked-data/test/test123/navigation/UM, upstreamTributaries=http://owi-test.usgs.gov:8080/test-url/linked-data/test/test123/navigation/UT, downstreamMain=http://owi-test.usgs.gov:8080/test-url/linked-data/test/test123/navigation/DM, downstreamDiversions=http://owi-test.usgs.gov:8080/test-url/linked-data/test/test123/navigation/DD}",
 				out.toString());
 	}
 
@@ -268,7 +268,7 @@ public class LinkedDataControllerTest {
 
 	@Test
 	public void getNavigationOptionsTestBad() throws UnsupportedEncodingException {
-		controller.getNavigationOptions(request, response, null, "DoesntMatter", "UT");
+		controller.getNavigation(request, response, null, "DoesntMatter", "UT");
 		verify(logService, times(2)).logRequest(any(HttpServletRequest.class));
 		verify(logService, times(2)).logRequestComplete(any(BigInteger.class), any(int.class));
 		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR.value(), response.getStatus());
