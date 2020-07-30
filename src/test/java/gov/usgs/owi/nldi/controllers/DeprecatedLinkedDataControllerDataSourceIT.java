@@ -19,6 +19,11 @@ import gov.usgs.owi.nldi.transform.FeatureTransformer;
 @EnableWebMvc
 @SpringBootTest(webEnvironment=WebEnvironment.RANDOM_PORT)
 @DatabaseSetup("classpath:/testData/crawlerSource.xml")
+
+// This test class contains tests for the deprecated "navigate" endpoints.  Don't add
+// new tests here and delete this class when we drop support for those endpoints.
+// The new tests that are tied to the new "navigation" endpoints are in
+// LinkedDataControllerDataSourceIT
 public class DeprecatedLinkedDataControllerDataSourceIT extends BaseIT {
 
 	@Value("${serverContextPath}")
