@@ -609,20 +609,4 @@ public class NetworkControllerFlowlineIT extends BaseIT {
 			false);
 	}
 
-	//Navigation Types Testing
-	@Test
-	@DatabaseSetup("classpath:/testData/featureWqp.xml")
-	public void getNavigationOptionsTest() throws Exception {
-		String actualbody = assertEntity(restTemplate,
-			"/linked-data/comid/13294390/navigation/UT?f=json",
-			HttpStatus.OK.value(),
-			null,
-			null,
-			MediaType.APPLICATION_JSON_VALUE,
-			null,
-			true,
-			false);
-		assertThat(new JSONArray(actualbody),
-			sameJSONArrayAs(new JSONArray(getCompareFile(RESULT_FOLDER, "navigation.json"))).allowingAnyArrayOrdering());
-	}
 }

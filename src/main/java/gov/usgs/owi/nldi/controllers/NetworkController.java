@@ -1,7 +1,9 @@
 package gov.usgs.owi.nldi.controllers;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,33 +43,6 @@ public class NetworkController extends BaseController {
 			LogService inLogService) {
 		super(inLookupDao, inStreamingDao, inNavigation, inParameters, configurationService, inLogService);
 	}
-
-
-	//swagger documentation for /linked-data/comid/navigation/{navigationMode} endpoint
-	@Operation(summary = "getNavigation", description = "returns the navigation options")
-	@GetMapping(value="linked-data/comid/navigation/{navigationMode}", produces=MediaType.APPLICATION_JSON_VALUE)
-	public void getNavigation(
-		HttpServletRequest request, HttpServletResponse response,
-		@PathVariable(Parameters.COMID) @Range(min=1, max=Integer.MAX_VALUE) String comid,
-		@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode,
-		@RequestParam(value=Parameters.STOP_COMID, required=false) @Range(min=1, max=Integer.MAX_VALUE) String stopComid,
-		@Parameter(description=Parameters.DISTANCE_DESCRIPTION)
-		@RequestParam(value=Parameters.DISTANCE, required=false, defaultValue=Parameters.MAX_DISTANCE)
-		@Pattern(message=Parameters.DISTANCE_VALIDATION_MESSAGE, regexp=Parameters.DISTANCE_VALIDATION_REGEX) String distance,
-		@RequestParam(value=Parameters.LEGACY, required=false) String legacy) throws Exception {
-
-		BigInteger logId = logService.logRequest(request);
-
-		try {
-			streamFlowLines(null, comid, navigationMode, stopComid, distance, isLegacy(legacy, navigationMode));
-
-		} catch (Exception e) {
-			GlobalDefaultExceptionHandler.handleError(e, response);
-		} finally {
-			logService.logRequestComplete(logId, response.getStatus());
-		}
-	}
-
 
 	//swagger documentation for /linked-data/{featureSource}/{featureID}/navigate/{navigationMode} endpoint
 	@Operation(summary = "getFlowlines", description = "returns the flowlines for the specified navigation in WGS84 lat/lon GeoJSON")
