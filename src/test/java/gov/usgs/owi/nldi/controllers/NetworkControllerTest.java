@@ -63,6 +63,15 @@ public class NetworkControllerTest {
 	}
 
 	@Test
+	public void getNavigationTest() throws Exception {
+		controller.getNavigation(request, response, null, null, null, null, null);
+		verify(logService).logRequest(any(HttpServletRequest.class));
+		verify(logService).logRequestComplete(any(BigInteger.class), any(int.class));
+		//this is a INTERNAL_SERVER_ERROR because of NPEs that shouldn't happen in real life.
+		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR.value(), response.getStatus());
+	}
+
+	@Test
 	public void getFeaturesTest() throws Exception {
 		controller.getFeatures(request, response, null, null, null, null, null, null);
 		verify(logService).logRequest(any(HttpServletRequest.class));
