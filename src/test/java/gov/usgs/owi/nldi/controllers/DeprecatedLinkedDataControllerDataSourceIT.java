@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
@@ -35,10 +36,15 @@ public class DeprecatedLinkedDataControllerDataSourceIT extends BaseIT {
 	@Autowired
 	private TestRestTemplate restTemplate;
 
+
+	private static final String RESULT_FOLDER  = "feature/other/";
+
 	@BeforeEach
 	public void setUp() {
 		urlRoot = "http://localhost:" + port + context;
 	}
+
+
 
 	//Navigation Within Datasource Testing
 	@Test
@@ -156,5 +162,48 @@ public class DeprecatedLinkedDataControllerDataSourceIT extends BaseIT {
 				false,
 				false);
 	}
+
+	//Navigation Types Testing
+	@Test
+	@DatabaseSetup("classpath:/testData/featureWqp.xml")
+	public void getNavigationTypesTest() throws Exception {
+		String compareFile = getCompareFile(RESULT_FOLDER, "wqp_USGS-05427880.json");
+		// The compare file is shared between the current test in LinkedDataControllerOtherIT.java
+		// and the deprecated one here, so adjust it.
+		compareFile = compareFile.replace("navigation", "navigate");
+		assertEntity(restTemplate,
+			"/linked-data/wqp/USGS-05427880/navigate",
+			HttpStatus.OK.value(),
+			null,
+			null,
+			MediaType.APPLICATION_JSON_VALUE,
+			compareFile,
+			true,
+			false);
+	}
+
+	@Test
+	public void getNavigationTypesNotFoundTest() throws Exception {
+		assertEntity(restTemplate,
+			"/linked-data/wqx/USGS-05427880/navigate",
+			HttpStatus.NOT_FOUND.value(),
+			null,
+			null,
+			MediaType.APPLICATION_JSON_VALUE,
+			null,
+			true,
+			false);
+
+		assertEntity(restTemplate,
+			"/linked-data/wqp/USGX-05427880/navigate",
+			HttpStatus.NOT_FOUND.value(),
+			null,
+			null,
+			MediaType.APPLICATION_JSON_VALUE,
+			null,
+			true,
+			false);
+	}
+
 
 }

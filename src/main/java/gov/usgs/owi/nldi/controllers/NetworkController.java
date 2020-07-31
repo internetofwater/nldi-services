@@ -108,8 +108,6 @@ public class NetworkController extends BaseController {
 		BigInteger logId = logService.logRequest(request);
 		try {
 			streamFlowLines(response, comid, navigationMode, stopComid, distance, isLegacy(legacy, navigationMode));
-		} catch (Exception e) {
-			GlobalDefaultExceptionHandler.handleError(e, response);
 		} finally {
 			logService.logRequestComplete(logId, response.getStatus());
 		}
@@ -132,8 +130,6 @@ public class NetworkController extends BaseController {
 		BigInteger logId = logService.logRequest(request);
 		try {
 			streamFeatures(response, comid, navigationMode, stopComid, distance, dataSource, isLegacy(legacy, navigationMode));
-		} catch (Exception e) {
-			GlobalDefaultExceptionHandler.handleError(e, response);
 		} finally {
 			logService.logRequestComplete(logId, response.getStatus());
 		}

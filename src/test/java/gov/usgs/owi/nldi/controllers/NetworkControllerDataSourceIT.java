@@ -17,6 +17,8 @@ import com.github.springtestdbunit.annotation.DatabaseSetup;
 import gov.usgs.owi.nldi.BaseIT;
 import gov.usgs.owi.nldi.transform.FeatureTransformer;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 @EnableWebMvc
 @SpringBootTest(webEnvironment=WebEnvironment.RANDOM_PORT)
 @DatabaseSetup("classpath:/testData/crawlerSource.xml")
@@ -32,6 +34,8 @@ public class NetworkControllerDataSourceIT extends BaseIT {
 	@Autowired
 	private TestRestTemplate restTemplate;
 	private static final String RESULT_FOLDER  = "network/feature/wqp/";
+	private static final String RESULT_FLOWLINE_FOLDER  = "network/flowline/";
+
 
 	@BeforeEach
 	public void setUp() {
@@ -239,4 +243,35 @@ public class NetworkControllerDataSourceIT extends BaseIT {
 				false,
 				false);
 	}
+
+
+	//Navigation Types Testing
+	@Test
+	@DatabaseSetup("classpath:/testData/featureWqp.xml")
+	public void getNavigationTypesTest() throws Exception {
+		assertEntity(restTemplate,
+			"/linked-data/comid/13294390/navigation",
+			HttpStatus.OK.value(),
+			null,
+			null,
+			MediaType.APPLICATION_JSON_VALUE,
+			getCompareFile(RESULT_FLOWLINE_FOLDER, "navigation_types.json"),
+			true,
+			false);
+	}
+
+	@Test
+	public void getNavigationTypesNotFoundTest() throws Exception {
+		assertEntity(restTemplate,
+			"/linked-data/comid/123/navigate",
+			HttpStatus.NOT_FOUND.value(),
+			null,
+			null,
+			MediaType.APPLICATION_JSON_VALUE,
+			null,
+			true,
+			false);
+
+	}
+
 }

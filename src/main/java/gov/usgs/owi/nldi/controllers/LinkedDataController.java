@@ -317,8 +317,6 @@ public class LinkedDataController extends BaseController {
 				streamFeatures(response, comid, navigationMode, stopComid, distance, dataSource,
 						isLegacy(legacy, navigationMode));
 			}
-		} catch (Exception e) {
-			GlobalDefaultExceptionHandler.handleError(e, response);
 		} finally {
 			logService.logRequestComplete(logId, response.getStatus());
 		}
