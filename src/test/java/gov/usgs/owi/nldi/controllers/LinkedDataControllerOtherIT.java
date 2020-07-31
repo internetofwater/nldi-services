@@ -196,7 +196,7 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 	@DatabaseSetup("classpath:/testData/featureWqp.xml")
 	public void getNavigationTypesTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/wqp/USGS-05427880/navigate",
+				"/linked-data/wqp/USGS-05427880/navigation",
 				HttpStatus.OK.value(),
 				null,
 				null,
@@ -209,7 +209,7 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 	@Test
 	public void getNavigationTypesNotFoundTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/wqx/USGS-05427880/navigate",
+				"/linked-data/wqx/USGS-05427880/navigation",
 				HttpStatus.NOT_FOUND.value(),
 				null,
 				null,
@@ -219,7 +219,7 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 				false);
 
 		assertEntity(restTemplate,
-				"/linked-data/wqp/USGX-05427880/navigate",
+				"/linked-data/wqp/USGX-05427880/navigation",
 				HttpStatus.NOT_FOUND.value(),
 				null,
 				null,
@@ -227,6 +227,40 @@ public class LinkedDataControllerOtherIT extends BaseIT {
 				null,
 				true,
 				false);
+	}
+
+
+	//Navigation Types Testing
+	@Test
+	@DatabaseSetup("classpath:/testData/featureWqp.xml")
+	public void getNavigationOptionsTest() throws Exception {
+		String actualbody = assertEntity(restTemplate,
+			"/linked-data/wqp/USGS-05427880/navigation/UT?f=json",
+			HttpStatus.OK.value(),
+			null,
+			null,
+			MediaType.APPLICATION_JSON_VALUE,
+			null,
+			true,
+			false);
+		assertThat(new JSONArray(actualbody),
+			sameJSONArrayAs(new JSONArray(getCompareFile(RESULT_FOLDER, "navigation.json"))).allowingAnyArrayOrdering());
+
+	}
+
+	@Test
+	@DatabaseSetup("classpath:/testData/featureWqp.xml")
+	public void getNavigationOptionsTestBadRequest() throws Exception {
+		assertEntity(restTemplate,
+			"/linked-data/wqp/USGS-05427880/navigation/XX",
+			HttpStatus.BAD_REQUEST.value(),
+			null,
+			null,
+			null,
+			null,
+			false,
+			false);
+
 	}
 
 }

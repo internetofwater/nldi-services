@@ -44,6 +44,33 @@ public class NetworkController extends BaseController {
 		super(inLookupDao, inStreamingDao, inNavigation, inParameters, configurationService, inLogService);
 	}
 
+
+	//swagger documentation for /linked-data/comid/navigation/{navigationMode} endpoint
+	@Operation(summary = "getNavigation", description = "returns the navigation options")
+	@GetMapping(value="linked-data/comid/navigation/{navigationMode}", produces=MediaType.APPLICATION_JSON_VALUE)
+	public void getNavigation(
+		HttpServletRequest request, HttpServletResponse response,
+		@PathVariable(Parameters.COMID) @Range(min=1, max=Integer.MAX_VALUE) String comid,
+		@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode,
+		@RequestParam(value=Parameters.STOP_COMID, required=false) @Range(min=1, max=Integer.MAX_VALUE) String stopComid,
+		@Parameter(description=Parameters.DISTANCE_DESCRIPTION)
+		@RequestParam(value=Parameters.DISTANCE, required=false, defaultValue=Parameters.MAX_DISTANCE)
+		@Pattern(message=Parameters.DISTANCE_VALIDATION_MESSAGE, regexp=Parameters.DISTANCE_VALIDATION_REGEX) String distance,
+		@RequestParam(value=Parameters.LEGACY, required=false) String legacy) throws Exception {
+
+		BigInteger logId = logService.logRequest(request);
+
+		try {
+			streamFlowLines(response, comid, navigationMode, stopComid, distance, isLegacy(legacy, navigationMode));
+
+		} catch (Exception e) {
+			GlobalDefaultExceptionHandler.handleError(e, response);
+		} finally {
+			logService.logRequestComplete(logId, response.getStatus());
+		}
+	}
+
+
 	//swagger documentation for /linked-data/{featureSource}/{featureID}/navigate/{navigationMode} endpoint
 	@Operation(summary = "getFlowlines", description = "returns the flowlines for the specified navigation in WGS84 lat/lon GeoJSON")
 	@GetMapping(value="linked-data/comid/{comid}/navigate/{navigationMode}", produces= MediaType.APPLICATION_JSON_VALUE)
@@ -73,10 +100,40 @@ public class NetworkController extends BaseController {
 		}
 	}
 
+
+	//swagger documentation for /linked-data/{featureSource}/{featureID}/navigation/{navigationMode} endpoint
+	@Operation(summary = "getFlowlines", description = "returns the flowlines for the specified navigation in WGS84 lat/lon GeoJSON")
+	@GetMapping(value="linked-data/comid/{comid}/navigation/{navigationMode}/flowlines", produces=MediaType.APPLICATION_JSON_VALUE)
+	public void getNavigationFlowlines(
+		HttpServletRequest request, HttpServletResponse response,
+		@PathVariable(Parameters.COMID) @Range(min=1, max=Integer.MAX_VALUE) String comid,
+		@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode,
+		@RequestParam(value=Parameters.STOP_COMID, required=false) @Range(min=1, max=Integer.MAX_VALUE) String stopComid,
+		@Parameter(description=Parameters.DISTANCE_DESCRIPTION)
+		@RequestParam(value=Parameters.DISTANCE, required=false, defaultValue=Parameters.MAX_DISTANCE)
+		@Pattern(message=Parameters.DISTANCE_VALIDATION_MESSAGE, regexp=Parameters.DISTANCE_VALIDATION_REGEX) String distance,
+		@RequestParam(value=Parameters.LEGACY, required=false) String legacy) throws Exception {
+
+		BigInteger logId = logService.logRequest(request);
+		if (stopComid != null && (Integer.parseInt(stopComid) < Integer.parseInt(comid))) {
+			logService.logRequestComplete(logId, HttpStatus.BAD_REQUEST.value());
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, BaseController.COMID_MISMATCH_ERROR);
+		}
+		try {
+			streamFlowLines(response, comid, navigationMode, stopComid, distance, isLegacy(legacy, navigationMode));
+		} catch (Exception e) {
+			GlobalDefaultExceptionHandler.handleError(e, response);
+		} finally {
+			logService.logRequestComplete(logId, response.getStatus());
+		}
+	}
+
+
 	//swagger documentation for /linked-data/{featureSource}/{featureID}/navigate/{navigationMode}/{dataSource} endpoint
-	@Operation(summary = "getFeatures", description = "Returns all features found along the specified navigation as points in WGS84 lat/lon GeoJSON")
+	@Operation(summary = "getFeatures (deprecated)", description = "Returns all features found along the specified navigation as points in WGS84 lat/lon GeoJSON")
 	@GetMapping(value="linked-data/comid/{comid}/navigate/{navigationMode}/{dataSource}", produces= MediaType.APPLICATION_JSON_VALUE)
-	public void getFeatures(HttpServletRequest request, HttpServletResponse response,
+	@Deprecated
+	public void getFeaturesDeprecated(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable(Parameters.COMID) @Range(min=1, max=Integer.MAX_VALUE) String comid,
 			@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode,
 			@PathVariable(value=DATA_SOURCE) String dataSource,
@@ -91,6 +148,34 @@ public class NetworkController extends BaseController {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, BaseController.COMID_MISMATCH_ERROR);
 		}
 
+		try {
+			streamFeatures(response, comid, navigationMode, stopComid, distance, dataSource, isLegacy(legacy, navigationMode));
+		} catch (Exception e) {
+			GlobalDefaultExceptionHandler.handleError(e, response);
+		} finally {
+			logService.logRequestComplete(logId, response.getStatus());
+		}
+	}
+
+	//swagger documentation for /linked-data/{featureSource}/{featureID}/navigation/{navigationMode}/{dataSource} endpoint
+	@Operation(summary = "getFeatures", description = "Returns all features found along the specified navigation as points in WGS84 lat/lon GeoJSON")
+	@GetMapping(value="linked-data/comid/{comid}/navigation/{navigationMode}/{dataSource}", produces= MediaType.APPLICATION_JSON_VALUE)
+	public void getFeatures(
+		HttpServletRequest request, HttpServletResponse response,
+		@PathVariable(Parameters.COMID) @Range(min=1, max=Integer.MAX_VALUE) String comid,
+		@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode,
+		@PathVariable(value=DATA_SOURCE) String dataSource,
+		@RequestParam(value=Parameters.STOP_COMID, required=false) @Range(min=1, max=Integer.MAX_VALUE) String stopComid,
+		@Parameter(description=Parameters.DISTANCE_DESCRIPTION)
+		@RequestParam(value=Parameters.DISTANCE, required=false, defaultValue=Parameters.MAX_DISTANCE)
+		@Pattern(message=Parameters.DISTANCE_VALIDATION_MESSAGE, regexp=Parameters.DISTANCE_VALIDATION_REGEX) String distance,
+		@RequestParam(value=Parameters.LEGACY, required=false) String legacy) throws Exception {
+
+		BigInteger logId = logService.logRequest(request);
+		if (stopComid != null && (Integer.parseInt(stopComid) < Integer.parseInt(comid))) {
+			logService.logRequestComplete(logId, HttpStatus.BAD_REQUEST.value());
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, BaseController.COMID_MISMATCH_ERROR);
+		}
 		try {
 			streamFeatures(response, comid, navigationMode, stopComid, distance, dataSource, isLegacy(legacy, navigationMode));
 		} catch (Exception e) {
@@ -123,8 +208,6 @@ public class NetworkController extends BaseController {
 			parameterMap.put(Parameters.FEATURE_ID, comid);
 			addContentHeader(response);
 			streamResults(transformer, BaseDao.FEATURE, parameterMap);
-		} catch (Exception e) {
-			GlobalDefaultExceptionHandler.handleError(e, response);
 		} finally {
 			logService.logRequestComplete(logId, response.getStatus());
 		}

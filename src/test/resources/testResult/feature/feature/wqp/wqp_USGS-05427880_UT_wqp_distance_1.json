@@ -17,7 +17,7 @@
         "name": "Sixmile Creek at STH 19 (WEST) crossing",
         "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10043697/",
         "comid": "13294132",
-        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10043697/navigate"
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10043697/navigation"
       }
     },
     {
@@ -36,7 +36,7 @@
         "name": "Sixmile Creek - Woodland Rd Station #2",
         "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10017024/",
         "comid": "13294132",
-        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10017024/navigate"
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10017024/navigation"
       }
     },
     {
@@ -55,7 +55,7 @@
         "name": "SIXMILE CREEK - 10 M UPSTREAM OF KINGSLEY RD CROS-SING",
         "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10016974/",
         "comid": "13294132",
-        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10016974/navigate"
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10016974/navigation"
       }
     },
     {
@@ -74,7 +74,7 @@
         "name": "BARBIAN POND - BARBIAN POND",
         "uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10001221/",
         "comid": "13294132",
-        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10001221/navigate"
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10001221/navigation"
       }
     },
     {
@@ -93,7 +93,7 @@
         "name": "SIXMILE CREEK AT STATE HIGHWAY 19 NEAR WAUNAKEE,WI",
         "uri": "http://www.waterqualitydata.us/provider/BIODATA/USGS-WI/USGS-05427880/",
         "comid": "13294132",
-        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427880/navigate"
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427880/navigation"
       }
     },
     {
@@ -112,7 +112,7 @@
         "name": "SIXMILE CREEK AT STATE HIGHWAY 19 NEAR WAUNAKEE,WI",
         "uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-05427880/",
         "comid": "13294132",
-        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427880/navigate"
+        "navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427880/navigation"
       }
     }
   ]

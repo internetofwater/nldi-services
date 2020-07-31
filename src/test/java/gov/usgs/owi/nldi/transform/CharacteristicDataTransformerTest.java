@@ -12,7 +12,9 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import gov.usgs.owi.nldi.dao.BaseDao;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
+
 
 public class CharacteristicDataTransformerTest {
 
@@ -42,6 +44,22 @@ public class CharacteristicDataTransformerTest {
 		} catch (IOException e) {
 			fail(e.getLocalizedMessage());
 		}
+	}
+
+	@Test
+	public void initJsonTestBad() {
+		boolean runtimeExceptionThrown = false;
+		try {
+			transformer.initJson(transformer.g, null);
+			transformer.g.flush();
+			assertEquals(INIT_JSON, response.getContentAsString());
+
+		} catch (RuntimeException e) {
+			runtimeExceptionThrown = true;
+		} catch (Throwable t) {
+			fail(t);
+		}
+		assertTrue(runtimeExceptionThrown);
 	}
 
 	@Test

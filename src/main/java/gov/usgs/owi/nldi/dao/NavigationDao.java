@@ -9,7 +9,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class NavigationDao extends BaseDao {
 
+	//deprecated
 	public static final String NAVIGATE = "navigate";
+
+	public static final String NAVIGATION = "navigation";
+
 	public static final String NAVIGATE_CACHED = NAVIGATE + "_cached";
 	private static final String NS = NAVIGATE + ".";
 	private static final String GET_CACHE = "getCache";

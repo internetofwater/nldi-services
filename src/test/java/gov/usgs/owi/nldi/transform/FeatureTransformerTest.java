@@ -67,10 +67,36 @@ public class FeatureTransformerTest {
 			transformer.g.flush();
 			assertEquals("{\"source\":\"sourceValue\",\"sourceName\":\"sourceNameValue\",\"identifier\":\"identifierValue\",\"name\":\"nameValue\","
 					+ "\"uri\":\"uriValue\",\"comid\":\"47439231\",\"reachcode\":\"05020002004263\",\"measure\":\"1.38233\","
-					+ "\"navigation\":\"" + configurationService.getLinkedDataUrl() + "/sourcevalue/identifierValue/navigate\"}",
+					+ "\"navigation\":\"" + configurationService.getLinkedDataUrl() + "/sourcevalue/identifierValue/navigation\"}",
 					response.getContentAsString());
 		} catch (IOException e) {
 			fail(e.getLocalizedMessage());
+		}
+	}
+
+	@Test
+	public void writePropertiesTestBad() {
+		Map<String, Object> map = new HashMap<>();
+		map.put(FlowLineTransformer.NHDPLUS_COMID, "13293474");
+		map.put(FeatureTransformer.COMID, "47439231");
+		map.put(FeatureTransformer.IDENTIFIER, "identifierValue");
+		map.put(FeatureTransformer.NAME, "nameValue");
+		map.put(FeatureTransformer.URI, "uriValue");
+		map.put(LookupDao.SOURCE, "sourceValue");
+		map.put(FeatureTransformer.SOURCE_NAME_DB, "sourceNameValue");
+		map.put(FeatureTransformer.REACHCODE, "05020002004263");
+		map.put(FeatureTransformer.MEASURE, 1.3823300000);
+		try {
+			transformer.g.writeStartObject();
+			transformer.writeProperties(transformer.g, null);
+			transformer.g.writeEndObject();
+			//need to flush the JsonGenerator to get at output.
+			transformer.g.flush();
+			fail("should have thrown runtime exception");
+		} catch (RuntimeException e) {
+			//good
+		} catch (Throwable t) {
+			fail(t.getMessage());
 		}
 	}
 
@@ -93,7 +119,7 @@ public class FeatureTransformerTest {
 			transformer.g.flush();
 			assertEquals("{\"source\":\"source2Value\",\"sourceName\":\"sourceName2Value\",\"identifier\":\"identifier2Value\",\"name\":\"name2Value\","
 						+ "\"uri\":\"uri2Value\",\"comid\":\"81149213\","
-						+ "\"navigation\":\"" + configurationService.getLinkedDataUrl() + "/source2value/identifier2Value/navigate\"}",
+						+ "\"navigation\":\"" + configurationService.getLinkedDataUrl() + "/source2value/identifier2Value/navigation\"}",
 						response.getContentAsString());
 		} catch (IOException e) {
 			fail(e.getLocalizedMessage());

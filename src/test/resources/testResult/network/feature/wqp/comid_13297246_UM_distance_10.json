@@ -13,7 +13,7 @@
 			"name": "Yahara River - Highway 184 (Hwy H) At Fulton",
 			"uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-10015792/",
 			"comid": "13296798",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10015792/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-10015792/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -28,7 +28,7 @@
 			"name": "RO-04/12E/18-0473",
 			"uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-424824089074501/",
 			"comid": "13297238",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-424824089074501/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-424824089074501/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -43,7 +43,7 @@
 			"name": "RO-04/12E/18-0499",
 			"uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-424822089073301/",
 			"comid": "13296798",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-424822089073301/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-424822089073301/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -58,7 +58,7 @@
 			"name": "YAHARA RIVER-QW SITE-NEAR FULTON, WI",
 			"uri": "http://www.waterqualitydata.us/provider/NWIS/USGS-WI/USGS-05430200/",
 			"comid": "13296790",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05430200/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05430200/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -73,7 +73,7 @@
 			"name": "Yahara River at Cth M At Fulton",
 			"uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-543056/",
 			"comid": "13296798",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-543056/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-543056/navigation"
 		}
 	}, {
 		"type": "Feature",
@@ -88,7 +88,7 @@
 			"name": "YAHARA RIVER - BEL FULTON DAM",
 			"uri": "http://www.waterqualitydata.us/provider/STORET/WIDNR_WQX/WIDNR_WQX-543289/",
 			"comid": "13296798",
-			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-543289/navigate"
+			"navigation": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/WIDNR_WQX-543289/navigation"
 		}
 	}]
 }

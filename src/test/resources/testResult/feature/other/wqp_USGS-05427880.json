@@ -1,6 +1,6 @@
 {
-	"upstreamMain": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427880/navigate/UM",
-	"upstreamTributaries": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427880/navigate/UT",
-	"downstreamMain": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427880/navigate/DM",
-	"downstreamDiversions": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427880/navigate/DD"
+	"upstreamMain": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427880/navigation/UM",
+	"upstreamTributaries": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427880/navigation/UT",
+	"downstreamMain": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427880/navigation/DM",
+	"downstreamDiversions": "http://owi-test.usgs.gov:8080/test-url/linked-data/wqp/USGS-05427880/navigation/DD"
 }

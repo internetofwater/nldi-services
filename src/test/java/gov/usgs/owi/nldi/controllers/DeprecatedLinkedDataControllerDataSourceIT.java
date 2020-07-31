@@ -19,7 +19,12 @@ import gov.usgs.owi.nldi.transform.FeatureTransformer;
 @EnableWebMvc
 @SpringBootTest(webEnvironment=WebEnvironment.RANDOM_PORT)
 @DatabaseSetup("classpath:/testData/crawlerSource.xml")
-public class LinkedDataControllerDataSourceIT extends BaseIT {
+
+// This test class contains tests for the deprecated "navigate" endpoints.  Don't add
+// new tests here and delete this class when we drop support for those endpoints.
+// The new tests that are tied to the new "navigation" endpoints are in
+// LinkedDataControllerDataSourceIT
+public class DeprecatedLinkedDataControllerDataSourceIT extends BaseIT {
 
 	@Value("${serverContextPath}")
 	private String context;
@@ -40,7 +45,7 @@ public class LinkedDataControllerDataSourceIT extends BaseIT {
 	@DatabaseSetup("classpath:/testData/featureWqp.xml")
 	public void getWqpUtTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/wqp/USGS-05427880/navigation/UT/wqp",
+				"/linked-data/wqp/USGS-05427880/navigate/UT/wqp",
 				HttpStatus.OK.value(),
 				FeatureTransformer.FEATURE_COUNT_HEADER,
 				"13",
@@ -54,7 +59,7 @@ public class LinkedDataControllerDataSourceIT extends BaseIT {
 	@DatabaseSetup("classpath:/testData/featureWqp.xml")
 	public void getWqpUtTestDistance1() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/wqp/USGS-05427880/navigation/UT/wqp?distance=1",
+				"/linked-data/wqp/USGS-05427880/navigate/UT/wqp?distance=1",
 				HttpStatus.OK.value(),
 				FeatureTransformer.FEATURE_COUNT_HEADER,
 				"6",
@@ -70,7 +75,7 @@ public class LinkedDataControllerDataSourceIT extends BaseIT {
 	@DatabaseSetup("classpath:/testData/featureWqp.xml")
 	public void getWqpUtTestDistanceEmpty() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/wqp/USGS-05427880/navigation/UT/wqp?distance=",
+				"/linked-data/wqp/USGS-05427880/navigate/UT/wqp?distance=",
 				HttpStatus.OK.value(),
 				FeatureTransformer.FEATURE_COUNT_HEADER,
 				"13",
@@ -84,12 +89,12 @@ public class LinkedDataControllerDataSourceIT extends BaseIT {
 	@DatabaseSetup("classpath:/testData/featureWqp.xml")
 	public void getWqpUtTestDistanceAboveMax() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/wqp/USGS-05427880/navigation/UT/wqp?distance=10000",
+				"/linked-data/wqp/USGS-05427880/navigate/UT/wqp?distance=10000",
 				HttpStatus.BAD_REQUEST.value(),
 				null,
 				null,
 				null,
-				"getFeatures.distance: distance must be between 1 and 9999 kilometers",
+				"getFeaturesDeprecated.distance: distance must be between 1 and 9999 kilometers",
 				false,
 				false);
 	}
@@ -99,12 +104,12 @@ public class LinkedDataControllerDataSourceIT extends BaseIT {
 	@DatabaseSetup("classpath:/testData/featureWqp.xml")
 	public void getWqpUtTestDistanceBelowMin() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/wqp/USGS-05427880/navigation/UT/wqp?distance=-1",
+				"/linked-data/wqp/USGS-05427880/navigate/UT/wqp?distance=-1",
 				HttpStatus.BAD_REQUEST.value(),
 				null,
 				null,
 				null,
-				"getFeatures.distance: distance must be between 1 and 9999 kilometers",
+				"getFeaturesDeprecated.distance: distance must be between 1 and 9999 kilometers",
 				false,
 				false);
 	}
@@ -115,7 +120,7 @@ public class LinkedDataControllerDataSourceIT extends BaseIT {
 	@DatabaseSetup("classpath:/testData/featureWqp.xml")
 	public void getWqpDmTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/wqp/USGS-05427880/navigation/DM/huc12pp",
+				"/linked-data/wqp/USGS-05427880/navigate/DM/huc12pp",
 				HttpStatus.OK.value(),
 				FeatureTransformer.FEATURE_COUNT_HEADER,
 				"9",
@@ -128,7 +133,7 @@ public class LinkedDataControllerDataSourceIT extends BaseIT {
 	@Test
 	public void badInputTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/wqx/USGS-05427880/navigation/DM/huc12pp",
+				"/linked-data/wqx/USGS-05427880/navigate/DM/huc12pp",
 				HttpStatus.NOT_FOUND.value(),
 				null,
 				null,
@@ -142,12 +147,12 @@ public class LinkedDataControllerDataSourceIT extends BaseIT {
 	@Test
 	public void badNavigationModeTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/wqp/USGS-05427880/navigation/XX/huc12pp",
+				"/linked-data/wqp/USGS-05427880/navigate/XX/huc12pp",
 				HttpStatus.BAD_REQUEST.value(),
 				null,
 				null,
 				null,
-				"getFeatures.navigationMode: must match \"DD|DM|PP|UT|UM\"",
+				"getFeaturesDeprecated.navigationMode: must match \"DD|DM|PP|UT|UM\"",
 				false,
 				false);
 	}
