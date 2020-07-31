@@ -17,11 +17,13 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -167,6 +169,12 @@ public class NetworkController extends BaseController {
 		String[] coordsArray = tempCoords.split(" ");
 		Double longitude = Double.parseDouble(coordsArray[0]);
 		Double latitude = Double.parseDouble(coordsArray[1]);
+		if (longitude < -90 || longitude > 90) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid longitude");
+		}
+		if (latitude < -90 || latitude > 90) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid latitude");
+		}
 		Map<String, Object> map = new HashMap<>();
 		map.put(Parameters.LATITUDE, latitude);
 		map.put(Parameters.LONGITUDE, longitude);
