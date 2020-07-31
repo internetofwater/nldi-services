@@ -12,9 +12,7 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import gov.usgs.owi.nldi.dao.LookupDao;
 import gov.usgs.owi.nldi.services.TestConfigurationService;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class FeatureTransformerTest {
 
@@ -37,14 +35,14 @@ public class FeatureTransformerTest {
 
 	@Test
 	public void constructorTest() {
+		boolean threwRuntimeEx = false;
 		try {
 			new FeatureTransformer(null, configurationService);
-			fail("should have thrown runtime exception");
+
 		} catch (RuntimeException re) {
-			//ok
-		} catch (Throwable t) {
-			fail("threw unexpected exception or error");
+			threwRuntimeEx = true;
 		}
+		assertTrue(threwRuntimeEx);
 	}
 
 	@Test
@@ -86,6 +84,7 @@ public class FeatureTransformerTest {
 		map.put(FeatureTransformer.SOURCE_NAME_DB, "sourceNameValue");
 		map.put(FeatureTransformer.REACHCODE, "05020002004263");
 		map.put(FeatureTransformer.MEASURE, 1.3823300000);
+		boolean threwRuntimeEx = false;
 		try {
 			transformer.g.writeStartObject();
 			transformer.writeProperties(transformer.g, null);
@@ -94,10 +93,11 @@ public class FeatureTransformerTest {
 			transformer.g.flush();
 			fail("should have thrown runtime exception");
 		} catch (RuntimeException e) {
-			//good
+			threwRuntimeEx = true;
 		} catch (Throwable t) {
 			fail(t.getMessage());
 		}
+		assertTrue(threwRuntimeEx);
 	}
 
 	@Test

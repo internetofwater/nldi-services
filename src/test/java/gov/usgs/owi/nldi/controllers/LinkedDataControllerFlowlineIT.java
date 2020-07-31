@@ -135,7 +135,7 @@ public class LinkedDataControllerFlowlineIT extends BaseIT {
 				null,
 				null,
 				null,
-				"getNavigationFlowlines.navigationMode: must match \"DD|DM|PP|UT|UM\"",
+				"getNavigation.navigationMode: must match \"DD|DM|PP|UT|UM\"",
 				false,
 				false);
 	}

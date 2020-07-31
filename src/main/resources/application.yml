@@ -43,7 +43,7 @@ management:
       enabled: true
       show-details: never
 
-
 springdoc:
   version: "@project.version@"
-
+  swagger-ui:
+    operationsSorter: alpha
