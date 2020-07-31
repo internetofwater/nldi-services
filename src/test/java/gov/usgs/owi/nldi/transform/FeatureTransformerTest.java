@@ -12,7 +12,11 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import gov.usgs.owi.nldi.dao.LookupDao;
 import gov.usgs.owi.nldi.services.TestConfigurationService;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
+
 
 public class FeatureTransformerTest {
 

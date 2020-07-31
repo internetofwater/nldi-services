@@ -1,5 +1,8 @@
 package gov.usgs.owi.nldi.controllers;
 
+import com.github.springtestdbunit.annotation.DatabaseSetup;
+import gov.usgs.owi.nldi.BaseIT;
+import gov.usgs.owi.nldi.transform.FlowLineTransformer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +14,6 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import com.github.springtestdbunit.annotation.DatabaseSetup;
-
-import gov.usgs.owi.nldi.BaseIT;
-import gov.usgs.owi.nldi.transform.FlowLineTransformer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

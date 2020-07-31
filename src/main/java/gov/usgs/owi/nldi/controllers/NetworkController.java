@@ -9,6 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.Pattern;
 
 import gov.usgs.owi.nldi.dao.BaseDao;
+import gov.usgs.owi.nldi.dao.LookupDao;
+import gov.usgs.owi.nldi.dao.StreamingDao;
+import gov.usgs.owi.nldi.services.ConfigurationService;
+import gov.usgs.owi.nldi.services.LogService;
+import gov.usgs.owi.nldi.services.Navigation;
+import gov.usgs.owi.nldi.services.Parameters;
 import gov.usgs.owi.nldi.swagger.model.Feature;
 import gov.usgs.owi.nldi.transform.FeatureTransformer;
 import io.swagger.v3.oas.annotations.Operation;
@@ -25,13 +31,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import gov.usgs.owi.nldi.dao.LookupDao;
-import gov.usgs.owi.nldi.dao.StreamingDao;
-import gov.usgs.owi.nldi.services.ConfigurationService;
-import gov.usgs.owi.nldi.services.LogService;
-import gov.usgs.owi.nldi.services.Navigation;
-import gov.usgs.owi.nldi.services.Parameters;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
