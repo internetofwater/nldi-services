@@ -20,7 +20,12 @@ import gov.usgs.owi.nldi.transform.FlowLineTransformer;
 @EnableWebMvc
 @SpringBootTest(webEnvironment=WebEnvironment.RANDOM_PORT)
 @DatabaseSetup("classpath:/testData/crawlerSource.xml")
-public class LinkedDataControllerFlowlineIT extends BaseIT {
+
+// This test class contains tests for the deprecated "navigate" endpoints.  Don't add
+// new tests here and delete this class when we drop support for those endpoints.
+// The new tests that are tied to the new "navigation" endpoints are in
+// LinkedDataControllerFlowlineIT
+public class DeprecatedLinkedDataControllerFlowlineIT extends BaseIT {
 
 	@Value("${serverContextPath}")
 	private String context;
@@ -43,7 +48,7 @@ public class LinkedDataControllerFlowlineIT extends BaseIT {
 	@DatabaseSetup("classpath:/testData/featureWqp.xml")
 	public void getWqpUMTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/wqp/USGS-05427880/navigation/UM/flowlines",
+				"/linked-data/wqp/USGS-05427880/navigate/UM",
 				HttpStatus.OK.value(),
 				FlowLineTransformer.FLOW_LINES_COUNT_HEADER,
 				"10",
@@ -57,7 +62,7 @@ public class LinkedDataControllerFlowlineIT extends BaseIT {
 	@DatabaseSetup("classpath:/testData/featureHuc12pp.xml")
 	public void getHuc12ppDM10Test() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/huc12pp/070900020601/navigation/DM/flowlines?distance=10",
+				"/linked-data/huc12pp/070900020601/navigate/DM?distance=10",
 				HttpStatus.OK.value(),
 				FlowLineTransformer.FLOW_LINES_COUNT_HEADER,
 				"6",
@@ -72,12 +77,12 @@ public class LinkedDataControllerFlowlineIT extends BaseIT {
 	@DatabaseSetup("classpath:/testData/featureHuc12pp.xml")
 	public void getHuc12ppDM10000TestDistanceAboveMax() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/huc12pp/070900020601/navigation/DM/flowlines?distance=10000",
+				"/linked-data/huc12pp/070900020601/navigate/DM?distance=10000",
 				HttpStatus.BAD_REQUEST.value(),
 				null,
 				null,
 				null,
-				"getNavigationFlowlines.distance: distance must be between 1 and 9999 kilometers",
+				"getFlowlines.distance: distance must be between 1 and 9999 kilometers",
 				false,
 				false);
 	}
@@ -86,12 +91,12 @@ public class LinkedDataControllerFlowlineIT extends BaseIT {
 	@DatabaseSetup("classpath:/testData/featureHuc12pp.xml")
 	public void getHuc12ppDM0TestDistanceBelowMin() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/huc12pp/070900020601/navigation/DM/flowlines/?distance=-1",
+				"/linked-data/huc12pp/070900020601/navigate/DM?distance=-1",
 				HttpStatus.BAD_REQUEST.value(),
 				null,
 				null,
 				null,
-				"getNavigationFlowlines.distance: distance must be between 1 and 9999 kilometers",
+				"getFlowlines.distance: distance must be between 1 and 9999 kilometers",
 				false,
 				false);
 	}
@@ -101,7 +106,7 @@ public class LinkedDataControllerFlowlineIT extends BaseIT {
 	@DatabaseSetup("classpath:/testData/featureHuc12pp.xml")
 	public void getHuc12ppDMTestEmptyDistance() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/huc12pp/070900020601/navigation/DM/flowlines?distance=",
+				"/linked-data/huc12pp/070900020601/navigate/DM?distance=",
 				HttpStatus.OK.value(),
 				FlowLineTransformer.FLOW_LINES_COUNT_HEADER,
 				"51",
@@ -116,7 +121,7 @@ public class LinkedDataControllerFlowlineIT extends BaseIT {
 	@Test
 	public void badInputTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/wqx/USGS-05427880/navigation/DM/flowlines",
+				"/linked-data/wqx/USGS-05427880/navigate/DM",
 				HttpStatus.NOT_FOUND.value(),
 				null,
 				null,
@@ -130,12 +135,12 @@ public class LinkedDataControllerFlowlineIT extends BaseIT {
 	@Test
 	public void badNavigationModeTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/wqp/USGS-05427880/navigation/XX",
+				"/linked-data/wqp/USGS-05427880/navigate/XX",
 				HttpStatus.BAD_REQUEST.value(),
 				null,
 				null,
 				null,
-				"getNavigation.navigationMode: must match \"DD|DM|PP|UT|UM\"",
+				"getFlowlines.navigationMode: must match \"DD|DM|PP|UT|UM\"",
 				false,
 				false);
 	}

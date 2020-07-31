@@ -1,0 +1,6 @@
+{
+"upstreamMain":"http://owi-test.usgs.gov:8080/test-url/linked-data/comid/13294390/navigation/UM",
+"upstreamTributaries":"http://owi-test.usgs.gov:8080/test-url/linked-data/comid/13294390/navigation/UT",
+"downstreamMain":"http://owi-test.usgs.gov:8080/test-url/linked-data/comid/13294390/navigation/DM",
+"downstreamDiversions":"http://owi-test.usgs.gov:8080/test-url/linked-data/comid/13294390/navigation/DD"
+}

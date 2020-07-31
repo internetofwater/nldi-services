@@ -109,7 +109,6 @@ public class NetworkControllerLegacyDataSourceIT extends BaseIT {
 
 	@Test
 	public void getComidDmDistanceTest() throws Exception {
-		System.err.println("XYZ enter test");
 		String actualbody = assertEntity(restTemplate,
 				"/linked-data/comid/13293474/navigation/DM/wqp?distance=10&legacy=true",
 				HttpStatus.OK.value(),
@@ -119,7 +118,6 @@ public class NetworkControllerLegacyDataSourceIT extends BaseIT {
 				getCompareFile(RESULT_FOLDER, "comid_13293474_DM_distance_10.json"),
 				true,
 				false);
-		System.err.println("XYZ actualbody" + actualbody);
 	}
 
 	//DD Testing
