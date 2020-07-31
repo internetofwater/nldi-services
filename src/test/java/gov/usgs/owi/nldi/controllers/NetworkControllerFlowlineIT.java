@@ -1,6 +1,8 @@
 package gov.usgs.owi.nldi.controllers;
 
-import org.json.JSONArray;
+import com.github.springtestdbunit.annotation.DatabaseSetup;
+import gov.usgs.owi.nldi.BaseIT;
+import gov.usgs.owi.nldi.transform.FlowLineTransformer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +15,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import com.github.springtestdbunit.annotation.DatabaseSetup;
-
-import gov.usgs.owi.nldi.BaseIT;
-import gov.usgs.owi.nldi.transform.FlowLineTransformer;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static uk.co.datumedge.hamcrest.json.SameJSONAs.sameJSONArrayAs;
 
 
 @EnableWebMvc

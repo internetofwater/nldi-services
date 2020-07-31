@@ -45,7 +45,7 @@ public class HtmlControllerIT extends BaseIT {
 				false,
 				false);
 
-		checkRedirectHtml(actualbody,"/linked-data/nwissite");
+		assertTrue(checkRedirectHtml(actualbody,"/linked-data/nwissite"));
 	}
 
 	@Test
@@ -59,7 +59,7 @@ public class HtmlControllerIT extends BaseIT {
 			null,
 			false,
 			false);
-		checkRedirectHtml(actualbody,"/linked-data/comid/position?f=json&coords=POINT(-89.35%2048.064)");
+		assertTrue(checkRedirectHtml(actualbody,"/linked-data/comid/position?f=json&coords=POINT(-89.35%2048.064)"));
 	}
 
 	@Test
@@ -73,7 +73,7 @@ public class HtmlControllerIT extends BaseIT {
 			null,
 			false,
 			false);
-		checkRedirectHtml(actualbody, "/linked-data/comid/position?f=json&coords=POINT(-89.35%2048.064)");
+		assertTrue(checkRedirectHtml(actualbody, "/linked-data/comid/position?f=json&coords=POINT(-89.35%2048.064)"));
 
 	}
 
@@ -88,7 +88,7 @@ public class HtmlControllerIT extends BaseIT {
 			null,
 			false,
 			false);
-	    checkRedirectHtml(actualbody, "/linked-data?f=json");
+	    assertTrue(checkRedirectHtml(actualbody, "/linked-data?f=json"));
 	}
 
 	@Test
@@ -103,7 +103,7 @@ public class HtmlControllerIT extends BaseIT {
 			null,
 			true,
 			false);
-		checkRedirectHtml(actualbody, "/linked-data/v2/wqp/USGS-05427880/navigate/UM/flowlines?f=json");
+		assertTrue(checkRedirectHtml(actualbody, "/linked-data/v2/wqp/USGS-05427880/navigate/UM/flowlines?f=json"));
 	}
 
 	@Test
@@ -117,7 +117,7 @@ public class HtmlControllerIT extends BaseIT {
 			null,
 			false,
 			false);
-		checkRedirectHtml(actualbody, "/linked-data/v2/comid/13297246/navigate/UM/flowlines?f=json&distance=10");
+		assertTrue(checkRedirectHtml(actualbody, "/linked-data/v2/comid/13297246/navigate/UM/flowlines?f=json&distance=10"));
 	}
 
 	@Test
@@ -132,7 +132,7 @@ public class HtmlControllerIT extends BaseIT {
 			null,
 			false,
 			false);
-		checkRedirectHtml(actualbody, "/linked-data/v2/wqp/USGS-05427880/navigate/UT?f=json");
+		assertTrue(checkRedirectHtml(actualbody, "/linked-data/v2/wqp/USGS-05427880/navigate/UT?f=json"));
 	}
 
 	@Test
@@ -147,7 +147,7 @@ public class HtmlControllerIT extends BaseIT {
 				false,
 				false);
 
-		checkRedirectHtml(actualbody, "/linked-data/comid/13302592/tot");
+		assertTrue(checkRedirectHtml(actualbody, "/linked-data/comid/13302592/tot"));
 	}
 
 
@@ -162,18 +162,33 @@ public class HtmlControllerIT extends BaseIT {
 				null,
 				false,
 				false);
-		checkRedirectHtml(actualbody, "/lookups/x?f=json");
+		assertTrue(checkRedirectHtml(actualbody, "/lookups/x?f=json"));
 	}
 
 
-	private void checkRedirectHtml(String actualbody, String link) {
-		assertTrue(actualbody.contains(link));
-		assertFalse(actualbody.contains("f=html"));
-		assertTrue(actualbody.trim().startsWith("<html>"));
-		assertTrue(actualbody.trim().endsWith("</html>"));
-		assertTrue(actualbody.contains("<a "));
-		assertTrue(actualbody.contains("href="));
-		assertTrue(actualbody.contains("a>"));
+	private boolean checkRedirectHtml(String actualbody, String link) {
+		if (!actualbody.contains(link)) {
+			return false;
+		}
+		if (actualbody.contains("f=html")) {
+			return false;
+		}
+		if (!actualbody.trim().startsWith("<html>")) {
+			return false;
+		}
+		if (!actualbody.trim().endsWith("</html>")) {
+			return false;
+		}
+		if (!actualbody.contains("<a ")) {
+			return false;
+		}
+		if (!actualbody.contains("href=")) {
+			return false;
+		}
+		if (!actualbody.contains("a>")) {
+			return false;
+		}
+		return true;
 	}
 
 }
