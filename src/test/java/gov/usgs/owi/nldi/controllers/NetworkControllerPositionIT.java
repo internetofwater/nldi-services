@@ -66,7 +66,7 @@ public class NetworkControllerPositionIT extends BaseIT {
 	@Test
 	public void getCoordinatesTestOutOfRange() throws Exception {
 		assertEntity(restTemplate,
-			"/linked-data/comid/position?coords=POINT(-100 0)",
+			"/linked-data/comid/position?coords=POINT(-181 0)",
 			HttpStatus.BAD_REQUEST.value(),
 			null,
 			null,
@@ -76,7 +76,7 @@ public class NetworkControllerPositionIT extends BaseIT {
 			false);
 
 		assertEntity(restTemplate,
-			"/linked-data/comid/position?coords=POINT(100 0)",
+			"/linked-data/comid/position?coords=POINT(181 0)",
 			HttpStatus.BAD_REQUEST.value(),
 			null,
 			null,
@@ -86,7 +86,7 @@ public class NetworkControllerPositionIT extends BaseIT {
 			false);
 
 		assertEntity(restTemplate,
-			"/linked-data/comid/position?coords=POINT(0 -100)",
+			"/linked-data/comid/position?coords=POINT(0 -91)",
 			HttpStatus.BAD_REQUEST.value(),
 			null,
 			null,
@@ -96,12 +96,56 @@ public class NetworkControllerPositionIT extends BaseIT {
 			false);
 
 		assertEntity(restTemplate,
-			"/linked-data/comid/position?coords=POINT(0 100)",
+			"/linked-data/comid/position?coords=POINT(0 91)",
 			HttpStatus.BAD_REQUEST.value(),
 			null,
 			null,
 			null,
 			"400 BAD_REQUEST \"Invalid latitude\"",
+			false,
+			false);
+	}
+
+
+	@Test
+	public void getCoordinatesTestInRange() throws Exception {
+		assertEntity(restTemplate,
+			"/linked-data/comid/position?coords=POINT(-180 0)",
+			HttpStatus.OK.value(),
+			null,
+			null,
+			null,
+			null,
+			false,
+			false);
+
+		assertEntity(restTemplate,
+			"/linked-data/comid/position?coords=POINT(180 0)",
+			HttpStatus.OK.value(),
+			null,
+			null,
+			null,
+			null,
+			false,
+			false);
+
+		assertEntity(restTemplate,
+			"/linked-data/comid/position?coords=POINT(0 -90)",
+			HttpStatus.OK.value(),
+			null,
+			null,
+			null,
+			null,
+			false,
+			false);
+
+		assertEntity(restTemplate,
+			"/linked-data/comid/position?coords=POINT(0 90)",
+			HttpStatus.OK.value(),
+			null,
+			null,
+			null,
+			null,
 			false,
 			false);
 	}

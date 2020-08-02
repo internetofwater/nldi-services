@@ -169,7 +169,7 @@ public class NetworkController extends BaseController {
 		String[] coordsArray = tempCoords.split(" ");
 		Double longitude = Double.parseDouble(coordsArray[0]);
 		Double latitude = Double.parseDouble(coordsArray[1]);
-		if (longitude < -90 || longitude > 90) {
+		if (longitude < -180 || longitude > 180) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid longitude");
 		}
 		if (latitude < -90 || latitude > 90) {
