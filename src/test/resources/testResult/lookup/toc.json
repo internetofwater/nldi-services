@@ -1,0 +1,17 @@
+[
+  {
+    "characteristics": "http://localhost:8081/nldi/lookups/local/characteristics",
+    "typeName": "Local Catchment Characteristics",
+    "type": "local"
+  },
+  {
+    "characteristics": "http://localhost:8081/nldi/lookups/div/characteristics",
+    "typeName": "Divergence Routed Catchment Characteristics",
+    "type": "div"
+  },
+  {
+    "characteristics": "http://localhost:8081/nldi/lookups/tot/characteristics",
+    "typeName": "Total Accumulated Catchment Characteristics",
+    "type": "tot"
+  }
+]
