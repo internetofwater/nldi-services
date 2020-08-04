@@ -33,6 +33,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+
 @RestController
 public class NetworkController extends BaseController {
 
@@ -190,6 +191,12 @@ public class NetworkController extends BaseController {
 		String[] coordsArray = tempCoords.split(" ");
 		Double longitude = Double.parseDouble(coordsArray[0]);
 		Double latitude = Double.parseDouble(coordsArray[1]);
+		if (longitude < -180 || longitude > 180) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid longitude");
+		}
+		if (latitude < -90 || latitude > 90) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid latitude");
+		}
 		Map<String, Object> map = new HashMap<>();
 		map.put(Parameters.LATITUDE, latitude);
 		map.put(Parameters.LONGITUDE, longitude);

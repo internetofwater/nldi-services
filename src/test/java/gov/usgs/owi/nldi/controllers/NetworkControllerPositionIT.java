@@ -1,5 +1,7 @@
 package gov.usgs.owi.nldi.controllers;
 
+import com.github.springtestdbunit.annotation.DatabaseSetup;
+import gov.usgs.owi.nldi.BaseIT;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +12,6 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-
-import com.github.springtestdbunit.annotation.DatabaseSetup;
-
-import gov.usgs.owi.nldi.BaseIT;
 
 @EnableWebMvc
 @SpringBootTest(webEnvironment=WebEnvironment.RANDOM_PORT)
@@ -56,6 +54,94 @@ public class NetworkControllerPositionIT extends BaseIT {
 		assertEntity(restTemplate,
 			"/linked-data/comid/position?coords=POINT(-89.35 NotANumber)",
 			HttpStatus.BAD_REQUEST.value(),
+			null,
+			null,
+			null,
+			null,
+			false,
+			false);
+	}
+
+
+	@Test
+	public void getCoordinatesTestOutOfRange() throws Exception {
+		assertEntity(restTemplate,
+			"/linked-data/comid/position?coords=POINT(-181 0)",
+			HttpStatus.BAD_REQUEST.value(),
+			null,
+			null,
+			null,
+			"400 BAD_REQUEST \"Invalid longitude\"",
+			false,
+			false);
+
+		assertEntity(restTemplate,
+			"/linked-data/comid/position?coords=POINT(181 0)",
+			HttpStatus.BAD_REQUEST.value(),
+			null,
+			null,
+			null,
+			"400 BAD_REQUEST \"Invalid longitude\"",
+			false,
+			false);
+
+		assertEntity(restTemplate,
+			"/linked-data/comid/position?coords=POINT(0 -91)",
+			HttpStatus.BAD_REQUEST.value(),
+			null,
+			null,
+			null,
+			"400 BAD_REQUEST \"Invalid latitude\"",
+			false,
+			false);
+
+		assertEntity(restTemplate,
+			"/linked-data/comid/position?coords=POINT(0 91)",
+			HttpStatus.BAD_REQUEST.value(),
+			null,
+			null,
+			null,
+			"400 BAD_REQUEST \"Invalid latitude\"",
+			false,
+			false);
+	}
+
+
+	@Test
+	public void getCoordinatesTestInRange() throws Exception {
+		assertEntity(restTemplate,
+			"/linked-data/comid/position?coords=POINT(-180 0)",
+			HttpStatus.OK.value(),
+			null,
+			null,
+			null,
+			null,
+			false,
+			false);
+
+		assertEntity(restTemplate,
+			"/linked-data/comid/position?coords=POINT(180 0)",
+			HttpStatus.OK.value(),
+			null,
+			null,
+			null,
+			null,
+			false,
+			false);
+
+		assertEntity(restTemplate,
+			"/linked-data/comid/position?coords=POINT(0 -90)",
+			HttpStatus.OK.value(),
+			null,
+			null,
+			null,
+			null,
+			false,
+			false);
+
+		assertEntity(restTemplate,
+			"/linked-data/comid/position?coords=POINT(0 90)",
+			HttpStatus.OK.value(),
 			null,
 			null,
 			null,

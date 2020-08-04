@@ -78,7 +78,7 @@
         select featureid
           from nhdplus.catchmentsp
             where st_intersects(nhdplus.catchmentsp.the_geom,
-              st_setsrid(st_makepoint(#{lon}, #{lat}), 4269)::geography);
+              st_geomfromtext('POINT(${lon} ${lat})', 4269));
     </select>
 
 
