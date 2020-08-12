@@ -46,7 +46,7 @@ public class NetworkControllerDataSourceIT extends BaseIT {
 	@Test
 	public void getComidUtTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/comid/13293474/navigation/UT/wqp",
+				"/linked-data/comid/13293474/navigation/UT/wqp?distance=9999",
 				HttpStatus.OK.value(),
 				FeatureTransformer.FEATURE_COUNT_HEADER,
 				"22",
@@ -113,7 +113,7 @@ public class NetworkControllerDataSourceIT extends BaseIT {
 	@Test
 	public void getComidUmTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/comid/13293474/navigation/UM/wqp",
+				"/linked-data/comid/13293474/navigation/UM/wqp?distance=9999",
 				HttpStatus.OK.value(),
 				FeatureTransformer.FEATURE_COUNT_HEADER,
 				"17",
@@ -140,7 +140,7 @@ public class NetworkControllerDataSourceIT extends BaseIT {
 	@Test
 	public void getComidDmTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/comid/13296790/navigation/DM/wqp",
+				"/linked-data/comid/13296790/navigation/DM/wqp?distance=9999",
 				HttpStatus.OK.value(),
 				FeatureTransformer.FEATURE_COUNT_HEADER,
 				"6",
@@ -167,7 +167,7 @@ public class NetworkControllerDataSourceIT extends BaseIT {
 	@Test
 	public void getComidDdTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/comid/13294310/navigation/DD/wqp",
+				"/linked-data/comid/13294310/navigation/DD/wqp?distance=9999",
 				HttpStatus.OK.value(),
 				FeatureTransformer.FEATURE_COUNT_HEADER,
 				"17",
@@ -194,7 +194,7 @@ public class NetworkControllerDataSourceIT extends BaseIT {
 	@Test
 	public void getComidPpStopComidInvalidTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/comid/13297246/navigation/PP/wqp?stopComid=13297198",
+				"/linked-data/comid/13297246/navigation/PP/wqp?distance=9999&stopComid=13297198",
 				HttpStatus.BAD_REQUEST.value(),
 				null,
 				null,
@@ -207,7 +207,7 @@ public class NetworkControllerDataSourceIT extends BaseIT {
 	@Test
 	public void getComidPpStopComidTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/comid/13297198/navigation/PP/wqp?stopComid=13297246",
+				"/linked-data/comid/13297198/navigation/PP/wqp?distance=9999&stopComid=13297246",
 				HttpStatus.OK.value(),
 				FeatureTransformer.FEATURE_COUNT_HEADER,
 				"16",
@@ -221,7 +221,7 @@ public class NetworkControllerDataSourceIT extends BaseIT {
 	@Test
 	public void badNavigationModeTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/comid/13297198/navigation/XX/wqp",
+				"/linked-data/comid/13297198/navigation/XX/wqp?distance=9999",
 				HttpStatus.BAD_REQUEST.value(),
 				null,
 				null,
@@ -234,7 +234,7 @@ public class NetworkControllerDataSourceIT extends BaseIT {
 	@Test
 	public void getBasinTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/comid/13297246/navigation/UT/basin",
+				"/linked-data/comid/13297246/navigation/UT/basin?distance=9999",
 				HttpStatus.OK.value(),
 				null,
 				null,
@@ -263,7 +263,7 @@ public class NetworkControllerDataSourceIT extends BaseIT {
 	@Test
 	public void getNavigationTypesNotFoundTest() throws Exception {
 		assertEntity(restTemplate,
-			"/linked-data/comid/123/navigate",
+			"/linked-data/comid/123/navigation",
 			HttpStatus.NOT_FOUND.value(),
 			null,
 			null,

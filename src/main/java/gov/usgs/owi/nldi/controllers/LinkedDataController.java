@@ -332,8 +332,8 @@ public class LinkedDataController extends BaseController {
 		@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode,
 		@PathVariable(value=DATA_SOURCE) String dataSource,
 		@RequestParam(value=Parameters.STOP_COMID, required=false) @Range(min=1, max=Integer.MAX_VALUE) String stopComid,
-		@Parameter(description=Parameters.DISTANCE_DESCRIPTION)
-		@RequestParam(value=Parameters.DISTANCE, required=false, defaultValue=Parameters.MAX_DISTANCE)
+		@Parameter(description=Parameters.DISTANCE_DESCRIPTION_NEW)
+		@RequestParam(value=Parameters.DISTANCE)
 		@Pattern(message=Parameters.DISTANCE_VALIDATION_MESSAGE, regexp=Parameters.DISTANCE_VALIDATION_REGEX) String distance,
 		@RequestParam(value=Parameters.LEGACY, required=false) String legacy) throws Exception {
 
@@ -401,8 +401,8 @@ public class LinkedDataController extends BaseController {
 		@PathVariable(Parameters.FEATURE_ID) String featureID,
 		@PathVariable(Parameters.NAVIGATION_MODE) @Pattern(regexp=REGEX_NAVIGATION_MODE) String navigationMode,
 		@RequestParam(value=Parameters.STOP_COMID, required=false) @Range(min=1, max=Integer.MAX_VALUE) String stopComid,
-		@Parameter(description=Parameters.DISTANCE_DESCRIPTION)
-		@RequestParam(value=Parameters.DISTANCE, required=false, defaultValue=Parameters.MAX_DISTANCE)
+		@Parameter(description=Parameters.DISTANCE_DESCRIPTION_NEW)
+		@RequestParam(value=Parameters.DISTANCE)
 		@Pattern(message=Parameters.DISTANCE_VALIDATION_MESSAGE, regexp=Parameters.DISTANCE_VALIDATION_REGEX) String distance,
 		@RequestParam(value=Parameters.LEGACY, required=false) String legacy) throws Exception {
 

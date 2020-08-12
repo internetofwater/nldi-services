@@ -43,7 +43,7 @@ public class LinkedDataControllerFlowlineIT extends BaseIT {
 	@DatabaseSetup("classpath:/testData/featureWqp.xml")
 	public void getWqpUMTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/wqp/USGS-05427880/navigation/UM/flowlines",
+				"/linked-data/wqp/USGS-05427880/navigation/UM/flowlines?distance=9999",
 				HttpStatus.OK.value(),
 				FlowLineTransformer.FLOW_LINES_COUNT_HEADER,
 				"10",
@@ -116,7 +116,7 @@ public class LinkedDataControllerFlowlineIT extends BaseIT {
 	@Test
 	public void badInputTest() throws Exception {
 		assertEntity(restTemplate,
-				"/linked-data/wqx/USGS-05427880/navigation/DM/flowlines",
+				"/linked-data/wqx/USGS-05427880/navigation/DM/flowlines?distance=9999",
 				HttpStatus.NOT_FOUND.value(),
 				null,
 				null,

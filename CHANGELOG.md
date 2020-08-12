@@ -17,6 +17,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 *   Implement HTML media type for NLDI resources
 *   Add new API to query for a feature by latitude and longitude
 *   Add new navigation endpoint and deprecate navigate endpoint
+*   Add new API for /lookups
+*   Add redirect for /lookups/{characteristicType} to /lookups/{characteristicType}/characteristics
+*   Make distance a required parameter for the new flowlines APIs.
   
 ## [1.2.0](https://github.com/ACWI-SSWD/nldi-services/compare/nldi-services-1.1.0...nldi-services-1.2.0)
 ### Changed

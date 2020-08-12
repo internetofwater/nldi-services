@@ -20,6 +20,7 @@ public class Parameters {
 	public static final String FEATURE_ID = "featureID";
 	public static final String DISTANCE = "distance";
 	public static final String DISTANCE_DESCRIPTION = "distance in kilometers";
+	public static final String DISTANCE_DESCRIPTION_NEW = "Distance in kilometers. Note that this is a very expensive query and should not be executed in parallel";
 	public static final String COORDS = "coords";
 	public static final String COORDS_DESCRIPTION = "coordinates in the form 'POINT(longitude latitude)'";
 	public static final String MAX_DISTANCE = "9999";
