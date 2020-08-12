@@ -1,7 +1,9 @@
 package gov.usgs.owi.nldi.controllers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -24,6 +26,7 @@ import gov.usgs.owi.nldi.services.LogService;
 import gov.usgs.owi.nldi.services.Navigation;
 import gov.usgs.owi.nldi.services.Parameters;
 import gov.usgs.owi.nldi.services.TestConfigurationService;
+import org.springframework.web.server.ResponseStatusException;
 
 public class NetworkControllerTest {
 
@@ -55,11 +58,16 @@ public class NetworkControllerTest {
 
 	@Test
 	public void getFlowlinesTest() throws Exception {
-		controller.getFlowlines(request, response, null, null, null, null, null);
+		try {
+			controller.getFlowlines(request, response, "13297246", "PP", "13297198", null, null);
+			fail("should have failed");
+		} catch (ResponseStatusException rse) {
+			//good
+		} catch (Throwable t) {
+			fail(t);
+		}
 		verify(logService).logRequest(any(HttpServletRequest.class));
-		verify(logService).logRequestComplete(any(BigInteger.class), any(int.class));
-		//this is a INTERNAL_SERVER_ERROR because of NPEs that shouldn't happen in real life.
-		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR.value(), response.getStatus());
+		verify(logService).logRequestComplete(any(BigInteger.class), eq(HttpStatus.BAD_REQUEST.value()));
 	}
 
 	@Test

@@ -193,15 +193,16 @@ public class NetworkControllerDataSourceIT extends BaseIT {
 	//PP Testing
 	@Test
 	public void getComidPpStopComidInvalidTest() throws Exception {
-		assertEntity(restTemplate,
+		String actualbody = assertEntity(restTemplate,
 				"/linked-data/comid/13297246/navigation/PP/wqp?distance=9999&stopComid=13297198",
 				HttpStatus.BAD_REQUEST.value(),
 				null,
 				null,
-				MediaType.APPLICATION_JSON_VALUE,
-				getCompareFile(RESULT_FOLDER, "comid_13297246_PP_stop_13297198.json"),
+				null,
+				null,
 				true,
 				true);
+		assertEquals("400 BAD_REQUEST \"The stopComid must be downstream of the start comid.\"", actualbody);
 	}
 
 	@Test

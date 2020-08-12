@@ -9,7 +9,6 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
@@ -226,18 +225,16 @@ public class DeprecatedNetworkControllerFlowlineIT extends BaseIT {
 	public void getComidPpStopComidInvalidTest() throws Exception {
 		// This deprecated endpoint and test are sharing the result file with
 		// the current endpoint and test, so tweak the comparison string accordingly.
-		String compareFile = getCompareFile(RESULT_FOLDER, "comid_13297246_PP_stop_13297198.json");
-		compareFile = compareFile.replace("/flowlines", "");
-		compareFile = compareFile.replace("navigation", "navigate");
 		assertEntity(restTemplate,
 				"/linked-data/comid/13297246/navigate/PP?stopComid=13297198",
 				HttpStatus.BAD_REQUEST.value(),
 				null,
 				null,
-				MediaType.APPLICATION_JSON_VALUE,
-				compareFile,
-				true,
+				null,
+				"400 BAD_REQUEST \"The stopComid must be downstream of the start comid.\"",
+				false,
 				true);
+
 	}
 
 	@Test
