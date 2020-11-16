@@ -15,7 +15,7 @@ deployJobName: "NLDI-services-container-deploy"
 # name of the project
 projectName: "iow-allgemein"
 # maximum amount of RAM for running Docker containers in the service
-memory: 768
+memory: 1024
 # name of the application or service
 applicationName: "nldi-services"
 # integer representing the order of precedence of the ALB rule.
