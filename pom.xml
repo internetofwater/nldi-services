@@ -14,7 +14,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>11</java.version>
-        <jackson.version>2.11.1</jackson.version>
+        <jackson.version>2.12.6.1</jackson.version>
         <wma.artifactory.url>https://cida.usgs.gov/artifactory</wma.artifactory.url>
         <spotless.ratchetFrom>origin/master</spotless.ratchetFrom>
         <test.database.port>5445</test.database.port>
