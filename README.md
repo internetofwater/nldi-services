@@ -7,21 +7,23 @@ This repository houses code behind the Network Linked Data Index (NLDI) API [(Sw
 
 ## Table of Contents
 
-- [Public API](#public-api)
-  - [Top Level Path](#top-level-path)
-  - [Up/Down Stream Navigation](#updown-stream-navigation)
-  - [Up/Down Stream Data](#updown-stream-data)
-  - [Query Parameters](#query-parameters)
-  - [Other Endpoints](#other-endpoints)
-- [Development](#development)
-  - [Dependencies](#dependencies)
-  - [Docker Compose](#docker-compose)
-  - [Environment Variables](#environment-variables)
-  - [Testing](#testing)
-  - [Pipelines](#pipelines)
-    - [Test](#test)
-    - [Build](#build)
-    - [Deploy](#deploy)
+- [Network Linked Data Index Services](#network-linked-data-index-services)
+  - [Table of Contents](#table-of-contents)
+  - [Public API](#public-api)
+    - [Top Level Path](#top-level-path)
+    - [Up/Down Stream Navigation](#updown-stream-navigation)
+    - [Up/Down Stream Data](#updown-stream-data)
+    - [Query Parameters](#query-parameters)
+    - [Other Endpoints](#other-endpoints)
+  - [Development](#development)
+    - [Dependencies](#dependencies)
+    - [Docker Compose](#docker-compose)
+    - [Environment Variables](#environment-variables)
+    - [Testing](#testing)
+    - [Pipelines](#pipelines)
+      - [Test](#test)
+      - [Build](#build)
+      - [Deploy](#deploy)
 
 ## Public API
 
@@ -101,6 +103,8 @@ docker-compose up nldi-services
 These test services will be accessible at <localhost:8080/nldi>. \
 If you would like to build these images using a mirror url simply set a `DOCKER_MIRROR` environment variable or include
 it as a build argument.
+
+See the [nldi-db project](https://github.com/internetofwater/nldi-db) for instructions to use different configurations of the database.
 
 ### Environment Variables
 
