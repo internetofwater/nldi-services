@@ -1,48 +1,68 @@
 ---
-  version: '3.3'
+version: '3.3'
 
-  services:
-    nldi-services:
-      image: nldi-services
-      container_name: nldi-services
-      build:
-        context: .
-        args:
-          DOCKER_MIRROR: ${DOCKER_MIRROR}
-      ports:
-        - "8080:8080"
-      environment:
-        serverContextPath: /nldi
-        serverPort: 8080
-        nldiProtocol: http
-        nldiHost: "localhost:8080"
-        nldiPath: /nldi
-        springFrameworkLogLevel: info
-        nldiDbHost: nldi-db
-        nldiDbPort: 5432
-        nldiDbUsername: read_only_user
-        nldiDbPassword: changeMe
-        nldiDbName: nldi
-        pygeoapiUrl: "https://labs.waterdata.usgs.gov/api/nldi/pygeoapi/"
-      networks:
-        - nldi
-    nldi-db:
-      image: ghcr.io/internetofwater/nldi-db:demo
-      container_name: nldi-db-demo
-      environment:
-        POSTGRES_PASSWORD: changeMe
-        NLDI_DATABASE_ADDRESS: localhost
-        NLDI_DATABASE_NAME: nldi
-        NLDI_DB_OWNER_USERNAME: nldi
-        NLDI_DB_OWNER_PASSWORD: changeMe
-        NLDI_SCHEMA_OWNER_USERNAME: nldi_schema_owner
-        NLDI_SCHEMA_OWNER_PASSWORD: changeMe
-        NHDPLUS_SCHEMA_OWNER_USERNAME: nhdplus
-        NLDI_READ_ONLY_USERNAME: read_only_user
-        NLDI_READ_ONLY_PASSWORD: changeMe
-        DB_DEMO_PORT: 5432
-      networks:
-        - nldi
-
-  networks:
-    nldi:
+services:
+  nldi-services:
+    image: nldi-services
+    container_name: nldi-services
+    build:
+      context: .
+      args:
+        DOCKER_MIRROR: ${DOCKER_MIRROR}
+    ports:
+      - "8080:8080"
+    environment:
+      serverContextPath: /nldi
+      serverPort: 8080
+      nldiProtocol: http
+      nldiHost: "localhost:8080"
+      nldiPath: /nldi
+      springFrameworkLogLevel: info
+      nldiDbHost: nldi-db
+      nldiDbPort: 5432
+      nldiDbUsername: read_only_user
+      nldiDbPassword: changeMe
+      nldiDbName: nldi
+      pygeoapiUrl: "https://labs.waterdata.usgs.gov/api/nldi/pygeoapi/"
+    networks:
+      - nldi
+  nldi-db:
+    image: ghcr.io/internetofwater/nldi-db:demo
+    container_name: nldi-db
+    environment:
+      POSTGRES_PASSWORD: changeMe
+      NLDI_DATABASE_ADDRESS: localhost
+      NLDI_DATABASE_NAME: nldi
+      NLDI_DB_OWNER_USERNAME: nldi
+      NLDI_DB_OWNER_PASSWORD: changeMe
+      NLDI_SCHEMA_OWNER_USERNAME: nldi_schema_owner
+      NLDI_SCHEMA_OWNER_PASSWORD: changeMe
+      NHDPLUS_SCHEMA_OWNER_USERNAME: nhdplus
+      NLDI_READ_ONLY_USERNAME: read_only_user
+      NLDI_READ_ONLY_PASSWORD: changeMe
+      DB_DEMO_PORT: 5432
+    networks:
+      - nldi
+    ports:
+      - "5432:5432"
+    volumes:
+      - data:/var/lib/postgresql/data
+  pygeoapi:
+    container_name: pygeoapi
+    build:
+      context: pygeoapi
+    restart: always
+    environment:
+      PYGEOAPI_URL: http://localhost:8081
+      NLDI_DB_NAME: nldi
+      NLDI_DB_HOST: nldi-db
+      NLDI_READ_ONLY_USERNAME: read_only_user
+      NLDI_READ_ONLY_PASSWORD: changeMe
+    networks:
+      - nldi
+    ports:
+      - "8081:80"
+networks:
+  nldi:
+volumes:
+  data:
