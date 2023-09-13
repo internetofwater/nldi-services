@@ -1,4 +1,0 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<dataset>
-	<nldi_data.web_service_log web_service_log_id="-1" request_timestamp_utc="2016-08-26 16:34" request_completed_utc="[dateTime]" referer="http://localhost:8080/test" user_agent="Mozilla/5.0" request_uri="/test/test123/DM" query_string="distance=5"/>
-</dataset>
