@@ -1,0 +1,184 @@
+server:
+  url: ${NLDI_URL}
+  pretty_print: false
+  pygeoapi: true
+  data:
+    host: ${NLDI_DB_HOST}
+    port: ${NLDI_DB_PORT}
+    dbname: ${NLDI_DB_NAME}
+    user: ${NLDI_DB_USERNAME}
+    password: ${NLDI_DB_PASSWORD}
+
+logging:
+  level: ERROR
+  # logfile: /tmp/nldi.log
+
+metadata:
+  identification:
+    title: Network Linked Data Index API - Python
+    description: |
+      The NLDI is a search service that takes a watershed 
+      outlet identifier as a starting point, a navigation 
+      mode to perform, and the type of data desired in 
+      response to the request. It can provide geospatial
+      representations of the navigation or linked data sources 
+      found along the navigation. It also has the ability to
+      return catchment the watershed outlet is contained in
+      or the total upstream basin.
+    keywords:
+      - python
+      - nldi
+      - usgs
+      - water
+    terms_of_service: https://creativecommons.org/licenses/by/1.0/
+  license:
+    name: CC-BY 1.0 license
+    url: https://creativecommons.org/licenses/by/1.0/
+  provider:
+    name: United States Geological Survey
+    url: https://labs.waterdata.usgs.gov/
+
+sources:
+  - crawler_source_id: 1
+    source_name: Water Quality Portal
+    source_suffix: WQP
+    source_uri: https://www.waterqualitydata.us/data/Station/search?mimeType=geojson&minactivities=1&counts=no
+    feature_id: MonitoringLocationIdentifier
+    feature_name: MonitoringLocationName
+    feature_uri: siteUrl
+    feature_reach: NULL
+    feature_measure: NULL
+    ingest_type: point
+    feature_type: varies
+  - crawler_source_id: 2
+    source_name: NWIS Surface Water Sites
+    source_suffix: nwissite
+    source_uri: https://www.sciencebase.gov/catalog/file/get/60c7b895d34e86b9389b2a6c?name=usgs_nldi_gages.geojson
+    feature_id: provider_id
+    feature_name: name
+    feature_uri: subjectOf
+    feature_reach: nhdpv2_REACHCODE
+    feature_measure: nhdpv2_REACH_measure
+    ingest_type: reach
+    feature_type: hydrolocation
+  - crawler_source_id: 3
+    source_name: HUC12 Pour Points
+    source_suffix: huc12pp
+    source_uri: https://www.sciencebase.gov/catalogMaps/mapping/ows/57336b02e4b0dae0d5dd619a?service=WFS&version=1.0.0&request=GetFeature&srsName=EPSG:4326&typeName=sb:fpp&outputFormat=json
+    feature_id: HUC_12
+    feature_name: HUC_12
+    feature_uri: HUC_12
+    feature_reach: NULL
+    feature_measure: NULL
+    ingest_type: point
+    feature_type: hydrolocation
+  - crawler_source_id: 5
+    source_name: Water Data Exchange 2.0 Sites
+    source_suffix: wade
+    source_uri: https://www.hydroshare.org/resource/5f665b7b82d74476930712f7e423a0d2/data/contents/wade.geojson
+    feature_id: feature_id
+    feature_name: feature_name
+    feature_uri: feature_uri
+    feature_reach: NULL
+    feature_measure: NULL
+    ingest_type: point
+    feature_type: varies
+  - crawler_source_id: 6
+    source_name: geoconnex.us reference gages
+    source_suffix: ref_gage
+    source_uri: https://www.hydroshare.org/resource/3295a17b4cc24d34bd6a5c5aaf753c50/data/contents/nldi_gages.geojson
+    feature_id: id
+    feature_name: name
+    feature_uri: subjectOf
+    feature_reach: nhdpv2_REACHCODE
+    feature_measure: nhdpv2_REACH_measure
+    ingest_type: reach
+    feature_type: hydrolocation
+  - crawler_source_id: 7
+    source_name: Streamgage catalog for CA SB19
+    source_suffix: ca_gages
+    source_uri: https://sb19.linked-data.internetofwater.dev/collections/ca_gages/items?f=json&limit=10000
+    feature_id: site_id
+    feature_name: sitename
+    feature_uri: uri
+    feature_reach: rchcd_medres
+    feature_measure: reach_measure
+    ingest_type: reach
+    feature_type: hydrolocation
+  - crawler_source_id: 8
+    source_name: USGS Geospatial Fabric V1.1 Points of Interest
+    source_suffix: gfv11_pois
+    source_uri: https://www.sciencebase.gov/catalogMaps/mapping/ows/609c8a63d34ea221ce3acfd3?service=WFS&version=1.0.0&request=GetFeature&srsName=EPSG:4326&typeName=sb::gfv11&outputFormat=json
+    feature_id: prvdr_d
+    feature_name: name
+    feature_uri: uri
+    feature_reach: n2_REACHC
+    feature_measure: n2_REACH_
+    ingest_type: reach
+    feature_type: hydrolocation
+  - crawler_source_id: 9
+    source_name: Vigil Network Data
+    source_suffix: vigil
+    source_uri: https://www.sciencebase.gov/catalog/file/get/60c7b895d34e86b9389b2a6c?name=vigil.geojson
+    feature_id: SBID
+    feature_name: Site Name
+    feature_uri: SBURL
+    feature_reach: nhdpv2_REACHCODE
+    feature_measure: nhdpv2_REACH_measure
+    ingest_type: reach
+    feature_type: hydrolocation
+  - crawler_source_id: 10
+    source_name: NWIS Groundwater Sites
+    source_suffix: nwisgw
+    source_uri: https://www.sciencebase.gov/catalog/file/get/60c7b895d34e86b9389b2a6c?name=nwis_wells.geojson
+    feature_id: provider_id
+    feature_name: name
+    feature_uri: subjectOf
+    feature_reach: NULL
+    feature_measure: NULL
+    ingest_type: point
+    feature_type: point
+  - crawler_source_id: 11
+    source_name: New Mexico Water Data Initative Sites
+    source_suffix: nmwdi-st
+    source_uri: https://locations.newmexicowaterdata.org/collections/Things/items?f=json&limit=100000
+    feature_id: id
+    feature_name: name
+    feature_uri: geoconnex
+    feature_reach: NULL
+    feature_measure: NULL
+    ingest_type: point
+    feature_type: point
+  - crawler_source_id: 12
+    source_name: geoconnex contribution demo sites
+    source_suffix: geoconnex-demo
+    source_uri: https://geoconnex-demo-pages.internetofwater.dev/collections/demo-gpkg/items?f=json&limit=10000
+    feature_id: id
+    feature_name: GNIS_NAME
+    feature_uri: uri
+    feature_reach: NHDPv2ReachCode
+    feature_measure: NHDPv2Measure
+    ingest_type: reach
+    feature_type: hydrolocation
+  - crawler_source_id: 13
+    source_name: EPA National Rivers and Streams Assessment
+    source_suffix: epa_nrsa
+    source_uri: https://www.sciencebase.gov/catalog/file/get/60c7b895d34e86b9389b2a6c?name=nrsa_nldi.geojson
+    feature_id: featureid
+    feature_name: feature_name
+    feature_uri: feature_uri
+    feature_reach: feature_reach
+    feature_measure: feature_measure
+    ingest_type: reach
+    feature_type: hydrolocation
+  - crawler_source_id: 14
+    source_name: 2020 Census Block - NHDPlusV2 Catchment Intersections
+    source_suffix: census2020-nhdpv2
+    source_uri: https://storage.googleapis.com/nhgf/2020pts.geojson
+    feature_id: id
+    feature_name: name
+    feature_uri: uri
+    feature_reach: NULL
+    feature_measure: NULL
+    ingest_type: point
+    feature_type: point
