@@ -3,17 +3,17 @@
 
   services:
     nldi:
-      image: ghcr.io/internetofwater/nldi-py:latest
+      image: internetofwater/nldi-py:latest
       container_name: nldi
       build:
         context: .
         args:
           DOCKER_MIRROR: ${DOCKER_MIRROR}
       ports:
-        - 8080:80
+        - 9999:80
       environment:
         NLDI_PATH: /nldi
-        NLDI_URL: http://localhost:8080/nldi
+        NLDI_URL: http://localhost:9999/nldi
         NLDI_DB_HOST: nldi-db
         NLDI_DB_PORT: 5432
         NLDI_DB_USERNAME: read_only_user

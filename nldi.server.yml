@@ -1,0 +1,42 @@
+server:
+  url: ${NLDI_URL}
+  pretty_print: false
+  data:
+    host: ${NLDI_DB_HOST}
+    port: ${NLDI_DB_PORT}
+    dbname: ${NLDI_DB_NAME}
+    user: ${NLDI_DB_USERNAME}
+    password: ${NLDI_DB_PASSWORD}
+
+pygeoapi:
+  enabled: true
+  gdp_url: ${PYGEOAPI_URL}
+
+logging:
+  level: ERROR
+  # logfile: /tmp/nldi.log
+
+metadata:
+  identification:
+    title: Network Linked Data Index API - Python
+    description: |
+      The NLDI is a search service that takes a watershed 
+      outlet identifier as a starting point, a navigation 
+      mode to perform, and the type of data desired in 
+      response to the request. It can provide geospatial
+      representations of the navigation or linked data sources 
+      found along the navigation. It also has the ability to
+      return catchment the watershed outlet is contained in
+      or the total upstream basin.
+    keywords:
+      - python
+      - nldi
+      - usgs
+      - water
+    terms_of_service: https://creativecommons.org/licenses/by/1.0/
+  license:
+    name: CC-BY 1.0 license
+    url: https://creativecommons.org/licenses/by/1.0/
+  provider:
+    name: United States Geological Survey
+    url: https://labs.waterdata.usgs.gov/
