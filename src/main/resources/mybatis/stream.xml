@@ -63,10 +63,10 @@
                    )
         select <choose>
                     <when test="simplified == true">
-                        st_asgeojson(st_simplify(st_memunion(catchmentsp.the_geom), .001), 9, 0) shape
+                        st_asgeojson(st_simplify(st_union(catchmentsp.the_geom), .001), 9, 0) shape
                     </when>
                     <otherwise>
-                        st_asgeojson(st_memunion(catchmentsp.the_geom), 9, 0) shape
+                        st_asgeojson(st_union(catchmentsp.the_geom), 9, 0) shape
                     </otherwise>
                 </choose>
           from navigation_results
