@@ -354,7 +354,7 @@ public class LinkedDataController extends BaseController {
   public void getBasin(
       HttpServletRequest request,
       HttpServletResponse response,
-      @PathVariable(LookupDao.FEATURE_SOURCE) @Schema(example = "wqp") String featureSource,
+      @PathVariable(LookupDao.FEATURE_SOURCE) @Schema(example = "WQP") String featureSource,
       @PathVariable(Parameters.FEATURE_ID) @Schema(example = "USGS-054279485") String featureID,
       @RequestParam(value = Parameters.SIMPLIFIED, required = false, defaultValue = "true")
           Boolean simplified,
