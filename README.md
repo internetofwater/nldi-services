@@ -7,21 +7,23 @@ This repository houses code behind the Network Linked Data Index (NLDI) API [(Sw
 
 ## Table of Contents
 
-- [Public API](#public-api)
-  - [Top Level Path](#top-level-path)
-  - [Up/Down Stream Navigation](#updown-stream-navigation)
-  - [Up/Down Stream Data](#updown-stream-data)
-  - [Query Parameters](#query-parameters)
-  - [Other Endpoints](#other-endpoints)
-- [Development](#development)
-  - [Dependencies](#dependencies)
-  - [Docker Compose](#docker-compose)
-  - [Environment Variables](#environment-variables)
-  - [Testing](#testing)
-  - [Pipelines](#pipelines)
-    - [Test](#test)
-    - [Build](#build)
-    - [Deploy](#deploy)
+- [Network Linked Data Index Services](#network-linked-data-index-services)
+  - [Table of Contents](#table-of-contents)
+  - [Public API](#public-api)
+    - [Top Level Path](#top-level-path)
+    - [Up/Down Stream Navigation](#updown-stream-navigation)
+    - [Up/Down Stream Data](#updown-stream-data)
+    - [Query Parameters](#query-parameters)
+    - [Other Endpoints](#other-endpoints)
+  - [Development](#development)
+    - [Dependencies](#dependencies)
+    - [Docker Compose](#docker-compose)
+    - [Environment Variables](#environment-variables)
+    - [Testing](#testing)
+    - [Pipelines](#pipelines)
+      - [Test](#test)
+      - [Build](#build)
+      - [Deploy](#deploy)
 
 ## Public API
 
@@ -146,7 +148,7 @@ This project has automated pipelines for test, build, and deploy.
 
 #### Test
 
-The test pipeline is run when a pull request is created and consists of two parts. The first step is linting using the Spotless Maven plugin. This validates that any code changes fit within certain style guidelines to maintain readability and consistency. The second stage runs all unit and integration tests. If both of these stages pass, a pull request is eligible to be merged.
+The test pipeline is run when a pull request is created and consists of two parts. The first step is linting using the Spotless Maven plugin. This validates that any code changes fit within certain style guidelines to maintain readability and consistency. The second stage runs all unit and integration tests. If both of these stages pass, a pull request is eligible to be merged..
 
 #### Build
 
