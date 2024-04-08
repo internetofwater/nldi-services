@@ -156,4 +156,4 @@ The build pipeline happens internally to the USGS and are triggered manually. Th
 
 #### Deploy
 
-Similar to the build pipeline, deploys are internal and triggered manually. The infrastructure components are managed with this pipeline and retrieve the Docker container from the previously mentioned container registry.
+Similar to the build pipeline, deploys are internal and triggered manually. The infrastructure components are managed with this pipeline and retrieve the Docker container from the previously mentioned container registry..
