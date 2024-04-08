@@ -148,7 +148,7 @@ This project has automated pipelines for test, build, and deploy.
 
 #### Test
 
-The test pipeline is run when a pull request is created and consists of two parts. The first step is linting using the Spotless Maven plugin. This validates that any code changes fit within certain style guidelines to maintain readability and consistency. The second stage runs all unit and integration tests. If both of these stages pass, a pull request is eligible to be merged..
+The test pipeline is run when a pull request is created and consists of two parts. The first step is linting using the Spotless Maven plugin. This validates that any code changes fit within certain style guidelines to maintain readability and consistency. The second stage runs all unit and integration tests. If both of these stages pass, a pull request is eligible to be merged.
 
 #### Build
 
