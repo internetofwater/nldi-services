@@ -9,7 +9,7 @@
 
 
     <name>nldi-services</name>
-    <url>https://labs.waterdata.usgs.gov/about-nldi/index.html</url>
+    <url>https://github.com/internetofwater/nldi-services</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

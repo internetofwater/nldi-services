@@ -23,7 +23,7 @@
         nldiDbUsername: read_only_user
         nldiDbPassword: changeMe
         nldiDbName: nldi
-        pygeoapiUrl: "https://labs.waterdata.usgs.gov/api/nldi/pygeoapi/"
+        pygeoapiUrl: "https://api.water.usgs.gov/nldi/pygeoapi/"
       networks:
         - nldi
     nldi-db:
