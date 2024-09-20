@@ -104,6 +104,8 @@ These test services will be accessible at <localhost:8080/nldi>. \
 If you would like to build these images using a mirror url simply set a `DOCKER_MIRROR` environment variable or include
 it as a build argument.
 
+See the [nldi-db project](https://github.com/internetofwater/nldi-db) for instructions to use different configurations of the database.
+
 ### Environment Variables
 
 To run the project (connecting to a separately running db instance) you will need to create the file application.yml in the project's root directory and add the following (normal defaults are filled in):
