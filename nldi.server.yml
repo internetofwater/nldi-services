@@ -1,5 +1,6 @@
 server:
   url: ${NLDI_URL}
+  prefix: ${NLDI_PATH}
   pretty_print: false
   data:
     host: ${NLDI_DB_HOST}
@@ -13,8 +14,7 @@ pygeoapi:
   gdp_url: ${PYGEOAPI_URL}
 
 logging:
-  level: ERROR
-  # logfile: /tmp/nldi.log
+  level: ${springFrameworkLogLevel}
 
 metadata:
   identification:
