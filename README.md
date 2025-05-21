@@ -3,25 +3,27 @@
 [![Spotless Check](https://github.com/internetofwater/nldi-services/actions/workflows/spotless.yml/badge.svg)](https://github.com/internetofwater/nldi-services/actions/workflows/spotless.yml)
 [![codecov](https://codecov.io/gh/internetofwater/nldi-services/branch/master/graph/badge.svg)](https://codecov.io/gh/internetofwater/nldi-services)
 
-This repository houses code behind the Network Linked Data Index (NLDI) API [(Swagger Docs)](https://labs.waterdata.usgs.gov/api/nldi/swagger-ui/index.html). The NLDI is hosted as part of the [USGS Waterdata Labs](https://labs.waterdata.usgs.gov/index.html), a set of new capabilities being developed by the USGS Water Mission Area.
+This repository houses code behind the Network Linked Data Index (NLDI) API [(Swagger Docs)](https://api.water.usgs.gov/nldi/swagger-ui/index.html).
 
 ## Table of Contents
 
-- [Public API](#public-api)
-  - [Top Level Path](#top-level-path)
-  - [Up/Down Stream Navigation](#updown-stream-navigation)
-  - [Up/Down Stream Data](#updown-stream-data)
-  - [Query Parameters](#query-parameters)
-  - [Other Endpoints](#other-endpoints)
-- [Development](#development)
-  - [Dependencies](#dependencies)
-  - [Docker Compose](#docker-compose)
-  - [Environment Variables](#environment-variables)
-  - [Testing](#testing)
-  - [Pipelines](#pipelines)
-    - [Test](#test)
-    - [Build](#build)
-    - [Deploy](#deploy)
+- [Network Linked Data Index Services](#network-linked-data-index-services)
+  - [Table of Contents](#table-of-contents)
+  - [Public API](#public-api)
+    - [Top Level Path](#top-level-path)
+    - [Up/Down Stream Navigation](#updown-stream-navigation)
+    - [Up/Down Stream Data](#updown-stream-data)
+    - [Query Parameters](#query-parameters)
+    - [Other Endpoints](#other-endpoints)
+  - [Development](#development)
+    - [Dependencies](#dependencies)
+    - [Docker Compose](#docker-compose)
+    - [Environment Variables](#environment-variables)
+    - [Testing](#testing)
+    - [Pipelines](#pipelines)
+      - [Test](#test)
+      - [Build](#build)
+      - [Deploy](#deploy)
 
 ## Public API
 
@@ -29,9 +31,9 @@ The services are accessed via an HTTP GET request. All output is generated as JS
 
 ### Top Level Path
 
-The root path for the NLDI services is `/api/nldi` and follows the hostname under which it is hosted. For example, the QA public endpoint is <https://labs-beta.waterdata.usgs.gov/api/nldi/> and the production endpoint is <https://labs.waterdata.usgs.gov/api/nldi/>. The root path will not return any information. Instead, utilize the sub-paths mentioned in the [Swagger documention](https://labs.waterdata.usgs.gov/api/nldi/swagger-ui/index.html) or the examples below.
+The root path for the NLDI services is `/api/nldi` and follows the hostname under which it is hosted. For example, the QA public endpoint is <https://labs-beta.waterdata.usgs.gov/api/nldi/> and the production endpoint is <https://api.water.usgs.gov/nldi/>. The root path will not return any information. Instead, utilize the sub-paths mentioned in the [Swagger documention](https://api.water.usgs.gov/nldi/swagger-ui/index.html) or the examples below.
 
-The [/api/nldi/linked-data](https://labs.waterdata.usgs.gov/api/nldi/linked-data/) endpoint will give you the valid data source names for the other endpoints. There is also a health check at `/about/health` and version information at `/about/info`.
+The [/api/nldi/linked-data](https://api.water.usgs.gov/nldi/linked-data/) endpoint will give you the valid data source names for the other endpoints. There is also a health check at `/about/health` and version information at `/about/info`.
 
 In general, the API uses hypermedia to help discover options from a given endpoint. A summary of these options follows.
 
@@ -70,7 +72,7 @@ Navigations accept query parameters to further refine/restrict the navigation be
 
 ### Other Endpoints
 
-The NLDI includes additional helper endpoints that will be documented here at a later date. See the [Swagger documentation](https://labs.waterdata.usgs.gov/api/nldi/swagger-ui/index.html) and [NLDI landing page](https://labs.waterdata.usgs.gov/about-nldi/index.html) for more.
+The NLDI includes additional helper endpoints that will be documented here at a later date. See the [Swagger documentation](https://api.water.usgs.gov/nldi/swagger-ui/index.html) and [NLDI intro page](https://waterdata.usgs.gov/blog/nldi-intro/) for more.
 
 ## Development
 
@@ -101,6 +103,8 @@ docker-compose up nldi-services
 These test services will be accessible at <localhost:8080/nldi>. \
 If you would like to build these images using a mirror url simply set a `DOCKER_MIRROR` environment variable or include
 it as a build argument.
+
+See the [nldi-db project](https://github.com/internetofwater/nldi-db) for instructions to use different configurations of the database.
 
 ### Environment Variables
 
@@ -154,4 +158,4 @@ The build pipeline happens internally to the USGS and are triggered manually. Th
 
 #### Deploy
 
-Similar to the build pipeline, deploys are internal and triggered manually. The infrastructure components are managed with this pipeline and retrieve the Docker container from the previously mentioned container registry.
+Similar to the build pipeline, deploys are internal and triggered manually. The infrastructure components are managed with this pipeline and retrieve the Docker container from the previously mentioned container registry..
