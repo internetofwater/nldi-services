@@ -1,6 +1,0 @@
-ignore:
-  # Spring Boot Application file - no testable logic
-  - "**/Application.java"
-
-  # OpenAPI model classes - no testable logic
-  - "**/swagger/model/*.java"
