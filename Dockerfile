@@ -1,4 +1,5 @@
-FROM internetofwater/nldi-py:latest
+
+FROM ghcr.io/internetofwater/nldi-py:2.1.0
 
 COPY nldi.server.yml nldi.source.yml /tmp/
 
