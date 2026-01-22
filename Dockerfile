@@ -1,6 +1,6 @@
 # This will be where nldi-py releases are specified for prod builds of
 # the nldi-services image.  
-ARG IMAGE_VERSION=2.1.5
+ARG IMAGE_VERSION=2.1.6
 
 FROM ghcr.io/internetofwater/nldi-py:${IMAGE_VERSION}
 
