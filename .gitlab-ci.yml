@@ -1,5 +1,5 @@
 include:
   - project: "wma/nhgf/nldi/mirror-pipelines"
-    ref: "2025-08-21-r0"
+    ref: "2026-05-18-r0"
     file:
       - "nldi-services.yml"
